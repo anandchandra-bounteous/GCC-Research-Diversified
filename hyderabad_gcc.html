@@ -1,0 +1,984 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hyderabad Financial Services GCC Dashboard - IT Services Intelligence</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Header */
+        .header {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            margin-bottom: 30px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            color: #1a202c;
+            margin-bottom: 10px;
+            font-weight: 800;
+        }
+
+        .header .subtitle {
+            color: #64748b;
+            font-size: 1.1em;
+            margin-bottom: 10px;
+        }
+
+        .header .badge {
+            display: inline-block;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.9em;
+            font-weight: 600;
+            margin-top: 10px;
+        }
+
+        /* Stats Grid */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 20px;
+            margin: 25px 0;
+        }
+
+        .stat-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 25px;
+            border-radius: 15px;
+            color: white;
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
+            transition: transform 0.3s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .stat-number {
+            font-size: 2.5em;
+            font-weight: 800;
+            margin-bottom: 5px;
+        }
+
+        .stat-label {
+            font-size: 0.85em;
+            opacity: 0.9;
+        }
+
+        /* Controls */
+        .controls {
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .search-box {
+            flex: 1;
+            min-width: 250px;
+            position: relative;
+        }
+
+        .search-box input {
+            width: 100%;
+            padding: 12px 15px 12px 45px;
+            border: 2px solid #e2e8f0;
+            border-radius: 10px;
+            font-size: 1em;
+        }
+
+        .search-icon {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #94a3b8;
+        }
+
+        select, button {
+            padding: 12px 20px;
+            border: 2px solid #e2e8f0;
+            border-radius: 10px;
+            font-size: 1em;
+            cursor: pointer;
+        }
+
+        button {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        /* GCC Cards with Brand Colors */
+        .gcc-grid {
+            display: grid;
+            gap: 25px;
+        }
+
+        .gcc-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+        }
+
+        .gcc-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.15);
+        }
+
+        .gcc-header {
+            padding: 30px;
+            color: white;
+            position: relative;
+        }
+
+        .gcc-header h2 {
+            font-size: 1.8em;
+            margin-bottom: 8px;
+        }
+
+        .gcc-sector {
+            opacity: 0.9;
+            font-size: 0.95em;
+        }
+
+        /* Brand-specific header colors */
+        .gcc-card[data-company="jpmorgan"] .gcc-header {
+            background: linear-gradient(135deg, #117ACA 0%, #0A5A9C 100%);
+        }
+
+        .gcc-card[data-company="goldman"] .gcc-header {
+            background: linear-gradient(135deg, #64A8F0 0%, #4B87D8 100%);
+        }
+
+        .gcc-card[data-company="hsbc"] .gcc-header {
+            background: linear-gradient(135deg, #DB0011 0%, #A50008 100%);
+        }
+
+        .gcc-card[data-company="wells"] .gcc-header {
+            background: linear-gradient(135deg, #D71E28 0%, #A51119 100%);
+        }
+
+        .gcc-card[data-company="broadridge"] .gcc-header {
+            background: linear-gradient(135deg, #0066CC 0%, #004999 100%);
+        }
+
+        .gcc-card[data-company="paypal"] .gcc-header {
+            background: linear-gradient(135deg, #003087 0%, #001F5C 100%);
+        }
+
+        .gcc-card[data-company="western"] .gcc-header {
+            background: linear-gradient(135deg, #FFCB05 0%, #D9A800 100%);
+            color: #000;
+        }
+
+        .gcc-card[data-company="citizens"] .gcc-header {
+            background: linear-gradient(135deg, #006747 0%, #004530 100%);
+        }
+
+        .gcc-card[data-company="vanguard"] .gcc-header {
+            background: linear-gradient(135deg, #C8102E 0%, #960C23 100%);
+        }
+
+        .gcc-card[data-company="lpl"] .gcc-header {
+            background: linear-gradient(135deg, #003B5C 0%, #002742 100%);
+        }
+
+        .gcc-card[data-company="lloyds"] .gcc-header {
+            background: linear-gradient(135deg, #006B54 0%, #004D3D 100%);
+        }
+
+        .gcc-card[data-company="ubs"] .gcc-header {
+            background: linear-gradient(135deg, #E60028 0%, #B3001F 100%);
+        }
+
+        .gcc-card[data-company="deutsche"] .gcc-header {
+            background: linear-gradient(135deg, #0018A8 0%, #001480 100%);
+        }
+
+        .gcc-card[data-company="sp"] .gcc-header {
+            background: linear-gradient(135deg, #00A3E0 0%, #0081B3 100%);
+        }
+
+        .gcc-card[data-company="factset"] .gcc-header {
+            background: linear-gradient(135deg, #005EB8 0%, #004589 100%);
+        }
+
+        .gcc-card[data-company="state"] .gcc-header {
+            background: linear-gradient(135deg, #00856A 0%, #006350 100%);
+        }
+
+        .gcc-body {
+            padding: 30px;
+        }
+
+        /* IT Services Intelligence Section */
+        .it-services-section {
+            background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            border-left: 4px solid #0ea5e9;
+        }
+
+        .it-services-title {
+            font-size: 0.9em;
+            font-weight: 700;
+            color: #0369a1;
+            margin-bottom: 12px;
+            text-transform: uppercase;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .it-services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+        }
+
+        .it-metric {
+            background: white;
+            padding: 12px;
+            border-radius: 8px;
+            border: 1px solid #bae6fd;
+        }
+
+        .it-metric-label {
+            font-size: 0.75em;
+            color: #64748b;
+            margin-bottom: 4px;
+        }
+
+        .it-metric-value {
+            font-size: 1.1em;
+            font-weight: 700;
+            color: #0369a1;
+        }
+
+        /* Partnership Opportunities */
+        .partnership-section {
+            background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            border-left: 4px solid #f59e0b;
+        }
+
+        .partnership-title {
+            font-size: 0.9em;
+            font-weight: 700;
+            color: #92400e;
+            margin-bottom: 12px;
+            text-transform: uppercase;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .opportunity-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .opportunity-badge {
+            background: white;
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-size: 0.85em;
+            color: #92400e;
+            border: 1px solid #fbbf24;
+        }
+
+        .gcc-section {
+            margin-bottom: 20px;
+        }
+
+        .section-label {
+            font-size: 0.75em;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #94a3b8;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .section-content {
+            color: #1a202c;
+            font-size: 0.95em;
+            line-height: 1.7;
+        }
+
+        .gcc-grid-2col {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        /* Tech Stack Pills */
+        .tech-stack {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 10px;
+        }
+
+        .tech-pill {
+            background: #e0e7ff;
+            color: #3730a3;
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 0.8em;
+            font-weight: 600;
+        }
+
+        /* Contact CTA */
+        .contact-cta {
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            color: white;
+            padding: 15px 20px;
+            border-radius: 10px;
+            text-align: center;
+            margin-top: 20px;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .contact-cta:hover {
+            transform: scale(1.02);
+        }
+
+        .contact-cta-text {
+            font-weight: 600;
+            font-size: 0.95em;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .gcc-grid-2col {
+                grid-template-columns: 1fr;
+            }
+
+            .it-services-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <h1>🏢 Hyderabad Financial Services GCC Ecosystem</h1>
+            <p class="subtitle">IT Services Intelligence Report: Partnership & Engagement Opportunities</p>
+            <span class="badge">🎯 16 Major GCCs • 112K+ Professionals • $25T+ AUM</span>
+
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-number">16</div>
+                    <div class="stat-label">Financial GCCs</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">112K+</div>
+                    <div class="stat-label">Total Workforce</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">$25T+</div>
+                    <div class="stat-label">Combined AUM</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">5</div>
+                    <div class="stat-label">New 2025-26</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">24/7</div>
+                    <div class="stat-label">Global Ops</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">100%</div>
+                    <div class="stat-label">AI Adoption</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Controls -->
+        <div class="controls">
+            <div class="search-box">
+                <svg class="search-icon" width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                </svg>
+                <input type="text" id="searchInput" placeholder="Search companies, services, tech stack...">
+            </div>
+            <select id="sectorFilter">
+                <option value="all">All Sectors</option>
+            </select>
+            <button onclick="exportToCSV()">
+                <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
+                </svg>
+                Export Intelligence Report
+            </button>
+        </div>
+
+        <!-- GCC Cards -->
+        <div class="gcc-grid" id="gccGrid"></div>
+
+        <div style="text-align: center; padding: 30px; color: white; font-size: 0.9em; opacity: 0.9;">
+            <p>Comprehensive GCC Intelligence Report for IT Services Companies</p>
+            <p>Data compiled: February 2026 | For business development inquiries: contact@example.com</p>
+        </div>
+    </div>
+
+    <script>
+        const gccData = [
+            {
+                company: "JPMorgan Chase & Co.",
+                companyId: "jpmorgan",
+                sector: "Banking & Financial Services",
+                location: "Salarpuria Sattva Knowledge City, HITEC City; Mindspace",
+                scale: "50,000+ India workforce; 822,000 sq ft (Asia Pacific HQ); 176,000 sq ft expansion 2025",
+                indiaSponsors: "Deepak Mangla (CEO, Corporate Centers India & Philippines)",
+                globalSponsors: "Daniel Wilkening (CAO Commercial Banking & Head Global Services)",
+                deliveryModel: "Captive GCC; 24/7 global operations hub",
+                focusThemes: "AI/ML risk mgmt, Cloud migration, Digital banking, Cybersecurity, RegTech, Blockchain",
+                techStack: ["AWS", "Azure", "Python", "Java", "React", "AI/ML", "Kafka", "Kubernetes"],
+                vendorEngagement: "Active managed services partnerships",
+                currentVendors: "Multiple tier-1 IT services vendors; Preference for large-scale partners",
+                expansionPlans: "Aggressive hiring: 5,000+ in 2025-26; New tower construction",
+                partnerships: ["Cloud migration", "AI/ML development", "Cybersecurity", "DevOps automation", "Data engineering"],
+                budget: "$500M+ annual IT spend (estimated)",
+                decisionMakers: "Deepak Mangla (CEO India), CTO/CIO organization",
+                procurementCycle: "Q1 & Q3 planning cycles; Enterprise procurement",
+                competitivePosition: "Tier-1 vendors preferred; Strong IBM, Accenture, TCS presence"
+            },
+            {
+                company: "Goldman Sachs Services India",
+                companyId: "goldman",
+                sector: "Investment Banking & Securities",
+                location: "Salarpuria Sattva Knowledge City (Opel Tower), HITEC City",
+                scale: "1,500+ in Hyderabad; 9,000+ India (2nd largest globally after NYC); 351,000 sq ft",
+                indiaSponsors: "Gunjan Samtani (Country Head & Global COO Engineering)",
+                globalSponsors: "Richard Gnodde (CEO Goldman Sachs International)",
+                deliveryModel: "Strategic GCC (2nd headquarters); Center of Excellence",
+                focusThemes: "AI/ML platforms, Cloud-native, Platform engineering, Client experience, FinTech modernization",
+                techStack: ["Python", "Java", "C++", "React", "Angular", "AWS", "GCP", "Spark", "Kafka"],
+                vendorEngagement: "Selective partnerships for specialized capabilities",
+                currentVendors: "Primarily captive; Limited MSA partnerships",
+                expansionPlans: "Hiring 1,000+ engineers annually; Focus on AI/ML talent",
+                partnerships: ["AI/ML consulting", "Cloud architecture", "Platform engineering", "Data science", "Quant development"],
+                budget: "$300M+ annual IT/engineering spend (estimated)",
+                decisionMakers: "Gunjan Samtani (Country Head), Engineering Leadership team",
+                procurementCycle: "Project-based; Quarterly reviews; Vendor rationalization ongoing",
+                competitivePosition: "High bar for vendors; Prefers boutique specialists for niche areas"
+            },
+            {
+                company: "HSBC Technology India",
+                companyId: "hsbc",
+                sector: "Banking & Financial Services",
+                location: "Multiple locations - Hyderabad, Pune, Bengaluru",
+                scale: "20,000+ India workforce; Strategic operational hub",
+                indiaSponsors: "HSBC India GCC Leadership Team",
+                globalSponsors: "HSBC Global Technology & Services Leadership",
+                deliveryModel: "Global Service Centre; Shared services delivery",
+                focusThemes: "Digital banking, Analytics & AI, Operational excellence, RegTech, RPA, Cloud modernization",
+                techStack: ["Java", ".NET", "Python", "Angular", "Azure", "AWS", "Salesforce", "SAP", "Pega"],
+                vendorEngagement: "Extensive MSA arrangements; Tier-1 and Tier-2 vendors",
+                currentVendors: "TCS, Infosys, Cognizant, Wipro, Accenture active",
+                expansionPlans: "Focus on automation and efficiency; Cloud transformation",
+                partnerships: ["RPA implementation", "Cloud migration", "Data analytics", "Application modernization", "Testing services"],
+                budget: "$400M+ annual outsourcing spend (estimated)",
+                decisionMakers: "India Head, Procurement team, Line of business leads",
+                procurementCycle: "Annual contract renewals; Multi-year framework agreements",
+                competitivePosition: "Established vendor ecosystem; Opportunities in emerging tech areas"
+            },
+            {
+                company: "Vanguard India GCC",
+                companyId: "vanguard",
+                sector: "Investment Management",
+                location: "Financial District (165,000 sq ft facility)",
+                scale: "Target: 2,500 by 2029; First India GCC; Largest global tech hub",
+                indiaSponsors: "Venkatesh Natarajan (Principal, Head of GCC)",
+                globalSponsors: "Salim Ramji (CEO); Nitin Tandon (CIO & MD IT)",
+                deliveryModel: "Innovation Hub & Global Value Center; Direct talent model",
+                focusThemes: "AI/ML strategy, Cloud-native, Data platforms, Mobile-first, Cybersecurity, Investment tech",
+                techStack: ["AWS", "Python", "Java", "React Native", "Kubernetes", "Terraform", "Snowflake", "AI/ML"],
+                vendorEngagement: "Building vendor ecosystem; Open to partnerships",
+                currentVendors: "Limited partnerships; Building from ground up",
+                expansionPlans: "Aggressive hiring: 2,500 by 2029; State-of-art facility",
+                partnerships: ["Cloud consulting", "AI/ML development", "Mobile development", "Security consulting", "Data platform build"],
+                budget: "$100M+ IT investment (growing rapidly)",
+                decisionMakers: "Venkatesh Natarajan (India Head), US Technology leadership",
+                procurementCycle: "Greenfield - open to new vendors; Quarterly planning",
+                competitivePosition: "🟢 HIGH OPPORTUNITY - New GCC building vendor relationships"
+            },
+            {
+                company: "LPL Financial GCC",
+                companyId: "lpl",
+                sector: "Wealth Management / Broker-Dealer",
+                location: "Prestige Skytech, Financial District (300,000 sq ft)",
+                scale: "Target: 2,500 over 3-5 years; Launched Feb 2026; $2.4T AUM",
+                indiaSponsors: "Ramesh Kaza (Head of GCC; ex-State Street India CIO)",
+                globalSponsors: "Greg Gates (Chief Technology & Information Officer)",
+                deliveryModel: "Captive GCC; First India facility; Integrated delivery",
+                focusThemes: "AI engineering, Network security, Cloud infrastructure, Data platforms, FinTech innovation",
+                techStack: ["Azure", "Python", "Java", "React", "Node.js", "Kubernetes", "Security tools", "AI/ML"],
+                vendorEngagement: "Active vendor selection underway",
+                currentVendors: "Building vendor panel; Open to partnerships",
+                expansionPlans: "Rapid scaling: 2,500 in 3-5 years; Focus on security & AI",
+                partnerships: ["Security consulting", "Cloud migration", "AI/ML development", "Infrastructure services", "Staff augmentation"],
+                budget: "$80M+ annual IT budget (ramping up)",
+                decisionMakers: "Ramesh Kaza (India Head), Greg Gates (Global CTO)",
+                procurementCycle: "🟢 Active vendor evaluation phase; New partnerships being formed",
+                competitivePosition: "🟢 PRIME OPPORTUNITY - Just launched Feb 2026; Building vendor ecosystem"
+            },
+            {
+                company: "Western Union - Hyderabad GCC",
+                companyId: "western",
+                sector: "Money Transfer & Payments",
+                location: "HCLTech partnership facility",
+                scale: "400 professionals; Launched Jan 2026; Complements Pune center",
+                indiaSponsors: "Western Union India GCC Leadership (HCLTech managed)",
+                globalSponsors: "Devin McGranahan (CEO); C. Vijayakumar (HCLTech CEO)",
+                deliveryModel: "Managed GCC (HCLTech partnership); AI transformation hub",
+                focusThemes: "AI-powered payments, Platform modernization, Digital experience, Payment infrastructure, Beyond remittance",
+                techStack: ["AI Force platform", "Cloud", "API architecture", "Python", "Java", "Security tools"],
+                vendorEngagement: "Primary partnership with HCLTech",
+                currentVendors: "HCLTech is primary partner; Limited additional vendors",
+                expansionPlans: "Scaling to 600+ by 2027; AI and platform focus",
+                partnerships: ["AI/ML services (through HCL)", "Platform engineering", "Security services", "Testing automation"],
+                budget: "$50M+ managed services spend",
+                decisionMakers: "Western Union & HCLTech joint governance",
+                procurementCycle: "Managed through HCLTech; Limited direct engagement opportunities",
+                competitivePosition: "⚠️ Limited opportunity - HCLTech is primary partner"
+            },
+            {
+                company: "Citizens Financial Group GCC",
+                companyId: "citizens",
+                sector: "Banking & Financial Services",
+                location: "Cognizant Campus, Hyderabad",
+                scale: "1,000 professionals by March 2026; Partnership model",
+                indiaSponsors: "Citizens India GCC Leadership (Cognizant-managed)",
+                globalSponsors: "Michael Ruttledge (CIO); Surya Gummadi (Cognizant); BCG (Governance)",
+                deliveryModel: "Managed GCC (Cognizant operated); Innovation center",
+                focusThemes: "GenAI banking, Digital transformation, Cognizant Neuro, Data analytics, Cybersecurity",
+                techStack: ["Cognizant Neuro", "FlowSource", "GenAI", "Cloud", "Data platforms"],
+                vendorEngagement: "Primarily Cognizant-delivered",
+                currentVendors: "Cognizant is primary partner; BCG for governance",
+                expansionPlans: "Scaling to 1,000 by March 2026; Banking Innovation Center",
+                partnerships: ["Limited - managed through Cognizant partnership"],
+                budget: "$60M+ managed services (Cognizant)",
+                decisionMakers: "Citizens & Cognizant joint leadership; BCG oversight",
+                procurementCycle: "Managed through Cognizant; Limited external opportunities",
+                competitivePosition: "⚠️ Limited opportunity - Cognizant is primary partner"
+            },
+            {
+                company: "Lloyds Technology Centre",
+                companyId: "lloyds",
+                sector: "Banking & Financial Services",
+                location: "Salarpuria Sattva Knowledge City, HITEC City",
+                scale: "600+ specialists; Opened Nov 2023; £4B digital investment to 2026",
+                indiaSponsors: "Sirisha Voruganti (CEO & Managing Director, Lloyds Technology Centre)",
+                globalSponsors: "Ron van Kemenade (Group COO, Lloyds Banking Group)",
+                deliveryModel: "Technology Centre (not banking services); Innovation hub",
+                focusThemes: "AI/ML, Cloud engineering, Blockchain, Digital banking, Data analytics, Cybersecurity, DevOps",
+                techStack: ["AWS", "Azure", "Python", "Java", "React", "Blockchain", "DevOps tools", "AI/ML"],
+                vendorEngagement: "Selective partnerships; Growing vendor panel",
+                currentVendors: "Building vendor ecosystem; Focus on UK-approved vendors",
+                expansionPlans: "Scaling to 1,000+ by 2026; Focus on AI and cloud",
+                partnerships: ["Cloud consulting", "AI/ML development", "Blockchain expertise", "DevOps automation", "Security services"],
+                budget: "Part of £4B group investment; ~$100M India allocation",
+                decisionMakers: "Sirisha Voruganti (India CEO), Group COO, UK Procurement",
+                procurementCycle: "UK-aligned procurement; Quarterly vendor reviews",
+                competitivePosition: "🟡 Moderate opportunity - Growing but UK-centric procurement"
+            },
+            {
+                company: "Wells Fargo India",
+                companyId: "wells",
+                sector: "Banking & Financial Services",
+                location: "Raidurgam; Tower 4 LEED facility",
+                scale: "10,000 India workforce; Consolidating Chennai to Hyd & Bengaluru",
+                indiaSponsors: "Uday Odedra (MD, India & Philippines Operations)",
+                globalSponsors: "Wells Fargo Global Technology & Operations Leadership",
+                deliveryModel: "Captive GCC; 24/7 global delivery hub",
+                focusThemes: "Cloud transformation, Data analytics & AI, Digital banking, Automation, Risk tech, Cybersecurity",
+                techStack: ["Azure", "AWS", "Java", ".NET", "Python", "Tableau", "Salesforce", "AI/ML"],
+                vendorEngagement: "Established vendor programs; Multi-year contracts",
+                currentVendors: "Infosys, TCS, Cognizant, HCL active; Tier-1 preferred",
+                expansionPlans: "Consolidation mode; Chennai closure by 2027; Focus on efficiency",
+                partnerships: ["Cloud migration", "Legacy modernization", "Data engineering", "Automation", "Security services"],
+                budget: "$300M+ annual IT services spend",
+                decisionMakers: "Uday Odedra (India MD), Procurement organization, BU leads",
+                procurementCycle: "Annual renewals; Multi-year MSAs in place",
+                competitivePosition: "🟡 Moderate opportunity - Established vendors but open to efficiency plays"
+            },
+            {
+                company: "PayPal - Hyderabad Tech Center",
+                companyId: "paypal",
+                sector: "Payments & FinTech",
+                location: "Hyderabad Tech Center",
+                scale: "Significant India presence; Key engineering hub",
+                indiaSponsors: "PayPal India Technology Leadership",
+                globalSponsors: "PayPal Global Technology & Product Leadership",
+                deliveryModel: "Technology center; Product engineering hub",
+                focusThemes: "AI/ML fraud prevention, Real-time payments, Mobile wallets, Customer experience, Blockchain, Data science",
+                techStack: ["Java", "Python", "Node.js", "React", "React Native", "Kubernetes", "AWS", "AI/ML", "Blockchain"],
+                vendorEngagement: "Selective partnerships; Primarily captive",
+                currentVendors: "Limited outsourcing; Niche partnerships only",
+                expansionPlans: "Steady growth; Focus on AI and mobile engineering",
+                partnerships: ["AI/ML consulting", "Blockchain expertise", "Mobile development", "Security testing", "Data science"],
+                budget: "Primarily captive model; ~$50M external spend",
+                decisionMakers: "India Engineering leadership, US Product teams",
+                procurementCycle: "Project-based; Ad-hoc partnerships",
+                competitivePosition: "🔴 Limited opportunity - Strong captive model; niche partnerships only"
+            },
+            {
+                company: "S&P Global - Orion Office",
+                companyId: "sp",
+                sector: "Financial Data & Analytics / Ratings",
+                location: "Skyview 10; DivyaSree NSL; Orion Technology Centre",
+                scale: "8,000+ India employees; 700+ at Orion; $10M+ invested",
+                indiaSponsors: "Abhishek Tomar (MD, India Operations)",
+                globalSponsors: "Nick Cafferillo (Chief Data & Technology Officer)",
+                deliveryModel: "Centre of Excellence; Digital transformation accelerator",
+                focusThemes: "AI/ML analytics, Data engineering, Cloud infrastructure, Advanced analytics, ESG tech, Market intelligence",
+                techStack: ["AWS", "Python", "Java", "Spark", "Kafka", "AI/ML", "Data platforms", "Analytics tools"],
+                vendorEngagement: "Established vendor programs; Focus on data & analytics",
+                currentVendors: "Multiple vendors for data services, analytics, infrastructure",
+                expansionPlans: "Growing Orion center; Focus on AI and data platforms",
+                partnerships: ["Data engineering", "AI/ML development", "Cloud services", "Analytics consulting", "ESG solutions"],
+                budget: "$150M+ annual IT/data services spend",
+                decisionMakers: "Abhishek Tomar (India MD), Nick Cafferillo (Global CDO/CTO)",
+                procurementCycle: "Annual contracts; Vendor performance reviews",
+                competitivePosition: "🟢 Good opportunity - Data/analytics focused; Open to specialized vendors"
+            },
+            {
+                company: "FactSet - Hyderabad",
+                companyId: "factset",
+                sector: "Financial Data & Analytics",
+                location: "DivyaSree Orion SEZ, Raidurgam (largest FactSet office globally)",
+                scale: "7,000+ employees (largest worldwide); 860,000 sq ft; Est. 2008",
+                indiaSponsors: "FactSet India Operations Leadership",
+                globalSponsors: "Phil Snow (CEO); Genevieve Haldeman (CTO & Chief Product Officer)",
+                deliveryModel: "Global Operations Center; 24/7 operations; Product engineering hub",
+                focusThemes: "Data engineering, Financial analytics, Product innovation, AI/ML, Cloud, Portfolio analytics, Research tech",
+                techStack: ["Python", "Java", "C++", "React", "AWS", "Data platforms", "AI/ML", "Analytics tools"],
+                vendorEngagement: "Infrastructure and support services partnerships",
+                currentVendors: "Selective vendors for infrastructure, facilities, support",
+                expansionPlans: "Mature center; Steady state operations; Focus on innovation",
+                partnerships: ["Infrastructure services", "Facilities management", "Support services", "Specialized consulting"],
+                budget: "$100M+ annual vendor spend (facilities, infrastructure, support)",
+                decisionMakers: "India Operations leadership, Global CTO organization",
+                procurementCycle: "Multi-year contracts; Established vendor relationships",
+                competitivePosition: "🟡 Moderate opportunity - Mature center; opportunities in specialized areas"
+            },
+            {
+                company: "Broadridge India",
+                companyId: "broadridge",
+                sector: "Financial Technology / Capital Markets",
+                location: "Hyderabad operations center",
+                scale: "Significant India operations supporting global infrastructure",
+                indiaSponsors: "Broadridge India Leadership Team",
+                globalSponsors: "Broadridge Global Operations & Technology Leadership",
+                deliveryModel: "GCC supporting global fintech delivery; Multi-location",
+                focusThemes: "Capital markets tech, Digital communications, Compliance automation, Data analytics, Cloud, Wealth tech",
+                techStack: ["Java", ".NET", "Cloud platforms", "Data tools", "Analytics", "Automation tools"],
+                vendorEngagement: "IT services and consulting partnerships",
+                currentVendors: "Multiple IT services vendors; Focus on delivery excellence",
+                expansionPlans: "Growth aligned with capital markets demand",
+                partnerships: ["Application development", "Cloud services", "Data analytics", "Testing services", "Support"],
+                budget: "$80M+ IT services spend in India",
+                decisionMakers: "India leadership, Global procurement",
+                procurementCycle: "Annual contracts; Performance-based renewals",
+                competitivePosition: "🟢 Good opportunity - Growing fintech needs; Open to partnerships"
+            },
+            {
+                company: "UBS - Hyderabad",
+                companyId: "ubs",
+                sector: "Wealth Management & Investment Banking",
+                location: "Hyderabad office / hub",
+                scale: "Part of UBS India operations; $1.6T AUM globally",
+                indiaSponsors: "UBS India Leadership Team",
+                globalSponsors: "UBS Global Technology & Operations",
+                deliveryModel: "GCC supporting wealth management and investment banking",
+                focusThemes: "Wealth management tech, Digital client engagement, Risk analytics, Trading tech, Portfolio management",
+                techStack: ["Java", "Python", "React", "Cloud platforms", "Trading systems", "Analytics tools"],
+                vendorEngagement: "Selective partnerships; Swiss procurement standards",
+                currentVendors: "Global vendor panel; Swiss compliance required",
+                expansionPlans: "Steady growth; Focus on wealth tech innovation",
+                partnerships: ["Wealth tech consulting", "Client experience", "Analytics", "Risk systems", "Trading platforms"],
+                budget: "$60M+ India IT spend",
+                decisionMakers: "India leadership, Swiss global procurement",
+                procurementCycle: "Swiss-aligned procurement; Rigorous vendor standards",
+                competitivePosition: "🟡 Moderate opportunity - Swiss procurement standards; established vendors"
+            },
+            {
+                company: "Deutsche Börse Group GCC",
+                companyId: "deutsche",
+                sector: "Financial Market Infrastructure / Stock Exchange",
+                location: "ANSR-managed facility",
+                scale: "1,000 roles in 2 years; Launched Aug 2025",
+                indiaSponsors: "Deutsche Börse India GCC Leadership (ANSR partnership)",
+                globalSponsors: "Christoph Böhm (CIO/COO, Deutsche Börse Group)",
+                deliveryModel: "Managed GCC (ANSR partnership); One Global Team",
+                focusThemes: "AI-powered analytics, Capital markets tech, Cybersecurity, Cloud engineering, Trading platforms",
+                techStack: ["Cloud platforms", "AI/ML", "Java", "Python", "Trading systems", "Security tools"],
+                vendorEngagement: "Managed through ANSR; Limited direct engagement",
+                currentVendors: "ANSR is primary setup partner; Other vendors through ANSR",
+                expansionPlans: "Scaling to 1,000 by 2027; Focus on market infrastructure",
+                partnerships: ["Opportunities through ANSR relationship", "Specialized consulting", "Training services"],
+                budget: "Managed through ANSR; Limited direct procurement",
+                decisionMakers: "Deutsche Börse & ANSR joint governance",
+                procurementCycle: "Managed through ANSR; German procurement standards",
+                competitivePosition: "⚠️ Limited opportunity - ANSR managed; German procurement oversight"
+            },
+            {
+                company: "State Street - Hyderabad",
+                companyId: "state",
+                sector: "Investment Services / Asset Management",
+                location: "Hyderabad office (Investment Services operations)",
+                scale: "Part of State Street India presence; $5.12T AUM globally",
+                indiaSponsors: "State Street India Operations Leadership",
+                globalSponsors: "State Street Global Leadership",
+                deliveryModel: "Global capability center; Operations & technology hub",
+                focusThemes: "Investment operations tech, Asset servicing, Data analytics, Automation, Risk/compliance, Digital assets",
+                techStack: ["Java", "Python", "Cloud platforms", "Data tools", "Custody systems", "Analytics"],
+                vendorEngagement: "Established vendor programs; Multi-year partnerships",
+                currentVendors: "TCS, Infosys, Cognizant, others; Tier-1 heavy",
+                expansionPlans: "Focus on digital assets and automation",
+                partnerships: ["Digital asset technology", "Automation services", "Data analytics", "Cloud migration", "Testing"],
+                budget: "$120M+ annual IT services spend",
+                decisionMakers: "India Operations Head, Global procurement, BU leads",
+                procurementCycle: "Annual renewals; Vendor rationalization underway",
+                competitivePosition: "🟡 Moderate opportunity - Established vendors but digital asset opportunities"
+            }
+        ];
+
+        const sectors = ['all', ...new Set(gccData.map(g => g.sector))];
+        let filteredData = [...gccData];
+
+        // Populate sector filter
+        const sectorFilter = document.getElementById('sectorFilter');
+        sectors.forEach(sector => {
+            const option = document.createElement('option');
+            option.value = sector;
+            option.textContent = sector;
+            sectorFilter.appendChild(option);
+        });
+
+        function renderGCCs() {
+            const grid = document.getElementById('gccGrid');
+            grid.innerHTML = filteredData.map(gcc => `
+                <div class="gcc-card" data-company="${gcc.companyId}">
+                    <div class="gcc-header">
+                        <h2>${gcc.company}</h2>
+                        <div class="gcc-sector">${gcc.sector}</div>
+                    </div>
+                    <div class="gcc-body">
+                        <!-- IT Services Intelligence -->
+                        <div class="it-services-section">
+                            <div class="it-services-title">
+                                <svg width="16" height="16" fill="currentColor" viewBox="0 0 20 20">
+                                    <path d="M9 2a1 1 0 000 2h2a1 1 0 100-2H9z"></path>
+                                    <path fill-rule="evenodd" d="M4 5a2 2 0 012-2 3 3 0 003 3h2a3 3 0 003-3 2 2 0 012 2v11a2 2 0 01-2 2H6a2 2 0 01-2-2V5zm3 4a1 1 0 000 2h.01a1 1 0 100-2H7zm3 0a1 1 0 000 2h3a1 1 0 100-2h-3zm-3 4a1 1 0 100 2h.01a1 1 0 100-2H7zm3 0a1 1 0 100 2h3a1 1 0 100-2h-3z" clip-rule="evenodd"></path>
+                                </svg>
+                                IT Services Intelligence
+                            </div>
+                            <div class="it-services-grid">
+                                <div class="it-metric">
+                                    <div class="it-metric-label">Vendor Engagement</div>
+                                    <div class="it-metric-value">${gcc.vendorEngagement}</div>
+                                </div>
+                                <div class="it-metric">
+                                    <div class="it-metric-label">Current Vendors</div>
+                                    <div class="it-metric-value">${gcc.currentVendors}</div>
+                                </div>
+                                <div class="it-metric">
+                                    <div class="it-metric-label">Annual Budget</div>
+                                    <div class="it-metric-value">${gcc.budget}</div>
+                                </div>
+                                <div class="it-metric">
+                                    <div class="it-metric-label">Opportunity Level</div>
+                                    <div class="it-metric-value">${gcc.competitivePosition.substring(0, 15)}</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Partnership Opportunities -->
+                        <div class="partnership-section">
+                            <div class="partnership-title">
+                                <svg width="16" height="16" fill="currentColor" viewBox="0 0 20 20">
+                                    <path d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v3h8v-3zM6 8a2 2 0 11-4 0 2 2 0 014 0zM16 18v-3a5.972 5.972 0 00-.75-2.906A3.005 3.005 0 0119 15v3h-3zM4.75 12.094A5.973 5.973 0 004 15v3H1v-3a3 3 0 013.75-2.906z"></path>
+                                </svg>
+                                Partnership Opportunities
+                            </div>
+                            <div class="opportunity-list">
+                                ${gcc.partnerships.map(p => `<span class="opportunity-badge">${p}</span>`).join('')}
+                            </div>
+                        </div>
+
+                        <!-- Standard Information -->
+                        <div class="gcc-grid-2col">
+                            <div class="gcc-section">
+                                <div class="section-label">Location</div>
+                                <div class="section-content">${gcc.location}</div>
+                            </div>
+                            <div class="gcc-section">
+                                <div class="section-label">Scale & Headcount</div>
+                                <div class="section-content">${gcc.scale}</div>
+                            </div>
+                            <div class="gcc-section">
+                                <div class="section-label">India Leadership</div>
+                                <div class="section-content">${gcc.indiaSponsors}</div>
+                            </div>
+                            <div class="gcc-section">
+                                <div class="section-label">Global Sponsors</div>
+                                <div class="section-content">${gcc.globalSponsors}</div>
+                            </div>
+                        </div>
+
+                        <div class="gcc-section">
+                            <div class="section-label">Expansion Plans</div>
+                            <div class="section-content">${gcc.expansionPlans}</div>
+                        </div>
+
+                        <div class="gcc-section">
+                            <div class="section-label">Decision Makers</div>
+                            <div class="section-content">${gcc.decisionMakers}</div>
+                        </div>
+
+                        <div class="gcc-section">
+                            <div class="section-label">Procurement Cycle</div>
+                            <div class="section-content">${gcc.procurementCycle}</div>
+                        </div>
+
+                        <div class="gcc-section">
+                            <div class="section-label">Tech Stack</div>
+                            <div class="tech-stack">
+                                ${gcc.techStack.map(tech => `<span class="tech-pill">${tech}</span>`).join('')}
+                            </div>
+                        </div>
+
+                        <div class="gcc-section">
+                            <div class="section-label">Focus Themes</div>
+                            <div class="section-content">${gcc.focusThemes}</div>
+                        </div>
+
+                        <div class="contact-cta">
+                            <div class="contact-cta-text">📧 Request detailed partnership brief & connect with decision makers</div>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function applyFilters() {
+            const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+            const sector = document.getElementById('sectorFilter').value;
+
+            filteredData = gccData.filter(gcc => {
+                const matchesSearch = 
+                    gcc.company.toLowerCase().includes(searchTerm) ||
+                    gcc.partnerships.join(' ').toLowerCase().includes(searchTerm) ||
+                    gcc.techStack.join(' ').toLowerCase().includes(searchTerm) ||
+                    gcc.focusThemes.toLowerCase().includes(searchTerm);
+                
+                const matchesSector = sector === 'all' || gcc.sector === sector;
+                return matchesSearch && matchesSector;
+            });
+
+            renderGCCs();
+        }
+
+        function exportToCSV() {
+            const headers = [
+                'Company',
+                'Sector',
+                'Location',
+                'Scale',
+                'India Leadership',
+                'Global Sponsors',
+                'Vendor Engagement',
+                'Current Vendors',
+                'Budget',
+                'Partnership Opportunities',
+                'Tech Stack',
+                'Expansion Plans',
+                'Decision Makers',
+                'Procurement Cycle',
+                'Competitive Position'
+            ];
+
+            const csvData = filteredData.map(gcc => [
+                gcc.company,
+                gcc.sector,
+                gcc.location,
+                gcc.scale,
+                gcc.indiaSponsors,
+                gcc.globalSponsors,
+                gcc.vendorEngagement,
+                gcc.currentVendors,
+                gcc.budget,
+                gcc.partnerships.join('; '),
+                gcc.techStack.join('; '),
+                gcc.expansionPlans,
+                gcc.decisionMakers,
+                gcc.procurementCycle,
+                gcc.competitivePosition
+            ]);
+
+            const csvContent = [
+                headers.join(','),
+                ...csvData.map(row => row.map(cell => `"${String(cell).replace(/"/g, '""')}"`).join(','))
+            ].join('\n');
+
+            const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+            const link = document.createElement('a');
+            link.href = URL.createObjectURL(blob);
+            link.download = 'Hyderabad_GCC_IT_Services_Intelligence_Report.csv';
+            link.click();
+        }
+
+        document.getElementById('searchInput').addEventListener('input', applyFilters);
+        document.getElementById('sectorFilter').addEventListener('change', applyFilters);
+
+        renderGCCs();
+    </script>
+</body>
+</html>
