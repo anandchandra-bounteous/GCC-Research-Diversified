@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>M&A Synergy Revenue Model — $34.54M</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--bg:#0f172a;--card:#1e293b;--bdr:#334155;--txt:#e2e8f0;--mut:#94a3b8;--blu:#3b82f6;--cyn:#06b6d4;--pur:#8b5cf6;--org:#f97316;--grn:#10b981;--red:#ef4444;--pnk:#ec4899;--yel:#eab308;--str:#1e40af;--eng:#0891b2;--mgt:#7c3aed;--dbx:#f97316}
+body{background:var(--bg);color:var(--txt);font-family:system-ui,-apple-system,sans-serif;padding:16px;min-height:100vh}
+h1{font-size:22px;font-weight:800;background:linear-gradient(135deg,#3b82f6,#8b5cf6,#f97316);-webkit-background-clip:text;-webkit-text-fill-color:transparent;text-align:center}
+.sub{color:var(--mut);font-size:12px;text-align:center;margin-top:4px}
+.sub strong{color:var(--grn)}
+.tabs{display:flex;gap:4px;flex-wrap:wrap;justify-content:center;margin:14px 0}
+.tabs button{background:var(--card);color:var(--txt);border:1px solid var(--bdr);border-radius:8px;padding:6px 11px;font-size:11px;cursor:pointer;font-weight:400;transition:.2s}
+.tabs button.active{background:var(--blu);border-color:var(--blu);font-weight:700}
+.tabs button:hover{opacity:.85}
+.filter{display:flex;justify-content:center;margin-bottom:12px}
+.filter select{background:var(--card);color:var(--txt);border:1px solid var(--bdr);border-radius:8px;padding:5px 12px;font-size:12px}
+.kpis{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:16px;justify-content:center}
+.kpi{background:var(--card);border:1px solid var(--bdr);border-radius:12px;padding:11px 14px;text-align:center;flex:1 1 120px;min-width:115px}
+.kpi .v{font-size:19px;font-weight:800}.kpi .l{font-size:10px;color:var(--mut);margin-top:2px}.kpi .s{font-size:9px;color:var(--mut);margin-top:1px}
+.sec{background:var(--card);border-radius:14px;border:1px solid var(--bdr);padding:16px;margin-bottom:16px}
+.sec h3{font-size:14px;font-weight:700;margin-bottom:12px}
+.chart-wrap{position:relative;width:100%;height:300px;margin-bottom:8px}
+table{width:100%;border-collapse:collapse;font-size:11px}
+th{text-align:right;padding:5px 4px;color:var(--mut);font-size:9px;font-weight:600}
+th:first-child{text-align:left}
+td{padding:5px 4px;text-align:right;font-size:10px}
+td:first-child{text-align:left;font-weight:600;font-size:11px}
+tr.sep{border-bottom:1px solid var(--bdr)}
+tr.total-row{border-top:2px solid var(--blu);font-weight:700}
+tr.total-row td{color:var(--blu)}
+.badge{padding:2px 8px;border-radius:10px;font-size:10px;white-space:nowrap;display:inline-block}
+.grid{display:grid;gap:10px}
+.g2{grid-template-columns:repeat(auto-fill,minmax(290px,1fr))}
+.g3{grid-template-columns:repeat(auto-fill,minmax(200px,1fr))}
+.gcard{background:var(--bg);border-radius:10px;padding:12px;border:1px solid var(--bdr)}
+.gcard .icon{font-size:18px;margin-bottom:3px}
+.gcard .title{font-weight:700;font-size:12px;margin-bottom:3px}
+.gcard .val{font-size:10px;color:var(--org);font-weight:600}
+.gcard .desc{font-size:10px;color:var(--mut);line-height:1.4;margin-top:3px}
+.gcard .fit{font-size:10px;color:#60a5fa;margin-top:3px}
+.progress{background:var(--bdr);border-radius:4px;height:5px;margin:6px 0}
+.progress-fill{height:100%;border-radius:4px}
+.tl-item{position:relative;padding-left:28px;margin-bottom:16px}
+.tl-dot{position:absolute;left:0;top:0;width:18px;height:18px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;color:#fff}
+.tl-line{position:absolute;left:8px;top:18px;width:2px;background:var(--bdr)}
+.tl-card{background:var(--bg);border-radius:10px;padding:12px;border:1px solid var(--bdr);border-left-width:3px}
+.tl-card .head{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px}
+.tl-card .items{display:grid;grid-template-columns:1fr 1fr;gap:3px}
+.tl-card .items div{font-size:10px;padding:2px 0}
+.footer{margin-top:14px;padding:10px;background:#1a2332;border-radius:8px;font-size:10px;color:var(--mut);line-height:1.5}
+.footer strong{color:var(--txt)}
+.hidden{display:none}
+.even-row{background:transparent}.odd-row{background:#1a2332}
+.bl{border-left:1px solid var(--bdr)}
+.green{color:var(--grn)}.blue{color:var(--blu)}.orange{color:var(--org)}.cyan{color:var(--cyn)}.purple{color:var(--pur)}.yellow{color:var(--yel)}.mut{color:var(--mut)}
+.bold{font-weight:700}
+</style>
+</head>
+<body>
+
+<h1>Full Enhanced M&A Synergy Model</h1>
+<p class="sub">Target: Data & AI Consultancy ($24M Rev, ~100 FTEs, 60+ DBX Certs) × Acquirer: Digital Solutions (5000+ Employees) | <strong>Your Projections: $34.54M Total Synergy</strong></p>
+
+<div class="tabs" id="tabs"></div>
+<div class="filter" id="filterWrap"><select id="clientFilter"><option value="all">All 8 Clients</option></select></div>
+<div id="content"></div>
+<div class="footer"><strong>Your Model Inputs:</strong> Revenue projections per your synergy model. Service-line splits derived from target capability mix × client sector needs. Win probs, cost synergies & FTE plans calibrated to $7.3M→$11.3M→$15.9M ramp. Pipeline multiplier based on target's $54M gross pipeline (Dec 2025). All figures USD.</div>
+
+<script>
+const C={bg:"#0f172a",card:"#1e293b",bdr:"#334155",txt:"#e2e8f0",mut:"#94a3b8",blu:"#3b82f6",cyn:"#06b6d4",pur:"#8b5cf6",org:"#f97316",grn:"#10b981",red:"#ef4444",pnk:"#ec4899",yel:"#eab308",str:"#1e40af",eng:"#0891b2",mgt:"#7c3aed",dbx:"#f97316"};
+const yrs=["CY2026","CY2027","CY2028"];
+const fmt=v=>`$${v.toFixed(1)}M`;
+const fK=v=>`$${(v*1000).toFixed(0)}K`;
+
+const clients=[
+  {name:"Morgan Stanley",short:"MS",sector:"Capital Markets",dbx:"High",ds:9,rd:8,bs:9,fs:9,er:2.5,rev:[1.5,2.25,3],sp:[.18,.17,.16],ep:[.40,.42,.44],mp:[.16,.15,.14],dp:[.26,.26,.26],cs:[.10,.18,.28],wp:[.70,.75,.85],fte:[5,8,11],insight:"Investor in Databricks at $38B & $134B. Uses Lakehouse for regulatory compute, SACCR risk, cybersecurity SIEM.",needs:"Multi-cloud governance, AI risk analytics, SF-to-DBX migration, GenAI wealth advisory"},
+  {name:"Goldman Sachs",short:"GS",sector:"Capital Markets",dbx:"High",ds:9,rd:7,bs:9,fs:8,er:2,rev:[1.5,2.25,3],sp:[.17,.16,.15],ep:[.40,.42,.44],mp:[.15,.14,.13],dp:[.28,.28,.28],cs:[.10,.18,.28],wp:[.65,.72,.82],fte:[5,8,11],insight:"Led $2B debt financing for DBX. Hosted CEO at Communacopia 2025. Deep platform commitment.",needs:"SecDB modernization, AI agents, real-time trading pipelines, cross-asset Lakehouse"},
+  {name:"Fidelity Investments",short:"FID",sector:"Asset Mgmt",dbx:"High",ds:8,rd:7,bs:8,fs:8,er:1.8,rev:[1.1,1.5,2],sp:[.20,.18,.16],ep:[.38,.40,.42],mp:[.16,.15,.14],dp:[.26,.27,.28],cs:[.08,.14,.20],wp:[.65,.72,.82],fte:[4,6,8],insight:"Co-led DBX Series L at $134B. Long-term investor since Series H.",needs:"AI/ML portfolio optimization, customer 360, compliance pipelines, GenAI advisor tools"},
+  {name:"NatWest",short:"NW",sector:"Retail Banking",dbx:"Medium",ds:5,rd:6,bs:9,fs:8,er:1.5,rev:[.9,1.5,2.25],sp:[.20,.18,.16],ep:[.36,.40,.42],mp:[.22,.20,.18],dp:[.22,.22,.24],cs:[.06,.12,.20],wp:[.55,.65,.75],fte:[3,5,8],insight:"5-year AWS+Accenture data transformation. Bank-wide platform for 20M customers.",needs:"Bank-wide data platform, customer 360, fraud AI, regulatory reporting, DBX adoption"},
+  {name:"Aon",short:"AON",sector:"Insurance",dbx:"Med-High",ds:7,rd:6,bs:7,fs:7,er:1.2,rev:[.65,.95,1.4],sp:[.20,.19,.17],ep:[.35,.38,.40],mp:[.20,.18,.17],dp:[.25,.25,.26],cs:[.05,.08,.14],wp:[.60,.68,.78],fte:[2,3,5],insight:"Keynoted at DBX Data+AI Summit 2025. Active in secure data sharing & collaborative analytics.",needs:"Risk analytics, claims pipeline, clean rooms, AI underwriting"},
+  {name:"Verizon",short:"VZ",sector:"Telecom",dbx:"Medium",ds:6,rd:5,bs:7,fs:6,er:1,rev:[.39,.69,.99],sp:[.18,.17,.15],ep:[.42,.43,.45],mp:[.15,.15,.14],dp:[.25,.25,.26],cs:[.03,.06,.10],wp:[.55,.62,.72],fte:[1,2,4],insight:"Uses Kyvos on Databricks for AI/ML/BI. 5G data monetization push.",needs:"Network analytics, CX AI, 5G monetization, IoT pipelines"},
+  {name:"British Telecom",short:"BT",sector:"Telecom",dbx:"Low-Med",ds:4,rd:5,bs:8,fs:7,er:.8,rev:[.39,.69,.99],sp:[.20,.19,.17],ep:[.35,.38,.42],mp:[.22,.20,.18],dp:[.23,.23,.23],cs:[.03,.06,.10],wp:[.50,.60,.72],fte:[1,2,4],insight:"Cloudera hybrid. Launched sovereign AI cloud (Dec 2025). Big DBX migration opportunity.",needs:"Sovereign data platform, Cloudera migration, AI network ops, UK governance"},
+  {name:"Nasdaq",short:"NDAQ",sector:"Exchanges",dbx:"High",ds:8,rd:6,bs:8,fs:8,er:1.2,rev:[.9,1.5,2.25],sp:[.18,.17,.15],ep:[.38,.40,.42],mp:[.18,.17,.16],dp:[.26,.26,.27],cs:[.06,.12,.20],wp:[.65,.72,.82],fte:[3,5,8],insight:"DBX for unified platform transition. Presented at Summit 2025.",needs:"Market data unification, real-time analytics, compliance AI, Lakehouse scale-out"},
+];
+
+const tabDef=[{id:"overview",l:"📊 Overview"},{id:"scenarios",l:"🎯 Scenarios"},{id:"waterfall",l:"📈 Revenue Bridge"},{id:"headcount",l:"👥 FTE Plan"},{id:"scorecard",l:"🏆 Scorecard"},{id:"pipeline",l:"🔧 DBX Pipeline"},{id:"timeline",l:"📅 Integration"},{id:"margin",l:"💰 Margins"}];
+let curTab="overview",curSel="all",charts={};
+
+function getFC(){return curSel==="all"?clients:clients.filter(c=>c.name===curSel)}
+function getTot(fc){return yrs.map((_,i)=>{const s=fc.reduce((a,c)=>a+c.rev[i]*c.sp[i],0),e=fc.reduce((a,c)=>a+c.rev[i]*c.ep[i],0),m=fc.reduce((a,c)=>a+c.rev[i]*c.mp[i],0),d=fc.reduce((a,c)=>a+c.rev[i]*c.dp[i],0),cs=fc.reduce((a,c)=>a+c.cs[i],0);return{s,e,m,d,cs}})}
+function getTRev(fc){return yrs.map((_,i)=>fc.reduce((a,c)=>a+c.rev[i],0))}
+function badge(t,c){return `<span class="badge" style="background:${c}">${t}</span>`}
+function dbxColor(d){return d.includes("High")?"#166534":d.includes("Med")?"#854d0e":"#7f1d1d"}
+function kpi(l,v,c,s){return `<div class="kpi"><div class="v" style="color:${c}">${v}</div><div class="l">${l}</div>${s?`<div class="s">${s}</div>`:""}</div>`}
+function destroyCharts(){Object.values(charts).forEach(c=>{if(c&&c.destroy)c.destroy()});charts={}}
+
+// Init tabs
+const tabsEl=document.getElementById("tabs");
+tabDef.forEach(t=>{const b=document.createElement("button");b.textContent=t.l;b.dataset.id=t.id;if(t.id===curTab)b.classList.add("active");b.onclick=()=>{curTab=t.id;document.querySelectorAll(".tabs button").forEach(x=>x.classList.remove("active"));b.classList.add("active");render()};tabsEl.appendChild(b)});
+
+// Init filter
+clients.forEach(c=>{const o=document.createElement("option");o.value=c.name;o.textContent=c.name;document.getElementById("clientFilter").appendChild(o)});
+document.getElementById("clientFilter").onchange=e=>{curSel=e.target.value;render()};
+
+function render(){
+  destroyCharts();
+  const fc=getFC(),tot=getTot(fc),tRev=getTRev(fc);
+  const grand=tRev.reduce((a,b)=>a+b,0);
+  const cagr=tRev[0]>0?((tRev[2]/tRev[0])**.5-1)*100:0;
+  const tCost=tot.reduce((s,t)=>s+t.cs,0);
+  const aBase=fc.reduce((s,c)=>s+c.er,0);
+  const fw=document.getElementById("filterWrap");
+  fw.style.display=["overview","scenarios","headcount"].includes(curTab)?"flex":"none";
+  const el=document.getElementById("content");
+
+  switch(curTab){
+  case "overview":{
+    let h=`<div class="kpis">${kpi("3-Year Synergy",fmt(grand),C.blu,"Your model")}${kpi("CY2026",fmt(tRev[0]),C.grn,"Year 1")}${kpi("CY2027",fmt(tRev[1]),C.pur,"Year 2")}${kpi("CY2028",fmt(tRev[2]),C.org,"Year 3")}${kpi("CAGR",cagr.toFixed(0)+"%",C.pnk)}${kpi("Total Value",fmt(grand+tCost),C.red,"Rev+Cost")}</div>`;
+    h+=`<div class="sec"><h3>Synergy Revenue by Service Line</h3><div class="chart-wrap"><canvas id="ch1"></canvas></div></div>`;
+    h+=`<div class="sec"><h3>Synergy Revenue by Client</h3><div class="chart-wrap"><canvas id="ch2"></canvas></div></div>`;
+    // Table
+    h+=`<div class="sec"><h3>Detailed Revenue Breakdown (USD Thousands)</h3><div style="overflow-x:auto"><table><thead><tr class="sep"><th style="text-align:left">Client</th><th style="text-align:left">Sector</th><th style="text-align:center">DBX</th>`;
+    yrs.forEach(y=>["Strat","Eng","Mgmt","DBX","Total"].forEach((x,i)=>{h+=`<th class="${i===0?"bl":""}" style="color:${i===4?C.grn:C.mut}">${i===0?y+" ":""}${x}</th>`}));
+    h+=`</tr></thead><tbody>`;
+    fc.forEach((c,idx)=>{
+      h+=`<tr class="sep ${idx%2?"odd-row":"even-row"}"><td>${c.name}</td><td class="mut" style="font-size:10px">${c.sector}</td><td style="text-align:center">${badge(c.dbx,dbxColor(c.dbx))}</td>`;
+      [0,1,2].forEach(yi=>{const sv=c.rev[yi]*c.sp[yi],ev=c.rev[yi]*c.ep[yi],mv=c.rev[yi]*c.mp[yi],dv=c.rev[yi]*c.dp[yi];
+        [sv,ev,mv,dv,c.rev[yi]].forEach((v,vi)=>{h+=`<td class="${vi===0?"bl":""}" style="font-weight:${vi===4?700:400};color:${vi===4?C.grn:C.txt}">$${(v*1000).toFixed(0)}</td>`})});
+      h+=`</tr>`;
+    });
+    if(curSel==="all"){h+=`<tr class="total-row"><td colspan="3">TOTAL</td>`;
+      [0,1,2].forEach(yi=>{[tot[yi].s,tot[yi].e,tot[yi].m,tot[yi].d,tRev[yi]].forEach((v,vi)=>{h+=`<td class="${vi===0?"bl":""}" style="color:${vi===4?C.grn:C.blu}">$${(v*1000).toFixed(0)}</td>`})});
+      h+=`</tr>`}
+    h+=`</tbody></table></div></div>`;
+    // Insights
+    h+=`<div class="sec"><h3>Client Research & Databricks Applicability</h3><div class="grid g2">`;
+    fc.forEach(c=>{h+=`<div class="gcard"><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:5px"><span style="font-weight:700;font-size:13px">${c.name}</span><div>${badge("DBX: "+c.dbx,dbxColor(c.dbx))} ${badge("3-Yr: "+fK(c.rev[0]+c.rev[1]+c.rev[2]),"#1e3a5f")}</div></div><p style="font-size:10px;color:#60a5fa;margin:0 0 3px;line-height:1.4">${c.insight}</p><p style="font-size:10px;color:${C.mut};margin:0;line-height:1.4"><strong style="color:${C.txt}">Synergy:</strong> ${c.needs}</p></div>`});
+    h+=`</div></div>`;
+    el.innerHTML=h;
+    // Charts
+    charts.ch1=new Chart(document.getElementById("ch1"),{type:"bar",data:{labels:yrs,datasets:[{label:"Data & AI Strategy",data:tot.map(t=>t.s),backgroundColor:C.str},{label:"Data & AI Engineering",data:tot.map(t=>t.e),backgroundColor:C.eng},{label:"Data Management",data:tot.map(t=>t.m),backgroundColor:C.mgt},{label:"Databricks Partnership",data:tot.map(t=>t.d),backgroundColor:C.dbx}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{labels:{color:C.mut,font:{size:11}}}},scales:{x:{stacked:true,ticks:{color:C.mut},grid:{color:C.bdr}},y:{stacked:true,ticks:{color:C.mut,callback:v=>"$"+v.toFixed(0)+"M"},grid:{color:C.bdr}}}}});
+    charts.ch2=new Chart(document.getElementById("ch2"),{type:"bar",data:{labels:fc.map(c=>c.name.length>13?c.name.slice(0,12)+"…":c.name),datasets:[{label:"CY2026",data:fc.map(c=>c.rev[0]),backgroundColor:C.blu},{label:"CY2027",data:fc.map(c=>c.rev[1]),backgroundColor:C.pur},{label:"CY2028",data:fc.map(c=>c.rev[2]),backgroundColor:C.org}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{labels:{color:C.mut,font:{size:11}}}},scales:{x:{ticks:{color:C.mut,font:{size:9}},grid:{color:C.bdr}},y:{ticks:{color:C.mut,callback:v=>"$"+v.toFixed(1)+"M"},grid:{color:C.bdr}}}}});
+    break;}
+
+  case "scenarios":{
+    const sc=yrs.map((yr,i)=>({yr,con:fc.reduce((s,c)=>s+c.rev[i]*c.wp[i]*.7,0),base:tRev[i],agg:fc.reduce((s,c)=>s+c.rev[i]*Math.min(c.wp[i]*1.3,1),0),pw:fc.reduce((s,c)=>s+c.rev[i]*c.wp[i],0)}));
+    let h=`<div class="kpis">${kpi("Conservative (3-Yr)",fmt(sc.reduce((s,d)=>s+d.con,0)),C.mut,"Win×0.7")}${kpi("Prob-Weighted (3-Yr)",fmt(sc.reduce((s,d)=>s+d.pw,0)),C.blu,"Risk-adjusted")}${kpi("Base Case (3-Yr)",fmt(grand),C.grn,"Your projections")}${kpi("Aggressive (3-Yr)",fmt(sc.reduce((s,d)=>s+d.agg,0)),C.org,"Win×1.3")}</div>`;
+    h+=`<div class="sec"><h3>Three-Scenario Projection</h3><div class="chart-wrap"><canvas id="ch3"></canvas></div></div>`;
+    h+=`<div class="sec"><h3>Client Win Probability & Risk-Adjusted Revenue ($K)</h3><div style="overflow-x:auto"><table><thead><tr class="sep"><th style="text-align:left">Client</th>`;
+    yrs.forEach(y=>["Win%","Base","Adj"].forEach((x,i)=>{h+=`<th class="${i===0?"bl":""}">${y} ${x}</th>`}));
+    h+=`<th class="bl green">3-Yr Adj</th></tr></thead><tbody>`;
+    fc.forEach((c,idx)=>{const a3=[0,1,2].reduce((s,i)=>s+c.rev[i]*c.wp[i],0);
+      h+=`<tr class="sep ${idx%2?"odd-row":"even-row"}"><td>${c.name}</td>`;
+      [0,1,2].forEach(yi=>{h+=`<td class="bl yellow">${(c.wp[yi]*100).toFixed(0)}%</td><td>$${(c.rev[yi]*1000).toFixed(0)}</td><td class="green bold">$${(c.rev[yi]*c.wp[yi]*1000).toFixed(0)}</td>`});
+      h+=`<td class="bl green bold">${fK(a3)}</td></tr>`});
+    h+=`</tbody></table></div></div>`;
+    el.innerHTML=h;
+    charts.ch3=new Chart(document.getElementById("ch3"),{type:"line",data:{labels:yrs,datasets:[{label:"Aggressive",data:sc.map(d=>d.agg),borderColor:C.org,borderDash:[6,3],pointRadius:4,fill:false},{label:"Base",data:sc.map(d=>d.base),borderColor:C.grn,borderWidth:3,pointRadius:6,fill:false},{label:"Prob-Weighted",data:sc.map(d=>d.pw),borderColor:C.blu,borderWidth:3,pointRadius:5,fill:false},{label:"Conservative",data:sc.map(d=>d.con),borderColor:C.mut,borderDash:[6,3],pointRadius:4,fill:false}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{labels:{color:C.mut,font:{size:11}}}},scales:{x:{ticks:{color:C.mut},grid:{color:C.bdr}},y:{ticks:{color:C.mut,callback:v=>"$"+v.toFixed(0)+"M"},grid:{color:C.bdr}}}}});
+    break;}
+
+  case "waterfall":{
+    let h=`<div class="kpis">${kpi("Acquirer Base",fmt(aBase),C.mut)}${kpi("+ CY26 Synergy",fmt(tRev[0]),C.blu)}${kpi("+ Cost Synergy",fmt(tot[0].cs),C.pur)}${kpi("= CY26 Combined",fmt(aBase*1.08+tRev[0]+tot[0].cs),C.grn)}</div>`;
+    h+=`<div class="sec"><h3>3-Year Revenue Bridge Evolution</h3><div class="chart-wrap"><canvas id="ch4"></canvas></div></div>`;
+    el.innerHTML=h;
+    charts.ch4=new Chart(document.getElementById("ch4"),{type:"bar",data:{labels:yrs,datasets:[{label:"Acquirer Organic",data:yrs.map((_,i)=>aBase*(1.08**(i+1))),backgroundColor:C.mut},{label:"Cross-Sell",data:tot.map(t=>t.s+t.m),backgroundColor:C.blu},{label:"DBX New Wins",data:tot.map(t=>t.d),backgroundColor:C.org},{label:"Eng Upsell",data:tot.map(t=>t.e),backgroundColor:C.cyn},{label:"Cost Synergy",data:tot.map(t=>t.cs),backgroundColor:C.pur}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{labels:{color:C.mut,font:{size:11}}}},scales:{x:{stacked:true,ticks:{color:C.mut},grid:{color:C.bdr}},y:{stacked:true,ticks:{color:C.mut,callback:v=>"$"+v.toFixed(0)+"M"},grid:{color:C.bdr}}}}});
+    break;}
+
+  case "headcount":{
+    const fd=yrs.map((_,i)=>{const b=fc.reduce((s,c)=>s+c.fte[i],0),ft=Math.min(b,Math.round(30*(1+i*.25)));return{b,ft,hi:Math.max(0,b-ft),rpf:tRev[i]/Math.max(b,1)}});
+    let h=`<div class="kpis">${fd.map((d,i)=>kpi(yrs[i]+" FTEs",d.b,C.cyn,"Rev/FTE: "+fmt(d.rpf))).join("")}${kpi("Target Pool","~100",C.mut,"For redeployment")}</div>`;
+    h+=`<div class="sec"><h3>FTE Ramp & Sourcing</h3><div class="chart-wrap"><canvas id="ch5"></canvas></div></div>`;
+    h+=`<div class="sec"><h3>Client FTE Allocation & Productivity</h3><div style="overflow-x:auto"><table><thead><tr class="sep"><th style="text-align:left">Client</th>`;
+    yrs.forEach(y=>["FTE","Rev$K"].forEach((x,i)=>{h+=`<th class="${i===0?"bl":""}" style="text-align:center">${y} ${x}</th>`}));
+    h+=`<th class="bl green" style="text-align:center">CY28 Rev/FTE</th></tr></thead><tbody>`;
+    fc.forEach((c,idx)=>{h+=`<tr class="sep ${idx%2?"odd-row":"even-row"}"><td>${c.name}</td>`;
+      [0,1,2].forEach(yi=>{h+=`<td class="bl" style="text-align:center">${c.fte[yi]}</td><td style="text-align:center">$${(c.rev[yi]*1000).toFixed(0)}</td>`});
+      h+=`<td class="bl green bold" style="text-align:center">${fK(c.rev[2]/c.fte[2])}</td></tr>`});
+    h+=`</tbody></table></div></div>`;
+    el.innerHTML=h;
+    charts.ch5=new Chart(document.getElementById("ch5"),{type:"bar",data:{labels:yrs,datasets:[{label:"From Target FTEs",data:fd.map(d=>d.ft),backgroundColor:C.blu},{label:"New Hires",data:fd.map(d=>d.hi),backgroundColor:C.org}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{labels:{color:C.mut,font:{size:11}}}},scales:{x:{stacked:true,ticks:{color:C.mut},grid:{color:C.bdr}},y:{stacked:true,ticks:{color:C.mut},grid:{color:C.bdr}}}}});
+    break;}
+
+  case "scorecard":{
+    const scd=clients.map(c=>({...c,comp:(c.ds*.3+c.rd*.2+c.bs*.3+c.fs*.2).toFixed(1),t3:c.rev[0]+c.rev[1]+c.rev[2]})).sort((a,b)=>b.comp-a.comp).map((c,i)=>({...c,rk:i+1}));
+    let h=`<div class="sec"><h3>Client Prioritization Scorecard</h3><p style="font-size:10px;color:${C.mut};margin-bottom:10px">Weights: DBX Adoption 30% + Budget Signal 30% + Relationship 20% + Service Fit 20%</p><div class="grid g2">`;
+    scd.forEach(c=>{const p=(c.comp/10)*100;
+      h+=`<div class="gcard"><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px"><span style="font-weight:700;font-size:14px">#${c.rk} ${c.name}</span><span style="font-size:20px;font-weight:800;color:${p>80?C.grn:p>65?C.yel:C.org}">${c.comp}</span></div><div style="display:flex;gap:4px;flex-wrap:wrap;margin-bottom:6px">${badge("DBX:"+c.ds,C.str)} ${badge("Budget:"+c.bs,"#854d0e")} ${badge("Rel:"+c.rd,"#4a1d7a")} ${badge("Fit:"+c.fs,"#164e63")}</div><div class="progress"><div class="progress-fill" style="width:${p}%;background:linear-gradient(90deg,${C.blu},${p>80?C.grn:C.org})"></div></div><div style="font-size:10px;color:${C.mut}">3-Yr: <span class="green bold">${fK(c.t3)}</span> | ${c.sector}</div><div style="font-size:10px;color:#60a5fa;margin-top:3px;line-height:1.3">${c.insight}</div></div>`});
+    h+=`</div></div>`;
+    h+=`<div class="sec"><h3>Go-to-Market Wave Sequencing</h3><div class="grid" style="grid-template-columns:1fr 1fr">`;
+    [{ph:"🟢 Wave 1 (Day 1–90)",f:c=>c.rk<=3,cl:C.grn,d:"Highest score. Immediate engagement."},{ph:"🔵 Wave 2 (Day 90–180)",f:c=>c.rk>3&&c.rk<=5,cl:C.blu,d:"Strong potential. Proposals & demos."},{ph:"🟠 Wave 3 (Day 180–270)",f:c=>c.rk>5&&c.rk<=7,cl:C.org,d:"Emerging. Longer sales cycle."},{ph:"⚪ Wave 4 (Day 270+)",f:c=>c.rk>7,cl:C.mut,d:"Nurture & develop."}].forEach(w=>{
+      h+=`<div class="gcard"><div style="font-weight:700;color:${w.cl};margin-bottom:4px;font-size:13px">${w.ph}</div><div style="font-size:10px;color:${C.mut};margin-bottom:6px">${w.d}</div>`;
+      scd.filter(w.f).forEach(c=>{h+=`<div style="display:flex;justify-content:space-between;padding:3px 0;border-bottom:1px solid ${C.bdr};font-size:11px"><span>${c.name} <span class="mut" style="font-size:9px">(${c.comp})</span></span><span class="green bold">${fK(c.t3)}</span></div>`});
+      h+=`</div>`});
+    h+=`</div></div>`;
+    el.innerHTML=h;break;}
+
+  case "pipeline":{
+    const dp=yrs.map((_,i)=>{const m=1.2+i*.4,p=(54/8)*8*(.2+i*.12)*m,cv=.22+i*.05;return{p,r:p*cv}});
+    let h=`<div class="kpis">${kpi("Target Dec-25 Pipeline","$54.0M",C.org,"42 DBX deals in 2025")}${kpi("2025 Bookings","$15.8M",C.blu,"532% YoY")}${kpi("DBX-Ready Accts","5 of 8",C.grn,"MS,GS,FID,NDAQ,AON")}${kpi("3-Yr Pipeline",fmt(dp.reduce((s,d)=>s+d.p,0)),C.pnk)}</div>`;
+    h+=`<div class="sec"><h3>Databricks Pipeline Multiplier</h3><div class="chart-wrap"><canvas id="ch6"></canvas></div></div>`;
+    h+=`<div class="sec"><h3>DBX Deal Archetypes</h3><div class="grid g3">`;
+    [{t:"Data Strategy Discovery",s:"$300K–$500K",cy:"4–6 wks",f:"All 8 clients",i:"🔍"},{t:"DBX Accelerator",s:"$500K–$1M",cy:"6–8 wks",f:"MS,GS,FID,NDAQ,AON",i:"🚀"},{t:"SF-to-DBX Migration",s:"$1M–$2M",cy:"3–6 mo",f:"MS, GS, Fidelity",i:"🔄"},{t:"Lakehouse Build",s:"$2M–$4M",cy:"6–12 mo",f:"NatWest, BT, Nasdaq",i:"🏗️"},{t:"AI/ML Development",s:"$500K–$1.5M",cy:"3–6 mo",f:"All FS clients",i:"🤖"},{t:"Data Governance",s:"$800K–$2M",cy:"6–12 mo",f:"NatWest, AON, BT",i:"🛡️"}].forEach(d=>{
+      h+=`<div class="gcard"><div class="icon">${d.i}</div><div class="title">${d.t}</div><div class="val">${d.s}</div><div class="desc">Cycle: ${d.cy}</div><div class="fit">Fit: ${d.f}</div></div>`});
+    h+=`</div></div>`;
+    el.innerHTML=h;
+    charts.ch6=new Chart(document.getElementById("ch6"),{type:"bar",data:{labels:yrs,datasets:[{label:"Gross Pipeline",data:dp.map(d=>d.p),backgroundColor:C.org},{label:"Expected Revenue",data:dp.map(d=>d.r),backgroundColor:C.grn}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{labels:{color:C.mut,font:{size:11}}}},scales:{x:{ticks:{color:C.mut},grid:{color:C.bdr}},y:{ticks:{color:C.mut,callback:v=>"$"+v.toFixed(0)+"M"},grid:{color:C.bdr}}}}});
+    break;}
+
+  case "timeline":{
+    const phases=[{ph:"Day 1–30",lb:"Foundation",items:["Joint account mapping (all 8)","DBX practice integration & cert audit","Client comms strategy","Combined capability deck"],cl:C.blu,pc:15},{ph:"Day 31–90",lb:"Quick Wins",items:["Wave 1: MS, GS, Fidelity","DBX Accelerator proposals (5 clients)","Joint staffing & cross-training","First $1M+ pipeline"],cl:C.cyn,pc:35},{ph:"Day 91–180",lb:"Scale",items:["All 8 accounts active","NatWest & BT advisory starts","Combined delivery model live","Unified governance offering"],cl:C.pur,pc:65},{ph:"Day 181–365",lb:"Optimize",items:["$7.3M CY26 on track","DBX certs 60→100+","Telecom playbook (BT+VZ)","Client satisfaction reviews"],cl:C.org,pc:90},{ph:"Year 2–3",lb:"Accelerate",items:["$11.3M→$15.9M run-rate","50+ DBX deals in pipeline","FS+Telecom thought leadership","DBX Premier Partner upgrade"],cl:C.grn,pc:100}];
+    let h=`<div class="sec"><h3>Integration Roadmap — Day 1 to Year 3</h3>`;
+    phases.forEach((p,i)=>{
+      h+=`<div class="tl-item"><div class="tl-dot" style="background:${p.cl}">${i+1}</div>${i<phases.length-1?`<div class="tl-line" style="height:calc(100% - 2px)"></div>`:""}<div class="tl-card" style="border-left-color:${p.cl}"><div class="head"><div><span style="font-weight:700;color:${p.cl};font-size:13px">${p.ph}</span><span class="mut" style="font-size:11px;margin-left:8px">— ${p.lb}</span></div><div class="progress" style="width:70px;margin:0"><div class="progress-fill" style="width:${p.pc}%;background:${p.cl}"></div></div></div><div class="items">${p.items.map(it=>`<div><span style="color:${p.cl};margin-right:5px">●</span>${it}</div>`).join("")}</div></div></div>`});
+    h+=`</div>`;
+    h+=`<div class="sec"><h3>Key Integration Risks & Mitigation</h3><div class="grid" style="grid-template-columns:1fr 1fr">`;
+    [{t:"Client Retention",r:"Medium",m:"Day 1 joint comms. Protect Capital One (77% target rev). Dedicated RMs.",cl:C.yel},{t:"Talent Retention",r:"High",m:"Retention packages for top 20 DBX staff. Career paths. Cross-training in 90 days.",cl:C.red},{t:"DBX Partnership",r:"Low",m:"60+ certs + 5000 employees = Premier Partner upgrade path.",cl:C.grn},{t:"Revenue Ramp",r:"Medium",m:"Phased $7.3M→$11.3M→$15.9M. Wave-based GTM. $54M pipeline identified.",cl:C.yel}].forEach(r=>{
+      h+=`<div class="gcard"><div style="display:flex;justify-content:space-between;margin-bottom:6px"><span style="font-weight:700;font-size:12px">${r.t}</span>${badge("Risk: "+r.r,r.r==="High"?"#7f1d1d":r.r==="Medium"?"#854d0e":"#166534")}</div><div style="font-size:10px;color:${C.mut};line-height:1.5">${r.m}</div></div>`});
+    h+=`</div></div>`;
+    el.innerHTML=h;break;}
+
+  case "margin":{
+    const md=yrs.map((_,i)=>{const r=tRev[i],gp=r*(.43+i*.02),eb=r*(.18+i*.02),cs=tot[i].cs;return{r,gp,eb,cs,gm:((gp/r)*100).toFixed(0),em:((eb/r)*100).toFixed(0)}});
+    let h=`<div class="kpis">${kpi("CY28 Gross Margin",md[2].gm+"%",C.grn,"From "+md[0].gm+"%")}${kpi("CY28 EBITDA",md[2].em+"%",C.blu,"From "+md[0].em+"%")}${kpi("3-Yr Cost Synergy",fmt(tCost),C.pur)}${kpi("3-Yr Total Value",fmt(grand+tCost),C.org,"Rev+Cost")}</div>`;
+    h+=`<div class="sec"><h3>Revenue, Profit & Cost Synergy</h3><div class="chart-wrap"><canvas id="ch7"></canvas></div></div>`;
+    h+=`<div class="sec"><h3>Margin Summary ($M)</h3><table><thead><tr class="sep"><th style="text-align:left">Metric</th>${yrs.map(y=>`<th style="color:${C.blu}">${y}</th>`).join("")}<th style="color:${C.grn}">3-Yr Total</th></tr></thead><tbody>`;
+    [{l:"Synergy Revenue",k:"r",c:C.txt},{l:"Gross Profit",k:"gp",c:C.grn},{l:"Gross Margin %",k:"gm",c:C.grn,suf:"%"},{l:"EBITDA",k:"eb",c:C.cyn},{l:"EBITDA Margin %",k:"em",c:C.cyn,suf:"%"},{l:"Cost Synergies",k:"cs",c:C.pur}].forEach(r=>{
+      h+=`<tr class="sep"><td style="font-weight:600">${r.l}</td>`;
+      md.forEach(d=>{h+=`<td style="color:${r.c}">${r.suf?d[r.k]+r.suf:fmt(d[r.k])}</td>`});
+      h+=`<td style="color:${r.c};font-weight:700">${r.suf?"—":fmt(md.reduce((s,d)=>s+d[r.k],0))}</td></tr>`});
+    h+=`<tr style="border-top:2px solid ${C.grn};font-weight:700"><td style="color:${C.org}">Total Value Created</td>`;
+    md.forEach(d=>{h+=`<td style="color:${C.org}">${fmt(d.r+d.cs)}</td>`});
+    h+=`<td style="color:${C.org}">${fmt(grand+tCost)}</td></tr></tbody></table></div>`;
+    h+=`<div class="sec"><h3>Margin Improvement Drivers</h3><div class="grid g3">`;
+    [{d:"Higher Utilization",im:"+2-3% GM",dt:"Cross-staffing reduces idle time 30%→15%.",i:"📈"},{d:"DBX Premium Pricing",im:"+3-5% GM",dt:"Specialized DBX work at 15-25% rate premium.",i:"💎"},{d:"Shared Delivery",im:"$0.5-1M/yr",dt:"Consolidated back-office & recruiting.",i:"🏢"},{d:"Scale Rate Cards",im:"+$15-25/hr",dt:"5000+ combined workforce lifts blended rates.",i:"📊"},{d:"Lower CAC",im:"-40%",dt:"Cross-sell into existing 8 accounts.",i:"🎯"},{d:"IP & Accelerators",im:"+$1-2M/yr",dt:"Reusable frameworks across broader base.",i:"⚡"}].forEach(d=>{
+      h+=`<div class="gcard"><div class="icon">${d.i}</div><div class="title">${d.d}</div><div class="val" style="color:${C.grn}">${d.im}</div><div class="desc">${d.dt}</div></div>`});
+    h+=`</div></div>`;
+    el.innerHTML=h;
+    charts.ch7=new Chart(document.getElementById("ch7"),{type:"bar",data:{labels:yrs,datasets:[{label:"Synergy Revenue",data:md.map(d=>d.r),backgroundColor:C.blu},{label:"Gross Profit",data:md.map(d=>d.gp),backgroundColor:C.grn},{label:"EBITDA",data:md.map(d=>d.eb),backgroundColor:C.cyn},{label:"Cost Synergy",data:md.map(d=>d.cs),backgroundColor:C.pur}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{labels:{color:C.mut,font:{size:11}}}},scales:{x:{ticks:{color:C.mut},grid:{color:C.bdr}},y:{ticks:{color:C.mut,callback:v=>"$"+v.toFixed(0)+"M"},grid:{color:C.bdr}}}}});
+    break;}
+  }
+}
+render();
+</script>
+</body>
+</html>
