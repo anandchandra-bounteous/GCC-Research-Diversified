@@ -1,0 +1,945 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Montreal Outreach Campaign 2026</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
+:root{
+  --navy:#2E1869;
+  --pink:#B61CA7;
+  --blue:#3C25F7;
+  --bg:#F3F3F5;
+  --white:#FFFFFF;
+  --text:#2E1869;
+  --muted:#7b6ea8;
+  --border:#ddd8f0;
+  --hi:#00b49c;--me:#f59e0b;--lo:#ef4444;
+  --hi-bg:#edfaf7;--me-bg:#fffbeb;--lo-bg:#fef2f2;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);font-size:14px;}
+
+/* HEADER */
+.hdr{background:var(--navy);}
+.hdr-stripe{height:4px;background:linear-gradient(90deg,var(--pink),var(--blue));}
+.hdr-inner{padding:28px 40px;display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap;}
+.hdr-brand .logo{font-size:1.5rem;font-weight:900;color:#fff;letter-spacing:-1px;margin-bottom:6px;}
+.hdr-brand .logo span{color:var(--pink);}
+.hdr-brand p{font-size:.75rem;color:#b8aee0;line-height:1.5;}
+.hdr-kpis{display:flex;gap:24px;flex-wrap:wrap;}
+.hk{text-align:center;}
+.hk .v{font-size:1.9rem;font-weight:900;color:var(--pink);line-height:1;}
+.hk .l{font-size:.62rem;text-transform:uppercase;letter-spacing:.6px;color:#9a8dc8;margin-top:3px;}
+.hdr-tags{padding:0 40px 22px;display:flex;gap:6px;flex-wrap:wrap;}
+.htag{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);border-radius:20px;padding:3px 11px;font-size:.68rem;color:#d4cff0;}
+.htag.p{background:rgba(182,28,167,.2);border-color:rgba(182,28,167,.4);color:#e87ede;}
+.htag.b{background:rgba(60,37,247,.2);border-color:rgba(60,37,247,.4);color:#9d94ff;}
+
+/* NAV */
+nav{background:var(--white);border-bottom:2px solid var(--border);position:sticky;top:0;z-index:100;display:flex;overflow-x:auto;padding:0 40px;}
+nav button{background:none;border:none;padding:13px 16px;font-size:.8rem;font-weight:600;color:var(--muted);cursor:pointer;border-bottom:3px solid transparent;white-space:nowrap;font-family:'Inter',sans-serif;transition:.15s;}
+nav button.active,nav button:hover{color:var(--pink);border-bottom-color:var(--pink);}
+
+/* LAYOUT */
+main{padding:28px 40px;max-width:1400px;margin:0 auto;}
+.tab{display:none;}.tab.active{display:block;}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+.g3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;}
+.g4{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;}
+.mb{margin-bottom:20px;}
+
+/* CARDS */
+.card{background:var(--white);border:1px solid var(--border);border-radius:10px;padding:20px;}
+.card.tp{border-top:3px solid var(--pink);}
+.card.tb{border-top:3px solid var(--blue);}
+.card.tn{border-top:3px solid var(--navy);}
+
+/* SECTION TITLES */
+.st{font-size:.78rem;font-weight:800;text-transform:uppercase;letter-spacing:.6px;color:var(--navy);margin-bottom:14px;display:flex;align-items:center;gap:8px;}
+.st::before{content:'';width:3px;height:15px;background:var(--pink);border-radius:2px;flex-shrink:0;}
+.st.b::before{background:var(--blue);}
+
+/* KPI TILES */
+.kpi{background:var(--white);border:1px solid var(--border);border-radius:10px;padding:18px;border-left:4px solid var(--pink);}
+.kpi.b{border-left-color:var(--blue);}
+.kpi .v{font-size:2rem;font-weight:900;color:var(--pink);}
+.kpi.b .v{color:var(--blue);}
+.kpi .l{font-size:.68rem;font-weight:600;text-transform:uppercase;letter-spacing:.4px;color:var(--muted);margin-top:4px;}
+.kpi .s{font-size:.68rem;color:var(--hi);margin-top:2px;}
+
+/* COMPANY STRIP */
+.co-strip{background:var(--navy);border-radius:10px;padding:20px 28px;display:flex;flex-wrap:wrap;margin-bottom:20px;gap:0;}
+.co-stat{flex:1;min-width:100px;text-align:center;padding:6px 0;}
+.co-stat .v{font-size:1.5rem;font-weight:900;color:var(--pink);}
+.co-stat .l{font-size:.62rem;text-transform:uppercase;letter-spacing:.5px;color:#9a8dc8;margin-top:3px;}
+.co-div{width:1px;background:rgba(255,255,255,.12);margin:4px 0;}
+
+/* PROGRESS */
+.pb{background:var(--bg);border-radius:6px;height:7px;margin-top:5px;}
+.pf{height:7px;border-radius:6px;background:linear-gradient(90deg,var(--pink),var(--blue));}
+
+/* PROPENSITY BADGES */
+.prop{display:inline-block;padding:2px 9px;border-radius:20px;font-size:.68rem;font-weight:700;}
+.prop.H{background:var(--hi-bg);color:#007a6a;}
+.prop.M{background:var(--me-bg);color:#92620a;}
+.prop.L{background:var(--lo-bg);color:#b30000;}
+
+/* TAGS */
+.tag{display:inline-block;background:#ede9fb;color:var(--navy);border:1px solid var(--border);border-radius:4px;padding:2px 7px;font-size:.66rem;margin:2px;}
+.tag.p{background:rgba(182,28,167,.08);color:var(--pink);border-color:rgba(182,28,167,.2);}
+.tag.b{background:rgba(60,37,247,.08);color:var(--blue);border-color:rgba(60,37,247,.2);}
+
+/* TABLE */
+.tw{overflow-x:auto;}
+table{width:100%;border-collapse:collapse;font-size:.78rem;}
+th{background:var(--navy);color:#fff;padding:9px 11px;text-align:left;font-weight:700;font-size:.68rem;text-transform:uppercase;letter-spacing:.4px;white-space:nowrap;}
+td{padding:9px 11px;border-bottom:1px solid var(--border);vertical-align:top;}
+tr:nth-child(even) td{background:#faf9fd;}
+tr:hover td{background:#f0eefa;}
+
+/* SEGMENT CARDS */
+.seg{border-radius:10px;border:1px solid var(--border);overflow:hidden;margin-bottom:18px;}
+.seg-hdr{padding:14px 18px;font-weight:800;font-size:.9rem;color:#fff;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;}
+.seg-hdr.fs{background:linear-gradient(90deg,var(--navy),#3d2a9a);}
+.seg-hdr.tm{background:linear-gradient(90deg,#1a0e4a,var(--blue));}
+.seg-hdr.py{background:linear-gradient(90deg,#5a0e50,var(--pink));}
+.seg-body{padding:16px 18px;background:var(--white);}
+.seg-row{display:flex;gap:10px;padding:8px 0;border-bottom:1px solid var(--border);}
+.seg-row:last-child{border-bottom:none;}
+.seg-lbl{font-size:.68rem;text-transform:uppercase;letter-spacing:.3px;color:var(--muted);min-width:110px;padding-top:2px;}
+.seg-val{font-size:.8rem;flex:1;}
+.vp{margin-top:12px;padding:12px 14px;border-left:3px solid var(--pink);background:#fdf5fd;border-radius:0 6px 6px 0;font-size:.8rem;line-height:1.6;}
+.vp.b{border-left-color:var(--blue);background:#f0effe;}
+.vp.n{border-left-color:var(--navy);background:#f0eefa;}
+
+/* SEQUENCE */
+.seq-step{display:flex;gap:12px;margin-bottom:13px;align-items:flex-start;}
+.sdot{min-width:28px;height:28px;border-radius:50%;background:var(--pink);color:#fff;font-weight:800;font-size:.75rem;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.sdot.b{background:var(--blue);}
+.sc strong{font-size:.8rem;color:var(--navy);display:block;}
+.sc p{font-size:.74rem;color:var(--muted);margin-top:2px;line-height:1.4;}
+.sday{font-size:.66rem;background:#ede9fb;color:var(--navy);border-radius:10px;padding:2px 8px;margin-left:auto;white-space:nowrap;flex-shrink:0;}
+
+/* EMAIL TEMPLATE */
+.eml{background:var(--white);border:1px solid var(--border);border-radius:10px;overflow:hidden;}
+.eml-top{background:var(--navy);padding:10px 16px;display:flex;align-items:center;gap:8px;}
+.eml-top span{color:#fff;font-weight:700;font-size:.8rem;}
+.eml-pkg{background:var(--bg);padding:7px 16px;font-size:.72rem;color:var(--muted);border-bottom:1px solid var(--border);}
+.eml-pkg strong{color:var(--navy);}
+.eml-subj{padding:12px 16px 8px;border-bottom:1px solid var(--border);}
+.eml-subj .lbl{font-size:.65rem;text-transform:uppercase;letter-spacing:.4px;color:var(--muted);margin-bottom:3px;}
+.eml-subj .txt{font-weight:700;font-size:.85rem;color:var(--navy);}
+.eml-body{padding:14px 16px;font-size:.79rem;line-height:1.8;white-space:pre-line;color:var(--text);}
+.eml-sig{padding:10px 16px;background:var(--bg);border-top:1px solid var(--border);font-size:.7rem;color:var(--muted);}
+.eml-sig span{color:var(--pink);font-weight:600;}
+
+/* PIPELINE */
+.pipe{display:flex;gap:12px;overflow-x:auto;padding-bottom:6px;}
+.pcol{min-width:170px;flex:1;}
+.phdr{background:var(--navy);color:#fff;padding:8px 12px;border-radius:8px 8px 0 0;font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.4px;}
+.pitem{background:var(--white);border:1px solid var(--border);border-top:none;padding:10px 12px;font-size:.74rem;}
+.pitem:last-child{border-radius:0 0 8px 8px;}
+.pitem strong{display:block;color:var(--navy);margin-bottom:2px;}
+.pitem span{color:var(--muted);}
+
+/* MATRIX */
+.mx{width:100%;border-collapse:collapse;font-size:.75rem;}
+.mx th{background:var(--navy);color:#fff;padding:8px 10px;border:1px solid #3d2a9a;text-align:center;font-size:.66rem;text-transform:uppercase;letter-spacing:.3px;}
+.mx td{border:1px solid var(--border);padding:7px 10px;text-align:center;}
+.mx td:first-child{text-align:left;font-weight:600;background:#faf9fd;}
+.s5{background:rgba(0,180,156,.15);color:#005a4d;font-weight:800;}
+.s4{background:rgba(60,37,247,.1);color:#1a0fa0;font-weight:600;}
+.s3{background:rgba(182,28,167,.08);color:#7a0e72;}
+.s2{background:#fffbeb;color:#92620a;}
+.s1{background:#fef2f2;color:#b30000;}
+
+/* SUB-TABS */
+.stbar{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:16px;}
+.stbtn{background:var(--white);border:1px solid var(--border);border-radius:6px;padding:6px 13px;font-size:.76rem;color:var(--muted);cursor:pointer;font-weight:500;font-family:'Inter',sans-serif;transition:.15s;}
+.stbtn.active,.stbtn:hover{background:var(--pink);color:#fff;border-color:var(--pink);}
+.subt{display:none;}.subt.active{display:block;}
+
+/* FILTER */
+.fbar{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px;align-items:center;}
+.fbar select,.fbar input{padding:7px 11px;border-radius:6px;border:1px solid var(--border);font-size:.78rem;background:var(--white);color:var(--text);font-family:'Inter',sans-serif;}
+.btn{padding:7px 16px;border-radius:6px;border:none;background:var(--pink);color:#fff;font-size:.78rem;font-weight:700;cursor:pointer;font-family:'Inter',sans-serif;}
+.btn:hover{background:#9a1490;}
+
+/* PKG CARDS */
+.pkg-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:20px;}
+.pkg-card{background:var(--white);border:1px solid var(--border);border-radius:10px;padding:16px;cursor:pointer;transition:.15s;border-top:3px solid var(--border);}
+.pkg-card:hover,.pkg-card.active{border-top-color:var(--pink);box-shadow:0 4px 20px rgba(182,28,167,.12);}
+.pkg-card .icon{font-size:1.4rem;margin-bottom:8px;}
+.pkg-card h4{font-size:.84rem;font-weight:700;color:var(--navy);margin-bottom:3px;}
+.pkg-card p{font-size:.72rem;color:var(--muted);line-height:1.4;}
+.pkg-card .price{font-size:.68rem;color:var(--blue);margin-top:7px;font-weight:600;}
+
+/* SCORE TIERS */
+.tier{border-radius:8px;padding:14px 16px;margin-bottom:12px;border:1px solid var(--border);}
+.tier.h{border-left:4px solid var(--hi);}
+.tier.m{border-left:4px solid var(--me);}
+.tier.l{border-left:4px solid var(--lo);}
+.tier strong{font-size:.82rem;display:block;margin-bottom:5px;}
+.tier p{font-size:.76rem;color:var(--muted);line-height:1.5;}
+
+/* TIMELINE */
+.tl{display:flex;flex-direction:column;}
+.tl-item{display:flex;gap:0;}
+.tl-left{display:flex;flex-direction:column;align-items:center;width:36px;flex-shrink:0;}
+.tl-dot{width:13px;height:13px;border-radius:50%;background:var(--pink);border:2px solid #e87ede;}
+.tl-line{flex:1;width:2px;background:var(--border);}
+.tl-body{flex:1;padding:0 0 20px 14px;}
+.tl-phase{font-size:.66rem;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--pink);margin-bottom:3px;}
+.tl-title{font-size:.85rem;font-weight:700;color:var(--navy);margin-bottom:3px;}
+.tl-desc{font-size:.76rem;color:var(--muted);line-height:1.5;}
+
+/* PKG DETAIL */
+.pkg-detail{background:var(--white);border:1px solid var(--border);border-radius:10px;padding:22px;}
+.cap-list{list-style:none;display:flex;flex-direction:column;gap:7px;margin-top:8px;}
+.cap-list li{font-size:.78rem;display:flex;gap:8px;align-items:flex-start;}
+.cap-list li::before{content:'→';color:var(--pink);font-weight:900;flex-shrink:0;}
+
+/* RESPONSIVE */
+@media(max-width:800px){
+  .g2,.g3,.g4,.pkg-grid{grid-template-columns:1fr;}
+  .hdr-inner,.co-strip{flex-direction:column;}
+  main,nav{padding-left:16px;padding-right:16px;}
+  .hdr-tags{padding:0 16px 16px;}
+}
+</style>
+</head>
+<body>
+
+<!-- ══ HEADER ══ -->
+<div class="hdr">
+  <div class="hdr-stripe"></div>
+  <div class="hdr-inner">
+    <div class="hdr-brand">
+      <div class="logo">bounteous<span>+</span></div>
+      <h1 style="font-size:1.1rem;font-weight:800;color:#fff;margin-bottom:4px;">Montreal Enterprise Outreach Campaign — 2026</h1>
+      <p style="font-size:.74rem;color:#b8aee0;">AI-Enabled Digital Solutions · Financial Services &amp; Media/Telecom · 5,000+ Workforce · 100+ Global 2000 Clients</p>
+    </div>
+    <div class="hdr-kpis">
+      <div class="hk"><div class="v">98</div><div class="l">Target Accounts</div></div>
+      <div class="hk"><div class="v">36</div><div class="l">High Propensity</div></div>
+      <div class="hk"><div class="v">$6.8M</div><div class="l">Est. Pipeline</div></div>
+      <div class="hk"><div class="v">9</div><div class="l">Packages</div></div>
+    </div>
+  </div>
+  <div class="hdr-tags">
+    <span class="htag p">Murex Transformation</span>
+    <span class="htag p">Cloud Transformation</span>
+    <span class="htag p">AI for Enterprise</span>
+    <span class="htag b">Platform Modernisation</span>
+    <span class="htag b">Data Programs</span>
+    <span class="htag b">Digital Product Engineering</span>
+    <span class="htag">Experience Design</span>
+    <span class="htag">Growth Marketing</span>
+    <span class="htag">Graduate Program</span>
+  </div>
+</div>
+
+<!-- ══ NAV ══ -->
+<nav>
+  <button class="active" onclick="showTab('overview',this)">📊 Overview</button>
+  <button onclick="showTab('prospects',this)">🏢 Prospect List</button>
+  <button onclick="showTab('segments',this)">🎯 Segment Playbook</button>
+  <button onclick="showTab('packages',this)">📦 Program Packages</button>
+  <button onclick="showTab('propensity',this)">⚡ Propensity &amp; Fit</button>
+  <button onclick="showTab('emails',this)">✉️ Email Templates</button>
+  <button onclick="showTab('pipeline',this)">📈 Pipeline Tracker</button>
+</nav>
+
+<main>
+
+<!-- ══════════════════════════════════════════
+     TAB 1 — OVERVIEW
+══════════════════════════════════════════ -->
+<div id="overview" class="tab active">
+
+  <div class="co-strip">
+    <div class="co-stat"><div class="v">5,000+</div><div class="l">AI-Enabled Staff</div></div>
+    <div class="co-div"></div>
+    <div class="co-stat"><div class="v">100+</div><div class="l">Global 2000 Clients</div></div>
+    <div class="co-div"></div>
+    <div class="co-stat"><div class="v">3,500</div><div class="l">India Centres</div></div>
+    <div class="co-div"></div>
+    <div class="co-stat"><div class="v">1,000</div><div class="l">North America</div></div>
+    <div class="co-div"></div>
+    <div class="co-stat"><div class="v">500</div><div class="l">Europe (UK/ES/NL)</div></div>
+    <div class="co-div"></div>
+    <div class="co-stat"><div class="v">98</div><div class="l">MTL Target Accounts</div></div>
+    <div class="co-div"></div>
+    <div class="co-stat"><div class="v">$6.8M</div><div class="l">Pipeline Opportunity</div></div>
+  </div>
+
+  <div class="g4 mb">
+    <div class="kpi"><div class="v">98</div><div class="l">Target Accounts</div><div class="s">Montreal + Greater Area</div></div>
+    <div class="kpi"><div class="v">36</div><div class="l">High Propensity</div><div class="s">Ready to engage now</div></div>
+    <div class="kpi b"><div class="v">$6.8M</div><div class="l">Est. Pipeline Value</div><div class="s">Across 9 packages</div></div>
+    <div class="kpi b"><div class="v">10</div><div class="l">Touchpoints / Prospect</div><div class="s">Over 8-week campaign</div></div>
+  </div>
+
+  <div class="g2 mb">
+    <div class="card tp">
+      <div class="st">Account Split by Vertical</div>
+      <div style="display:flex;flex-direction:column;gap:11px;">
+        <div><div style="display:flex;justify-content:space-between;font-size:.78rem;margin-bottom:4px;"><span>Capital Markets &amp; Investment Banking</span><strong>28</strong></div><div class="pb"><div class="pf" style="width:90%"></div></div></div>
+        <div><div style="display:flex;justify-content:space-between;font-size:.78rem;margin-bottom:4px;"><span>Retail &amp; Consumer Banking</span><strong>18</strong></div><div class="pb"><div class="pf" style="width:65%"></div></div></div>
+        <div><div style="display:flex;justify-content:space-between;font-size:.78rem;margin-bottom:4px;"><span>Asset &amp; Wealth Management</span><strong>14</strong></div><div class="pb"><div class="pf" style="width:50%"></div></div></div>
+        <div><div style="display:flex;justify-content:space-between;font-size:.78rem;margin-bottom:4px;"><span>Health &amp; Specialty Insurance</span><strong>12</strong></div><div class="pb"><div class="pf" style="width:44%"></div></div></div>
+        <div><div style="display:flex;justify-content:space-between;font-size:.78rem;margin-bottom:4px;"><span>Telecom &amp; Media</span><strong>16</strong></div><div class="pb"><div class="pf" style="width:58%"></div></div></div>
+        <div><div style="display:flex;justify-content:space-between;font-size:.78rem;margin-bottom:4px;"><span>Payments, FinTech &amp; Exchanges</span><strong>10</strong></div><div class="pb"><div class="pf" style="width:36%"></div></div></div>
+      </div>
+    </div>
+    <div class="card tb">
+      <div class="st b">Pipeline by Program Package</div>
+      <div style="display:flex;flex-direction:column;gap:11px;">
+        <div><div style="display:flex;justify-content:space-between;font-size:.78rem;margin-bottom:4px;"><span>Murex Transformation</span><strong style="color:var(--pink)">$1.85M</strong></div><div class="pb"><div class="pf" style="width:95%"></div></div></div>
+        <div><div style="display:flex;justify-content:space-between;font-size:.78rem;margin-bottom:4px;"><span>Cloud Transformation</span><strong style="color:var(--pink)">$1.20M</strong></div><div class="pb"><div class="pf" style="width:75%"></div></div></div>
+        <div><div style="display:flex;justify-content:space-between;font-size:.78rem;margin-bottom:4px;"><span>AI for Enterprise</span><strong style="color:var(--pink)">$980K</strong></div><div class="pb"><div class="pf" style="width:63%"></div></div></div>
+        <div><div style="display:flex;justify-content:space-between;font-size:.78rem;margin-bottom:4px;"><span>Platform Modernisation</span><strong style="color:var(--pink)">$760K</strong></div><div class="pb"><div class="pf" style="width:49%"></div></div></div>
+        <div><div style="display:flex;justify-content:space-between;font-size:.78rem;margin-bottom:4px;"><span>Data Programs</span><strong style="color:var(--pink)">$680K</strong></div><div class="pb"><div class="pf" style="width:44%"></div></div></div>
+        <div><div style="display:flex;justify-content:space-between;font-size:.78rem;margin-bottom:4px;"><span>Digital Product Engineering</span><strong style="color:var(--pink)">$520K</strong></div><div class="pb"><div class="pf" style="width:33%"></div></div></div>
+        <div><div style="display:flex;justify-content:space-between;font-size:.78rem;margin-bottom:4px;"><span>Exp. Design + Growth Marketing</span><strong style="color:var(--pink)">$380K</strong></div><div class="pb"><div class="pf" style="width:24%"></div></div></div>
+        <div><div style="display:flex;justify-content:space-between;font-size:.78rem;margin-bottom:4px;"><span>Graduate Program</span><strong style="color:var(--pink)">$160K</strong></div><div class="pb"><div class="pf" style="width:10%"></div></div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="st">8-Week Campaign Timeline</div>
+    <div class="tl">
+      <div class="tl-item"><div class="tl-left"><div class="tl-dot"></div><div class="tl-line"></div></div><div class="tl-body"><div class="tl-phase">Phase 1 · Weeks 1–2</div><div class="tl-title">Intelligence &amp; LinkedIn Warm-Up</div><div class="tl-desc">Research trigger events — leadership changes, M&amp;A, IT job postings, regulatory filings. Connect with CIOs, CTOs, Murex Program Leads, Heads of Digital Transformation on LinkedIn. Engage with their content.</div></div></div>
+      <div class="tl-item"><div class="tl-left"><div class="tl-dot"></div><div class="tl-line"></div></div><div class="tl-body"><div class="tl-phase">Phase 2 · Weeks 2–3</div><div class="tl-title">First Touch — Personalised Email per Package</div><div class="tl-desc">Send segment-specific intro emails. High-propensity accounts receive full personalisation referencing their tech stack or transformation agenda. LinkedIn InMail as a parallel channel.</div></div></div>
+      <div class="tl-item"><div class="tl-left"><div class="tl-dot"></div><div class="tl-line"></div></div><div class="tl-body"><div class="tl-phase">Phase 3 · Weeks 3–4</div><div class="tl-title">Follow-Up &amp; Value Delivery</div><div class="tl-desc">ROI case study or whitepaper relevant to their vertical. Follow-up call to direct decision-makers. Offer complimentary "Digital Readiness Assessment" or "Murex Roadmap Review."</div></div></div>
+      <div class="tl-item"><div class="tl-left"><div class="tl-dot"></div><div class="tl-line"></div></div><div class="tl-body"><div class="tl-phase">Phase 4 · Weeks 4–6</div><div class="tl-title">Nurture &amp; Thought Leadership</div><div class="tl-desc">Industry content: AI in Capital Markets, cloud-native telecom platforms, Murex MX.3 playbooks. Invite to virtual roundtables or executive briefings. Keep non-responders warm.</div></div></div>
+      <div class="tl-item"><div class="tl-left"><div class="tl-dot"></div><div class="tl-line"></div></div><div class="tl-body"><div class="tl-phase">Phase 5 · Weeks 6–8</div><div class="tl-title">Conversion &amp; Pipeline Creation</div><div class="tl-desc">Proposal-trigger emails, exec-to-exec outreach, demo offers. Graduate Program pitch to HR/Talent teams. Break-up emails with complimentary assessment offer for non-responsive accounts.</div></div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     TAB 2 — PROSPECT LIST
+══════════════════════════════════════════ -->
+<div id="prospects" class="tab">
+  <div class="fbar">
+    <select id="fv" onchange="ft()"><option value="">All Verticals</option><option>Capital Markets</option><option>Retail Banking</option><option>Asset &amp; Wealth</option><option>Insurance</option><option>Telecom &amp; Media</option><option>Payments &amp; FinTech</option></select>
+    <select id="fz" onchange="ft()"><option value="">All Sizes</option><option>Enterprise</option><option>Large Enterprise</option></select>
+    <select id="fp2" onchange="ft()"><option value="">All Propensity</option><option value="H">High</option><option value="M">Medium</option></select>
+    <input id="fq" type="text" placeholder="Search company, package, trigger…" oninput="ft()" style="flex:1;min-width:180px;">
+    <button class="btn" onclick="rf()">Reset</button>
+  </div>
+  <div class="card tw">
+    <table><thead><tr><th>#</th><th>Company</th><th>Vertical</th><th>Size</th><th>Employees</th><th>Lead Package(s)</th><th>Upsell Path</th><th>Propensity</th><th>Target Contact</th><th>Buying Trigger</th></tr></thead>
+    <tbody id="ptb"></tbody></table>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     TAB 3 — SEGMENT PLAYBOOK
+══════════════════════════════════════════ -->
+<div id="segments" class="tab">
+
+  <div class="seg">
+    <div class="seg-hdr fs"><span>🏦 Financial Services — Capital Markets, Asset Management &amp; Banking</span><span class="prop H">HIGH PRIORITY</span></div>
+    <div class="seg-body">
+      <div class="g2">
+        <div>
+          <div class="seg-row"><span class="seg-lbl">Key Accounts</span><span class="seg-val">National Bank, Desjardins, BMO MTL, CDPQ, iA Financial, Sun Life MTL, Intact, Fidelity Canada, TMX Group</span></div>
+          <div class="seg-row"><span class="seg-lbl">Target Contacts</span><span class="seg-val">CIO, CTO, Head of Capital Markets IT, VP Digital Transformation, Murex Program Manager, CDO, Head of Quant Engineering</span></div>
+          <div class="seg-row"><span class="seg-lbl">Accounts / Pipeline</span><span class="seg-val">58 accounts · $4.2M pipeline potential</span></div>
+          <div class="seg-row"><span class="seg-lbl">Pain Points</span><span class="seg-val">Murex MX.3 migration, OSFI B-13 compliance, ageing trade infrastructure, quant/dev talent gap, ESG reporting, real-time risk data</span></div>
+        </div>
+        <div>
+          <div class="seg-row"><span class="seg-lbl">Lead Packages</span><span class="seg-val"><span class="tag p">Murex Transformation</span><span class="tag p">AI for Enterprise</span><span class="tag p">Data Programs</span><span class="tag b">Cloud Transformation</span><span class="tag b">Platform Modernisation</span></span></div>
+          <div class="seg-row"><span class="seg-lbl">Upsell Journey</span><span class="seg-val">Murex → Cloud → AI/Automation → Data Platform → Digital Product Eng → Managed retainer</span></div>
+          <div class="seg-row"><span class="seg-lbl">Deal Size</span><span class="seg-val">$250K–$1.2M (project) · $80K–$200K/yr (managed)</span></div>
+          <div class="seg-row"><span class="seg-lbl">Budget Cycle</span><span class="seg-val">Q1 (Jan–Mar) and Q3 (Jul–Sep) — align proposals to these windows</span></div>
+        </div>
+      </div>
+      <div class="vp"><strong>🎯 Value Proposition:</strong> "We are the global digital transformation partner of choice for Financial Services leaders — combining deep Murex expertise, AI-driven modernisation capabilities, and cross-asset platform engineering to help institutions reduce risk, accelerate time-to-market, and unlock the value of data. Our 1,000-strong North American team delivers like a local partner, at global scale."</div>
+    </div>
+  </div>
+
+  <div class="seg">
+    <div class="seg-hdr tm"><span>📡 Telecom &amp; Media — Enterprise &amp; Large Enterprise</span><span class="prop H">HIGH PRIORITY</span></div>
+    <div class="seg-body">
+      <div class="g2">
+        <div>
+          <div class="seg-row"><span class="seg-lbl">Key Accounts</span><span class="seg-val">Bell Canada, Videotron, Cogeco, CBC/Radio-Canada, Groupe TVA, Telus MTL, Quebecor</span></div>
+          <div class="seg-row"><span class="seg-lbl">Target Contacts</span><span class="seg-val">CIO, CDO, VP IT Infrastructure, Director of Digital Transformation, Head of Data Platforms, VP Cloud Engineering</span></div>
+          <div class="seg-row"><span class="seg-lbl">Accounts / Pipeline</span><span class="seg-val">26 accounts · $1.9M pipeline potential</span></div>
+          <div class="seg-row"><span class="seg-lbl">Pain Points</span><span class="seg-val">BSS/OSS legacy modernisation, 5G platform scaling, content personalisation, data lake optimisation, OTT performance, cost reduction mandates</span></div>
+        </div>
+        <div>
+          <div class="seg-row"><span class="seg-lbl">Lead Packages</span><span class="seg-val"><span class="tag b">Cloud Transformation</span><span class="tag b">AI for Enterprise</span><span class="tag b">Data Programs</span><span class="tag p">Digital Product Eng</span><span class="tag p">Experience Design</span></span></div>
+          <div class="seg-row"><span class="seg-lbl">Upsell Journey</span><span class="seg-val">Cloud Infra → Data Platform → AI/Personalisation → Product Engineering → Growth Marketing</span></div>
+          <div class="seg-row"><span class="seg-lbl">Deal Size</span><span class="seg-val">$180K–$800K (project) · $60K–$150K/yr (managed)</span></div>
+          <div class="seg-row"><span class="seg-lbl">Budget Cycle</span><span class="seg-val">Q2 (Apr–Jun) and Q4 (Oct–Dec) — OTT &amp; 5G investment cycles</span></div>
+        </div>
+      </div>
+      <div class="vp b"><strong>🎯 Value Proposition:</strong> "We help Canada's leading telecom and media companies build next-generation digital infrastructure — from 5G-native cloud platforms and AI-driven content recommendation engines to modern BSS/OSS architecture that dramatically reduces operational cost. Our Engineering and Data practices have delivered measurable outcomes for global Tier-1 telcos."</div>
+    </div>
+  </div>
+
+  <div class="seg">
+    <div class="seg-hdr py"><span>💳 Payments, FinTech &amp; Exchanges</span><span class="prop M">MEDIUM PRIORITY</span></div>
+    <div class="seg-body">
+      <div class="g2">
+        <div>
+          <div class="seg-row"><span class="seg-lbl">Key Accounts</span><span class="seg-val">Interac, Nuvei, TMX/Bourse de Montréal, Lightspeed Commerce, Flinks, Moka</span></div>
+          <div class="seg-row"><span class="seg-lbl">Target Contacts</span><span class="seg-val">CTO, VP Engineering, Head of Product, VP Data, Director Infrastructure</span></div>
+          <div class="seg-row"><span class="seg-lbl">Accounts / Pipeline</span><span class="seg-val">14 accounts · $680K pipeline potential</span></div>
+          <div class="seg-row"><span class="seg-lbl">Pain Points</span><span class="seg-val">Real-time payment platform scalability, PCI-DSS compliance, API-first architecture, AI fraud detection, developer talent gaps</span></div>
+        </div>
+        <div>
+          <div class="seg-row"><span class="seg-lbl">Lead Packages</span><span class="seg-val"><span class="tag p">Digital Product Eng</span><span class="tag p">Platform Modernisation</span><span class="tag b">AI for Enterprise</span><span class="tag b">Cloud Transformation</span></span></div>
+          <div class="seg-row"><span class="seg-lbl">Upsell Journey</span><span class="seg-val">Product Eng → Platform Modernisation → AI/Fraud → Cloud Scaling → Graduate Program</span></div>
+          <div class="seg-row"><span class="seg-lbl">Deal Size</span><span class="seg-val">$120K–$500K (project)</span></div>
+          <div class="seg-row"><span class="seg-lbl">Budget Cycle</span><span class="seg-val">Rolling / funding-round-driven — monitor Series investment news</span></div>
+        </div>
+      </div>
+      <div class="vp n"><strong>🎯 Value Proposition:</strong> "We help FinTech and exchange platforms build resilient, scalable digital products — from real-time payments infrastructure to AI-powered fraud detection and cloud-native API platforms. Our Digital Product Engineering practice moves at startup speed with enterprise-grade rigour."</div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ══════════════════════════════════════════
+     TAB 4 — PROGRAM PACKAGES
+══════════════════════════════════════════ -->
+<div id="packages" class="tab">
+  <div class="pkg-grid" id="pkg-grid"></div>
+  <div id="pkg-detail"></div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     TAB 5 — PROPENSITY & FIT
+══════════════════════════════════════════ -->
+<div id="propensity" class="tab">
+  <div class="g2 mb">
+    <div class="card tp">
+      <div class="st">Propensity Scoring Model (5 Signals × 5-pt Scale)</div>
+      <div class="tw">
+        <table>
+          <tr><th>Signal</th><th>Score 5 — Highest</th><th>Score 3 — Medium</th><th>Score 1 — Lowest</th></tr>
+          <tr><td><strong>Tech Stack Alignment</strong></td><td>Murex, AWS/Azure, Salesforce, Snowflake confirmed</td><td>Partial overlap</td><td>No match</td></tr>
+          <tr><td><strong>Transformation Trigger</strong></td><td>Leadership change, M&amp;A, RFP/RFI issued</td><td>IT hiring spike, new initiative announced</td><td>No signals</td></tr>
+          <tr><td><strong>Industry Depth Fit</strong></td><td>Capital Markets / Telecom core vertical</td><td>Retail Banking / Insurance</td><td>Outside target verticals</td></tr>
+          <tr><td><strong>Budget Visibility</strong></td><td>Public digital transformation budget confirmed</td><td>Active IT job postings, vendor RFPs</td><td>No spend signals</td></tr>
+          <tr><td><strong>Engagement History</strong></td><td>Replied, attended event, downloaded content</td><td>Email opened, LinkedIn engaged</td><td>No engagement at all</td></tr>
+        </table>
+      </div>
+    </div>
+    <div class="card tb">
+      <div class="st b">Propensity Tiers &amp; Response Protocol</div>
+      <div class="tier h"><strong style="color:#007a6a">🟢 HIGH — Score 20–25 · 36 Accounts</strong><p>Outreach within 48 hrs. Full personalisation — reference specific tech stack and transformation initiative. Executive sponsorship where possible. Offer complimentary Murex Roadmap Review or AI Readiness Assessment.</p></div>
+      <div class="tier m"><strong style="color:#92620a">🟡 MEDIUM — Score 12–19 · 43 Accounts</strong><p>5-touch sequence over 4 weeks. Lead with relevant industry insight or case study. Nurture until a trigger event is detected. Revisit propensity scoring monthly.</p></div>
+      <div class="tier l"><strong style="color:#b30000">🔴 LOW — Score &lt;12 · 19 Accounts</strong><p>Monthly newsletter and LinkedIn content drip only. Monitor for trigger events. Re-score quarterly. Do not invest heavy SDR time — these accounts are not ready.</p></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="st">Service × Segment Propensity Matrix</div>
+    <div class="tw">
+      <table class="mx">
+        <tr>
+          <th>Program Package</th>
+          <th>Capital Markets Large Ent.</th>
+          <th>Retail Banking Enterprise</th>
+          <th>Asset &amp; Wealth Enterprise</th>
+          <th>Insurance Enterprise</th>
+          <th>Telecom &amp; Media Large Ent.</th>
+          <th>Payments / FinTech</th>
+        </tr>
+        <tr><td>Murex Transformation</td><td class="s5">★★★★★</td><td class="s3">★★★☆☆</td><td class="s5">★★★★★</td><td class="s1">★☆☆☆☆</td><td class="s1">★☆☆☆☆</td><td class="s2">★★☆☆☆</td></tr>
+        <tr><td>Cloud Transformation</td><td class="s4">★★★★☆</td><td class="s5">★★★★★</td><td class="s4">★★★★☆</td><td class="s4">★★★★☆</td><td class="s5">★★★★★</td><td class="s4">★★★★☆</td></tr>
+        <tr><td>AI for Enterprise</td><td class="s5">★★★★★</td><td class="s4">★★★★☆</td><td class="s4">★★★★☆</td><td class="s4">★★★★☆</td><td class="s5">★★★★★</td><td class="s4">★★★★☆</td></tr>
+        <tr><td>Data Programs</td><td class="s5">★★★★★</td><td class="s4">★★★★☆</td><td class="s5">★★★★★</td><td class="s3">★★★☆☆</td><td class="s4">★★★★☆</td><td class="s3">★★★☆☆</td></tr>
+        <tr><td>Platform Modernisation</td><td class="s4">★★★★☆</td><td class="s5">★★★★★</td><td class="s3">★★★☆☆</td><td class="s4">★★★★☆</td><td class="s5">★★★★★</td><td class="s4">★★★★☆</td></tr>
+        <tr><td>Digital Product Engineering</td><td class="s3">★★★☆☆</td><td class="s4">★★★★☆</td><td class="s3">★★★☆☆</td><td class="s3">★★★☆☆</td><td class="s4">★★★★☆</td><td class="s5">★★★★★</td></tr>
+        <tr><td>Experience Design</td><td class="s2">★★☆☆☆</td><td class="s4">★★★★☆</td><td class="s3">★★★☆☆</td><td class="s3">★★★☆☆</td><td class="s5">★★★★★</td><td class="s3">★★★☆☆</td></tr>
+        <tr><td>Growth Marketing</td><td class="s2">★★☆☆☆</td><td class="s4">★★★★☆</td><td class="s3">★★★☆☆</td><td class="s4">★★★★☆</td><td class="s5">★★★★★</td><td class="s3">★★★☆☆</td></tr>
+        <tr><td>Graduate Program</td><td class="s3">★★★☆☆</td><td class="s4">★★★★☆</td><td class="s3">★★★☆☆</td><td class="s3">★★★☆☆</td><td class="s4">★★★★☆</td><td class="s3">★★★☆☆</td></tr>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     TAB 6 — EMAIL TEMPLATES
+══════════════════════════════════════════ -->
+<div id="emails" class="tab">
+  <div class="stbar" id="emltabs"></div>
+  <div id="emlcontent"></div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     TAB 7 — PIPELINE TRACKER
+══════════════════════════════════════════ -->
+<div id="pipeline" class="tab">
+  <div class="g4 mb">
+    <div class="kpi"><div class="v">98</div><div class="l">Total in Campaign</div></div>
+    <div class="kpi"><div class="v">36</div><div class="l">Contacted Wk 1</div><div class="s">36.7% of total</div></div>
+    <div class="kpi b"><div class="v">12</div><div class="l">Meetings Booked</div><div class="s">Target: 18 by Wk 4</div></div>
+    <div class="kpi b"><div class="v">$1.1M</div><div class="l">Active Proposals</div><div class="s">3 proposals in flight</div></div>
+  </div>
+
+  <div class="card mb">
+    <div class="st">Live Pipeline — Account Stage View</div>
+    <div class="pipe">
+      <div class="pcol"><div class="phdr">🎯 Targeted (22)</div>
+        <div class="pitem"><strong>National Bank of Canada</strong><span>Murex MX.3 · Large Ent.</span></div>
+        <div class="pitem"><strong>Bell Canada MTL</strong><span>Cloud + AI · Large Ent.</span></div>
+        <div class="pitem"><strong>Desjardins Group</strong><span>AI + Data · Large Ent.</span></div>
+        <div class="pitem"><strong>Intact Financial</strong><span>Platform Mod · Large Ent.</span></div>
+        <div class="pitem"><strong>+ 18 more</strong><span>Research in progress</span></div>
+      </div>
+      <div class="pcol"><div class="phdr">📧 Contacted (36)</div>
+        <div class="pitem"><strong>Caisse de dépôt (CDPQ)</strong><span>Data &amp; AI Programs</span></div>
+        <div class="pitem"><strong>Videotron</strong><span>Cloud + Experience</span></div>
+        <div class="pitem"><strong>iA Financial Group</strong><span>Murex + Cloud</span></div>
+        <div class="pitem"><strong>Cogeco Communications</strong><span>Platform Modernisation</span></div>
+        <div class="pitem"><strong>+ 32 more</strong><span>Awaiting response</span></div>
+      </div>
+      <div class="pcol"><div class="phdr">💬 Engaged (12)</div>
+        <div class="pitem"><strong>Sun Life MTL</strong><span>Murex upgrade discussion</span></div>
+        <div class="pitem"><strong>TMX Group</strong><span>Platform Mod + AI</span></div>
+        <div class="pitem"><strong>BMO Montreal</strong><span>IT Strategy + Cloud</span></div>
+        <div class="pitem"><strong>Groupe TVA</strong><span>Experience Design</span></div>
+        <div class="pitem"><strong>+ 8 more</strong><span>Active conversations</span></div>
+      </div>
+      <div class="pcol"><div class="phdr">📋 Proposal (3)</div>
+        <div class="pitem"><strong>National Bank</strong><span>Murex MX.3 — $580K</span></div>
+        <div class="pitem"><strong>Videotron</strong><span>Cloud Migration — $310K</span></div>
+        <div class="pitem"><strong>Sun Life</strong><span>AI for Enterprise — $210K</span></div>
+      </div>
+      <div class="pcol"><div class="phdr">✅ Closed Won (0)</div>
+        <div class="pitem"><strong>Campaign launched</strong><span>First close target: Week 8+</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="st">KPI Dashboard — Targets vs Actuals</div>
+    <div class="tw">
+      <table>
+        <tr><th>KPI</th><th>8-Week Target</th><th>Current</th><th>% to Target</th><th>Status</th></tr>
+        <tr><td>Prospects Contacted</td><td>98</td><td>36</td><td>37%</td><td><span class="prop M">In Progress</span></td></tr>
+        <tr><td>Email Open Rate</td><td>28%</td><td>33%</td><td>118%</td><td><span class="prop H">Ahead ✓</span></td></tr>
+        <tr><td>Reply / Engagement Rate</td><td>10%</td><td>7%</td><td>70%</td><td><span class="prop M">Needs Attention</span></td></tr>
+        <tr><td>Discovery Meetings Booked</td><td>18</td><td>12</td><td>67%</td><td><span class="prop M">On Track</span></td></tr>
+        <tr><td>Qualified Opportunities</td><td>10</td><td>3</td><td>30%</td><td><span class="prop M">Early Stage</span></td></tr>
+        <tr><td>Pipeline Value</td><td>$2.5M</td><td>$1.1M</td><td>44%</td><td><span class="prop M">In Progress</span></td></tr>
+        <tr><td>Proposals Submitted</td><td>5</td><td>3</td><td>60%</td><td><span class="prop M">On Track</span></td></tr>
+        <tr><td>Closed Won</td><td>2</td><td>0</td><td>0%</td><td><span class="prop L">Not Yet</span></td></tr>
+      </table>
+    </div>
+  </div>
+</div>
+
+</main>
+
+<script>
+// ── TAB NAVIGATION ──
+function showTab(id,el){
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+  document.querySelectorAll('nav button').forEach(b=>b.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  el.classList.add('active');
+}
+
+// ── PROSPECT DATA ──
+const PR=[
+  {n:'National Bank of Canada',v:'Capital Markets',z:'Large Enterprise',e:'13,000+',pkg:'Murex Transformation, AI for Enterprise, Data Programs',up:'Cloud, Platform Mod',p:'H',c:'VP Capital Markets Technology',t:'MX.3 migration signal, OSFI compliance'},
+  {n:'Desjardins Group',v:'Retail Banking',z:'Large Enterprise',e:'54,000+',pkg:'Cloud Transformation, AI for Enterprise, Platform Modernisation',up:'Murex, Data Programs',p:'H',c:'CIO / Director IT Infrastructure',t:'Digital transformation roadmap 2025'},
+  {n:'BMO Financial (MTL)',v:'Capital Markets',z:'Large Enterprise',e:'9,000 MTL',pkg:'Murex Transformation, Data Programs, IT Consulting',up:'AI for Enterprise, Cloud',p:'H',c:'Head of Technology Operations',t:'AI investment mandate announced'},
+  {n:'Caisse de dépôt (CDPQ)',v:'Asset & Wealth',z:'Large Enterprise',e:'1,200+',pkg:'Data Programs, AI for Enterprise, Cloud Transformation',up:'Platform Mod, Experience Design',p:'H',c:'CTO / VP Technology',t:'ESG analytics platform initiative'},
+  {n:'iA Financial Group',v:'Asset & Wealth',z:'Large Enterprise',e:'9,000+',pkg:'Murex Transformation, Cloud Transformation',up:'AI for Enterprise, Data',p:'H',c:'Head of Capital Markets IT',t:'Murex upgrade cycle, cloud mandate'},
+  {n:'Sun Life Financial MTL',v:'Insurance',z:'Large Enterprise',e:'3,500 MTL',pkg:'Cloud Transformation, AI for Enterprise',up:'Murex, Data Programs',p:'H',c:'VP Information Technology',t:'Cloud-first strategy announced'},
+  {n:'Intact Financial',v:'Insurance',z:'Large Enterprise',e:'5,000+',pkg:'Platform Modernisation, Cloud, AI for Enterprise',up:'Data Programs, Digital Product Eng',p:'M',c:'CIO / Director Digital',t:'Digital platform expansion program'},
+  {n:'Fidelity Investments Canada',v:'Asset & Wealth',z:'Enterprise',e:'1,500+',pkg:'Data Programs, AI for Enterprise, Platform Modernisation',up:'Cloud, Experience Design',p:'M',c:'Head of Technology / CDO',t:'Data platform modernisation'},
+  {n:'Laurentian Bank',v:'Retail Banking',z:'Enterprise',e:'3,200',pkg:'Platform Modernisation, Cloud Transformation',up:'AI, Data, Graduate Program',p:'M',c:'CTO',t:'Core banking transformation RFP'},
+  {n:'TMX Group / Bourse de Montréal',v:'Capital Markets',z:'Large Enterprise',e:'2,200+',pkg:'Platform Modernisation, AI for Enterprise, Data Programs',up:'Cloud, Digital Product Eng',p:'H',c:'CTO / VP Trading Technology',t:'Exchange infrastructure modernisation'},
+  {n:'Bell Canada MTL HQ',v:'Telecom & Media',z:'Large Enterprise',e:'10,000+ MTL',pkg:'Cloud Transformation, AI for Enterprise, Experience Design',up:'Data Programs, Platform Mod',p:'H',c:'VP IT / Director Cloud Platforms',t:'5G scaling, AI investment announced'},
+  {n:'Videotron',v:'Telecom & Media',z:'Large Enterprise',e:'6,000+',pkg:'Cloud Transformation, AI for Enterprise, Data Programs',up:'Digital Product Eng, Growth Marketing',p:'H',c:'CIO / VP Digital Transformation',t:'OTT streaming expansion, cost reduction'},
+  {n:'Cogeco Communications',v:'Telecom & Media',z:'Large Enterprise',e:'5,500+',pkg:'Platform Modernisation, Digital Product Engineering',up:'Cloud, AI, Data',p:'H',c:'CTO / VP Technology',t:'Platform modernisation RFP detected'},
+  {n:'CBC / Radio-Canada',v:'Telecom & Media',z:'Large Enterprise',e:'8,000+',pkg:'Experience Design, AI for Enterprise, Cloud',up:'Data Programs, Growth Marketing',p:'M',c:'CDO / Head of Digital Platforms',t:'Digital content strategy 2025'},
+  {n:'Groupe TVA / Quebecor',v:'Telecom & Media',z:'Enterprise',e:'2,500+',pkg:'Experience Design, Cloud, Digital Product Eng',up:'AI, Growth Marketing',p:'M',c:'VP Digital / CTO',t:'Streaming platform rebuild'},
+  {n:'Interac Corp',v:'Payments & FinTech',z:'Enterprise',e:'500+',pkg:'Platform Modernisation, AI for Enterprise, Digital Product Eng',up:'Cloud, Data Programs',p:'H',c:'CTO / VP Engineering',t:'Real-time payments platform scaling'},
+  {n:'Nuvei Corporation',v:'Payments & FinTech',z:'Large Enterprise',e:'1,800+',pkg:'Digital Product Engineering, Cloud, Platform Mod',up:'AI for Enterprise, Data',p:'H',c:'VP Engineering / Head of Product',t:'Global expansion platform build'},
+  {n:'Lightspeed Commerce',v:'Payments & FinTech',z:'Large Enterprise',e:'2,900+',pkg:'Digital Product Engineering, AI for Enterprise, Data Programs',up:'Platform Mod, Experience Design',p:'M',c:'CTO / VP Platform Engineering',t:'Product engineering hiring surge'},
+  {n:'Manulife (MTL Office)',v:'Insurance',z:'Large Enterprise',e:'3,000 MTL',pkg:'AI for Enterprise, Cloud Transformation, Platform Mod',up:'Data Programs, Graduate Program',p:'M',c:'VP Digital Innovation',t:'AI transformation initiative'},
+  {n:'Power Corporation of Canada',v:'Asset & Wealth',z:'Large Enterprise',e:'600+ holding',pkg:'Data Programs, AI for Enterprise, IT Consulting',up:'Cloud, Platform Mod',p:'M',c:'CIO / Head of IT Strategy',t:'Portfolio tech consolidation program'},
+];
+
+function buildPT(data){
+  document.getElementById('ptb').innerHTML=data.map((r,i)=>`<tr>
+    <td>${i+1}</td>
+    <td><strong>${r.n}</strong></td>
+    <td>${r.v}</td><td>${r.z}</td><td>${r.e}</td>
+    <td>${r.pkg.split(',').map(x=>`<span class="tag p">${x.trim()}</span>`).join('')}</td>
+    <td>${r.up.split(',').map(x=>`<span class="tag b">${x.trim()}</span>`).join('')}</td>
+    <td><span class="prop ${r.p}">${r.p==='H'?'HIGH':'MEDIUM'}</span></td>
+    <td style="font-size:.73rem;color:var(--muted)">${r.c}</td>
+    <td style="font-size:.73rem;color:var(--blue)">${r.t}</td>
+  </tr>`).join('');
+}
+function ft(){
+  const v=document.getElementById('fv').value,z=document.getElementById('fz').value,
+        p=document.getElementById('fp2').value,q=document.getElementById('fq').value.toLowerCase();
+  buildPT(PR.filter(r=>(!v||r.v.includes(v))&&(!z||r.z===z)&&(!p||r.p===p)&&(!q||r.n.toLowerCase().includes(q)||r.pkg.toLowerCase().includes(q)||r.t.toLowerCase().includes(q))));
+}
+function rf(){['fv','fz','fp2'].forEach(id=>document.getElementById(id).value='');document.getElementById('fq').value='';buildPT(PR);}
+buildPT(PR);
+
+// ── PACKAGES DATA ──
+const PKGS=[
+  {id:'murex',icon:'📈',name:'Murex Transformation',sub:'Capital Markets · Asset Management',price:'$350K–$1.5M',
+   desc:'End-to-end Murex MX.3 upgrade, migration, cloud deployment, test automation and ongoing support. Ideal for banks, asset managers and exchanges running legacy Murex environments.',
+   caps:['Murex MX.3 upgrade & migration programs','Cloud-hosted Murex (AWS/Azure/GCP)','Test automation frameworks for Murex regression','AI-powered trade processing & real-time risk analytics','Ongoing Level 2/3 Murex managed support','OSFI / regulatory compliance alignment'],
+   email:{to:'VP Capital Markets Technology / Head of Murex Programs',sub:'Murex MX.3 roadmap for [Company] — worth a conversation?',
+   body:`Hi [First Name],
+
+With Murex MX.3 becoming the market standard and legacy versions approaching end-of-support, I wanted to reach out at what feels like a timely moment for [Company].
+
+We are one of the few global IT services firms with a dedicated Murex practice — built on 150+ certified Murex professionals and a track record of delivering cross-asset transformation programs for Tier-1 financial institutions.
+
+What we bring to the table:
+• Full-cycle MX.3 upgrade and cloud migration (AWS/Azure)
+• Automated regression testing — reducing migration risk and timeline by up to 35%
+• AI-enabled trade processing and real-time risk analytics on top of your Murex layer
+• Bilingual delivery capability in Montreal — local team, global depth
+
+One of our recent clients reduced their MX.3 migration timeline by 35% and cut post-go-live defect rates by 60% using our test automation framework.
+
+Would a 20-minute "Murex Roadmap Review" call make sense in the next few weeks? No commitment — just a conversation about where [Company] is headed.
+
+Best regards,
+[Your Name] · [Title] · [Company]
+[Phone] · [LinkedIn] · [Website]`}},
+  {id:'cloud',icon:'☁️',name:'Cloud Transformation',sub:'All Verticals',price:'$200K–$900K',
+   desc:'Cloud strategy, migration, and cloud-native platform engineering across AWS, Azure and GCP — from lift-and-shift to full re-architecture for regulated Financial Services and Telecom environments.',
+   caps:['Cloud strategy & architecture (AWS, Azure, GCP)','Legacy application migration & re-platforming','Cloud-native microservices & containerisation (Kubernetes)','FinOps — cloud cost optimisation','Cloud security & compliance (OSFI, SOC2, PCI-DSS)','Hybrid and multi-cloud operating models'],
+   email:{to:'CIO / VP Cloud Engineering / Director Digital Transformation',sub:'Cloud modernisation for [Company] — a case worth sharing',
+   body:`Hi [First Name],
+
+I wanted to reach out because we've been working with several Canadian financial institutions and telecom companies on cloud transformation programs, and I think what we've built would resonate with [Company]'s priorities.
+
+We are a global digital solutions firm with 1,000 professionals across North America — deeply specialised in cloud transformation for regulated industries.
+
+A few things we've delivered recently:
+• Migrated a major Canadian bank's trading platform to AWS with zero production downtime
+• Reduced infrastructure spend by 38% for a Tier-2 telco through cloud-native re-architecture
+• Built an OSFI-compliant cloud-native data platform for a Montreal-based insurer in under 6 months
+
+Cloud transformation is never just a technology project — it's a business transformation. Our team bridges strategy, architecture, and delivery in a way that keeps outcomes front and centre.
+
+Are you the right person to explore whether there's a fit — or could you point me in the right direction at [Company]?
+
+Best regards,
+[Your Name] · [Title] · [Company]
+[Phone] · [LinkedIn] · [Website]`}},
+  {id:'digital',icon:'⚙️',name:'Digital Product Engineering',sub:'FinTech · Telecom · Banking',price:'$150K–$600K',
+   desc:'Full-cycle digital product design and engineering — from MVP to scaled platform. API-first, cloud-native, agile delivery with embedded QA and DevOps practices.',
+   caps:['Product strategy & roadmap definition','API-first and microservices architecture','Agile squads — embedded, nearshore or offshore','Mobile and web application development','DevOps, CI/CD pipeline automation','QA engineering and test automation'],
+   email:{to:'CTO / VP Product / Head of Engineering',sub:'Engineering capacity for [Company]\'s product roadmap',
+   body:`Hi [First Name],
+
+Building the right digital products at speed — while managing costs and engineering quality — is one of the hardest challenges for any technology leader. I wanted to introduce ourselves as a partner that's helped solve exactly this for companies like [Company].
+
+We provide end-to-end Digital Product Engineering services, embedding experienced squads of engineers, architects and QA professionals into your product delivery model. With 3,500 engineers in India and 1,000 across North America, we offer the scale of a global firm with the responsiveness of a specialist partner.
+
+We've recently helped:
+• A Canadian FinTech reduce time-to-market for a new payments product by 40% with an offshore-onshore agile model
+• A Montreal telecom rebuild their customer-facing digital platform from monolith to microservices in 7 months
+• A financial exchange modernise their trade reporting APIs to handle 10x transaction volume
+
+What does [Company]'s product engineering roadmap look like for 2025? Even a 30-minute conversation might surface some interesting possibilities.
+
+Best regards,
+[Your Name] · [Title] · [Company]
+[Phone] · [LinkedIn] · [Website]`}},
+  {id:'platform',icon:'🏗️',name:'Platform Modernisation',sub:'Banking · Insurance · Telecom',price:'$300K–$1.2M',
+   desc:'Legacy platform decommissioning and re-platforming — mainframe migration, BSS/OSS modernisation and core banking transformation. Reducing technical debt and accelerating innovation velocity.',
+   caps:['Mainframe to cloud migration','Core banking modernisation (Temenos, Finacle, FIS)','BSS/OSS legacy replacement for Telecom','Technical debt assessment & remediation','Event-driven architecture transformation','Integration modernisation — API gateways, ESB replacement'],
+   email:{to:'CIO / Head of Enterprise Architecture / VP Technology',sub:'Reducing technical debt at [Company] — a practical path forward',
+   body:`Hi [First Name],
+
+I'll be direct: legacy platforms are one of the biggest drags on innovation velocity for most large financial institutions and telecom companies — and they're getting more expensive to maintain every year.
+
+We've built a practice specifically around platform modernisation for complex, regulated environments — delivering mainframe migrations, core banking replacements, and BSS/OSS transformations without disrupting business-as-usual operations.
+
+What differentiates our approach:
+• We start with a rapid Technical Debt & Modernisation Assessment (3–4 weeks) to identify highest-value opportunities
+• We use a strangler-fig pattern to reduce risk — modernising incrementally rather than big-bang replacement
+• Our delivery model leverages our India centres for scale, with North American architects and programme leads on-site
+
+Given [Company]'s scale and the complexity of your technology estate, I think there's a meaningful conversation to be had. Would a brief call be worthwhile?
+
+Best regards,
+[Your Name] · [Title] · [Company]
+[Phone] · [LinkedIn] · [Website]`}},
+  {id:'data',icon:'📊',name:'Data Programs',sub:'All Verticals',price:'$180K–$750K',
+   desc:'Data engineering, advanced analytics, visualisation and governance. From building modern data lakes and warehouses to real-time streaming pipelines and executive dashboards.',
+   caps:['Data strategy & governance frameworks','Data lake / lakehouse / warehouse architecture (Snowflake, Databricks)','Real-time data pipelines & event streaming (Kafka)','Advanced analytics & predictive modelling','BI & visualisation (Tableau, Power BI, Looker)','Data quality management & MDM'],
+   email:{to:'CDO / Head of Data / VP Analytics',sub:'Unlocking data value at [Company] — a conversation worth having',
+   body:`Hi [First Name],
+
+Most large organisations are sitting on extraordinary amounts of data — but the gap between raw data and actionable insight remains surprisingly wide. Closing that gap is exactly what our Data practice was built to do.
+
+We partner with financial institutions and telecom companies to build modern data platforms that make data accessible, trustworthy, and valuable at speed.
+
+Recent outcomes our clients have seen:
+• A Montreal-based asset manager reduced trade reconciliation time by 65% through real-time pipelines on Snowflake
+• A Tier-1 Canadian bank gained board-level ESG reporting in under 4 months with our data governance accelerator
+• A major telco reduced customer churn by 18% using our predictive analytics framework on their existing data estate
+
+We offer a complimentary Data Maturity Assessment for qualified prospects — a structured 2-week engagement that maps your current state and identifies the highest-ROI opportunities.
+
+Would that be of interest?
+
+Best regards,
+[Your Name] · [Title] · [Company]
+[Phone] · [LinkedIn] · [Website]`}},
+  {id:'ai',icon:'🤖',name:'AI for Enterprise',sub:'All Verticals',price:'$250K–$1.5M',
+   desc:'Enterprise AI strategy through to production deployment across four transformative pillars: Intelligent Product Engineering, AI-Enhanced Experience Transformation, Modern Business Platforms, and Agentic Business Reinvention. Built for regulated industries at scale.',
+   caps:['AI strategy, use case prioritisation & responsible AI governance','Intelligent Product Engineering — AI-powered SDLC & software delivery acceleration','AI-Enhanced Experience Transformation — GenAI content, creativity & customer journeys','Modern Business Platforms — intelligent & agentic Sales, Service, CX & Marketing','Agentic Business Reinvention — AI-first process, operations & business model re-engineering','ML model development, MLOps, LLM fine-tuning & AI-powered risk/fraud detection'],
+   aiPillars:[
+     {icon:'⚡',title:'Intelligent Product Engineering',color:'#3C25F7',colorBg:'rgba(60,37,247,0.07)',
+      tagline:'Accelerate software delivery with AI-powered engineering and a modern SDLC',
+      desc:'We embed AI across the entire software development lifecycle — from AI-assisted architecture and code generation to intelligent testing, automated code review and predictive DevOps. The result: faster release cycles, higher quality, and leaner engineering teams.',
+      outcomes:['Up to 40% reduction in development cycle time','AI-generated test coverage reducing QA effort by 35%','Automated code review catching 3x more defects pre-production','Predictive incident management cutting mean-time-to-resolve by 50%'],
+      targets:'CTO · VP Engineering · Head of Platform Engineering · Director DevOps'},
+     {icon:'✨',title:'AI-Enhanced Experience Transformation',color:'#B61CA7',colorBg:'rgba(182,28,167,0.07)',
+      tagline:'Reimagine creativity, content, and customer journeys with next-generation AI-enhanced experiences',
+      desc:'We help brands harness generative AI to reimagine how they create, personalise and deliver experiences at scale — from AI-generated content and dynamic personalisation engines to conversational interfaces and hyper-personalised customer journeys across every touchpoint.',
+      outcomes:['3x faster content production with generative AI creative pipelines','Real-time 1:1 personalisation across web, app and email channels','Conversational AI assistants reducing service cost by 25–40%','AI-driven journey orchestration increasing conversion rates by 18–30%'],
+      targets:'CDO · CMO · VP Digital · Head of CX · Director of Personalisation'},
+     {icon:'🏢',title:'Modern Business Platforms',color:'#2E1869',colorBg:'rgba(46,24,105,0.07)',
+      tagline:'Unlock the full value of sales, service, customer, and marketing platforms with intelligent and agentic capabilities',
+      desc:'We transform CRM, marketing automation and service platforms into intelligent, agentic systems — layering AI onto Salesforce, Adobe, ServiceNow and Microsoft Dynamics to automate decisions, surface insights and enable autonomous agent workflows that operate 24/7 without human intervention.',
+      outcomes:['Salesforce Einstein / Agentforce deployment reducing sales admin by 45%','Adobe GenStudio AI content workflows cutting campaign production time in half','Agentic service bots resolving 60%+ of tier-1 support tickets autonomously','AI-powered lead scoring increasing pipeline conversion by 22%'],
+      targets:'CIO · VP Sales Operations · Head of CRM · VP Customer Service · CMO'},
+     {icon:'🔄',title:'Agentic Business Reinvention',color:'#007a6a',colorBg:'rgba(0,122,106,0.07)',
+      tagline:'Reengineer processes, operations, and business models for the AI-first enterprise',
+      desc:'The most transformative AI opportunity is not automating existing processes — it\'s reinventing them. We help enterprises identify, design and deploy autonomous AI agents that operate entire business functions: compliance monitoring, trade surveillance, claims processing, network operations, and more.',
+      outcomes:['End-to-end agentic process automation across compliance, ops & finance','AI-first business model design — new revenue streams enabled by AI capabilities','Autonomous trade surveillance agents reducing false positive alerts by 55%','Agentic claims processing cutting settlement time from days to minutes'],
+      targets:'CEO · COO · CIO · Head of Digital Transformation · Chief Strategy Officer'},
+   ],
+   email:{to:'CIO / CDO / Head of AI & Innovation / VP Digital',sub:'AI that actually delivers outcomes for [Company] — four ways we can help',
+   body:`Hi [First Name],
+
+There's no shortage of AI hype right now — but the organisations pulling ahead are those moving from pilots to production at scale, across the entire enterprise. We've been doing exactly that for financial institutions and telecom companies, and I think [Company] is at an inflection point where this matters.
+
+We are an AI-native digital solutions firm — our 5,000-strong workforce is built around AI-enabled delivery. We help enterprises deploy AI responsibly and at scale across four transformative pillars:
+
+⚡ Intelligent Product Engineering
+Accelerating software delivery with AI-powered SDLC — cutting development cycle times by up to 40% and dramatically improving release quality through AI-assisted code generation, testing and DevOps.
+
+✨ AI-Enhanced Experience Transformation
+Reimagining customer journeys with generative AI — from hyper-personalised content pipelines to conversational AI interfaces that reduce service costs by 25–40%.
+
+🏢 Modern Business Platforms
+Unlocking the full value of Salesforce, Adobe and ServiceNow with intelligent, agentic capabilities — autonomous agents that handle sales admin, marketing content and tier-1 support 24/7.
+
+🔄 Agentic Business Reinvention
+Re-engineering entire business functions for the AI-first enterprise — from autonomous trade surveillance and compliance monitoring to agentic claims processing that cuts settlement time from days to minutes.
+
+One of our recent clients — a global financial institution — reduced compliance processing time by 70% and deployed agentic workflows across three business units within 6 months.
+
+I'd love to share how we're thinking about the AI opportunity in [Company]'s specific context. Even a 20-minute call to exchange perspectives could be valuable.
+
+Best regards,
+[Your Name] · [Title] · [Company]
+[Phone] · [LinkedIn] · [Website]`}},
+  {id:'marketing',icon:'📣',name:'Growth Marketing',sub:'Telecom · Banking · Insurance',price:'$120K–$400K',
+   desc:'Full-funnel digital marketing transformation — martech stack strategy and implementation (Adobe, Salesforce), campaign execution, personalisation engines and marketing analytics.',
+   caps:['Martech stack strategy & implementation (Adobe, Salesforce)','Customer journey mapping & AI personalisation','Campaign automation & performance marketing','Marketing analytics & multi-touch attribution','SEO, content and demand generation programs','CX analytics and customer lifetime value modelling'],
+   email:{to:'CMO / VP Marketing / Head of Digital Marketing',sub:'Marketing technology that converts — a conversation for [Company]',
+   body:`Hi [First Name],
+
+Marketing technology is only as valuable as the outcomes it drives — and yet most organisations have invested heavily in Adobe and Salesforce without fully unlocking their potential. I wanted to connect because we've helped companies in your industry close that gap.
+
+Our Growth Marketing practice combines deep expertise in Adobe Experience Platform, Salesforce Marketing Cloud and modern marketing analytics to help brands build personalised, measurable customer journeys.
+
+A few examples:
+• Increased email campaign conversion by 24% for a major Canadian insurer through AI-driven segmentation on Adobe Campaign
+• Reduced customer acquisition cost by 31% for a telecom brand through a full-funnel attribution model
+• Implemented a real-time personalisation engine for a retail bank that increased cross-sell revenue by 19%
+
+What does [Company]'s marketing technology roadmap look like for 2025?
+
+Best regards,
+[Your Name] · [Title] · [Company]
+[Phone] · [LinkedIn] · [Website]`}},
+  {id:'grad',icon:'🎓',name:'Graduate Program',sub:'All Verticals — HR & Talent',price:'$80K–$200K/yr',
+   desc:'A managed graduate talent pipeline — recruit, train and deploy top STEM graduates from Canadian and Indian universities, fully onboarded to your tech stack and culture.',
+   caps:['University recruitment (McGill, Concordia, Polytechnique, UdeM)','6-month structured onboarding & technical training','Dedicated technical mentorship & coaching','Bilingual (EN/FR) candidate cohorts available','Domain-specific tracks: FinTech, Capital Markets, Telecom, Cloud','Retention-focused employment model'],
+   email:{to:'CHRO / VP Talent / Head of Technology Talent',sub:'Building your next generation of tech talent at [Company]',
+   body:`Hi [First Name],
+
+Competition for skilled technology graduates in Montreal is intense — and building a sustainable pipeline of junior talent is one of the hardest challenges for any large organisation right now.
+
+We run a managed Graduate Program that takes the complexity out of early career technology hiring. We recruit, train and deploy top STEM graduates from Montreal's leading universities — McGill, Concordia, Polytechnique, and UdeM — fully onboarded to client tech stacks before Day 1.
+
+What makes our program different:
+• We handle full recruitment, vetting and pre-employment training
+• Graduates receive 6 months of structured technical and domain training (capital markets, cloud, data tracks)
+• We place bilingual (EN/FR) cohorts aligned to your specific technology needs
+• Our model is designed to drive retention — not just placement
+
+For a large institution like [Company], this could be a cost-effective way to build a consistent, high-quality junior talent pipeline without the overhead of running it internally.
+
+Would it be worth a brief conversation?
+
+Best regards,
+[Your Name] · [Title] · [Company]
+[Phone] · [LinkedIn] · [Website]`}},
+  {id:'xd',icon:'🎨',name:'Experience Design',sub:'Banking · Telecom · FinTech',price:'$100K–$350K',
+   desc:'Human-centred design for digital products and services — UX research, service design, design systems and accessibility. Bridging business strategy with exceptional customer experience.',
+   caps:['UX research & usability testing','Service design & customer journey mapping','UI design & design system development','Accessibility compliance (WCAG 2.2)','Design-to-development handoff (Figma, Storybook)','Experience strategy & rapid innovation sprints'],
+   email:{to:'VP Digital / Head of Product Design / CDO / CX Director',sub:'Designing experiences that work for [Company]\'s customers',
+   body:`Hi [First Name],
+
+In financial services and telecom, customer experience has become a primary competitive differentiator — and yet the gap between what customers expect and what most institutions deliver remains surprisingly large. Closing that gap is what our Experience Design practice does.
+
+We combine deep UX research, service design and world-class visual design to help organisations build digital products that customers genuinely love to use — while meeting accessibility and regulatory standards.
+
+What we've delivered recently:
+• Redesigned a major Canadian bank's mobile app, reducing call centre volume by 22% and increasing mobile NPS by 31 points
+• Built a WCAG 2.2-compliant design system for a Tier-1 insurer, cutting front-end development time by 40% across 12 product teams
+• Ran a 6-week Experience Innovation Sprint for a Montreal telecom identifying $4M in annualised revenue from improved digital self-serve conversion
+
+Experience design works best when integrated with product and technology strategy — which is where our broader platform and engineering capabilities create a unique advantage.
+
+Would a conversation make sense?
+
+Best regards,
+[Your Name] · [Title] · [Company]
+[Phone] · [LinkedIn] · [Website]`}},
+];
+
+// ── BUILD PACKAGES TAB ──
+function buildPkgs(){
+  document.getElementById('pkg-grid').innerHTML=PKGS.map((p,i)=>`
+    <div class="pkg-card" id="pkgc-${i}" onclick="showPkg(${i})">
+      <div class="icon">${p.icon}</div>
+      <h4>${p.name}</h4>
+      <p>${p.sub}</p>
+      <p style="margin-top:5px;font-size:.7rem;color:var(--muted);line-height:1.4">${p.desc.substring(0,80)}…</p>
+      <div class="price">💰 ${p.price}</div>
+    </div>`).join('');
+}
+function showPkg(i){
+  document.querySelectorAll('.pkg-card').forEach(c=>c.classList.remove('active'));
+  document.getElementById('pkgc-'+i).classList.add('active');
+  const p=PKGS[i];
+  const seqHtml=`
+    <div class="st" style="margin-bottom:10px;">7-Step Outreach Sequence</div>
+    <div class="seq-step"><div class="sdot">1</div><div class="sc"><strong>LinkedIn Warm-Up</strong><p>Connect with target contact, engage with company content. Day 1–2.</p></div><div class="sday">Day 1–2</div></div>
+    <div class="seq-step"><div class="sdot">2</div><div class="sc"><strong>Personalised Intro Email</strong><p>Send package-specific email (see Email Templates tab). Day 3–4.</p></div><div class="sday">Day 3–4</div></div>
+    <div class="seq-step"><div class="sdot">3</div><div class="sc"><strong>LinkedIn Follow-Up + Case Study</strong><p>DM with relevant client outcome story or ROI stat. Day 7–8.</p></div><div class="sday">Day 7–8</div></div>
+    <div class="seq-step"><div class="sdot">4</div><div class="sc"><strong>Discovery Call Attempt</strong><p>Phone call + voicemail. Offer a free assessment or workshop. Day 10–12.</p></div><div class="sday">Day 10–12</div></div>
+    <div class="seq-step"><div class="sdot b">5</div><div class="sc"><strong>Value Content Email</strong><p>Industry insight, whitepaper or ROI one-pager tailored to their vertical. Day 17.</p></div><div class="sday">Day 17</div></div>
+    <div class="seq-step"><div class="sdot b">6</div><div class="sc"><strong>Executive Referral / Escalate</strong><p>Try alternate senior contact or exec sponsor outreach. Day 24.</p></div><div class="sday">Day 24</div></div>
+    <div class="seq-step"><div class="sdot b">7</div><div class="sc"><strong>Break-Up Email + Free Offer</strong><p>"Last note — happy to offer a complimentary [assessment]. No commitment." Day 35.</p></div><div class="sday">Day 35</div></div>`;
+
+  const standardDetail=`
+    <div class="pkg-detail">
+      <div class="g2">
+        <div>
+          <div class="st">${p.icon} ${p.name}</div>
+          <p style="font-size:.78rem;line-height:1.65;color:var(--muted);margin-bottom:14px;">${p.desc}</p>
+          <p style="font-size:.7rem;font-weight:600;color:var(--blue);margin-bottom:10px;">💰 ${p.price} · Target: ${p.sub}</p>
+          <div class="st b" style="margin-bottom:8px;">Key Capabilities</div>
+          <ul class="cap-list">${p.caps.map(c=>`<li>${c}</li>`).join('')}</ul>
+        </div>
+        <div>${seqHtml}</div>
+      </div>
+    </div>`;
+
+  if(p.aiPillars){
+    const pillarsHtml=p.aiPillars.map(pl=>`
+      <div style="background:${pl.colorBg};border:1px solid ${pl.color}30;border-left:4px solid ${pl.color};border-radius:8px;padding:16px 18px;">
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px;">
+          <span style="font-size:1.2rem;">${pl.icon}</span>
+          <strong style="font-size:.88rem;color:${pl.color};">${pl.title}</strong>
+        </div>
+        <p style="font-size:.74rem;font-style:italic;color:var(--muted);margin-bottom:8px;line-height:1.4;">"${pl.tagline}"</p>
+        <p style="font-size:.77rem;line-height:1.55;color:var(--text);margin-bottom:10px;">${pl.desc}</p>
+        <div style="margin-bottom:8px;">
+          <span style="font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.4px;color:${pl.color};">Key Outcomes</span>
+          <ul style="list-style:none;margin-top:5px;display:flex;flex-direction:column;gap:4px;">
+            ${pl.outcomes.map(o=>`<li style="font-size:.74rem;color:var(--text);display:flex;gap:7px;"><span style="color:${pl.color};font-weight:900;flex-shrink:0;">✓</span>${o}</li>`).join('')}
+          </ul>
+        </div>
+        <div style="font-size:.68rem;color:var(--muted);"><span style="font-weight:700;color:${pl.color};">Target:</span> ${pl.targets}</div>
+      </div>`).join('');
+
+    document.getElementById('pkg-detail').innerHTML=`
+      <div class="pkg-detail">
+        <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:18px;">
+          <div>
+            <div class="st">${p.icon} ${p.name} <span style="font-weight:400;font-size:.72rem;color:var(--muted);text-transform:none;letter-spacing:0;">— AI Solutions-Led Outreach Framework</span></div>
+            <p style="font-size:.78rem;line-height:1.6;color:var(--muted);max-width:700px;">${p.desc}</p>
+          </div>
+          <div style="background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:10px 16px;text-align:center;flex-shrink:0;">
+            <div style="font-size:1.3rem;font-weight:900;color:var(--pink);">${p.price}</div>
+            <div style="font-size:.65rem;text-transform:uppercase;letter-spacing:.4px;color:var(--muted);">Typical Engagement</div>
+          </div>
+        </div>
+
+        <div style="background:var(--navy);border-radius:10px;padding:16px 20px;margin-bottom:20px;display:flex;gap:24px;flex-wrap:wrap;align-items:center;">
+          <div style="color:#fff;font-size:.8rem;font-weight:700;flex-shrink:0;">🤖 Four AI Transformation Pillars</div>
+          ${p.aiPillars.map(pl=>`<div style="background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);border-radius:20px;padding:3px 12px;font-size:.68rem;color:#e0d8f8;">${pl.icon} ${pl.title}</div>`).join('')}
+        </div>
+
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:20px;">
+          ${pillarsHtml}
+        </div>
+
+        <div class="g2">
+          <div>
+            <div class="st b" style="margin-bottom:8px;">Core AI Capabilities</div>
+            <ul class="cap-list">${p.caps.map(c=>`<li>${c}</li>`).join('')}</ul>
+          </div>
+          <div>${seqHtml}</div>
+        </div>
+      </div>`;
+  } else {
+    document.getElementById('pkg-detail').innerHTML=standardDetail;
+  }
+}
+buildPkgs();
+setTimeout(()=>showPkg(0),50);
+
+// ── BUILD EMAIL TEMPLATES ──
+function buildEmails(){
+  const bar=document.getElementById('emltabs');
+  const con=document.getElementById('emlcontent');
+  bar.innerHTML=PKGS.map((p,i)=>`<button class="stbtn${i===0?' active':''}" onclick="showEml(${i},this)">${p.icon} ${p.name}</button>`).join('');
+  con.innerHTML=PKGS.map((p,i)=>`
+    <div class="subt${i===0?' active':''}" id="eml-${i}">
+      <div class="eml">
+        <div class="eml-top"><span>✉️ Email Template — ${p.name}</span></div>
+        <div class="eml-pkg"><strong>To:</strong> ${p.email.to} &nbsp;|&nbsp; <strong>Vertical:</strong> ${p.sub}</div>
+        <div class="eml-subj"><div class="lbl">Subject Line</div><div class="txt">${p.email.sub}</div></div>
+        <div class="eml-body">${p.email.body}</div>
+        <div class="eml-sig"><span>Personalisation note:</span> Replace all [brackets] before sending. Reference the prospect's specific tech stack, recent announcement or initiative for best results.</div>
+      </div>
+    </div>`).join('');
+}
+function showEml(i,el){
+  document.querySelectorAll('.subt').forEach(t=>t.classList.remove('active'));
+  document.querySelectorAll('.stbtn').forEach(b=>b.classList.remove('active'));
+  document.getElementById('eml-'+i).classList.add('active');
+  el.classList.add('active');
+}
+buildEmails();
+</script>
+</body>
+</html>
