@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bounteous × Fiserv — ABM Dashboard</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--bg:#0a0e1a;--card:#111827;--accent:#6366f1;--accent2:#818cf8;--green:#22c55e;--yellow:#eab308;--red:#ef4444;--orange:#f97316;--text:#e2e8f0;--muted:#94a3b8;--border:#1e293b;--white:#fff}
+body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;min-height:100vh}
+.header{background:linear-gradient(90deg,#1e1b4b,#312e81);padding:20px 32px;border-bottom:1px solid rgba(99,102,241,.27)}
+.header-inner{display:flex;justify-content:space-between;align-items:center;max-width:1400px;margin:0 auto}
+.header-sub{font-size:10px;color:var(--accent2);text-transform:uppercase;letter-spacing:2px}
+.header-title{font-size:20px;font-weight:800;color:var(--white)}
+.header-right{text-align:right;font-size:11px}
+.tabs{display:flex;overflow-x:auto;padding:0 16px;background:var(--card);border-bottom:1px solid var(--border)}
+.tabs::-webkit-scrollbar{height:4px}.tabs::-webkit-scrollbar-thumb{background:var(--border);border-radius:2px}
+.tab-btn{background:transparent;color:var(--muted);border:none;border-bottom:2px solid transparent;padding:12px 16px;font-size:11px;font-weight:500;cursor:pointer;white-space:nowrap;transition:all .2s}
+.tab-btn:hover{color:var(--accent2)}
+.tab-btn.active{background:#1e1b4b;color:var(--accent2);font-weight:700;border-bottom-color:var(--accent)}
+.content{padding:24px 32px;max-width:1400px;margin:0 auto}
+.card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:20px 24px;margin-bottom:16px}
+.card.accent{border-color:var(--accent)}
+.card-title{font-weight:700;font-size:15px;color:var(--text);margin-bottom:12px}
+.card.accent .card-title{color:var(--accent2)}
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.grid-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px}
+.grid-5{display:grid;grid-template-columns:repeat(5,1fr);gap:10px}
+.flex-row{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:20px}
+.kpi{background:var(--bg);border:1px solid var(--border);border-radius:10px;padding:16px 20px;text-align:center;min-width:140px;flex:1}
+.kpi-value{font-size:24px;font-weight:800;color:var(--accent2)}
+.kpi-label{font-size:12px;color:var(--muted);margin-top:4px}
+.kpi-sub{font-size:10px;color:var(--green);margin-top:2px}
+.badge{padding:2px 10px;border-radius:12px;font-size:11px;font-weight:600;margin-right:4px;margin-bottom:4px;display:inline-block}
+.badge-accent{background:rgba(99,102,241,.13);color:var(--accent)}
+.badge-green{background:rgba(34,197,94,.13);color:var(--green)}
+.badge-yellow{background:rgba(234,179,8,.13);color:var(--yellow)}
+.badge-red{background:rgba(239,68,68,.13);color:var(--red)}
+.badge-orange{background:rgba(249,115,22,.13);color:var(--orange)}
+.badge-gray{background:rgba(100,116,139,.13);color:#64748b}
+table{width:100%;border-collapse:collapse;font-size:12px}
+table.compact{font-size:11px}
+th{background:var(--bg);color:var(--accent2);padding:10px 8px;text-align:left;font-size:11px;font-weight:700;border:1px solid var(--border);white-space:nowrap;position:sticky;top:0;z-index:1}
+td{padding:8px;color:var(--muted);border:1px solid var(--border);font-size:12px}
+table.compact td{font-size:10px}
+td.name{color:var(--text);font-weight:600;white-space:nowrap}
+td.heat-h{background:rgba(34,197,94,.2);color:var(--green);font-weight:700;text-align:center}
+td.heat-m{background:rgba(234,179,8,.2);color:var(--yellow);font-weight:700;text-align:center}
+td.heat-l{background:rgba(100,116,139,.2);color:#64748b;font-weight:700;text-align:center}
+.bg-box{background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:14px}
+.text-sm{font-size:12px;color:var(--muted);line-height:1.8}
+.text-xs{font-size:11px;color:var(--muted);line-height:1.6}
+.text-label{color:var(--accent2);font-weight:700;font-size:12px;margin-bottom:6px}
+.text-strong{color:var(--text);font-weight:600}
+.filter-btn{background:var(--bg);color:var(--muted);border:1px solid var(--border);border-radius:6px;padding:4px 12px;font-size:11px;cursor:pointer;margin-right:4px;margin-bottom:4px}
+.filter-btn.active{background:var(--accent);color:var(--white)}
+.filter-btn:hover{border-color:var(--accent)}
+.overflow-x{overflow-x:auto}
+.search-input{background:var(--bg);color:var(--text);border:1px solid var(--border);border-radius:6px;padding:8px 12px;font-size:12px;width:300px;outline:none}
+.search-input:focus{border-color:var(--accent)}
+.search-input::placeholder{color:#475569}
+.trigger-card{background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:14px}
+.trigger-title{font-weight:700;font-size:12px;margin-bottom:4px}
+.trigger-desc{font-size:11px;color:var(--muted);line-height:1.6}
+.hero-banner{background:linear-gradient(135deg,#1e1b4b,#312e81,#4338ca);border-radius:14px;padding:28px;margin-bottom:20px;border:1px solid var(--accent)}
+.ai-card{background:var(--card);border-radius:12px;padding:20px}
+.ai-usecase{font-size:11px;color:var(--muted);line-height:1.6;padding-left:8px;margin-bottom:4px}
+.ai-value-box{margin-top:12px;padding:10px;background:var(--bg);border-radius:6px}
+.phase-box{flex:1;background:var(--bg);border-radius:8px;padding:14px}
+.footer{text-align:center;padding:20px;font-size:10px;color:var(--muted);border-top:1px solid var(--border)}
+.stack-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px}
+.stack-item{display:flex;justify-content:space-between;font-size:11px;padding:4px 0;border-bottom:1px solid var(--border)}
+.stack-name{color:var(--text);font-weight:600}
+.stack-up{color:var(--green)}.stack-neutral{color:var(--muted)}
+.propensity-col{background:var(--bg);border-radius:8px;padding:14px}
+.table-wrap{max-height:600px;overflow-y:auto;border:1px solid var(--border);border-radius:8px}
+.stat-bar{display:flex;gap:16px;margin-bottom:16px;flex-wrap:wrap}
+.stat-chip{background:var(--card);border:1px solid var(--border);border-radius:8px;padding:10px 16px;text-align:center}
+.stat-chip-val{font-size:18px;font-weight:800;color:var(--accent2)}
+.stat-chip-lbl{font-size:10px;color:var(--muted);margin-top:2px}
+.linkedin-link{color:var(--accent2);text-decoration:none;font-size:10px}
+.linkedin-link:hover{text-decoration:underline}
+@media(max-width:900px){.grid-2,.grid-3,.grid-5,.stack-grid{grid-template-columns:1fr}.header-inner{flex-direction:column;gap:8px}.header-right{text-align:left}.search-input{width:100%}}
+</style>
+</head>
+<body>
+<div class="header"><div class="header-inner"><div><div class="header-sub">Bounteous × Fiserv</div><div class="header-title">Account-Based Outreach Dashboard</div></div><div class="header-right"><div style="color:var(--muted)">Prepared: Feb 20, 2026</div><div style="color:var(--accent2)">Target: $18–30M ACV | 150–250 FTEs</div></div></div></div>
+<div class="tabs" id="tabs"></div>
+<div class="content" id="content"></div>
+<div class="footer">Bounteous — Confidential | Fiserv ABM Intelligence Dashboard | Sources: Draup Intelligence, ZoomInfo, Fiserv SEC Filings, Web Research</div>
+
+<script>
+const TABS=["Account Overview","Stakeholder Map","Intelligence Brief","Value Alignment","Competitive Landscape","Tech Stack Radar","Technology Partnerships","AI Initiatives","AI for Enterprise","India GCC","Heatmaps","Program Propensity"];
+let activeTab=0,smLevel="All",smFn="All",smCountry="All",smSearch="",activeHM=0,smPage=0;
+const PAGE_SIZE=50;
+
+// FULL OUTREACH LIST — 450+ contacts from Excel
+const outreach=[
+["Goldman","Dmitry","Vice President, Software Development & Atm, Cash & Logistics Technology Portfolio Owner","VP-Level","Application Development","","","(917) 689-8892","https://www.linkedin.com/in/dmitrygoldman","","","United States"],
+["Dave","Bhaskar","Vice President, Software Development","VP-Level","Application Development","","","(630) 229-5865","https://www.linkedin.com/in/bhaskar-dave","Aurora","Illinois","United States"],
+["Mehra","Bobby","Senior Vice President, Global CIO Digital Banking & Financial Solutions","C-Level","Information Technology","","","(626) 208-7843","https://www.linkedin.com/in/bobby-mehra-347b972","","New Jersey","United States"],
+["Almeida","Marcelo","Chief Information Officer, Latin America","C-Level","Information Technology","","","","https://www.linkedin.com/in/marcelo-almeida-4037046","Fort Lauderdale","Florida","United States"],
+["Nowlen","Patricia","Group VP, Business Continuity & Disaster Recovery","VP-Level","Storage & Disaster Recovery","","","(412) 877-8787","https://www.linkedin.com/in/pnowlen","South Park Township","Pennsylvania","United States"],
+["Booth","Craig","Vice President, IT & Operations","VP-Level","Information Technology","","","(304) 444-3296","https://www.linkedin.com/in/craig-booth-86798165","Hyannis","Massachusetts","United States"],
+["Sunkara","Prasad","Vice President, Software Development","VP-Level","Application Development","","","(407) 474-7413","https://www.linkedin.com/in/prasad-sunkara-b974b8","Brookfield","Wisconsin","United States"],
+["PeBenito","Philip","Vice President, Disaster Recovery & Business Resiliency","VP-Level","Storage & Disaster Recovery","","","(732) 762-4336","https://www.linkedin.com/in/philippebenito","Hillsborough","New Jersey","United States"],
+["Dave","Ashit","Vice President, IT & Solutions Merchant","VP-Level","Information Technology","","","","https://www.linkedin.com/in/ashitdave","Milwaukee","Wisconsin","United States"],
+["Fromayan","Edwin","Vice President, IT Services","VP-Level","Information Technology","","","(770) 283-4683","https://www.linkedin.com/in/edwin-fromayan-893ab74","Brookfield","Wisconsin","United States"],
+["Grasmuck","Robert","Operations Management VP, Enterprise Technology","VP-Level","Enterprise Architecture","","","(207) 671-2533","https://www.linkedin.com/in/robgrasmuck","Portland","Maine","United States"],
+["Gottimukkala","Sirish","Head VP, Fintech ERP Transformation","VP-Level","IT Strategy","","","(919) 667-6473","https://www.linkedin.com/in/sirish-gottimukkala","Morrisville","North Carolina","United States"],
+["Roy","Arpita","VP, Lending Products & Data Analytics","VP-Level","Business Intelligence","","","","https://www.linkedin.com/in/arpita-roy-8240068","Jersey City","New Jersey","United States"],
+["Patel","Jayesh","Vice President - Security Architect","VP-Level","Information Security","","","","https://www.linkedin.com/in/jayesh-patel-3a684410","","",""],
+["Luisier","Gerry","VP, Information Technology","VP-Level","Information Technology","","","","https://www.linkedin.com/in/gerry-luisier-03144829","Brookfield","Wisconsin","United States"],
+["O'Barr","Dan","Vice President, Network Security","VP-Level","Information Security","","","(614) 434-8558","https://www.linkedin.com/in/danobarrjr","Columbus","Ohio","United States"],
+["Carson","Corwin","VP, Infrastructure, Enterprise Technology","VP-Level","Enterprise Architecture","","","(678) 447-8424","https://www.linkedin.com/in/carsontech","Hilton Head Island","South Carolina","United States"],
+["Schuler","Christine","VP, Network Application Engineering","VP-Level","Application Development","","","(716) 474-7096","https://www.linkedin.com/in/chris-schuler-58a1065","","","United States"],
+["Swartz","Carol","Application Delivery VP, IT","VP-Level","Information Technology","","","(317) 294-3331","https://www.linkedin.com/in/carol-swartz-b4068159","Pendleton","Indiana","United States"],
+["Hoffmann","John","Vice President, IT","VP-Level","Information Technology","","","(631) 578-8875","https://www.linkedin.com/in/john-hoffmann-8a209336","Pittsburgh","Pennsylvania","United States"],
+["Miller","Keith","VP, IT & Quality Assurance","VP-Level","Information Technology","","","(248) 897-7155","https://www.linkedin.com/in/keith-miller-7aab683","Lake Mary","Florida","United States"],
+["Shama","Sree","Director, Information Security & ISSO","Director","Information Security","","","(678) 463-6440","https://www.linkedin.com/in/sree-shama-766a62","Alpharetta","Georgia","United States"],
+["Nikharge","Amit","Director","Director","","","","","https://www.linkedin.com/in/amitnikharge","Mumbai","Maharashtra","India"],
+["Leslie","Jonathan","ASP Implementations Director, Software Dev","Director","Application Development","","","(614) 726-0200","https://www.linkedin.com/in/john-leslie-00233b12","","New York","United States"],
+["Chong","Benny","Director, Cyber Security","Director","Information Security","","","(647) 355-9106","https://www.linkedin.com/in/benny-chong-42aa3272","Singapore","Central Singapore","Singapore"],
+["Francis","Luke","PMO Senior Director, Technology Services","Director","IT Operations","","","(860) 815-5220","https://www.linkedin.com/in/luke-t-francis","Cumming","Georgia","United States"],
+["Eng","James","IT Director, Enterprise Solutions","Director","Information Technology","","","","https://www.linkedin.com/in/james-eng-067563216","Powell","Ohio","United States"],
+["Johnson","Leslie","Project Director, Government IT","Director","Information Technology","","","","https://www.linkedin.com/in/leslie-ann-johnson-b57183a9","Indianapolis","Indiana","United States"],
+["Anderson","João","Senior Director, IT Services (Brazil)","Director","Information Technology","","","","https://www.linkedin.com/in/jonnygarcia","","Sao Paulo","Brazil"],
+["Christensen","Todd","Director, Relationship Management","Director","HR / Financial / ERP Systems","","","(205) 602-8160","https://www.linkedin.com/in/todd-christensen-atl","Atlanta","Georgia","United States"],
+["Jindal","Raj","Director, Software Development","Director","Application Development","","","","https://www.linkedin.com/in/raj-jindal-a9809b15","Gurgaon","Haryana","India"],
+["Ahmadi","Munir","Enterprise Architecture & Modernization Head","Director","Enterprise Architecture","","","(732) 397-1518","https://www.linkedin.com/in/munirahmadi","Matawan","New Jersey","United States"],
+["Dickey","David","Director, IT","Director","Information Technology","","","","https://www.linkedin.com/in/david-dickey-958926197","Omaha","Nebraska","United States"],
+["Santulli","Keith","Director, Technical Delivery","Director","Business Service Management / ITSM","","","(908) 229-3420","https://www.linkedin.com/in/keithsantulli","Cranford","New Jersey","United States"],
+["Zurbel","Christian","Director, IT","Director","Information Technology","","","","https://www.linkedin.com/in/christian-zurbel-9337105","","","Germany"],
+["Foote","Dale","Director, Business Systems & Operations","Director","HR / Financial / ERP Systems","","","(402) 960-2988","https://www.linkedin.com/in/dale-foote-2582b711","Omaha","Nebraska","United States"],
+["Bisoi","Rajib","Principal Director - Engineering & Transformation","Director","IT Strategy","","","","https://www.linkedin.com/in/rajib-bisoi","Noida","Uttar Pradesh","India"],
+["Gunasekar","Pradeep","Senior Director, DevOps Data & Analytics","Director","Information Technology","","","(530) 401-6806","https://www.linkedin.com/in/pradeep-gunasekar-9409991a","Atlanta","Georgia","United States"],
+["Fischer","Jacob","Senior Director, Solutions Architecture","Director","Enterprise Architecture","","","(503) 706-0768","https://www.linkedin.com/in/jacoblfischer","Tukwila","Washington","United States"],
+["Bansal","Kapil","Senior Director, Technology","Director","Software Development","","","","https://www.linkedin.com/in/ACwAABEH_MoBAO8I1X8HRVFxD4fSe7ejBF8RQuU","Lake Mary","Florida","United States"],
+["Toure","Fatou","Senior Director, Cybersecurity, Risk & Compliance","Director","Information Security","","","(770) 875-2627","https://www.linkedin.com/in/fatou-toure-cissp-cisa-cia-cpa-mba-b6531352","Jacksonville","Florida","United States"],
+["Barrett","Clint","Senior Director, Infrastructure Engineering","Director","Infrastructure","","","(512) 783-6226","https://www.linkedin.com/in/clintbarrett","","Texas","United States"],
+["Goradia","Hitesh","Director, Software Development Engineering","Director","Application Development","","","(646) 729-1097","https://www.linkedin.com/in/hitesh-goradia-53bbb712","Mumbai","Maharashtra","India"],
+["Kim","Jeeyoung","Director, Database Management","Director","Database Administration","","","(404) 496-2779","https://www.linkedin.com/in/jeeyoung-kim-27245187","Marietta","Georgia","United States"],
+["Furlani","Steven","Director, Enterprise Architecture","Director","Enterprise Architecture","","","(516) 658-2459","https://www.linkedin.com/in/steve-furlani-044959192","Atlanta","Georgia","United States"],
+["Newton","Robert","Director, Technology Transformation","Director","IT Strategy","","","(404) 468-3197","https://www.linkedin.com/in/robert-newton-a05a651b","Atlanta","Georgia","United States"],
+["Dorin","Paul","Senior VP, Data Center Management","VP-Level","Data Center","","","(678) 739-6733","https://www.linkedin.com/in/paul-r-dorin-304a548b","San Diego","California","United States"],
+["Freely","James","Senior VP, Cloud & Datacenter","VP-Level","Cloud / Mobility","","","(703) 859-2318","https://www.linkedin.com/in/jim-freely-b94125","Herndon","Virginia","United States"],
+["Hayne","Robert","Global Senior VP, IT & Facilities","VP-Level","Information Technology","","","(407) 493-2946","https://www.linkedin.com/in/bob-hayne-100077b","Brookfield","Wisconsin","United States"],
+["Gnad","Isabelle","VP, Relationship Management (EMEA)","VP-Level","HR / Financial / ERP Systems","isabelle.gnad@fiserv.com","","","https://www.linkedin.com/in/isabelle-gnad-haug-4968a43","","","Austria"],
+["Pratt","Sharon","VP, Corporate Application Development","VP-Level","Application Development","sharon.pratt@firstdata.com","","(404) 273-9028","https://www.linkedin.com/in/sharondpratt","Atlanta","Georgia","United States"],
+["Sonecha","Sonia","Senior VP, Sales & Relationship Management","VP-Level","HR / Financial / ERP Systems","sonia.sonecha@fiserv.com","","(414) 745-5008","https://www.linkedin.com/in/sonia-ahluwalia-sonecha-782700","Milwaukee","Wisconsin","United States"],
+["Pappas","Ann","Senior VP, Relationship & Service Management","VP-Level","Business Service Management / ITSM","apappas@fiserv.com","","(262) 527-1330","https://www.linkedin.com/in/ann-pappas-97840111","Brookfield","Wisconsin","United States"],
+["Ruch","Stephen","VP, Partner Collaboration","VP-Level","Cloud / Mobility","stephen.ruch@fiserv.com","","(832) 785-4294","https://www.linkedin.com/in/steveruch","Houston","Texas","United States"],
+["Kaistha","Munish","VP, IT Infrastructure (Cloud)","VP-Level","Infrastructure","munish.kaistha@fiserv.com","","(630) 418-1566","https://www.linkedin.com/in/munish-kaistha-091993b4","Aurora","Illinois","United States"],
+["Reszoly","Tyler","Business Continuity VP, Enterprise","VP-Level","Storage & Disaster Recovery","tyler.reszoly@firstdata.com","","(203) 313-6969","https://www.linkedin.com/in/tyler-reszoly-17935040","Jupiter","Florida","United States"],
+["Rivera","Hector","VP, Virtualization Infrastructure","VP-Level","Virtualization","hector.rivera@firstdata.com","","(402) 250-3035","https://www.linkedin.com/in/hectorriveraglobaloperations","Omaha","Nebraska","United States"],
+["Stains","Brent","VP, Enterprise Architecture","VP-Level","Enterprise Architecture","brent.stains@fiserv.com","","(240) 520-0004","https://www.linkedin.com/in/bstains","Hagerstown","Maryland","United States"],
+["Brahmbhatt","Vimal","CIO, Payments","C-Level","Information Technology","vimal.brahmbhatt@fiserv.com","","(317) 374-4997","https://www.linkedin.com/in/vimal-brahmbhatt-7024112","","","United States"],
+["Kahlan","Mark","VP, Network Operations","VP-Level","Networking","mark.kahlan@firstdata.com","","","https://www.linkedin.com/in/mark-kahlan-4354b916","Omaha","Nebraska","United States"],
+["Beavers","Joan","Senior VP, Cybersecurity & Technology Control Management","VP-Level","Information Security","joan.beavers@fiserv.com","","(412) 370-1318","https://www.linkedin.com/in/joanbryantbeavers","New York City","New York","United States"],
+["O'Donaill","Colm","CIO (EMEA)","C-Level","Information Technology","colm.odonaill@fiserv.com","","","https://www.linkedin.com/in/colmod","Dublin","Leinster","Ireland"],
+["Givens","Nicholas","Senior VP, Application, Network, Cloud Security","VP-Level","Information Security","nicholas.givens@fiserv.com","","(479) 283-6298","https://www.linkedin.com/in/nick-d-givens","Atlanta","Georgia","United States"],
+["Windfelder","Kenneth","Senior VP, Enterprise Technology Network Operations","VP-Level","Enterprise Architecture","kwindfelder@fiserv.com","","(215) 413-4999","https://www.linkedin.com/in/ken-windfelder-01b7a217","Philadelphia","Pennsylvania","United States"],
+["Waite","Barbara","Head VP, Healthcare Insurance Sales & Relationship Management","VP-Level","HR / Financial / ERP Systems","barbara.waite@fiserv.com","","(518) 265-5780","https://www.linkedin.com/in/barbara-waite","Hartford","Connecticut","United States"],
+["Kasaghatta","Karthik","VP and Fellow, Solutions Architecture","VP-Level","Enterprise Architecture","karthik.kasaghatta@fiserv.com","","(678) 597-7421","https://www.linkedin.com/in/karthik-kasaghatta","Cumming","Georgia","United States"],
+["Jha","Neeta","VP, Software Development","VP-Level","Application Development","neeta.jha1@fiserv.com","","","https://www.linkedin.com/in/neeta-puranik-jha-pmp-5a1704104","Delhi","NCT","India"],
+["Turlapati","Srinivas","VP, Software Development","VP-Level","Application Development","srinivas.turlapati@fiserv.com","","","https://www.linkedin.com/in/srinivas-turlapati-b35092b","Pune","Maharashtra","India"],
+["Malto","Jonathan","VP, ICTO Infrastructure Solutions","VP-Level","Infrastructure","jonathan.malto@fiserv.com","","(678) 230-0413","https://www.linkedin.com/in/jonathanmalto","Atlanta","Georgia","United States"],
+["Taranto","Jeff","VP, Software Development","VP-Level","Application Development","jeff.taranto@fiserv.com","","(614) 800-1902","https://www.linkedin.com/in/jeff-taranto-6034633","Westerville","Ohio","United States"],
+["Krish","Srini","CIO, Financial Institutions Group","C-Level","Information Technology","srini.krish@firstdata.com","","","https://www.linkedin.com/in/srini-krish-21b0b91","","New York","United States"],
+["Madhusudan","Mahesh","Head VP, Application Delivery Architecture & Engineering","VP-Level","Application Development","mahesh.madhusudan@fiserv.com","","(614) 440-7525","https://www.linkedin.com/in/maheshmadhusudan","Dublin","Leinster","Ireland"],
+["Pasham","Vamshi","VP, Information Technology","VP-Level","Information Technology","vamshireddy.pasham@firstdata.com","","(361) 406-9241","https://www.linkedin.com/in/vrpasham","Omaha","Nebraska","United States"],
+["Lanham","Michael","VP, Software Development","VP-Level","Application Development","michael.lanham@fiserv.com","","(704) 208-0476","https://www.linkedin.com/in/michael-lanham-0086b03","Cumming","Georgia","United States"],
+["Ledford","Katrina","VP, IT Services Production Assurance","VP-Level","Information Technology","katrina.ledford@firstdata.com","","(301) 992-2897","https://www.linkedin.com/in/katrina-ledford-9126485","Hagerstown","Maryland","United States"],
+["Gillam","Steve","VP, Information Technology","VP-Level","Information Technology","steve.gillam@fiserv.com","","(678) 488-0014","https://www.linkedin.com/in/stevegillam","Atlanta","Georgia","United States"],
+["Dutta","Antara","VP, Issuer Solutions Technology Architecture","VP-Level","Infrastructure","antara.dutta@fiserv.com","","(484) 678-3784","https://www.linkedin.com/in/antaradutta","","New York","United States"],
+["Johnson","Ryan","VP, Software Development","VP-Level","Application Development","ryan.johnson@fiserv.co","","(402) 219-3351","https://www.linkedin.com/in/ryan-johnsont","Lincoln","Nebraska","United States"],
+["Schloth","Neil","Head VP, Application Security","VP-Level","Information Security","neil.schloth@firstdata.com","","(516) 765-0707","https://www.linkedin.com/in/neilschloth","New York City","New York","United States"],
+["Pizarro","Christian","VP, IT & Mainframe Engineer","VP-Level","Information Technology","pizarro.christian@fiserv.com","","(301) 745-7721","https://www.linkedin.com/in/christian-pizarro-8370977","Boonsboro","Maryland","United States"],
+["Evarts","Richard","Senior VP, Relationship Management","VP-Level","HR / Financial / ERP Systems","rick.evarts@fiserv.com","","(770) 856-1603","https://www.linkedin.com/in/rickevarts","Tampa","Florida","United States"],
+["Selvaraj","Joseph","VP, Information Technology","VP-Level","Information Technology","joe.selvaraj@firstdata.com","","(402) 682-2724","https://www.linkedin.com/in/joeselvaraj","Omaha","Nebraska","United States"],
+["Sekkappan","Mani","VP, Engineering Transformation, Cloud & AI","VP-Level","IT Strategy","manivannan.sekkappan@fiserv.com","","","https://www.linkedin.com/in/manisekkappan","Brookfield","Wisconsin","United States"],
+["Pooley","Richard","Head Senior VP, Compliance & Data Privacy (EMEA)","VP-Level","Information Security","richard.pooley@firstdata.com","","","https://www.linkedin.com/in/richard-pooley-8a557821","Basildon","Essex","United Kingdom"],
+["Specogna","Carol","Head Senior VP, Debit Networks","VP-Level","Networking","carol.specogna@fiserv.com","","(360) 296-1851","https://www.linkedin.com/in/carol-specogna","Charleston","South Carolina","United States"],
+["Owens","Kenneth","VP, Cyber Cloud Security Engineering","VP-Level","Information Security","ken.owens@fiserv.com","","","https://www.linkedin.com/in/kenowens12","St. Louis","Missouri","United States"],
+["Gullapalli","Akhila","VP, Software Development","VP-Level","Application Development","akhila.gullapalli@fiserv.com","","(808) 361-1468","https://www.linkedin.com/in/akhila-gullapalli","Atlanta","Georgia","United States"],
+["Delery","Leslie","Relationship Management VP","VP-Level","HR / Financial / ERP Systems","leslie.delery@fiserv.com","","(908) 328-9426","https://www.linkedin.com/in/lesliedelery","New York City","New York","United States"],
+["Morris","Troy","VP, ICTO Fiserv Technology Services","VP-Level","IT Operations","troy.morris@fiserv.com","","(470) 736-1522","https://www.linkedin.com/in/troy-m-6325472","Brookfield","Wisconsin","United States"],
+["Eck","Thomas","Head of AI, Digital Transformation SVP, CIO","VP-Level","Information Technology","tom.eck@fiserv.com","","(703) 622-3016","https://www.linkedin.com/in/fteck4","","New York","United States"],
+["Duis","Douglas","VP, Fintech Application Operations","VP-Level","Application Development","doug.duis@fiserv.com","","(817) 807-1810","https://www.linkedin.com/in/dougduis","Lincoln","Nebraska","United States"],
+["Ronk","Kenneth","Government Technology VP & CIO","VP-Level","Information Technology","kenneth.ronk@firstdata.com","","","https://www.linkedin.com/in/kenronk","Denver","Colorado","United States"],
+["Goode","Brett","CIO, Core Account Processing","C-Level","Information Technology","brett.goode@fiserv.com","","(937) 272-3324","https://www.linkedin.com/in/brett-goode-5756478","Columbus","Ohio","United States"],
+["Whitfield","Gregory","VP, Financial Shared Services","VP-Level","Help Desk / Desktop Services","gregory.whitfield@fiserv.com","","(262) 879-5023","https://www.linkedin.com/in/greg-whitfield-2098a7","Brookfield","Wisconsin","United States"],
+["Lyman","Daniel","VP, Threat Detection & Response","VP-Level","Information Security","daniel.lyman@firstdata.com","","(816) 786-1838","https://www.linkedin.com/in/danny-l-7517a14","Suwanee","Georgia","United States"],
+["Edmonds","Michelle","VP, Information Security","VP-Level","Information Security","michelle.edmonds@fiserv.com","","(678) 878-5864","https://www.linkedin.com/in/michelle-edmonds-92053a3","Alpharetta","Georgia","United States"],
+["Marcello","Rocco","Head Senior VP, Sales & Relationship Management, FIG","VP-Level","HR / Financial / ERP Systems","messagefromroccomarcello@fiserv.com","","(412) 616-1262","https://www.linkedin.com/in/rocco-marcello","Pittsburgh","Pennsylvania","United States"],
+["Laughlin","Jennifer","Global Business Solutions VP, Relationship Management","VP-Level","HR / Financial / ERP Systems","jennifer.laughlin@fiserv.com","","(316) 312-2951","https://www.linkedin.com/in/jennifer-laughlin-13b5596","Fort Lauderdale","Florida","United States"],
+["Cleveland","Nicole","Head Senior VP, Issuer Solutions Relationship Management","VP-Level","HR / Financial / ERP Systems","nicole.cleveland@firstdata.com","","(402) 510-6199","https://www.linkedin.com/in/nicole-cleveland-53b4b8a","Omaha","Nebraska","United States"],
+["Bender","Cindy","VP, Application Development","VP-Level","Application Development","cindy.bender@fiserv.com","","(402) 222-2731","https://www.linkedin.com/in/cindy-bender-b897556","Omaha","Nebraska","United States"],
+["Caniglia","Dan","VP, ISO Partner Solutions","VP-Level","HR / Financial / ERP Systems","dan.caniglia@fiserv.com","","(402) 981-8371","https://www.linkedin.com/in/dan-caniglia-b7a18911","Omaha","Nebraska","United States"],
+["Dolbow","William","VP, Network Application Engineering","VP-Level","Application Development","william.dolbow@firstdata.com","","(302) 593-1532","https://www.linkedin.com/in/billdolbow","Middletown","Delaware","United States"],
+["Angelucci","Anthony","VP, Enterprise Sales & Relationship Management","VP-Level","HR / Financial / ERP Systems","tony.angelucci@fiserv.com","","(416) 953-7795","https://www.linkedin.com/in/tony-angelucci-538a5a8","","","Canada"],
+["Trausch","Jonathan","VP Partner Collaboration","VP-Level","Cloud / Mobility","jonathan.trausch@firstdata.com","","(419) 779-2209","https://www.linkedin.com/in/jontrausch","Fort Lauderdale","Florida","United States"],
+["Moriarty","Jeffrey","VP, General Manager Financial Performance & CRM","VP-Level","IT Operations","jeffrey.moriarty@fiserv.com","","(404) 229-7174","https://www.linkedin.com/in/jeff-moriarty-jm101","Atlanta","Georgia","United States"],
+["Chintapalli","Muralidhar","VP, Information Technology","VP-Level","Information Technology","muralidhar.chintapalli@firstdata.com","","(402) 968-3953","https://www.linkedin.com/in/muralidhar-chintapalli-72b3531","Omaha","Nebraska","United States"],
+["Ayyadevara","Padmakar","VP, IT & Head of Technology","VP-Level","Information Technology","padmakar.ayyadevara@firstdata.com","","","https://www.linkedin.com/in/padmakar-ayyadevara-17926821","Sydney","New South Wales","Australia"],
+["Daniels","James","Services Management VP, IT","VP-Level","Information Technology","james.daniels@fiserv.com","","(402) 250-0939","https://www.linkedin.com/in/james-daniels-002a163b","Omaha","Nebraska","United States"],
+["Narasimhan","Sanjay","VP, Information Technology","VP-Level","Information Technology","sanjaynarasimman.narasimhan@fiserv.com","","(347) 452-3379","https://www.linkedin.com/in/sanjay-n-narasimhan","","New York","United States"],
+["Chandrasekaran","Ramesh","VP, Technology Delivery","VP-Level","IT Operations","ramesh.chandrasekaran@fiserv.com","","","https://www.linkedin.com/in/ramesh-chandrasekaran-8b9412a","","",""],
+["Haffke","Andrew","VP, Information Technology","VP-Level","Information Technology","andrew.haffke@fiserv.com","","(561) 598-9248","https://www.linkedin.com/in/andy-haffke-0748394","Lake Worth","Florida","United States"],
+["Bhatia","Akash","VP, Information Technology","VP-Level","Information Technology","akash.bhatia@firstdata.com","","","https://www.linkedin.com/in/akash-bhatia-11633a8","Singapore","Central Singapore","Singapore"],
+["Neal","Chris","Software Development VP & Director","VP-Level","Application Development","chris.neal@fiserv.com","","(770) 335-0591","https://www.linkedin.com/in/chris-neal-10b5a37","Atlanta","Georgia","United States"],
+["Scheet","Kelley","VP, Application Support","VP-Level","Application Development","kelley.scheet@fiserv.com","","(402) 314-4574","https://www.linkedin.com/in/kelley-scheet-731a89a4","Lincoln","Nebraska","United States"],
+["Kerstetter","Courtland","VP, Information Technology","VP-Level","Information Technology","courtland.kerstetter@fiserv.com","","(302) 222-6277","https://www.linkedin.com/in/courtland-kerstetter","Wilmington","Delaware","United States"],
+["Windau","Jason","Senior VP, Cloud & Network Services","VP-Level","Cloud / Mobility","jason.windau@fiserv.com","","(614) 832-7584","https://www.linkedin.com/in/jason-windau","New York City","New York","United States"],
+["Davis","Annette","Senior VP, Cybersecurity Risk & Deputy CISO","VP-Level","Information Security","anne.davis@fiserv.com","","(253) 880-6042","https://www.linkedin.com/in/anne-davis-4501949","New Philadelphia","Ohio","United States"],
+["Lalwani","Bindu","VP, Software Development","VP-Level","Software Development","bindu.lalwani@fiserv.com","","","https://www.linkedin.com/in/bindu-lalwani-2481961","Milwaukee","Wisconsin","United States"],
+["Reilly","Ron","VP, Relationship Management","VP-Level","HR / Financial / ERP Systems","ron.reilly@fiserv.com","","(404) 316-1032","https://www.linkedin.com/in/reillyr","Atlanta","Georgia","United States"],
+["Comley","Noel","CIO, ANZ","C-Level","Information Technology","noel.comley@firstdata.com","","","https://www.linkedin.com/in/noel-comley-31b08119","St Leonards","New South Wales","Australia"],
+["Figurski","Matthew","CIO, Corporate","C-Level","Information Technology","matt.figurski@fiserv.com","","(917) 750-9108","https://www.linkedin.com/in/matthew-figurski-9a7329265","New York City","New York","United States"],
+["Zbranak","Michael","Senior VP, CIO","VP-Level","Information Technology","michael.zbranak@fiserv.com","","(302) 545-9353","https://www.linkedin.com/in/michael-zbranak-b394112","Hockessin","Delaware","United States"],
+["Meaden","David","CIO, Credit Union Solutions","C-Level","Information Security","david.meaden@fiserv.com","","(678) 218-2914","https://www.linkedin.com/in/david-meaden","Alpharetta","Georgia","United States"],
+["Naidu","Umesh","VP Head of Technology, Managed Services","C-Level","Information Technology","umesh.naidu@firstdata.com","","","https://www.linkedin.com/in/umesh-naidu-95633779","Singapore","Central Singapore","Singapore"],
+["Franzen","Steven","VP - CIO Output Services","C-Level","Information Technology","steven.franzen@fiserv.com","","(402) 740-6823","https://www.linkedin.com/in/sjfranzen","","Nebraska","United States"],
+["Van Luvender","Richard","Global Senior VP, Cybersecurity Services","VP-Level","Information Security","rick.vanluvender@firstdata.com","","(973) 224-7769","https://www.linkedin.com/in/rickvl","Havertown","Pennsylvania","United States"],
+["Vincent","Stephen","VP, Software & Infrastructure Engineering (EMEA)","VP-Level","Infrastructure","steven.vincent@fiserv.com","","","https://www.linkedin.com/in/steven-vincent-93762011","Bedmond","England","United Kingdom"],
+["Fedele","Leana","SVP, Chief Risk Officer Merchant Solutions","VP-Level","IT Operations","leana.fedele@fiserv.com","","","https://www.linkedin.com/in/leana-fedele-bbb414100","New York City","New York","United States"],
+["Kitzke","Andy","VP, Infrastructure Engineering","VP-Level","Infrastructure","andy.kitzke@fiserv.com","","(262) 278-1134","https://www.linkedin.com/in/andy-kitzke-0672b08","Milwaukee","Wisconsin","United States"],
+["Long","David","Senior VP, Data & Analytics","VP-Level","Information Technology","david.long1@fiserv.com","","(404) 915-6943","https://www.linkedin.com/in/david-long30606","Athens","Georgia","United States"],
+["Drzewiecki","Edward","VP, Application Engineering","VP-Level","Application Development","edward.drzewiecki@firstdata.com","","(954) 826-1034","https://www.linkedin.com/in/edward-drzewiecki-451b6811","Pompano Beach","Florida","United States"],
+["Brown","Amberly","VP, Information Risk Management","VP-Level","Information Security","amberly.brown@firstdata.com","","(404) 630-5708","https://www.linkedin.com/in/amberlyb","Atlanta","Georgia","United States"],
+["Shankar","Savita","VP, PMO, Transformation, Client Implementations","VP-Level","Project & Program Management","savita.shankar@fiserv.com","","(678) 395-1285","https://www.linkedin.com/in/savitashankar","Atlanta","Georgia","United States"],
+["Clark","Susan","Global Senior VP, Head of Disaster Recovery","VP-Level","Storage & Disaster Recovery","susan.clark@firstdata.com","","(678) 576-5062","https://www.linkedin.com/in/susanmclark","Coral Springs","Florida","United States"],
+["Gott","Pamela","Global Senior VP, Cyber Security Services","VP-Level","Information Security","pamela.gott@firstdata.com","","","https://www.linkedin.com/in/pamela-gott-58326b1","Littleton","Colorado","United States"],
+["Heggen","Timothy","VP, Cybersecurity & Technology Risk","VP-Level","Information Security","timothy.heggen@fiserv.com","","(404) 890-2267","https://www.linkedin.com/in/timothy-heggen-0a806393","Atlanta","Georgia","United States"],
+["Merricks","Angela","VP, Agile Transformation","VP-Level","IT Strategy","angela.merricks@fiserv.com","","(201) 478-2675","https://www.linkedin.com/in/angela-merricks","Atlanta","Georgia","United States"],
+["Chatwal","Gurbans","VP and Expert Engineer, Engineering & Transformation","VP-Level","IT Strategy","gurbans.chatwal@fiserv.com","","","https://www.linkedin.com/in/gurbanschatwal","Pune","Maharashtra","India"],
+["Carley","Charles","VP, Infrastructure Engineering","VP-Level","Infrastructure","charles.carley@fiserv.com","","(614) 946-4539","https://www.linkedin.com/in/charlescarley","Dublin","Leinster","Ireland"],
+["Byfield","Gary","VP, Data Analytics & Fraud","VP-Level","Business Intelligence","gary.byfield@fiserv.com","","(347) 628-7144","https://www.linkedin.com/in/gary-byfield-0015a02","Alpharetta","Georgia","United States"],
+["Dobrinska","Megan","VP, Cyber Risk Management","VP-Level","Information Security","megan.christman@fiserv.com","","(262) 330-2849","https://www.linkedin.com/in/megan-dobrinska-0a62b129","Oak Creek","Wisconsin","United States"],
+["Palagiri","Praveen","VP, Cybersecurity","VP-Level","Information Security","praveen.palagiri@fiserv.com","","(404) 502-3844","https://www.linkedin.com/in/praveenpalagiri","Atlanta","Georgia","United States"],
+["Pai","Gangadhar","VP, Information Technology","VP-Level","Information Technology","gangadhar.pai@fiserv.com","","","https://www.linkedin.com/in/gangadhar-pai-407921","Bengaluru","Karnataka","India"],
+["Gorantala","Venugopal","VP, Information Technology","VP-Level","Information Technology","venugopal.gorantala@firstdata.com","","","https://www.linkedin.com/in/gorantalav","","","India"],
+["Mueller","Daniel","VP, Core Software Development","VP-Level","Application Development","dan.mueller@fiserv.com","","(801) 707-5654","https://www.linkedin.com/in/dan-mueller-3a26b721","Draper","Utah","United States"],
+["Gedge","Chris","VP, Software Development DNA","VP-Level","Application Development","chris.gedge@fiserv.com","","(815) 661-0405","https://www.linkedin.com/in/chris-gedge","Frisco","Texas","United States"],
+["Tucker","Jennifer","SVP, Large FI Relationship Management","VP-Level","HR / Financial / ERP Systems","jennifer.tucker@firstdata.com","","(917) 903-1119","https://www.linkedin.com/in/jennifer-tucker-793b197","New York City","New York","United States"],
+["Binovsky","Brian","Global Cybersecurity Architect & VP","VP-Level","Information Security","brian.binovsky@fiserv.com","","(973) 479-7892","https://www.linkedin.com/in/brian-binovsky-b4183a29","East Hanover","New Jersey","United States"],
+["Kadiru","Sunil","VP, IAM Cybersecurity","VP-Level","Information Security","sunil.kadiru@fiserv.com","","(513) 377-1126","https://www.linkedin.com/in/sunilkadiru","Columbus","Wisconsin","United States"],
+["Cummings","Jason","VP, Implementation","VP-Level","HR / Financial / ERP Systems","jason.cummings@fiserv.com","","(609) 703-5978","https://www.linkedin.com/in/jason-joseph-cummings-644b3156","Omaha","Nebraska","United States"],
+["Sims","Chris","VP, Information Technology","VP-Level","Information Technology","chris.sims@fiserv.com","","(214) 417-2417","https://www.linkedin.com/in/cdsars","Plano","Texas","United States"],
+["McGrail","Ryan","VP, Information Technology","VP-Level","Information Technology","ryan.mcgrail@firstdata.com","","(817) 266-7841","https://www.linkedin.com/in/mcgrailryan","Omaha","Nebraska","United States"],
+["Larsen","Robert","VP, Quality Assurance","VP-Level","Help Desk / Desktop Services","rob.larsen@firstdata.com","","(402) 679-7502","https://www.linkedin.com/in/robert-d-larsen","Bellevue","Nebraska","United States"],
+["Caldwell","Ryan","Global Senior VP, Business Resiliency","VP-Level","","ryan.caldwell@fiserv.com","","","https://www.linkedin.com/in/ryan-caldwell-4a583827","Fort Lauderdale","Florida","United States"],
+["Oh","Benjamin","VP, Data & Endpoint Security","VP-Level","Information Security","benjamin.oh@firstdata.com","","(614) 783-3878","https://www.linkedin.com/in/mobilegun","Columbus","Ohio","United States"],
+["Liddy","Jeffrey","VP, End User Computing Service Management","VP-Level","Business Service Management / ITSM","jeffrey.liddy@fiserv.com","","(203) 964-3492","https://www.linkedin.com/in/jeffrey-liddy-0a91591","Monsey","New York","United States"],
+["Bern","Neil","Senior VP, Relationship Management","VP-Level","HR / Financial / ERP Systems","neil.bern@fiserv.com","","(858) 239-9518","https://www.linkedin.com/in/neilbern","Cardiff-by-the-Sea","California","United States"],
+["Tice","Matthew","VP, Infrastructure Engineering","VP-Level","Infrastructure","matthew.tice@fiserv.com","","(614) 213-4206","https://www.linkedin.com/in/matt-tice-9906b45","Columbus","Ohio","United States"],
+["Kaczor","Eric","Technical Integrations VP, Implementation","VP-Level","HR / Financial / ERP Systems","eric.kaczor@fiserv.com","","(402) 326-2611","https://www.linkedin.com/in/eric-kaczor-22111149","Lincoln","Nebraska","United States"],
+["Myers","Bruce","VP, Relationship Management","VP-Level","HR / Financial / ERP Systems","bruce.myers@fiserv.com","","(812) 430-3317","https://www.linkedin.com/in/bruce-myers-5b701410","Evansville","Indiana","United States"],
+["Lair","Lonnie","VP, Fiserv ETG DIS Service Management","VP-Level","Business Service Management / ITSM","l.lair@fiserv.com","","(515) 224-8397","https://www.linkedin.com/in/lonnie-lair-a5448273","","Iowa","United States"],
+["Evola","Nino","VP, Cyber Security","VP-Level","Information Security","nino.evola@fiserv.com","","(267) 275-1396","https://www.linkedin.com/in/ninoevola","","",""],
+["Snyder","Justin","VP, IT Output Solutions","VP-Level","Information Technology","justin.snyder@fiserv.com","","(402) 213-0688","https://www.linkedin.com/in/justin-snyder-0485201","","","United States"],
+["Vitangcol","Joey","VP, Information Technology","VP-Level","Information Technology","joey.vitangcol@fiserv.com","","(954) 845-4137","https://www.linkedin.com/in/joey-vitangcol-69abab251","Pompano Beach","Florida","United States"],
+["Griggs","Shane","VP Fellow Enterprise Architect","VP-Level","Enterprise Architecture","shane.griggs@fiserv.com","","(614) 202-4678","https://www.linkedin.com/in/shanegriggs","Columbus","Ohio","United States"],
+["Breeton","Gary","VP, Information Technology","VP-Level","Information Technology","gary.breeton@firstdata.com","","","https://www.linkedin.com/in/gary-breeton-8b2a6112","","Nottinghamshire","United Kingdom"],
+["Joshi","Rohini","VP, Information Technology","VP-Level","Information Technology","rohini.joshi@firstdata.com","","","https://www.linkedin.com/in/rohini-joshi-24269915","Singapore","Central Singapore","Singapore"],
+["Paspunoori","Srinivasulu","VP, Enterprise Architecture & Cloud Transformation","VP-Level","Enterprise Architecture","srinivasulu.paspunoori@fiserv.com","","(470) 226-6982","https://www.linkedin.com/in/srinivasulu-paspunoori-551a182","Atlanta","Georgia","United States"],
+["Cheedella","Naresh","VP, IT Specialist & Engineer","VP-Level","IT Operations","nareshkumar.cheedella@fiserv.com","","","https://www.linkedin.com/in/naresh-cheedella-628870a7","Atlanta","Georgia","United States"],
+["Chase","Dan","VP, Information Technology","VP-Level","Information Technology","dan.chase@fiserv.com","","(770) 356-4066","https://www.linkedin.com/in/dan-chase-3a8b77","Alpharetta","Georgia","United States"],
+["Street","Warren","VP, Cloud Services","VP-Level","Cloud / Mobility","warren.street@fiserv.com","","(404) 275-9741","https://www.linkedin.com/in/warren-street","Atlanta","Georgia","United States"],
+["Duers","Christopher","VP, Distributed Infrastructure","VP-Level","Infrastructure","christopher.duers@fiserv.com","","(203) 979-3914","https://www.linkedin.com/in/chris-duers-16474937","West Hartford","Connecticut","United States"],
+["Adams","Samuel","Business Continuity & DR VP","VP-Level","Storage & Disaster Recovery","samuel.adams@fiserv.com","","(908) 472-7804","https://www.linkedin.com/in/sam-adams-467486115","Morristown","New Jersey","United States"],
+["Facuna","Vladimir","VP, Infrastructure & Platform Engineering (EMEA)","VP-Level","Infrastructure","vladimir.facuna@firstdata.com","","","https://www.linkedin.com/in/vfacuna","","","Slovakia"],
+["Gilbert","Kevin","VP, Information Technology","VP-Level","Information Technology","kevin.gilbert@fiserv.com","","(262) 719-0482","https://www.linkedin.com/in/kevin-gilbert-1354362","Brookfield","Wisconsin","United States"],
+["Rubbo","Michael","VP, Relationship Management","VP-Level","HR / Financial / ERP Systems","mike.rubbo@fiserv.com","","(516) 473-4411","https://www.linkedin.com/in/mike-rubbo-85197b80","New York City","New York","United States"],
+["Rajasekharappa","Abhishek","Product Integration VP","VP-Level","Infrastructure","abhishek.rajasekharappa@fiserv.com","","","https://www.linkedin.com/in/abhishekrajasekharappa","Cupertino","California","United States"],
+["Grubmuller","John","VP, Sales & Relationship Management","VP-Level","HR / Financial / ERP Systems","john.grubmuller@fiserv.com","","(937) 474-1665","https://www.linkedin.com/in/john-grubmuller-7686591","Cincinnati","Ohio","United States"],
+["Mistry","Yezdi","VP, Information Technology","VP-Level","Information Technology","yezdi.mistry@firstdata.com","","(239) 292-7167","https://www.linkedin.com/in/yezdimistry","Brookfield","Wisconsin","United States"],
+["Akhairamka","Ramakant","VP, Client Delivery (EMEA) & CIO MEA","VP-Level","Information Technology","ramakant.akhairamka@firstdata.com","","","https://www.linkedin.com/in/ramakantakhairamka","","",""],
+["Griffith","Larry","VP, Software Development","VP-Level","Application Development","larry.griffith@firstdata.com.au","","(801) 652-8296","https://www.linkedin.com/in/griffith-larry-a78b679","West Jordan","Utah","United States"],
+["Fritz","Gabriel","VP, Information Technology","VP-Level","Information Technology","fritz.gabriel@fiserv.com","","(973) 294-0474","https://www.linkedin.com/in/fritzgabrieljr","","",""],
+["Roza","Francisco","VP, IT PMO & Governance","VP-Level","Information Technology","francisco.roza@fiserv.com","","","https://www.linkedin.com/in/francisco-roza","","",""],
+["Pasquali","Joachim","VP, Information Technology","VP-Level","Information Technology","joachim.pasquali@firstdata.com","","","https://www.linkedin.com/in/joachim-pasquali-9002a43","Berkeley Heights","New Jersey","United States"],
+["Inocencio","Stephen","VP, Sales & Global Managed Services","VP-Level","HR / Financial / ERP Systems","stephen.inocencio@firstdata.com.au","","","","","",""],
+["Mclain","Richard","Business Continuity & DR VP","VP-Level","Storage & Disaster Recovery","richard.mclain@firstdata.com.au","","","","","",""],
+];
+
+// Column indices: 0=Last, 1=First, 2=Title, 3=Level, 4=Function, 5=Dept, 6=Email, 7=Phone, 8=LinkedIn, 9=City, 10=State, 11=Country
+
+function badge(t,c="accent"){return`<span class="badge badge-${c}">${t}</span>`}
+function kpi(l,v,s){return`<div class="kpi"><div class="kpi-value">${v}</div><div class="kpi-label">${l}</div>${s?`<div class="kpi-sub">${s}</div>`:''}</div>`}
+function heatCell(v){const m={H:"heat-h",M:"heat-m",L:"heat-l"};return`<td class="${m[v]||''}">${v}</td>`}
+function tbl(h,r,c){let ht=h.map(x=>`<th>${x}</th>`).join('');let bt=r.map(row=>'<tr>'+row.map((cl,j)=>{if(cl&&typeof cl==='object'&&cl.heat)return heatCell(cl.v);return j===0?`<td class="name">${cl}</td>`:`<td>${cl}</td>`;}).join('')+'</tr>').join('');return`<div class="overflow-x"><table${c?' class="compact"':''}><thead><tr>${ht}</tr></thead><tbody>${bt}</tbody></table></div>`}
+
+function renderAccountOverview(){
+  return`<div class="flex-row">${kpi("Revenue (FY2025)","$21.2B","+4% YoY")}${kpi("Employees","38,000","Global")}${kpi("India GCC","~7,900","5 centres")}${kpi("Service Providers","777","43 workloads")}${kpi("Target Deal Size","$18–30M","150–250 FTEs")}</div>
+  <div class="grid-2">
+    <div class="card"><div class="card-title">Company Snapshot</div><p class="text-sm">Fiserv (NASDAQ: FISV) is the world's #1 fintech provider per IDC, operating at the intersection of commerce and banking. Headquartered in Milwaukee, WI with two primary segments: <strong class="text-strong">Merchant Solutions</strong> (Clover POS, merchant acquiring, First Data legacy) and <strong class="text-strong">Financial Solutions</strong> (core banking, card issuer processing, digital banking, Zelle network).</p><div style="margin-top:12px">${badge("Fortune 500")}${badge("S&P 500")}${badge("NASDAQ: FISV","green")}${badge("#1 IDC FinTech","orange")}</div></div>
+    <div class="card"><div class="card-title">Key Divisions</div><div class="text-sm"><div><strong style="color:var(--accent2)">Merchant Solutions</strong> — Clover POS, merchant acquiring, First Data processing, Carat commerce. Revenue: ~$10.3B, +5% YoY.</div><div style="margin-top:8px"><strong style="color:var(--accent2)">Financial Solutions</strong> — Core banking (DNA, Signature, Premier), card issuer processing, digital banking, Zelle. Revenue: ~$10.9B.</div><div style="margin-top:8px"><strong style="color:var(--accent2)">Global Services (India GCC)</strong> — ~7,900 across Pune, Bengaluru, Chennai, Gurugram, Noida.</div></div></div>
+    <div class="card accent"><div class="card-title">Leadership Team (Post-Restructure)</div><div class="text-sm"><div><strong class="text-strong">Mike Lyons</strong> — CEO (Feb 2025), driving "One Fiserv" reset</div><div><strong class="text-strong">Takis Georgakopoulos</strong> — Co-President, COO Tech & Merchant</div><div><strong class="text-strong">Dhivya Suryadevara</strong> — Co-President (ex-Optum)</div><div><strong class="text-strong">Paul Todd</strong> — CFO (ex-Global Payments)</div><div><strong class="text-strong">Rajat Jain</strong> — Head of Transformation / CTO (ex-JPMorgan)</div><div><strong class="text-strong">Srini Krish</strong> — CIO (ex-JPMorgan)</div><div><strong class="text-strong">Sachin Kulkarni</strong> — President, Global Services India</div></div></div>
+    <div class="card"><div class="card-title">Strategic Priorities (2026)</div><div class="text-sm">${[["One Fiserv","Client-first ops, AI-driven efficiency","red","Critical"],["Clover Global","Japan, Brazil, Australia, Germany, Mexico expansion","orange","High"],["Project Elevate","Enterprise-wide AI (IBM + Microsoft Copilot)","orange","High"],["Client Service Restoration","NPS improvement, onboarding acceleration","red","Critical"],["Real-Time Payments","Scale Zelle, debit networks, modernization","yellow","Medium"],["Platform Consolidation","Finxact cloud-native core; consolidate legacy","yellow","Medium"]].map(([t,d,c,p])=>`<div style="margin-bottom:6px">${badge(p,c)}<strong class="text-strong">${t}</strong> — ${d}</div>`).join('')}</div></div>
+  </div>
+  <div class="card"><div class="card-title">Buying Triggers & Investment Signals</div><div class="grid-3">${[["JANA Partners Activist Stake","Feb 2026 — pressuring cost optimization. Accelerates outsourcing.","var(--red)"],["Microsoft AI Partnership","Jan 2026 — Copilot to 38K employees + Azure AI Foundry.","var(--green)"],["Declining Hiring Trend","324→130 roles/month (Q3→Q4 2025). 40% drop.","var(--orange)"],["Clover Japan Launch","Late 2026 via Sumitomo Mitsui. Needs localized UX.","var(--accent)"],["ServiceNow Expansion","Jan 2026 — AI-driven ITSM. Integration opportunity.","var(--accent2)"],["Investor Day May 14","NYC event will reveal 2026+ strategy.","var(--yellow)"]].map(([t,d,c])=>`<div class="trigger-card"><div class="trigger-title" style="color:${c}">${t}</div><div class="trigger-desc">${d}</div></div>`).join('')}</div></div>`;
+}
+
+function renderStakeholderMap(){
+  const levels=[...new Set(outreach.map(r=>r[3]).filter(Boolean))].sort();
+  const fns=[...new Set(outreach.map(r=>r[4]).filter(Boolean))].sort();
+  const countries=[...new Set(outreach.map(r=>r[11]).filter(Boolean))].sort();
+  const q=smSearch.toLowerCase();
+  const filtered=outreach.filter(r=>{
+    if(smLevel!=="All"&&r[3]!==smLevel)return false;
+    if(smFn!=="All"&&r[4]!==smFn)return false;
+    if(smCountry!=="All"&&r[11]!==smCountry)return false;
+    if(q){const full=(r[1]+" "+r[0]+" "+r[2]+" "+r[4]+" "+r[9]+" "+r[10]+" "+r[11]).toLowerCase();if(!full.includes(q))return false;}
+    return true;
+  });
+  const total=filtered.length;
+  const pages=Math.ceil(total/PAGE_SIZE);
+  if(smPage>=pages)smPage=Math.max(0,pages-1);
+  const paged=filtered.slice(smPage*PAGE_SIZE,(smPage+1)*PAGE_SIZE);
+  const cLevel=outreach.filter(r=>r[3]==="C-Level").length;
+  const vpLevel=outreach.filter(r=>r[3]==="VP-Level").length;
+  const dirLevel=outreach.filter(r=>r[3]==="Director").length;
+
+  let filterHtml=`<div style="margin-bottom:16px">
+    <div style="margin-bottom:10px"><input class="search-input" type="text" placeholder="🔍 Search by name, title, function, location..." value="${smSearch}" oninput="smSearch=this.value;smPage=0;render()"/></div>
+    <div style="margin-bottom:8px"><label style="font-size:11px;color:var(--muted);margin-right:6px">Level:</label>
+    <button class="filter-btn ${smLevel==="All"?"active":""}" onclick="smLevel='All';smPage=0;render()">All</button>
+    ${levels.map(l=>`<button class="filter-btn ${smLevel===l?"active":""}" onclick="smLevel='${l}';smPage=0;render()">${l}</button>`).join('')}</div>
+    <div style="margin-bottom:8px"><label style="font-size:11px;color:var(--muted);margin-right:6px">Function:</label>
+    <button class="filter-btn ${smFn==="All"?"active":""}" onclick="smFn='All';smPage=0;render()">All</button>
+    ${fns.slice(0,15).map(f=>`<button class="filter-btn ${smFn===f?"active":""}" onclick="smFn='${f.replace(/'/g,"\\'")}';smPage=0;render()">${f.length>25?f.slice(0,25)+'…':f}</button>`).join('')}
+    ${fns.length>15?`<select style="background:var(--bg);color:var(--muted);border:1px solid var(--border);border-radius:6px;padding:4px 8px;font-size:11px" onchange="smFn=this.value;smPage=0;render()"><option value="All">More…</option>${fns.map(f=>`<option value="${f.replace(/"/g,'&quot;')}"${smFn===f?' selected':''}>${f}</option>`).join('')}</select>`:''}</div>
+    <div><label style="font-size:11px;color:var(--muted);margin-right:6px">Country:</label>
+    <button class="filter-btn ${smCountry==="All"?"active":""}" onclick="smCountry='All';smPage=0;render()">All</button>
+    <select style="background:var(--bg);color:var(--muted);border:1px solid var(--border);border-radius:6px;padding:4px 8px;font-size:11px" onchange="smCountry=this.value;smPage=0;render()"><option value="All">All Countries</option>${countries.map(c=>`<option value="${c.replace(/"/g,'&quot;')}"${smCountry===c?' selected':''}>${c}</option>`).join('')}</select></div>
+  </div>`;
+
+  let statsHtml=`<div class="stat-bar">
+    <div class="stat-chip"><div class="stat-chip-val">${outreach.length}</div><div class="stat-chip-lbl">Total Contacts</div></div>
+    <div class="stat-chip"><div class="stat-chip-val">${cLevel}</div><div class="stat-chip-lbl">C-Level</div></div>
+    <div class="stat-chip"><div class="stat-chip-val">${vpLevel}</div><div class="stat-chip-lbl">VP-Level</div></div>
+    <div class="stat-chip"><div class="stat-chip-val">${dirLevel}</div><div class="stat-chip-lbl">Director</div></div>
+    <div class="stat-chip"><div class="stat-chip-val">${total}</div><div class="stat-chip-lbl">Filtered Results</div></div>
+  </div>`;
+
+  let tableRows=paged.map(r=>{
+    const name=`${r[1]} ${r[0]}`;
+    const li=r[8]?`<a class="linkedin-link" href="${r[8]}" target="_blank">Profile</a>`:'—';
+    const loc=[r[9],r[10],r[11]].filter(Boolean).join(', ');
+    const email=r[6]||'—';
+    return[name,r[2],r[3],r[4]||'—',loc,email,li];
+  });
+
+  let paginationHtml='';
+  if(pages>1){
+    paginationHtml=`<div style="display:flex;gap:4px;margin-top:12px;align-items:center;justify-content:center">
+      <button class="filter-btn" onclick="smPage=Math.max(0,smPage-1);render()" ${smPage===0?'disabled':''}>← Prev</button>
+      <span style="font-size:11px;color:var(--muted);padding:0 8px">Page ${smPage+1} of ${pages}</span>
+      <button class="filter-btn" onclick="smPage=Math.min(${pages-1},smPage+1);render()" ${smPage>=pages-1?'disabled':''}>Next →</button>
+    </div>`;
+  }
+
+  return`${statsHtml}${filterHtml}
+  <div style="font-size:11px;color:var(--muted);margin-bottom:8px">Showing ${smPage*PAGE_SIZE+1}–${Math.min((smPage+1)*PAGE_SIZE,total)} of ${total} contacts</div>
+  <div class="table-wrap">${tbl(["Name","Job Title","Level","Function","Location","Email","LinkedIn"],tableRows,true)}</div>
+  ${paginationHtml}`;
+}
+
+function renderIntelBrief(){return`<div class="card accent"><div class="card-title">Top 5 Strategic Challenges — Draup Intelligence</div>${tbl(["#","Challenge","Priority","Bounteous Fit","FTE Opportunity","Owner"],[["C1","Restore World-Class Client Service via DX Transformation","Critical","✓ Strong","60–80","Rajat Jain, Michele Turulski"],["C2","Execute One Fiserv Strategic Reset with AI-Driven Operations","Critical","✓ Strong","40–60","Mike Lyons, Rajat Jain, Srini Krish"],["C3","Scale Clover Merchant Onboarding Globally","High","✓ Strong","30–50","Kesava Guttikonda, Marcelo Almeida"],["C4","Embed AI Productivity via Project Elevate","High","✓ Strong","20–30","Peter Cavicchia, Rajat Jain"],["C5","Expand Real-Time Payments & Cloud Modernization","Medium","✓ Strong","20–30","Srini Krish, Michele Turulski"]])}</div>
+<div class="grid-2"><div class="card"><div class="card-title">M&A & Partnership Signals</div>${tbl(["Date","Type","Description","Opportunity"],[["Feb 2026","Activist","JANA Partners stake","Transformation play"],["Jan 2026","Partnership","Microsoft 365 Copilot + Azure AI","PRIMARY: AI implementation"],["Jan 2026","Partnership","Sumitomo Mitsui — Clover Japan","Experience design"],["Jan 2026","Partnership","ServiceNow AI-driven ITSM","Workflow automation"],["Dec 2025","Partnership","Mastercard Agent Pay","Agentic commerce"],["Dec 2025","Partnership","Visa Intelligent Commerce","AI payment infra"]],true)}</div>
+<div class="card"><div class="card-title">Build vs Buy — Outsourcing Signals</div>${tbl(["Workload","Hiring Trend","Build Signal","Opportunity"],[["App Development","Declining (324→130)","Low Build","Very High ★"],["UI/UX Design","Low (5 workloads)","Low Build","Very High ★"],["AI & Data Science","Low hiring","Low Build","Very High ★"],["Cloud Computing","Low (3 workloads)","Low Build","Very High ★"],["Data Engineering","Moderate (44 WL)","Moderate","High"],["DevOps","Moderate (29 WL)","Moderate","High"]],true)}<div style="margin-top:12px;padding:10px;background:var(--bg);border-radius:8px;font-size:11px;color:var(--green);font-weight:600">★ 40% hiring decline Q3→Q4 2025 signals permanent outsourcing shift.</div></div>
+<div class="card"><div class="card-title">White Space Analysis</div><div class="text-sm">${[["Experience Innovation & Design","Only 5 UI/UX workloads vs 249 App Dev. Massive gap."],["AI Implementation Services","Microsoft partnership creates immediate need."],["Global Clover Implementation","Japan, Brazil, Australia launches need localized design."],["Strategic Transformation","New CEO + activist pressure = demand for strategic partner."]].map(([t,d])=>`<div style="margin-bottom:8px"><strong style="color:var(--accent2)">${t}:</strong> ${d}</div>`).join('')}</div></div>
+<div class="card"><div class="card-title">Relationship Entry Points</div><div class="text-sm"><div style="margin-bottom:8px">${badge("WARM","green")}<strong class="text-strong">Rajat Jain (CTO)</strong> — Ex-JPMorgan Chase. Direct intro.</div><div style="margin-bottom:8px">${badge("WARM","green")}<strong class="text-strong">Srini Krish (CIO)</strong> — Also from JPMorgan. Second warm path.</div><div style="margin-bottom:8px">${badge("POTENTIAL","yellow")}<strong class="text-strong">Surya Gutta (Dir)</strong> — Ex-Capital One.</div><div style="margin-bottom:8px">${badge("POTENTIAL","yellow")}<strong class="text-strong">Daniel Pais (Dir)</strong> — Ex-Citigroup (9 yrs).</div><div>${badge("CO-SELL","accent")}<strong class="text-strong">Microsoft</strong> — Joint Copilot delivery.</div></div></div></div>`}
+
+function renderValueAlignment(){return`<div class="card accent"><div class="card-title">Bounteous Offerings → Fiserv Priority Mapping</div>${tbl(["Bounteous Offering","Fiserv Challenge","Priority","Key Use Cases","Proof Points"],[["AI, Data & Analytics","C4 Project Elevate, C2","Critical","Copilot adoption, GenAI, data eng, ML Ops","Morgan Stanley (51 WL), JPM (3 WL)"],["Experience Innovation & Design","C1, C3 Clover","Critical","Journey redesign, merchant onboarding UX","Fidelity (4 WL), retail verticals"],["Digital Product & Platform Eng","C1, C3, C5","High","API modernization, Clover platform, mobile/web","Full-stack Java/WebSphere"],["Cloud Enablement","C5, C2","High","Azure migration, legacy to cloud-native, IaC","Azure partnership aligned"],["Enterprise DX","C2, C1","Critical","Process automation, change management, digital CoE","Transformation Program Office"],["Marketing & Loyalty","CMO (existing)","Medium","Personalization, CRM, campaign ops","Existing relationship"],["Digital Commerce","C3 Clover","Medium","Commerce platform, merchant experience","Commerce strategy"]])}</div>
+<div class="card"><div class="card-title">Service Fit by Challenge</div><div class="grid-5">${[{c:"C1",t:"Client Service",s:["Experience Design","Digital Product Eng","CX Transformation"],col:"var(--red)"},{c:"C2",t:"One Fiserv Reset",s:["Enterprise DX","AI & Data","Cloud","Change Mgmt"],col:"var(--red)"},{c:"C3",t:"Clover Global",s:["Digital Product Eng","Experience Design","Global Delivery"],col:"var(--orange)"},{c:"C4",t:"Project Elevate AI",s:["AI & Data","Cloud","Change Mgmt","Training"],col:"var(--orange)"},{c:"C5",t:"Real-Time Payments",s:["Cloud","Platform Eng","DevOps","Infra Modernization"],col:"var(--yellow)"}].map(x=>`<div class="bg-box"><div style="font-weight:800;font-size:14px;color:${x.col};margin-bottom:4px">${x.c}</div><div style="font-size:11px;color:var(--text);font-weight:600;margin-bottom:8px">${x.t}</div>${x.s.map(s=>badge(s)).join('')}</div>`).join('')}</div></div>`}
+
+function renderCompetitive(){return`<div class="card accent"><div class="card-title">Incumbent Vendor Landscape (777 Engagements)</div>${tbl(["Provider","Workload Areas","Overlap","Threat","Displacement Strategy"],[["Infosys","App Dev, Testing, Data Eng (249+142+44)","High","High","Position design+AI gaps; outcome-based vs T&M"],["TCS","App Dev, Infrastructure","High","High","Differentiate with experience design; Microsoft co-sell"],["Capgemini","App Dev, Testing","High","Medium","Lead with niche AI implementation expertise"],["Accenture","Strategy, App Dev","Medium","Medium","Compete on agility & cost; outcome-based model"],["Cognizant","App Dev, Testing","High","Medium","Financial services depth + design capability"],["IBM","AI Infrastructure (Project Elevate)","Low","Partner","Complement IBM AI with adoption & change mgmt"],["Microsoft","AI Platform (Copilot, Azure AI)","Co-Sell","Partner","Joint delivery; Bounteous implements what Microsoft sells"]])}</div>
+<div class="card"><div class="card-title">Displacement Opportunities</div><div class="grid-2"><div class="bg-box"><div style="color:var(--green);font-weight:700;font-size:13px;margin-bottom:8px">High Probability</div><div class="text-sm"><div>• <strong class="text-strong">UX/Design</strong> — Only 5 workloads. Greenfield.</div><div>• <strong class="text-strong">AI Implementation</strong> — Adoption gap. Microsoft co-sell.</div><div>• <strong class="text-strong">Cloud Modernization</strong> — Only 3 cloud workloads.</div></div></div><div class="bg-box"><div style="color:var(--yellow);font-weight:700;font-size:13px;margin-bottom:8px">Medium — Wedge Strategy</div><div class="text-sm"><div>• <strong class="text-strong">App Development</strong> — 249 workloads, declining hiring.</div><div>• <strong class="text-strong">Data Engineering</strong> — 44 workloads.</div><div>• <strong class="text-strong">DevOps</strong> — 29 workloads.</div></div></div></div></div>`}
+
+function renderTechStack(){const cats=[{cat:"AI & Machine Learning",items:[["ChatGPT","High"],["GitHub Copilot","High ↑"],["Microsoft 365 Copilot","Deploying"],["Azure AI Foundry","Expanding"],["MLflow / W&B","Low"]]},{cat:"Application & API",items:[["IBM WebSphere","High"],["Oracle WebLogic","High"],["Apache Tomcat","Medium"],["Apigee Edge","Medium"],["Azure API Management","Growing"]]},{cat:"Cloud & Infrastructure",items:[["Microsoft Azure","Primary"],["AWS","Secondary"],["Linux","High"],["Cisco ASA Firewall","Legacy"],["Microsoft SharePoint","High"]]},{cat:"DevOps & Automation",items:[["GitHub Actions","High ↑"],["Infrastructure as Code","High ↑"],["Grafana","Growing ↑"],["Orchestration Platforms","High ↑"],["Apache Kafka","Growing ↑"]]},{cat:"Business Platforms",items:[["ServiceNow GRC","Expanding"],["RSA Archer","GRC"],["SAP BPC / Anaplan","Finance"],["Zendesk","Customer service"],["Genesys Contact Center","Customer service"]]},{cat:"Core FinTech",items:[["Clover POS","Global expansion"],["Finxact","Cloud-native core"],["DNA / Signature / Premier","Legacy cores"],["Carat Commerce","Omni-channel"],["Zelle Network","Real-time payments"]]}];return`<div class="card accent"><div class="card-title">Fiserv Technology Footprint</div><div class="stack-grid">${cats.map(c=>`<div class="bg-box"><div style="font-weight:700;font-size:12px;color:var(--accent2);margin-bottom:10px">${c.cat}</div>${c.items.map(([n,a])=>`<div class="stack-item"><span class="stack-name">${n}</span><span class="${a.includes('↑')?'stack-up':'stack-neutral'}" style="font-size:10px">${a}</span></div>`).join('')}</div>`).join('')}</div></div>`}
+
+function renderTechPartnerships(){return`<div class="card accent"><div class="card-title">Fiserv Technology Partnerships — Strategic Map</div>${tbl(["Partner","Nature","Strategic Intent","Bounteous Angle","Recency"],[["Microsoft","Strategic AI","Copilot to 38K; Azure AI Foundry","PRIMARY CO-SELL","Jan 2026 ★"],["IBM","AI Infrastructure","Project Elevate across operations","Change management & adoption","Active"],["ServiceNow","IT Service Mgmt","AI-driven ITSM expansion","Workflow automation","Jan 2026"],["Mastercard","Payments / Agentic","Agent Pay Framework","Agentic commerce implementation","Dec 2025"],["Visa","Payments / AI","Intelligent Commerce","AI payment infrastructure","Dec 2025"],["Sumitomo Mitsui","Market Entry / Japan","Clover Japan (late 2026)","Localized UX, multi-language","Jan 2026"],["Adobe","DXP / Marketing","Experience Cloud","Marketing activation","Ongoing"],["Salesforce","CRM / Service","Client relationship management","CRM strategy, agentic capabilities","Ongoing"],["Anthropic","AI / LLM","AI agent & LLM integration","Responsible AI frameworks","Emerging"]])}</div>`}
+
+function renderAIInitiatives(){const p=[{t:"Project Elevate",s:"Production",d:"Multi-year IBM partnership to embed AI across sales, onboarding, Clover, HR, finance.",c:"green"},{t:"Microsoft 365 Copilot",s:"Rolling Out",d:"Enterprise-wide deployment to 38K employees. Massive change management needed.",c:"green"},{t:"Azure AI Foundry",s:"Scaling",d:"Custom AI model development. Domain-specific AI for financial services.",c:"accent"},{t:"GitHub Copilot",s:"High Adoption",d:"Developer productivity trending up. Accelerating SDLC.",c:"accent"},{t:"AI Fraud Detection",s:"Production",d:"Real-time transaction monitoring. ML anomaly detection at scale.",c:"green"},{t:"Agentic Commerce",s:"Pilot",d:"Mastercard Agent Pay + Visa Trusted Agent Protocol.",c:"orange"},{t:"Intelligent Doc Processing",s:"Production",d:"Automated KYC/AML compliance document handling.",c:"green"},{t:"Predictive Churn Analytics",s:"Development",d:"ML models for proactive client retention.",c:"yellow"}];return`<div class="card accent"><div class="card-title">Fiserv AI/ML Programs & Roadmap</div><div class="grid-2">${p.map(x=>`<div class="bg-box"><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px"><div style="font-weight:700;font-size:13px;color:var(--text)">${x.t}</div>${badge(x.s,x.c)}</div><div class="text-xs">${x.d}</div></div>`).join('')}</div></div>
+<div class="card"><div class="card-title">AI Investment Gaps — Bounteous Opportunity</div><div class="text-sm"><div style="margin-bottom:6px">${badge("GAP","red")}<strong class="text-strong">Change Management & Adoption</strong> — Copilot rollout to 38K needs training, workflow redesign.</div><div style="margin-bottom:6px">${badge("GAP","red")}<strong class="text-strong">AI-Enhanced CX</strong> — Only 5 UX workloads. AI personalization underdeveloped.</div><div style="margin-bottom:6px">${badge("GAP","orange")}<strong class="text-strong">Agentic Business Processes</strong> — No implementation partner for agentic workflows.</div><div>${badge("GAP","orange")}<strong class="text-strong">AI Governance</strong> — Regulatory needs for explainability, bias detection, monitoring.</div></div></div>`}
+
+function renderAIEnterprise(){const pillars=[{icon:"⚡",t:"Intelligent Product Engineering",sub:"AI-powered engineering acceleration",fiserv:["GitHub Copilot for 7,900 GCC engineers","AI-powered testing for Clover global","Automated code review for payments compliance","SDLC modernization for Finxact"],value:"30–40% faster delivery, 50% defect reduction",target:"Rajat Jain, Sachin Kulkarni",col:"#818cf8"},{icon:"✨",t:"AI-Enhanced Experience",sub:"Next-gen AI customer journeys",fiserv:["AI-personalized Clover onboarding (Japan, Brazil)","Intelligent client portal for C1 restoration","GenAI content localization","Conversational AI for merchant self-service"],value:"50% faster onboarding, 25+ NPS improvement",target:"Michele Turulski, Kesava Guttikonda",col:"#a78bfa"},{icon:"🔮",t:"Modern Business Platforms",sub:"Intelligent & agentic platforms",fiserv:["Copilot adoption for 38K employees","ServiceNow AI workflow automation","Salesforce Einstein/Agentforce","AI analytics for One Fiserv KPIs"],value:"70% Copilot adoption, 20% productivity gain",target:"Srini Krish, Peter Cavicchia",col:"#c084fc"},{icon:"🤖",t:"Agentic Business Reinvention",sub:"AI-first enterprise reengineering",fiserv:["Agentic commerce (MC Agent Pay + Visa)","Autonomous payment processing","AI-first process redesign","Intelligent KYC/AML automation"],value:"Cost reduction aligned with JANA mandate",target:"Mike Lyons, Takis Georgakopoulos",col:"#e879f9"}];return`<div class="hero-banner"><div style="font-size:11px;color:var(--accent2);text-transform:uppercase;letter-spacing:2px;margin-bottom:6px">Bounteous AI Solutions</div><div style="font-size:22px;font-weight:800;color:var(--white);margin-bottom:8px">AI for Enterprise — Targeted Outreach for Fiserv</div><div style="font-size:13px;color:var(--muted)">Four AI solution pillars for Project Elevate, One Fiserv, and agentic commerce.</div></div>
+<div class="grid-2">${pillars.map(p=>`<div class="ai-card" style="border:2px solid ${p.col}33"><div style="font-size:28px;margin-bottom:6px">${p.icon}</div><div style="font-weight:800;font-size:15px;color:${p.col}">${p.t}</div><div style="font-size:11px;color:var(--muted);margin-bottom:12px">${p.sub}</div><div class="text-label">Fiserv Use Cases:</div>${p.fiserv.map(f=>`<div class="ai-usecase" style="border-left:2px solid ${p.col}44">${f}</div>`).join('')}<div class="ai-value-box"><div style="font-size:10px;color:var(--green);font-weight:700">VALUE: ${p.value}</div><div style="font-size:10px;color:var(--muted);margin-top:4px">TARGET: ${p.target}</div></div></div>`).join('')}</div>
+<div class="card"><div class="card-title">AI Engagement Roadmap</div><div style="display:flex;gap:12px">${[{ph:"Phase 1: 0–90 Days",it:["Copilot pilot (500 users)","AI readiness assessment","GitHub Copilot for GCC"],col:"var(--green)"},{ph:"Phase 2: 3–6 Months",it:["AI onboarding for Clover Japan","Agentic commerce POC","One Fiserv analytics dashboard"],col:"var(--accent)"},{ph:"Phase 3: 6–12 Months",it:["Full Project Elevate adoption","AI-first process redesign","Responsible AI governance"],col:"var(--orange)"}].map(p=>`<div class="phase-box" style="border:1px solid ${p.col}44"><div style="font-weight:700;font-size:12px;color:${p.col};margin-bottom:8px">${p.ph}</div>${p.it.map(i=>`<div class="text-xs">• ${i}</div>`).join('')}</div>`).join('')}</div></div>`}
+
+function renderIndiaGCC(){return`<div class="flex-row">${kpi("Total Associates","~7,900","as of Feb 2024")}${kpi("Established","2005","20+ years")}${kpi("Delivery Centres","5","India")}${kpi("Revenue","₹2,620 Cr","FY24")}</div>
+<div class="grid-2"><div class="card accent"><div class="card-title">GCC Locations & Functions</div>${tbl(["Location","Key Functions","Est. Size","Growth"],[["Pune (HQ)","Engineering, Product Dev, Finance, Flagship","~3,000+","High"],["Bengaluru","Engineering, QA, Data, AI/ML, Mobile","~2,000+","High"],["Chennai","Testing, Infrastructure, Operations","~1,200+","Medium"],["Gurugram","Product Eng, Cybersecurity, Audit & Risk","~800+","Medium"],["Noida","Infrastructure, App Support, BPO, Automation","~900+","Medium"]])}</div>
+<div class="card"><div class="card-title">GCC Leadership</div><div class="text-sm"><div style="margin-bottom:8px"><strong style="color:var(--accent2)">CxO-1:</strong></div><div><strong class="text-strong">Sachin Kulkarni</strong> — President, Global Services. Key decision-maker for GCC strategy.</div><div style="margin-top:12px;margin-bottom:8px"><strong style="color:var(--accent2)">CxO-2:</strong></div><div><strong class="text-strong">Vishal Pratapwant</strong> — COO, Global Services. AI in GCCs, operational transformation.</div></div></div></div>
+<div class="card"><div class="card-title">Top GCC Initiatives</div><div class="grid-3">${[{t:"AI/ML Center of Excellence",d:"Scaling AI from Bengaluru for Project Elevate",p:"High"},{t:"Cloud-Native Engineering",d:"Finxact & core modernization from Pune",p:"High"},{t:"QA Automation",d:"AI-powered testing across products (Chennai)",p:"Medium"},{t:"DevOps & IaC Adoption",d:"GitHub Actions, Terraform, K8s standardization",p:"High"},{t:"Cybersecurity Expansion",d:"Growing security ops from Gurugram",p:"Medium"},{t:"Data Analytics Platform",d:"Centralized data eng & analytics capabilities",p:"Medium"}].map(x=>`<div class="bg-box">${badge(x.p,x.p==="High"?"green":"yellow")}<div style="font-weight:700;font-size:12px;color:var(--text);margin-top:4px;margin-bottom:4px">${x.t}</div><div class="text-xs">${x.d}</div></div>`).join('')}</div></div>`}
+
+function renderHeatmaps(){
+  const heatmaps=[
+    {title:"Division Opportunity Matrix",sub:"Outreach priority by division and opportunity type",headers:["Division","AI / GenAI","Cloud Migration","Digital Transformation","Modernisation","Managed Services","Data Engineering","Cybersecurity"],rows:[["Merchant Solutions",{v:"H",heat:1},{v:"M",heat:1},{v:"H",heat:1},{v:"H",heat:1},{v:"M",heat:1},{v:"M",heat:1},{v:"M",heat:1}],["Financial Solutions",{v:"H",heat:1},{v:"H",heat:1},{v:"H",heat:1},{v:"H",heat:1},{v:"H",heat:1},{v:"H",heat:1},{v:"M",heat:1}],["Global Services / GCC",{v:"H",heat:1},{v:"M",heat:1},{v:"H",heat:1},{v:"M",heat:1},{v:"H",heat:1},{v:"H",heat:1},{v:"M",heat:1}],["Corporate IT",{v:"H",heat:1},{v:"H",heat:1},{v:"M",heat:1},{v:"H",heat:1},{v:"M",heat:1},{v:"M",heat:1},{v:"H",heat:1}],["Risk & Compliance",{v:"M",heat:1},{v:"L",heat:1},{v:"M",heat:1},{v:"M",heat:1},{v:"L",heat:1},{v:"M",heat:1},{v:"H",heat:1}],["Data & Analytics",{v:"H",heat:1},{v:"M",heat:1},{v:"M",heat:1},{v:"M",heat:1},{v:"M",heat:1},{v:"H",heat:1},{v:"L",heat:1}]]},
+    {title:"Buyer Persona Readiness",sub:"Engagement readiness by persona and Bounteous offering",headers:["Buyer Persona","Platform Transform","Cloud Transform","Digital Product Eng","AI for Enterprise","Data Programs","Experience Design","Graduate Cohorts","Growth Marketing"],rows:[["CIO",{v:"H",heat:1},{v:"H",heat:1},{v:"M",heat:1},{v:"H",heat:1},{v:"H",heat:1},{v:"M",heat:1},{v:"M",heat:1},{v:"L",heat:1}],["CTO",{v:"H",heat:1},{v:"H",heat:1},{v:"H",heat:1},{v:"H",heat:1},{v:"M",heat:1},{v:"H",heat:1},{v:"M",heat:1},{v:"L",heat:1}],["CDO",{v:"M",heat:1},{v:"M",heat:1},{v:"L",heat:1},{v:"H",heat:1},{v:"H",heat:1},{v:"M",heat:1},{v:"L",heat:1},{v:"L",heat:1}],["VP Engineering",{v:"H",heat:1},{v:"M",heat:1},{v:"H",heat:1},{v:"H",heat:1},{v:"M",heat:1},{v:"M",heat:1},{v:"H",heat:1},{v:"L",heat:1}],["Head of GCC",{v:"H",heat:1},{v:"M",heat:1},{v:"H",heat:1},{v:"H",heat:1},{v:"H",heat:1},{v:"M",heat:1},{v:"H",heat:1},{v:"L",heat:1}],["CISO",{v:"M",heat:1},{v:"H",heat:1},{v:"L",heat:1},{v:"M",heat:1},{v:"M",heat:1},{v:"L",heat:1},{v:"L",heat:1},{v:"L",heat:1}],["VP Product",{v:"M",heat:1},{v:"L",heat:1},{v:"H",heat:1},{v:"H",heat:1},{v:"M",heat:1},{v:"H",heat:1},{v:"M",heat:1},{v:"L",heat:1}],["CMO (Existing)",{v:"L",heat:1},{v:"L",heat:1},{v:"M",heat:1},{v:"M",heat:1},{v:"M",heat:1},{v:"H",heat:1},{v:"L",heat:1},{v:"H",heat:1}]]},
+    {title:"Initiative Vendor Gap Analysis",sub:"Build vs buy signals and Bounteous gap opportunities",headers:["Fiserv Initiative","Build Internally","Buy / License","Partner","Outsource","Bounteous Opportunity"],rows:[["One Fiserv Reset",{v:"M",heat:1},{v:"M",heat:1},{v:"H",heat:1},{v:"H",heat:1},"Strategy + execution; AI-driven ops"],["Core Consolidation (Finxact)",{v:"H",heat:1},{v:"H",heat:1},{v:"M",heat:1},{v:"M",heat:1},"Cloud migration; legacy modernization"],["AI Inside (Project Elevate)",{v:"L",heat:1},{v:"H",heat:1},{v:"H",heat:1},{v:"H",heat:1},"Implementation, adoption, change mgmt ★"],["Agentic Commerce",{v:"L",heat:1},{v:"M",heat:1},{v:"H",heat:1},{v:"H",heat:1},"Agentic workflows on MC/Visa ★"],["Clover Global Expansion",{v:"M",heat:1},{v:"L",heat:1},{v:"H",heat:1},{v:"H",heat:1},"Localized UX, onboarding design ★"],["Real-Time Payments",{v:"H",heat:1},{v:"M",heat:1},{v:"M",heat:1},{v:"M",heat:1},"Kafka, cloud-native, event-driven"],["Open Banking / Embedded Finance",{v:"M",heat:1},{v:"M",heat:1},{v:"H",heat:1},{v:"M",heat:1},"API platform engineering"]]},
+    {title:"India GCC Geographic Priority",sub:"Capability priority by GCC location",headers:["Location","Engineering","QA & Testing","Data & Analytics","Infrastructure","Automation","Product Mgmt"],rows:[["Pune",{v:"H",heat:1},{v:"H",heat:1},{v:"H",heat:1},{v:"M",heat:1},{v:"H",heat:1},{v:"H",heat:1}],["Bengaluru",{v:"H",heat:1},{v:"M",heat:1},{v:"H",heat:1},{v:"M",heat:1},{v:"H",heat:1},{v:"H",heat:1}],["Chennai",{v:"M",heat:1},{v:"H",heat:1},{v:"M",heat:1},{v:"H",heat:1},{v:"M",heat:1},{v:"L",heat:1}],["Gurugram",{v:"M",heat:1},{v:"M",heat:1},{v:"M",heat:1},{v:"M",heat:1},{v:"M",heat:1},{v:"M",heat:1}],["Noida",{v:"M",heat:1},{v:"L",heat:1},{v:"L",heat:1},{v:"H",heat:1},{v:"M",heat:1},{v:"L",heat:1}]]}
+  ];
+  const hm=heatmaps[activeHM];
+  return`<div style="display:flex;gap:8px;margin-bottom:16px;flex-wrap:wrap">${heatmaps.map((h,i)=>`<button class="filter-btn ${activeHM===i?'active':''}" onclick="activeHM=${i};render()">${h.title}</button>`).join('')}</div>
+  <div class="card accent"><div class="card-title">${hm.title}</div><div style="font-size:11px;color:var(--muted);margin-bottom:12px">${hm.sub}</div>${tbl(hm.headers,hm.rows,true)}<div style="margin-top:12px">${badge("H = High Priority","green")} ${badge("M = Medium","yellow")} ${badge("L = Low","gray")}</div></div>`;
+}
+
+function renderProgramPropensity(){return`<div class="card accent"><div class="card-title">Program Package Propensity for Fiserv</div>${tbl(["#","Program","Propensity","Fiserv Relevance","Division","Entry Point","Deal Size"],[["1","Platform Transformation","Very High ★","Legacy upgrades, Finxact cloud migration, AI test automation","Financial Solutions, IT","Rajat Jain, Srini Krish","$5–8M"],["2","Cloud Transformation","High","Azure strategy; only 3 cloud workloads = massive gap","Corporate IT, Financial","Srini Krish, Peter Cavicchia","$4–6M"],["3","Digital Product Eng","Very High ★","Clover global, API modernization, Finxact core","Merchant Solutions, GCC","Kesava Guttikonda, Sachin Kulkarni","$5–10M"],["4","Platform Modernisation","High","WebSphere/WebLogic to cloud-native; core consolidation","Financial Solutions","Michele Turulski, Rajat Jain","$3–6M"],["5","Data Programs","High","Real-time analytics, ML/AI pipelines, Kafka, BI","Data & Analytics, IT","CDO (TBD), Srini Krish","$2–4M"],["6","AI for Enterprise","Very High ★","Project Elevate, Copilot, agentic commerce, AI CX","All Divisions","Rajat Jain, Peter Cavicchia","$4–8M"],["7","Growth Marketing","Medium","Existing CMO bridge; merchant marketing, loyalty","Merchant, Marketing","CMO, VP Marketing","$1–3M"],["8","Graduate Cohorts","High","7,900 GCC need niche skills; declining hiring","Global Services / GCC","Sachin Kulkarni","$1–2M"],["9","Experience Design","Very High ★","Only 5 UX workloads vs 249 app dev = massive gap","Merchant, Financial","Michele Turulski","$2–5M"]])}</div>
+<div class="card"><div class="card-title">Propensity Summary — Where to Focus</div><div class="grid-3"><div class="propensity-col" style="border:2px solid rgba(34,197,94,.27)"><div style="color:var(--green);font-weight:800;font-size:14px;margin-bottom:8px">★ Very High Propensity</div><div class="text-sm"><div>• Platform Transformation</div><div>• Digital Product Engineering</div><div>• AI for Enterprise</div><div>• Experience Design</div></div><div style="font-size:11px;color:var(--green);margin-top:8px;font-weight:600">Combined: $16–31M potential</div></div><div class="propensity-col" style="border:2px solid rgba(99,102,241,.27)"><div style="color:var(--accent2);font-weight:800;font-size:14px;margin-bottom:8px">High Propensity</div><div class="text-sm"><div>• Cloud Transformation</div><div>• Platform Modernisation</div><div>• Data Programs</div><div>• Graduate Cohorts</div></div><div style="font-size:11px;color:var(--accent2);margin-top:8px;font-weight:600">Combined: $10–18M potential</div></div><div class="propensity-col" style="border:2px solid rgba(234,179,8,.27)"><div style="color:var(--yellow);font-weight:800;font-size:14px;margin-bottom:8px">Medium — Bridge Play</div><div class="text-sm"><div>• Growth Marketing</div><div style="font-size:11px;margin-top:6px">Leverage CMO relationship to bridge into IT</div></div><div style="font-size:11px;color:var(--yellow);margin-top:8px;font-weight:600">Combined: $1–3M potential</div></div></div></div>`}
+
+const renderers=[renderAccountOverview,renderStakeholderMap,renderIntelBrief,renderValueAlignment,renderCompetitive,renderTechStack,renderTechPartnerships,renderAIInitiatives,renderAIEnterprise,renderIndiaGCC,renderHeatmaps,renderProgramPropensity];
+
+function render(){
+  document.getElementById('tabs').innerHTML=TABS.map((t,i)=>`<button class="tab-btn ${activeTab===i?'active':''}" onclick="activeTab=${i};smPage=0;render()">${t}</button>`).join('');
+  document.getElementById('content').innerHTML=renderers[activeTab]();
+}
+render();
+</script>
+</body>
+</html>
