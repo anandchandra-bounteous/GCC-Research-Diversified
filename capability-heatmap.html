@@ -8,139 +8,74 @@
   @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
   *{margin:0;padding:0;box-sizing:border-box}
   body{font-family:'Inter',sans-serif;background:#0a0e1a;color:#e0e6f0;min-height:100vh;overflow-x:hidden}
-  .header{background:linear-gradient(135deg,#0f1629 0%,#1a1f3a 50%,#0d1225 100%);padding:32px 40px 24px;border-bottom:1px solid rgba(99,132,255,0.15)}
-  .header h1{font-size:28px;font-weight:800;background:linear-gradient(135deg,#6384ff,#a78bfa,#60d5fa);-webkit-background-clip:text;-webkit-text-fill-color:transparent;letter-spacing:-0.5px}
-  .header .subtitle{color:#8892b0;font-size:13px;margin-top:6px;font-weight:400;max-width:900px;line-height:1.5}
-
-  /* Reader Guide */
-  .reader-guide{margin-top:18px;background:rgba(99,132,255,0.04);border:1px solid rgba(99,132,255,0.12);border-radius:10px;padding:18px 22px;position:relative}
-  .guide-toggle{display:flex;align-items:center;justify-content:space-between;cursor:pointer}
-  .guide-toggle h3{font-size:13px;font-weight:600;color:#a0aec0;letter-spacing:0.3px}
-  .guide-toggle .arrow{color:#6384ff;font-size:16px;transition:transform .2s}
-  .guide-toggle .arrow.open{transform:rotate(180deg)}
-  .guide-content{margin-top:14px;display:none;line-height:1.7}
-  .guide-content.show{display:block}
-  .guide-content p{font-size:12px;color:#8892b0;margin-bottom:10px}
-  .guide-content strong{color:#cbd5e1}
-  .guide-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:10px}
-  .guide-card{background:rgba(15,22,41,0.5);border:1px solid rgba(99,132,255,0.08);border-radius:8px;padding:12px 14px}
-  .guide-card h4{font-size:11px;font-weight:700;color:#6384ff;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:5px}
-  .guide-card p{font-size:11px;color:#64748b;margin-bottom:0;line-height:1.5}
-  .guide-scale{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
-  .guide-chip{display:flex;align-items:center;gap:5px;font-size:10.5px;color:#94a3b8}
-  .guide-chip .dot{width:14px;height:14px;border-radius:3px;flex-shrink:0}
-
-  /* Controls */
-  .controls{display:flex;gap:10px;margin-top:18px;flex-wrap:wrap;align-items:center}
-  .ctrl-group{display:flex;align-items:center;gap:6px}
-  .ctrl-label{font-size:10.5px;font-weight:600;color:#475569;text-transform:uppercase;letter-spacing:0.7px;margin-right:4px}
-  .ctrl-btn{padding:7px 16px;border-radius:20px;border:1px solid rgba(99,132,255,0.25);background:rgba(99,132,255,0.08);color:#a0aec0;font-size:12px;font-weight:500;cursor:pointer;transition:all .2s;font-family:'Inter',sans-serif}
+  .header{background:linear-gradient(135deg,#0f1629 0%,#1a1f3a 50%,#0d1225 100%);padding:20px 30px 16px;border-bottom:1px solid rgba(99,132,255,0.15)}
+  .header h1{font-size:24px;font-weight:800;background:linear-gradient(135deg,#6384ff,#a78bfa,#60d5fa);-webkit-background-clip:text;-webkit-text-fill-color:transparent;letter-spacing:-0.5px}
+  .intro{color:#7a84a0;font-size:11.5px;margin-top:6px;line-height:1.6;max-width:1100px}
+  .intro strong{color:#94a3b8}
+  .controls{display:flex;gap:8px;margin-top:12px;flex-wrap:wrap;align-items:center}
+  .ctrl-group{display:flex;align-items:center;gap:5px}
+  .ctrl-label{font-size:9.5px;font-weight:600;color:#475569;text-transform:uppercase;letter-spacing:0.7px;margin-right:2px}
+  .ctrl-btn{padding:5px 13px;border-radius:16px;border:1px solid rgba(99,132,255,0.25);background:rgba(99,132,255,0.08);color:#a0aec0;font-size:11px;font-weight:500;cursor:pointer;transition:all .2s;font-family:'Inter',sans-serif}
   .ctrl-btn:hover,.ctrl-btn.active{background:rgba(99,132,255,0.2);color:#e0e6f0;border-color:rgba(99,132,255,0.5)}
-  .ctrl-btn.active{background:linear-gradient(135deg,rgba(99,132,255,0.3),rgba(167,139,250,0.2));box-shadow:0 0 12px rgba(99,132,255,0.15)}
-  /* View dimension toggle — 3 distinct buttons */
-  .dim-group{display:flex;background:rgba(15,23,42,0.6);border:1px solid rgba(99,132,255,0.15);border-radius:22px;overflow:hidden}
-  .dim-btn{padding:7px 18px;font-size:11.5px;font-weight:600;font-family:'Inter',sans-serif;cursor:pointer;color:#64748b;background:transparent;border:none;transition:all .2s;white-space:nowrap;position:relative}
-  .dim-btn:not(:last-child)::after{content:'';position:absolute;right:0;top:20%;height:60%;width:1px;background:rgba(99,132,255,0.12)}
+  .ctrl-btn.active{background:linear-gradient(135deg,rgba(99,132,255,0.3),rgba(167,139,250,0.2));box-shadow:0 0 10px rgba(99,132,255,0.12)}
+  .dim-group{display:flex;background:rgba(15,23,42,0.6);border:1px solid rgba(99,132,255,0.15);border-radius:18px;overflow:hidden}
+  .dim-btn{padding:5px 14px;font-size:10.5px;font-weight:600;font-family:'Inter',sans-serif;cursor:pointer;color:#64748b;background:transparent;border:none;transition:all .2s;white-space:nowrap;position:relative}
+  .dim-btn:not(:last-child)::after{content:'';position:absolute;right:0;top:22%;height:56%;width:1px;background:rgba(99,132,255,0.12)}
   .dim-btn:hover{color:#a0aec0}
-  .dim-btn.active{background:linear-gradient(135deg,rgba(99,132,255,0.25),rgba(167,139,250,0.18));color:#e0e6f0;box-shadow:0 0 14px rgba(99,132,255,0.12)}
+  .dim-btn.active{background:linear-gradient(135deg,rgba(99,132,255,0.25),rgba(167,139,250,0.18));color:#e0e6f0}
   .dim-btn.active::after{display:none}
-
-  .legend{display:flex;align-items:center;gap:6px;margin-left:auto;font-size:11px;color:#64748b}
-  .legend-bar{width:180px;height:12px;border-radius:6px;background:linear-gradient(90deg,#1e293b 0%,#1e3a5f 20%,#0e7490 40%,#10b981 60%,#f59e0b 80%,#ef4444 100%)}
-  .legend span{font-size:10px;color:#64748b}
-  .main{padding:24px 40px 60px;overflow-x:auto}
-  table{border-collapse:separate;border-spacing:2px;width:100%;min-width:1100px}
-  thead th{position:sticky;top:0;z-index:10;background:#0f1629;font-size:10.5px;font-weight:600;color:#94a3b8;padding:10px 8px;text-align:center;letter-spacing:0.3px;text-transform:uppercase;border-bottom:2px solid rgba(99,132,255,0.15);white-space:nowrap}
-  thead th:first-child{text-align:left;min-width:260px;z-index:11}
-  thead th.proj-col{min-width:100px}
-  thead th.proj-col .proj-tag{display:inline-block;padding:3px 8px;border-radius:4px;font-size:9px;font-weight:700;letter-spacing:0.5px;margin-top:3px}
+  .legend{display:flex;align-items:center;gap:5px;margin-left:auto;font-size:10px;color:#64748b}
+  .leg-chip{display:inline-flex;align-items:center;gap:3px;font-size:9.5px}
+  .leg-dot{width:10px;height:10px;border-radius:2px;display:inline-block}
+  .stats-bar{display:flex;gap:12px;margin-top:10px;flex-wrap:wrap}
+  .stat-card{background:rgba(99,132,255,0.04);border:1px solid rgba(99,132,255,0.1);border-radius:8px;padding:8px 14px;flex:1;min-width:150px}
+  .stat-card .stat-val{font-size:18px;font-weight:800;background:linear-gradient(135deg,#6384ff,#a78bfa);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+  .stat-card .stat-lbl{font-size:9px;color:#64748b;margin-top:1px;font-weight:500;text-transform:uppercase;letter-spacing:0.4px}
+  .main{padding:12px 30px 40px;overflow-x:auto}
+  table{border-collapse:separate;border-spacing:1px;width:100%;min-width:960px}
+  thead th{position:sticky;top:0;z-index:10;background:#0f1629;font-size:9.5px;font-weight:600;color:#94a3b8;padding:7px 5px;text-align:center;letter-spacing:0.3px;text-transform:uppercase;border-bottom:2px solid rgba(99,132,255,0.12);white-space:nowrap}
+  thead th:first-child{text-align:left;min-width:220px;z-index:11}
+  thead th .proj-tag{display:inline-block;padding:2px 6px;border-radius:3px;font-size:8px;font-weight:700;letter-spacing:0.4px;margin-top:2px}
   .tag-gmm{background:rgba(14,116,144,0.2);color:#22d3ee}
   .tag-sf{background:rgba(16,185,129,0.2);color:#34d399}
   .tag-rm{background:rgba(245,158,11,0.2);color:#fbbf24}
   .tag-ai{background:rgba(167,139,250,0.2);color:#c4b5fd}
   .tag-overall{background:rgba(99,132,255,0.2);color:#93a8ff}
-  tbody tr{transition:background .15s}
+  tbody tr{transition:background .12s}
   tbody tr:hover{background:rgba(99,132,255,0.04)}
-  tbody td{padding:8px;text-align:center;border-radius:4px;font-size:12px;font-weight:600;cursor:default;position:relative;transition:transform .15s,box-shadow .15s}
-  tbody td:first-child{text-align:left;font-weight:500;color:#cbd5e1;font-size:12.5px;padding-left:12px;border-radius:6px 0 0 6px;background:transparent !important}
-  tbody td:hover:not(:first-child){transform:scale(1.08);box-shadow:0 0 16px rgba(99,132,255,0.2);z-index:5}
-  .fn-label{display:flex;align-items:center;gap:8px}
-  .fn-label .side-tag{font-size:8.5px;padding:2px 6px;border-radius:3px;font-weight:600;letter-spacing:0.5px;flex-shrink:0}
+  tbody td{padding:5px 4px;text-align:center;border-radius:3px;font-size:10px;font-weight:700;cursor:default;position:relative;transition:transform .12s,box-shadow .12s;letter-spacing:0.3px;text-transform:uppercase}
+  tbody td:first-child{text-align:left;font-weight:500;color:#cbd5e1;font-size:11px;padding-left:8px;border-radius:4px 0 0 4px;background:transparent !important;text-transform:none;letter-spacing:0}
+  tbody td:hover:not(:first-child){transform:scale(1.06);box-shadow:0 0 12px rgba(99,132,255,0.18);z-index:5}
+  .fn-label{display:flex;align-items:center;gap:6px}
+  .fn-label .side-tag{font-size:7.5px;padding:1px 5px;border-radius:2px;font-weight:700;letter-spacing:0.4px;flex-shrink:0}
   .side-buy{background:rgba(16,185,129,0.15);color:#34d399}
   .side-sell{background:rgba(245,158,11,0.15);color:#fbbf24}
   .side-both{background:rgba(99,132,255,0.15);color:#93a8ff}
-  .section-row td{background:rgba(99,132,255,0.06) !important;font-size:11px !important;font-weight:700 !important;color:#6384ff !important;letter-spacing:1px;text-transform:uppercase;padding:12px 12px 6px !important;border-bottom:1px solid rgba(99,132,255,0.1)}
-  .tooltip{display:none;position:fixed;background:#1a1f3a;border:1px solid rgba(99,132,255,0.3);border-radius:8px;padding:12px 16px;font-size:11.5px;color:#cbd5e1;max-width:320px;z-index:1000;box-shadow:0 8px 32px rgba(0,0,0,0.5);line-height:1.5;pointer-events:none}
-  .tooltip .tt-title{font-weight:700;color:#e0e6f0;margin-bottom:4px;font-size:12px}
-  .tooltip .tt-proj{font-weight:600;margin-bottom:2px}
-  .tooltip .tt-score{display:inline-block;padding:2px 8px;border-radius:4px;font-weight:700;font-size:11px;margin-bottom:6px}
-  .tooltip .tt-dim{margin-top:6px;padding-top:6px;border-top:1px solid rgba(99,132,255,0.1);font-size:10px;color:#6384ff;font-weight:600}
-  .score-5{background:rgba(239,68,68,0.2);color:#fca5a5}
-  .score-4{background:rgba(245,158,11,0.2);color:#fcd34d}
-  .score-3{background:rgba(16,185,129,0.2);color:#6ee7b7}
-  .score-2{background:rgba(14,116,144,0.2);color:#67e8f9}
-  .score-1{background:rgba(30,41,59,0.5);color:#64748b}
-  .score-0{background:rgba(15,23,42,0.5);color:#475569}
-  .overall-cell{font-weight:800 !important;font-size:13px !important}
-  .footer{text-align:center;padding:20px;color:#475569;font-size:10px;border-top:1px solid rgba(99,132,255,0.08)}
-  .stats-bar{display:flex;gap:20px;margin-top:16px;flex-wrap:wrap}
-  .stat-card{background:rgba(99,132,255,0.05);border:1px solid rgba(99,132,255,0.12);border-radius:10px;padding:14px 20px;flex:1;min-width:180px}
-  .stat-card .stat-val{font-size:26px;font-weight:800;background:linear-gradient(135deg,#6384ff,#a78bfa);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
-  .stat-card .stat-lbl{font-size:10.5px;color:#64748b;margin-top:2px;font-weight:500;text-transform:uppercase;letter-spacing:0.5px}
-  @media(max-width:768px){.header,.main{padding:16px}.legend{margin-left:0;margin-top:8px}.stats-bar{gap:10px}.stat-card{min-width:140px;padding:10px 14px}.guide-grid{grid-template-columns:1fr}.dim-btn{padding:6px 12px;font-size:10.5px}}
+  .section-row td{background:rgba(99,132,255,0.05) !important;font-size:9.5px !important;font-weight:700 !important;color:#6384ff !important;letter-spacing:1px;text-transform:uppercase !important;padding:8px 8px 4px !important;border-bottom:1px solid rgba(99,132,255,0.08)}
+  .tooltip{display:none;position:fixed;background:#1a1f3a;border:1px solid rgba(99,132,255,0.3);border-radius:8px;padding:10px 14px;font-size:11px;color:#cbd5e1;max-width:300px;z-index:1000;box-shadow:0 8px 28px rgba(0,0,0,0.5);line-height:1.45;pointer-events:none}
+  .tooltip .tt-title{font-weight:700;color:#e0e6f0;margin-bottom:3px;font-size:11.5px}
+  .tooltip .tt-proj{font-weight:600;margin-bottom:2px;font-size:10.5px}
+  .tooltip .tt-level{display:inline-block;padding:2px 7px;border-radius:3px;font-weight:700;font-size:10px;margin-bottom:5px;text-transform:uppercase}
+  .tooltip .tt-dim{margin-top:5px;padding-top:5px;border-top:1px solid rgba(99,132,255,0.1);font-size:9px;color:#6384ff;font-weight:600}
+  .lvl-high{background:rgba(239,68,68,0.2);color:#fca5a5}
+  .lvl-med{background:rgba(16,185,129,0.2);color:#6ee7b7}
+  .lvl-low{background:rgba(30,58,95,0.5);color:#67e8f9}
+  .lvl-none{background:rgba(15,23,42,0.5);color:#475569}
+  .overall-cell{font-weight:800 !important;font-size:10.5px !important}
+  .footer{text-align:center;padding:14px;color:#475569;font-size:9px;border-top:1px solid rgba(99,132,255,0.08)}
+  @media(max-width:768px){.header,.main{padding:12px}.stats-bar{gap:6px}.stat-card{min-width:120px;padding:6px 10px}}
 </style>
 </head>
 <body>
 
 <div class="header">
   <h1>Sarang Bajpai — Capability Heat Map</h1>
-  <p class="subtitle">Mapping demonstrated competency across <strong>domain knowledge</strong> and <strong>AI-enabled skills</strong> to capital markets business functions. Based on four published thought-leadership applications: Global Monetary Momentum (GMM), SentimentFusion, RiskManager, and Agentic AI Narrative Builder.</p>
+  <p class="intro">This heat map scores demonstrated capability across <strong>19 capital markets business functions</strong>, derived from four published AI-enabled financial applications. Each cell reflects both direct domain expertise and transferable thought leadership — not just like-for-like mapping. Cells are colour-coded from dark (low) to red (high). <strong>Hover over any cell</strong> for a detailed rationale. Use the <strong>Scope</strong> filters to isolate buy-side, sell-side, or infrastructure functions, and the <strong>View</strong> toggle to switch between a blended score, pure domain knowledge, or pure AI/ML skill assessment.</p>
 
-  <!-- Reader Guide -->
-  <div class="reader-guide">
-    <div class="guide-toggle" onclick="toggleGuide()">
-      <h3>📖 How to Read This Heat Map</h3>
-      <span class="arrow open" id="guideArrow">▼</span>
-    </div>
-    <div class="guide-content show" id="guideContent">
-      <p>This heat map scores demonstrated capability across <strong>19 capital markets business functions</strong>, assessed against four published AI-enabled financial applications. Each cell represents the depth of competency that a given project demonstrates for that business function — scored from <strong>0 (Not Demonstrated)</strong> to <strong>5 (Expert)</strong>. Scores reflect both <em>direct</em> capability and <em>transferable</em> thought leadership.</p>
-
-      <div class="guide-grid">
-        <div class="guide-card">
-          <h4>🔍 Reading the Cells</h4>
-          <p><strong>Hover over any cell</strong> to see a detailed rationale explaining <em>why</em> that score was given — including how the project's capabilities transfer to that business function, even when the connection isn't immediately obvious.</p>
-        </div>
-        <div class="guide-card">
-          <h4>🎯 Filtering by Side</h4>
-          <p>Use <strong>Buy-Side / Sell-Side / Market Infrastructure</strong> buttons to filter functions relevant to your context. Each function is also tagged with a coloured pill — <span style="color:#34d399">BUY</span>, <span style="color:#fbbf24">SELL</span>, or <span style="color:#93a8ff">BOTH</span>.</p>
-        </div>
-        <div class="guide-card">
-          <h4>📊 Choosing a View Lens</h4>
-          <p>The <strong>three-tab view selector</strong> lets you switch between: <strong>Domain + AI</strong> (blended overall), <strong>Domain Knowledge</strong> only (financial expertise), or <strong>AI Skills</strong> only (applied AI/ML/NLP capability). This reveals whether strength is domain-led, tech-led, or both.</p>
-        </div>
-        <div class="guide-card">
-          <h4>📈 Interpreting for Roles</h4>
-          <p>The <strong>Overall column</strong> gives a composite score per function. Look for rows scoring <strong>4+</strong> to identify strongest fits. The <strong>stats bar</strong> highlights top functions and strongest project signal dynamically as you filter.</p>
-        </div>
-      </div>
-
-      <div class="guide-scale" style="margin-top:14px">
-        <span style="font-size:10.5px;color:#64748b;font-weight:600;margin-right:6px">Score Scale:</span>
-        <div class="guide-chip"><div class="dot" style="background:rgba(239,68,68,0.45)"></div>5 Expert</div>
-        <div class="guide-chip"><div class="dot" style="background:rgba(245,158,11,0.5)"></div>4 Advanced</div>
-        <div class="guide-chip"><div class="dot" style="background:rgba(16,185,129,0.5)"></div>3 Proficient</div>
-        <div class="guide-chip"><div class="dot" style="background:rgba(14,116,144,0.55)"></div>2 Foundational</div>
-        <div class="guide-chip"><div class="dot" style="background:rgba(30,58,95,0.7)"></div>1 Awareness</div>
-        <div class="guide-chip"><div class="dot" style="background:rgba(15,23,42,0.6)"></div>0 Not Shown</div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Controls -->
   <div class="controls">
     <div class="ctrl-group">
       <span class="ctrl-label">Scope:</span>
-      <button class="ctrl-btn active" onclick="filterSide('all')">All Functions</button>
+      <button class="ctrl-btn active" onclick="filterSide('all')">All</button>
       <button class="ctrl-btn" onclick="filterSide('buy')">Buy-Side</button>
       <button class="ctrl-btn" onclick="filterSide('sell')">Sell-Side</button>
       <button class="ctrl-btn" onclick="filterSide('infra')">Infrastructure</button>
@@ -154,12 +89,11 @@
       </div>
     </div>
     <div class="legend">
-      <span>Low</span>
-      <div class="legend-bar"></div>
-      <span>Expert</span>
+      <div class="leg-chip"><div class="leg-dot" style="background:rgba(30,58,95,0.8)"></div>Low</div>
+      <div class="leg-chip"><div class="leg-dot" style="background:rgba(16,185,129,0.55)"></div>Medium</div>
+      <div class="leg-chip"><div class="leg-dot" style="background:rgba(239,68,68,0.5)"></div>High</div>
     </div>
   </div>
-  <div class="stats-bar" id="statsBar"></div>
 </div>
 
 <div class="main">
@@ -170,220 +104,111 @@
 </div>
 
 <div class="tooltip" id="tooltip"></div>
-<div class="footer">Capability Heat Map — Sarang Bajpai | Based on published AI-enabled financial applications | Scores: 5=Expert, 4=Advanced, 3=Proficient, 2=Foundational, 1=Awareness, 0=Not Demonstrated</div>
+<div class="footer">Capability Heat Map — Sarang Bajpai | Derived from: Global Monetary Momentum · SentimentFusion · RiskManager · Agentic AI Narrative Builder</div>
 
 <script>
-const PROJECTS = [
-  {id:'gmm', name:'GMM', fullName:'Global Monetary Momentum', tag:'tag-gmm'},
-  {id:'sf',  name:'SentimentFusion', fullName:'SentimentFusion', tag:'tag-sf'},
-  {id:'rm',  name:'RiskManager', fullName:'RiskManager', tag:'tag-rm'},
-  {id:'ai',  name:'AI Narrative', fullName:'Agentic AI Narrative Builder', tag:'tag-ai'}
+const PROJECTS=[
+  {id:'gmm',name:'GMM',full:'Global Monetary Momentum',tag:'tag-gmm'},
+  {id:'sf',name:'SentimentFusion',full:'SentimentFusion',tag:'tag-sf'},
+  {id:'rm',name:'RiskManager',full:'RiskManager',tag:'tag-rm'},
+  {id:'ai',name:'AI Narrative',full:'AI Narrative Builder',tag:'tag-ai'}
 ];
+let curDim=0,curSide='all';
+const dimL=['Domain + AI','Domain Knowledge','AI Skills'];
 
-let currentDim = 0;
-let currentSide = 'all';
-const dimLabels = ['Domain + AI','Domain Knowledge','AI Skills'];
+function lvl(s){if(s>=3.8)return'High';if(s>=2)return'Med';if(s>=0.5)return'Low';return'—'}
+function lvlClass(s){if(s>=3.8)return'high';if(s>=2)return'med';if(s>=0.5)return'low';return'none'}
+function bg(s){
+  if(s>=4.5)return'rgba(239,68,68,0.5)';if(s>=3.8)return'rgba(245,158,11,0.5)';
+  if(s>=3)return'rgba(16,185,129,0.45)';if(s>=2)return'rgba(14,116,144,0.45)';
+  if(s>=0.5)return'rgba(30,58,95,0.6)';return'rgba(15,23,42,0.5)';
+}
+function tc(s){
+  if(s>=4.5)return'#fca5a5';if(s>=3.8)return'#fcd34d';
+  if(s>=3)return'#6ee7b7';if(s>=2)return'#5eead4';
+  if(s>=0.5)return'#67e8f9';return'#334155';
+}
 
-const DATA = [
+const DATA=[
   {section:'INVESTMENT RESEARCH & STRATEGY'},
-  {fn:'Research (Fundamental)',side:'buy',tags:['buy'],
-   scores:[4,3, 3,5, 3,2, 4,5],
-   tips:['GMM: Deep macro fundamental research — central bank policy analysis, global economic indicator tracking, monetary regime classification','SentimentFusion: NLP-driven extraction of fundamental signals from earnings calls, filings, news — AI augmenting traditional research','RiskManager: Risk-adjusted fundamental views, factor exposure analysis informing research opinions','AI Narrative: Agentic AI auto-generates investment narratives from fundamental data — transforms how research is produced & consumed']},
-  {fn:'Equity / Credit Research (Sell-Side)',side:'sell',tags:['sell'],
-   scores:[3,2, 3,5, 3,2, 4,5],
-   tips:['GMM: Macro overlay for sector/credit views, monetary policy impact on earnings & spreads','SentimentFusion: AI-driven sentiment scoring of company-specific news, earnings calls — directly applicable to sell-side coverage','RiskManager: Credit risk metrics, spread analysis informing sell-side credit research','AI Narrative: Automated initiation notes, earnings flash notes, morning commentary — high-impact sell-side use case']},
-  {fn:'Quant / Systematic Research',side:'buy',tags:['buy'],
-   scores:[5,4, 4,5, 4,4, 3,5],
-   tips:['GMM: Momentum-based systematic signals across global macro — core quant strategy design, factor construction, backtesting','SentimentFusion: Quantitative sentiment factor construction, NLP signal generation, alternative data integration — directly in quant research domain','RiskManager: Quantitative risk modelling, statistical methods for VaR, stress testing — mathematical rigour','AI Narrative: ML/AI pipeline design, agentic architectures — demonstrates advanced AI engineering applicable to quant systems']},
-  {fn:'Strategy & Asset Allocation',side:'buy',tags:['buy'],
-   scores:[5,4, 3,4, 4,3, 3,4],
-   tips:['GMM: Core competency — global macro strategy, monetary momentum driving cross-asset allocation decisions across equities, rates, FX, commodities','SentimentFusion: Sentiment regime indicators informing tactical allocation shifts and risk-on/risk-off positioning','RiskManager: Risk-based allocation frameworks (risk parity concepts, drawdown control), risk budgeting across asset classes','AI Narrative: AI-generated strategy commentary and allocation rationale — enhances CIO/strategist communication']},
-
+  {fn:'Research (Fundamental)',side:'buy',tags:['buy'],scores:[4,3,3,5,3,2,4,5],tips:['GMM: Deep macro fundamental research — central bank policy analysis, global economic indicator tracking, monetary regime classification','SentimentFusion: NLP-driven extraction of fundamental signals from earnings calls, filings, news — AI augmenting traditional research','RiskManager: Risk-adjusted fundamental views, factor exposure analysis informing research opinions','AI Narrative: Agentic AI auto-generates investment narratives from fundamental data — transforms how research is produced & consumed']},
+  {fn:'Equity / Credit Research (Sell-Side)',side:'sell',tags:['sell'],scores:[3,2,3,5,3,2,4,5],tips:['GMM: Macro overlay for sector/credit views, monetary policy impact on earnings & spreads','SentimentFusion: AI-driven sentiment scoring of company-specific news, earnings calls — directly applicable to sell-side coverage','RiskManager: Credit risk metrics, spread analysis informing sell-side credit research','AI Narrative: Automated initiation notes, earnings flash notes, morning commentary — high-impact sell-side use case']},
+  {fn:'Quant / Systematic Research',side:'buy',tags:['buy'],scores:[5,4,4,5,4,4,3,5],tips:['GMM: Momentum-based systematic signals across global macro — core quant strategy design, factor construction, backtesting','SentimentFusion: Quantitative sentiment factor construction, NLP signal generation, alternative data integration','RiskManager: Quantitative risk modelling, statistical methods for VaR, stress testing — mathematical rigour','AI Narrative: ML/AI pipeline design, agentic architectures — advanced AI engineering applicable to quant systems']},
+  {fn:'Strategy & Asset Allocation',side:'buy',tags:['buy'],scores:[5,4,3,4,4,3,3,4],tips:['GMM: Core competency — global macro strategy, monetary momentum driving cross-asset allocation across equities, rates, FX, commodities','SentimentFusion: Sentiment regime indicators informing tactical allocation shifts and risk-on/risk-off positioning','RiskManager: Risk-based allocation frameworks, risk budgeting across asset classes','AI Narrative: AI-generated strategy commentary and allocation rationale — enhances CIO/strategist communication']},
   {section:'PORTFOLIO & TRADING'},
-  {fn:'Portfolio Management / Construction',side:'buy',tags:['buy'],
-   scores:[4,3, 3,4, 5,4, 3,4],
-   tips:['GMM: Momentum-driven portfolio construction, regime-aware weighting, dynamic asset allocation implementation','SentimentFusion: Sentiment-overlay for position sizing and conviction weighting, alternative signal integration into portfolio process','RiskManager: Core competency — risk-aware portfolio construction, constraint management, tracking error budgeting, factor exposure control','AI Narrative: AI-assisted portfolio commentary, automated position rationale — transforms PM communication workflows']},
-  {fn:'Trading & Execution (OMS/EMS)',side:'both',tags:['buy','sell'],
-   scores:[2,2, 3,4, 3,3, 1,3],
-   tips:['GMM: Momentum signals applicable to execution timing, macro-driven urgency assessment','SentimentFusion: Real-time sentiment signals for execution timing, news-driven trade urgency — directly applicable to smart order routing logic','RiskManager: Pre-trade risk checks, real-time position limit monitoring, execution risk controls','AI Narrative: AI-assisted trade rationale documentation, best-execution narrative generation']},
-  {fn:'Sales & Trading / Market Making (Sell-Side)',side:'sell',tags:['sell'],
-   scores:[3,2, 3,4, 3,3, 3,4],
-   tips:['GMM: Macro narrative for client engagement, monetary policy impact on flow positioning','SentimentFusion: Real-time market colour from sentiment analytics — powerful tool for sales desk differentiation','RiskManager: Inventory risk management, market-making risk controls, P&L attribution','AI Narrative: AI-generated market colour, client commentary, morning notes — transforms sell-side content production']},
-
+  {fn:'Portfolio Management / Construction',side:'buy',tags:['buy'],scores:[4,3,3,4,5,4,3,4],tips:['GMM: Momentum-driven portfolio construction, regime-aware weighting, dynamic allocation','SentimentFusion: Sentiment-overlay for position sizing, conviction weighting, alternative signal integration','RiskManager: Core — risk-aware construction, constraint management, tracking error budgeting, factor exposure control','AI Narrative: AI-assisted portfolio commentary, automated position rationale generation']},
+  {fn:'Trading & Execution (OMS/EMS)',side:'both',tags:['buy','sell'],scores:[2,2,3,4,3,3,1,3],tips:['GMM: Momentum signals for execution timing, macro-driven urgency assessment','SentimentFusion: Real-time sentiment for execution timing, news-driven trade urgency — smart order routing applications','RiskManager: Pre-trade risk checks, real-time position limit monitoring, execution risk controls','AI Narrative: AI-assisted trade rationale documentation, best-execution narrative generation']},
+  {fn:'Sales & Trading / Market Making',side:'sell',tags:['sell'],scores:[3,2,3,4,3,3,3,4],tips:['GMM: Macro narrative for client engagement, monetary policy impact on flow positioning','SentimentFusion: Real-time market colour from sentiment analytics — sales desk differentiation','RiskManager: Inventory risk management, market-making risk controls, P&L attribution','AI Narrative: AI-generated market colour, client commentary, morning notes']},
   {section:'RISK & GOVERNANCE'},
-  {fn:'Risk Management (Market/Credit/Liquidity)',side:'both',tags:['buy','sell'],
-   scores:[4,3, 3,4, 5,5, 2,3],
-   tips:['GMM: Macro risk indicators, monetary policy regime risk, systemic risk monitoring, tail risk assessment from global conditions','SentimentFusion: Sentiment-based early warning signals, market stress detection from news/social media — novel AI risk inputs','RiskManager: Core expertise — market risk (VaR, ES, stress testing), credit risk metrics, liquidity risk frameworks — comprehensive risk analytics','AI Narrative: AI-generated risk commentary, automated risk reporting narratives, exception-based narrative alerts']},
-  {fn:'Model Risk / Governance',side:'both',tags:['buy','sell'],
-   scores:[3,3, 3,4, 4,4, 3,5],
-   tips:['GMM: Momentum model methodology documentation, model performance monitoring, parameter governance','SentimentFusion: NLP model validation, bias detection, model explainability — critical for AI model governance frameworks','RiskManager: Model validation expertise, backtesting frameworks, model inventory management, governance documentation','AI Narrative: Agentic AI governance challenges — prompt engineering governance, output validation, hallucination detection — frontier AI governance']},
-  {fn:'Compliance & Regulatory',side:'both',tags:['buy','sell'],
-   scores:[2,2, 2,3, 3,3, 2,4],
-   tips:['GMM: Regulatory awareness of macro-prudential frameworks, central bank policy compliance implications','SentimentFusion: Regulatory text analysis, compliance monitoring via NLP, surveillance applications','RiskManager: Regulatory capital calculations, stress testing for regulatory submissions (FRTB, ICAAP concepts)','AI Narrative: AI-driven regulatory report generation, automated compliance narrative — emerging RegTech application']},
-
+  {fn:'Risk Management (Mkt/Credit/Liquidity)',side:'both',tags:['buy','sell'],scores:[4,3,3,4,5,5,2,3],tips:['GMM: Macro risk indicators, monetary policy regime risk, systemic risk monitoring, tail risk assessment','SentimentFusion: Sentiment-based early warning signals, market stress detection from news/social media','RiskManager: Core expertise — VaR, ES, stress testing, credit risk metrics, liquidity risk frameworks','AI Narrative: AI-generated risk commentary, automated risk reporting, exception-based alerts']},
+  {fn:'Model Risk / Governance',side:'both',tags:['buy','sell'],scores:[3,3,3,4,4,4,3,5],tips:['GMM: Momentum model methodology documentation, performance monitoring, parameter governance','SentimentFusion: NLP model validation, bias detection, explainability — AI model governance frameworks','RiskManager: Model validation, backtesting frameworks, model inventory management','AI Narrative: Agentic AI governance — prompt governance, output validation, hallucination detection']},
+  {fn:'Compliance & Regulatory',side:'both',tags:['buy','sell'],scores:[2,2,2,3,3,3,2,4],tips:['GMM: Macro-prudential frameworks awareness, central bank policy compliance','SentimentFusion: Regulatory text analysis, compliance monitoring via NLP, surveillance','RiskManager: Regulatory capital, stress testing for regulatory submissions (FRTB, ICAAP)','AI Narrative: AI-driven regulatory report generation, automated compliance narrative']},
   {section:'VALUATION, PERFORMANCE & OPERATIONS'},
-  {fn:'Valuation / Pricing / NAV',side:'both',tags:['buy','sell'],
-   scores:[2,1, 2,3, 4,3, 2,3],
-   tips:['GMM: Discount rate regime analysis — monetary policy directly impacts valuation models','SentimentFusion: Sentiment-adjusted valuation premiums, market-implied sentiment for pricing overlays','RiskManager: Core pricing knowledge — risk factor modelling, mark-to-model governance, fair value hierarchy understanding','AI Narrative: AI-assisted valuation commentary, automated NAV commentary generation']},
-  {fn:'Performance & Attribution',side:'buy',tags:['buy'],
-   scores:[3,2, 2,3, 3,3, 3,5],
-   tips:['GMM: Factor attribution for momentum exposures, macro factor decomposition of returns','SentimentFusion: Sentiment factor contribution analysis — attributing alpha to sentiment signals','RiskManager: Risk-adjusted performance metrics (Sharpe, Sortino, information ratio), risk attribution','AI Narrative: AI-automated performance commentary, attribution narrative generation — directly eliminates manual reporting burden']},
-  {fn:'Investment Operations (Post-Trade, Recon, Corp Actions)',side:'buy',tags:['buy'],
-   scores:[1,1, 1,2, 2,2, 2,4],
-   tips:['GMM: Limited direct application — macro awareness for corporate action impact assessment','SentimentFusion: Exception-based sentiment monitoring for corporate actions, news-driven recon priority','RiskManager: Post-trade risk checks, settlement risk awareness, reconciliation break analysis','AI Narrative: AI-automated exception reporting, operational narrative generation, break commentary — strong ops automation use case']},
-
+  {fn:'Valuation / Pricing / NAV',side:'both',tags:['buy','sell'],scores:[2,1,2,3,4,3,2,3],tips:['GMM: Discount rate regime analysis — monetary policy impacts valuation models','SentimentFusion: Sentiment-adjusted valuation premiums, market-implied sentiment overlays','RiskManager: Risk factor modelling, mark-to-model governance, fair value hierarchy','AI Narrative: AI-assisted valuation commentary, automated NAV commentary']},
+  {fn:'Performance & Attribution',side:'buy',tags:['buy'],scores:[3,2,2,3,3,3,3,5],tips:['GMM: Factor attribution for momentum exposures, macro factor decomposition','SentimentFusion: Sentiment factor contribution analysis — attributing alpha to sentiment signals','RiskManager: Risk-adjusted performance metrics (Sharpe, Sortino, IR), risk attribution','AI Narrative: AI-automated performance commentary, attribution narrative — eliminates manual reporting']},
+  {fn:'Investment Ops (Post-Trade, Recon)',side:'buy',tags:['buy'],scores:[1,1,1,2,2,2,2,4],tips:['GMM: Limited direct application — macro awareness for corp action impact','SentimentFusion: Exception-based sentiment monitoring for corporate actions','RiskManager: Post-trade risk checks, settlement risk, reconciliation break analysis','AI Narrative: AI-automated exception reporting, operational narrative, break commentary']},
   {section:'PRODUCT, DATA & DISTRIBUTION'},
-  {fn:'Product & Client Reporting / Distribution',side:'both',tags:['buy','sell'],
-   scores:[3,2, 3,4, 3,3, 5,5],
-   tips:['GMM: Macro market commentary for client materials, CIO letter content generation','SentimentFusion: Sentiment dashboard products, client-facing sentiment analytics, data-as-a-service positioning','RiskManager: Risk reporting for clients, regulatory reporting, standardised risk metrics communication','AI Narrative: Core competency — AI-driven automated reporting, client factsheets, investment letters, RFP responses — transforms content production']},
-  {fn:'Data Management (Market/Ref/Alt)',side:'both',tags:['buy','sell','infra'],
-   scores:[4,3, 4,5, 3,3, 3,4],
-   tips:['GMM: Multi-source macro data aggregation, time-series management, global economic database design','SentimentFusion: Core competency — alternative data sourcing, unstructured data pipelines, NLP data processing, data quality for text analytics','RiskManager: Market data management, reference data for risk models, data lineage and quality','AI Narrative: Data orchestration for AI pipelines, multi-source data retrieval, agentic data access patterns']},
-  {fn:'Index Management (Methodology + Maintenance)',side:'both',tags:['buy','sell','infra'],
-   scores:[4,3, 3,4, 3,2, 2,3],
-   tips:['GMM: Strong alignment — momentum-based index design, rules-based methodology, rebalancing logic, benchmark construction','SentimentFusion: Sentiment-based index methodology (e.g., sentiment-weighted factor indices), novel index product design','RiskManager: Risk factor index construction, risk-parity index methodology, volatility-targeting indices','AI Narrative: AI-assisted index methodology documentation, automated index commentary']},
-
+  {fn:'Product & Client Reporting',side:'both',tags:['buy','sell'],scores:[3,2,3,4,3,3,5,5],tips:['GMM: Macro commentary for client materials, CIO letter content','SentimentFusion: Sentiment dashboard products, client-facing analytics, data-as-a-service','RiskManager: Risk reporting, regulatory reporting, standardised risk communication','AI Narrative: Core — AI-driven automated reporting, factsheets, investment letters, RFP responses']},
+  {fn:'Data Management (Market/Ref/Alt)',side:'both',tags:['buy','sell','infra'],scores:[4,3,4,5,3,3,3,4],tips:['GMM: Multi-source macro data aggregation, time-series management, economic database design','SentimentFusion: Core — alternative data sourcing, unstructured data pipelines, NLP processing, data quality','RiskManager: Market data management, reference data for risk models, data lineage','AI Narrative: Data orchestration for AI pipelines, multi-source retrieval, agentic data access']},
+  {fn:'Index Management (Methodology)',side:'both',tags:['buy','sell','infra'],scores:[4,3,3,4,3,2,2,3],tips:['GMM: Strong — momentum-based index design, rules-based methodology, rebalancing, benchmark construction','SentimentFusion: Sentiment-based index methodology, sentiment-weighted factor indices','RiskManager: Risk factor index construction, risk-parity methodology, vol-targeting indices','AI Narrative: AI-assisted index methodology documentation, automated index commentary']},
   {section:'SPECIALIST FUNCTIONS'},
-  {fn:'Private Markets (Deal Lifecycle + Portfolio Monitoring)',side:'buy',tags:['buy'],
-   scores:[2,1, 3,4, 3,3, 3,5],
-   tips:['GMM: Macro environment assessment for deal timing and exit strategy','SentimentFusion: Private company sentiment monitoring from news/social, deal pipeline sentiment scoring — alternative data for PE/VC','RiskManager: Portfolio company risk monitoring, concentration risk, vintage analysis','AI Narrative: Strong alignment — AI-generated deal memos, IC papers, portfolio monitoring narratives, LP reporting automation']},
-  {fn:'Treasury / Funding / Capital (esp. Sell-Side)',side:'sell',tags:['sell'],
-   scores:[4,2, 2,3, 4,3, 2,3],
-   tips:['GMM: Core relevance — monetary policy directly impacts funding costs, rate expectations, FRA/OIS spreads, capital planning','SentimentFusion: Market sentiment for funding market stress indicators, liquidity sentiment monitoring','RiskManager: Liquidity risk management, capital adequacy modelling, funding stress testing, LCR/NSFR awareness','AI Narrative: AI-generated treasury commentary, funding condition narratives, capital planning reports']},
-  {fn:'Structuring / Financial Engineering',side:'sell',tags:['sell'],
-   scores:[3,2, 2,3, 4,3, 2,3],
-   tips:['GMM: Rate environment analysis for structured product design, macro scenario overlays','SentimentFusion: Sentiment inputs for structured product trigger design, market condition analysis','RiskManager: Structured product risk analysis, Greeks computation, scenario analysis, payoff modelling','AI Narrative: AI-assisted term sheet drafting, product documentation, client presentation generation']},
-  {fn:'Wealth Management / Advisory',side:'buy',tags:['buy'],
-   scores:[4,2, 3,4, 3,2, 5,5],
-   tips:['GMM: Macro views for client advisory conversations, investment outlook generation','SentimentFusion: Client sentiment analysis, market sentiment dashboards for advisors, personalised news curation','RiskManager: Client risk profiling, portfolio risk communication, suitability assessments','AI Narrative: Core use case — AI-personalised client communications, portfolio reviews, market updates, proposal generation — transforms advisory content']},
-  {fn:'ESG / Sustainable Finance',side:'both',tags:['buy','sell'],
-   scores:[2,1, 3,5, 2,2, 3,4],
-   tips:['GMM: Green macro policy tracking, climate-related monetary policy analysis','SentimentFusion: ESG sentiment analysis — controversy detection, greenwashing identification, stakeholder sentiment on sustainability — powerful NLP application','RiskManager: Climate risk modelling, ESG risk integration into risk frameworks','AI Narrative: AI-generated ESG reports, sustainability narratives, TCFD/SFDR reporting automation']},
+  {fn:'Private Markets (Deal Lifecycle)',side:'buy',tags:['buy'],scores:[2,1,3,4,3,3,3,5],tips:['GMM: Macro environment assessment for deal timing and exit strategy','SentimentFusion: Private company sentiment monitoring, deal pipeline sentiment scoring — alt data for PE/VC','RiskManager: Portfolio company risk monitoring, concentration risk, vintage analysis','AI Narrative: Strong — AI-generated deal memos, IC papers, portfolio monitoring narratives, LP reporting']},
+  {fn:'Treasury / Funding / Capital',side:'sell',tags:['sell'],scores:[4,2,2,3,4,3,2,3],tips:['GMM: Core — monetary policy impacts funding costs, rate expectations, FRA/OIS spreads, capital planning','SentimentFusion: Funding market stress indicators, liquidity sentiment monitoring','RiskManager: Liquidity risk management, capital adequacy modelling, funding stress testing','AI Narrative: AI-generated treasury commentary, funding condition narratives']},
+  {fn:'Structuring / Financial Engineering',side:'sell',tags:['sell'],scores:[3,2,2,3,4,3,2,3],tips:['GMM: Rate environment for structured product design, macro scenario overlays','SentimentFusion: Sentiment inputs for structured product triggers, market condition analysis','RiskManager: Structured product risk analysis, Greeks, scenario analysis, payoff modelling','AI Narrative: AI-assisted term sheet drafting, product documentation']},
+  {fn:'Wealth Management / Advisory',side:'buy',tags:['buy'],scores:[4,2,3,4,3,2,5,5],tips:['GMM: Macro views for client advisory, investment outlook generation','SentimentFusion: Client sentiment analysis, market dashboards for advisors, personalised news','RiskManager: Client risk profiling, portfolio risk communication, suitability assessments','AI Narrative: Core — AI-personalised client comms, portfolio reviews, proposals — transforms advisory']},
+  {fn:'ESG / Sustainable Finance',side:'both',tags:['buy','sell'],scores:[2,1,3,5,2,2,3,4],tips:['GMM: Green macro policy tracking, climate-related monetary policy analysis','SentimentFusion: ESG sentiment — controversy detection, greenwashing identification, stakeholder analysis','RiskManager: Climate risk modelling, ESG risk integration into frameworks','AI Narrative: AI-generated ESG reports, sustainability narratives, TCFD/SFDR automation']},
 ];
 
-function getColor(s) {
-  const c = ['rgba(15,23,42,0.6)','rgba(30,58,95,0.7)','rgba(14,116,144,0.55)','rgba(16,185,129,0.5)','rgba(245,158,11,0.5)','rgba(239,68,68,0.45)'];
-  return c[Math.round(s)] || c[0];
-}
-function getTextColor(s) {
-  const c = ['#334155','#67e8f9','#5eead4','#6ee7b7','#fcd34d','#fca5a5'];
-  return c[Math.round(s)] || c[0];
-}
-function getScoreLabel(s) {
-  const l = ['—','Awareness','Foundational','Proficient','Advanced','Expert'];
-  return l[Math.round(s)] || '—';
-}
-function computeOverall(scores) {
-  let d=0,a=0,n=0;
-  for(let i=0;i<scores.length;i+=2){d+=scores[i];a+=scores[i+1];n++}
-  if(currentDim===1)return(d/n).toFixed(1);
-  if(currentDim===2)return(a/n).toFixed(1);
-  return((d+a)/(n*2)).toFixed(1);
-}
-function getProjectScore(scores,pi) {
-  let d=scores[pi*2],a=scores[pi*2+1];
-  if(currentDim===1)return d;
-  if(currentDim===2)return a;
-  return(d+a)/2;
-}
+function ps(scores,pi){let d=scores[pi*2],a=scores[pi*2+1];if(curDim===1)return d;if(curDim===2)return a;return(d+a)/2}
+function ov(scores){let d=0,a=0,n=0;for(let i=0;i<scores.length;i+=2){d+=scores[i];a+=scores[i+1];n++}if(curDim===1)return d/n;if(curDim===2)return a/n;return(d+a)/(n*2)}
 
-function toggleGuide() {
-  const c = document.getElementById('guideContent');
-  const a = document.getElementById('guideArrow');
-  c.classList.toggle('show');
-  a.classList.toggle('open');
-}
-
-function filterSide(side) {
-  currentSide = side;
-  document.querySelectorAll('.ctrl-btn').forEach(b => {
-    const s = b.getAttribute('onclick');
-    if(s && s.includes('filterSide')){
-      const m = s.match(/'(\w+)'/);
-      if(m) b.classList.toggle('active', m[1]===side);
-    }
-  });
+function filterSide(s){
+  curSide=s;
+  document.querySelectorAll('.ctrl-btn').forEach(b=>{const m=b.getAttribute('onclick');if(m&&m.includes('filterSide')){const r=m.match(/'(\w+)'/);if(r)b.classList.toggle('active',r[1]===s)}});
   render();
 }
+function setDim(d){curDim=d;document.querySelectorAll('.dim-btn').forEach((b,i)=>b.classList.toggle('active',i===d));render()}
 
-function setDim(d) {
-  currentDim = d;
-  document.querySelectorAll('.dim-btn').forEach((b,i) => b.classList.toggle('active', i===d));
-  render();
-}
-
-function render() {
-  const head = document.getElementById('heatHead');
-  const body = document.getElementById('heatBody');
+function render(){
+  const head=document.getElementById('heatHead'),body=document.getElementById('heatBody');
   head.innerHTML='';body.innerHTML='';
+  let hr='<tr><th>Business Function</th>';
+  PROJECTS.forEach(p=>{hr+=`<th>${p.full}<br><span class="proj-tag ${p.tag}">${p.name}</span></th>`});
+  hr+='<th>Overall<br><span class="proj-tag tag-overall">COMPOSITE</span></th></tr>';
+  head.innerHTML=hr;
 
-  let hr = '<tr><th>Business Function</th>';
-  PROJECTS.forEach(p => {
-    hr += `<th class="proj-col">${p.fullName}<br><span class="proj-tag ${p.tag}">${p.name}</span></th>`;
-  });
-  hr += '<th class="proj-col">Overall<br><span class="proj-tag tag-overall">COMPOSITE</span></th></tr>';
-  head.innerHTML = hr;
-
-  let totalScore=0,fnCount=0;
-  let projTotals=[0,0,0,0],projCounts=[0,0,0,0];
-  let topFns=[];
-
-  DATA.forEach(row => {
-    if(row.section){
-      body.innerHTML += `<tr class="section-row"><td colspan="${PROJECTS.length+2}">${row.section}</td></tr>`;
-      return;
-    }
-    if(currentSide!=='all' && !row.tags.includes(currentSide)) return;
-
-    let tr='<tr>';
-    const sc = row.side==='buy'?'side-buy':row.side==='sell'?'side-sell':'side-both';
-    const sl = row.side==='buy'?'BUY':row.side==='sell'?'SELL':'BOTH';
-    tr += `<td><div class="fn-label"><span class="side-tag ${sc}">${sl}</span>${row.fn}</div></td>`;
-
-    PROJECTS.forEach((p,i) => {
-      const s = getProjectScore(row.scores,i);
-      const bg = getColor(s);
-      const tc = getTextColor(s);
-      tr += `<td style="background:${bg};color:${tc}" data-fn="${row.fn}" data-proj="${p.fullName}" data-score="${s%1===0?s:s.toFixed(1)}" data-tip="${row.tips[i]}" onmouseenter="showTip(event)" onmouseleave="hideTip()">${s%1===0?s:s.toFixed(1)}</td>`;
-      projTotals[i]+=s; projCounts[i]++;
+  let tot=0,cnt=0,pt=[0,0,0,0],topF=[];
+  DATA.forEach(r=>{
+    if(r.section){body.innerHTML+=`<tr class="section-row"><td colspan="${PROJECTS.length+2}">${r.section}</td></tr>`;return}
+    if(curSide!=='all'&&!r.tags.includes(curSide))return;
+    const sc=r.side==='buy'?'side-buy':r.side==='sell'?'side-sell':'side-both';
+    const sl=r.side==='buy'?'BUY':r.side==='sell'?'SELL':'BOTH';
+    let tr=`<tr><td><div class="fn-label"><span class="side-tag ${sc}">${sl}</span>${r.fn}</div></td>`;
+    PROJECTS.forEach((p,i)=>{
+      const s=ps(r.scores,i),l=lvl(s),c=lvlClass(s);
+      tr+=`<td style="background:${bg(s)};color:${tc(s)}" data-fn="${r.fn}" data-proj="${p.full}" data-score="${s}" data-lvl="${l}" data-tip="${r.tips[i]}" onmouseenter="showTip(event)" onmouseleave="hideTip()">${l}</td>`;
+      pt[i]+=s;
     });
-
-    const ov = computeOverall(row.scores);
-    const ovN = parseFloat(ov);
-    tr += `<td class="overall-cell" style="background:${getColor(ovN)};color:${getTextColor(ovN)}">${ov}</td></tr>`;
-    body.innerHTML += tr;
-
-    totalScore+=ovN; fnCount++;
-    topFns.push({fn:row.fn,score:ovN});
+    const o=ov(r.scores),ol=lvl(o);
+    tr+=`<td class="overall-cell" style="background:${bg(o)};color:${tc(o)}">${ol}</td></tr>`;
+    body.innerHTML+=tr;tot+=o;cnt++;topF.push({fn:r.fn,s:o});
   });
 
-  topFns.sort((a,b)=>b.score-a.score);
-  const avg = fnCount>0?(totalScore/fnCount).toFixed(1):'0';
-  const top3 = topFns.slice(0,3).map(f=>f.fn).join(', ');
-  const best = PROJECTS[projTotals.indexOf(Math.max(...projTotals))].fullName;
-
-  document.getElementById('statsBar').innerHTML = `
-    <div class="stat-card"><div class="stat-val">${avg}</div><div class="stat-lbl">Avg Competency (of 5.0) — ${dimLabels[currentDim]}</div></div>
-    <div class="stat-card"><div class="stat-val">${fnCount}</div><div class="stat-lbl">Functions Mapped</div></div>
-    <div class="stat-card"><div class="stat-val">${best}</div><div class="stat-lbl">Strongest Project Signal</div></div>
-    <div class="stat-card"><div class="stat-val" style="font-size:14px">${top3}</div><div class="stat-lbl">Top 3 Functions</div></div>
-  `;
 }
 
-function showTip(e) {
+function showTip(e){
   const td=e.target,t=document.getElementById('tooltip');
-  const fn=td.dataset.fn,proj=td.dataset.proj,score=td.dataset.score,tip=td.dataset.tip;
-  const sn=Math.round(parseFloat(score));
-  t.innerHTML=`<div class="tt-title">${fn}</div><div class="tt-proj">${proj}</div><div class="tt-score score-${sn}">${score} — ${getScoreLabel(parseFloat(score))}</div><div>${tip}</div><div class="tt-dim">🔎 Current view: ${dimLabels[currentDim]}</div>`;
+  const fn=td.dataset.fn,proj=td.dataset.proj,l=td.dataset.lvl,tip=td.dataset.tip,s=parseFloat(td.dataset.score);
+  const lc=lvlClass(s);
+  t.innerHTML=`<div class="tt-title">${fn}</div><div class="tt-proj">${proj}</div><div class="tt-level lvl-${lc}">${l}</div><div>${tip}</div><div class="tt-dim">🔎 View: ${dimL[curDim]}</div>`;
   t.style.display='block';
   const r=td.getBoundingClientRect();
-  let left=r.right+12,top=r.top;
-  if(left+320>window.innerWidth)left=r.left-332;
-  if(top+200>window.innerHeight)top=window.innerHeight-210;
+  let left=r.right+10,top=r.top;
+  if(left+300>window.innerWidth)left=r.left-310;
+  if(top+180>window.innerHeight)top=window.innerHeight-190;
   t.style.left=left+'px';t.style.top=top+'px';
 }
 function hideTip(){document.getElementById('tooltip').style.display='none'}
-
 render();
 </script>
 </body>
