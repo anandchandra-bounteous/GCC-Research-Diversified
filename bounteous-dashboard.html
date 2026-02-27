@@ -38,6 +38,10 @@ section.active{display:block;animation:fi .35s ease;}
 .hd-card h3{font-size:16px;font-weight:800;margin-bottom:8px;letter-spacing:-.3px;}
 .hd-card p{font-size:13px;color:rgba(255,255,255,.55);line-height:1.6;}
 .hd-card .pill{margin-top:12px;display:inline-flex;align-items:center;gap:6px;background:linear-gradient(90deg,rgba(182,28,167,.25),rgba(60,37,247,.25));border:1px solid rgba(60,37,247,.35);border-radius:14px;padding:4px 12px;font-size:11px;font-weight:700;color:#a78bfa;}
+.hd-clickable{cursor:pointer;position:relative;transition:transform .2s,box-shadow .2s,border-color .2s;}
+.hd-clickable:hover{transform:translateY(-4px);box-shadow:0 12px 36px rgba(182,28,167,.35);border-color:rgba(182,28,167,.5);}
+.hd-click-hint{font-size:10px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;color:var(--mag);margin-bottom:10px;opacity:.7;transition:opacity .2s;}
+.hd-clickable:hover .hd-click-hint{opacity:1;}
 .sec-grid-2{display:grid;grid-template-columns:1fr 1fr;gap:22px;}
 .sec-grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;}
 .sec-grid-4{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;}
@@ -182,12 +186,14 @@ table.hm td.hc:hover{transform:scale(1.06);box-shadow:0 6px 20px rgba(0,0,0,.4);
   </div>
   <!-- Vector 1 & Vector 2 — Overview only -->
   <div class="hero-deals">
-    <div class="hd-card">
+    <div class="hd-card hd-clickable" onclick="go('s1',document.querySelectorAll('.nb2')[1],24);setTimeout(()=>{document.getElementById('v1anchor').scrollIntoView({behavior:'smooth'})},80)" title="Explore GCC Takeout Business Case">
+      <div class="hd-click-hint">Click to explore →</div>
       <h3>🏗️ Vector 1 — GCC Takeout</h3>
       <p>Acquire underperforming sub-1000 headcount GCCs in India. Re-engineer with AI agents. Deliver same outcomes with 30% fewer people.</p>
       <div class="pill">🤖 AI-First Operating Model</div>
     </div>
-    <div class="hd-card">
+    <div class="hd-card hd-clickable" onclick="go('s1',document.querySelectorAll('.nb2')[1],24);setTimeout(()=>{document.getElementById('v2anchor').scrollIntoView({behavior:'smooth'})},80)" title="Explore Large Transformation Business Case">
+      <div class="hd-click-hint">Click to explore →</div>
       <h3>⚡ Vector 2 — Large Transformation</h3>
       <p>Win platform modernization and AI product buildouts as the end-to-end partner — strategy, design, and engineering under one mandate.</p>
       <div class="pill">🚀 Outcome-Based Engagement</div>
@@ -198,8 +204,8 @@ table.hm td.hc:hover{transform:scale(1.06);box-shadow:0 6px 20px rgba(0,0,0,.4);
 <!-- ── S1 BUSINESS CASE ───────────────────────────────── -->
 <section id="s1">
   <div class="dlabel">Business Case Model</div>
-  <div style="margin-bottom:28px;">
-    <div style="font-size:18px;font-weight:800;margin-bottom:4px;">🏗️ GCC Takeout — Business Case Model</div>
+  <div id="v1anchor" style="margin-bottom:28px;">
+    <div style="font-size:18px;font-weight:800;margin-bottom:4px;">🏗️ Vector 1 — GCC Takeout Business Case Model</div>
     <div style="font-size:13px;color:rgba(255,255,255,.5);margin-bottom:18px;">Applicable to sub-1000 headcount GCCs in BFSI, Telecom, and Payments sectors that are cost-bloated and AI-unequipped.</div>
     <div class="card" style="margin-bottom:18px;padding:0;overflow:hidden;">
       <div style="display:grid;grid-template-columns:160px 1fr 1fr 1fr;">
@@ -218,8 +224,8 @@ table.hm td.hc:hover{transform:scale(1.06);box-shadow:0 6px 20px rgba(0,0,0,.4);
       <div class="card accent-purple"><div class="icon">📈</div><div class="bnum" style="background:linear-gradient(135deg,#a78bfa,var(--elec));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">3–5x</div><div style="font-size:11px;color:rgba(255,255,255,.45);margin:4px 0 8px;text-transform:uppercase;letter-spacing:.5px;">Deal Expansion Multiplier</div><p>GCC takeover is the beachhead. Average deal expands 3–5x as we absorb broader engineering and data mandates.</p></div>
     </div>
   </div>
-  <div>
-    <div style="font-size:18px;font-weight:800;margin-bottom:4px;">⚡ Large Transformation — Business Case Model</div>
+  <div id="v2anchor">
+    <div style="font-size:18px;font-weight:800;margin-bottom:4px;">⚡ Vector 2 — Large Transformation Business Case Model</div>
     <div style="font-size:13px;color:rgba(255,255,255,.5);margin-bottom:18px;">Platform modernization, AI product engineering, and core system re-engineering — positioned as outcome-based mandates.</div>
     <div class="sec-grid-2">
       <div class="card accent-mag">
