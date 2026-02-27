@@ -6,157 +6,195 @@
 <title>Bounteous | Disruptive Large Deals</title>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
-:root{--deep:#2E1869;--light:#F3F3F5;--mag:#B61CA7;--white:#FFFFFF;--elec:#3C25F7;--card:#1a0d45;--glass:rgba(255,255,255,0.05);}
+:root{
+  --deep:#2E1869;--mag:#B61CA7;--elec:#3C25F7;--card:#1a0d45;--glass:rgba(255,255,255,0.06);
+  --t1:#ffffff;--t2:rgba(255,255,255,.85);--t3:rgba(255,255,255,.6);
+  --fs-xs:13px;--fs-sm:15px;--fs-base:17px;--fs-md:20px;--fs-lg:26px;--fs-xl:34px;--fs-2xl:48px;
+}
 *{margin:0;padding:0;box-sizing:border-box;}
-body{font-family:'Inter',sans-serif;background:var(--deep);color:#fff;overflow-x:hidden;}
-nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(46,24,105,0.97);backdrop-filter:blur(14px);border-bottom:1px solid rgba(182,28,167,0.25);display:flex;align-items:center;justify-content:space-between;padding:0 28px;height:54px;}
-.nb{font-size:16px;font-weight:900;letter-spacing:-.5px;}
+body{font-family:'Inter',sans-serif;background:var(--deep);color:var(--t1);overflow-x:hidden;font-size:var(--fs-base);}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(46,24,105,0.97);backdrop-filter:blur(14px);border-bottom:1px solid rgba(182,28,167,0.3);display:flex;align-items:center;justify-content:space-between;padding:0 36px;height:64px;}
+.nb{font-size:20px;font-weight:900;letter-spacing:-.5px;}
 .nb span{color:var(--mag);}
-.nl{display:flex;gap:3px;flex-wrap:wrap;}
-.nb2{background:none;border:none;color:rgba(255,255,255,0.55);font-size:11px;font-weight:600;padding:5px 11px;border-radius:18px;cursor:pointer;transition:all .18s;letter-spacing:.4px;text-transform:uppercase;}
+.nl{display:flex;gap:4px;flex-wrap:wrap;}
+.nb2{background:none;border:none;color:rgba(255,255,255,0.6);font-size:13px;font-weight:700;padding:8px 16px;border-radius:20px;cursor:pointer;transition:all .18s;letter-spacing:.4px;text-transform:uppercase;}
 .nb2:hover,.nb2.active{background:var(--elec);color:#fff;}
-.prog{position:fixed;top:0;left:0;height:2px;background:linear-gradient(90deg,var(--mag),var(--elec));z-index:200;transition:width .3s;}
-section{min-height:100vh;padding:74px 52px 52px;display:none;}
-section.active{display:block;animation:fi .35s ease;}
-@keyframes fi{from{opacity:0;transform:translateY(14px);}to{opacity:1;transform:none;}}
-#s0{background:linear-gradient(135deg,#0d0733 0%,var(--deep) 60%,#1a0d45 100%);display:flex!important;flex-direction:column;justify-content:center;position:relative;overflow:hidden;padding:74px 64px 52px;}
-.hgrid{position:absolute;inset:0;background-image:linear-gradient(rgba(60,37,247,.07) 1px,transparent 1px),linear-gradient(90deg,rgba(60,37,247,.07) 1px,transparent 1px);background-size:56px 56px;}
+
+/* PROGRESS */
+.prog{position:fixed;top:0;left:0;height:3px;background:linear-gradient(90deg,var(--mag),var(--elec));z-index:200;transition:width .3s;}
+
+/* SECTIONS */
+section{min-height:100vh;padding:84px 64px 60px;display:none;}
+section.active{display:block;animation:fi .3s ease;}
+@keyframes fi{from{opacity:0;transform:translateY(12px);}to{opacity:1;transform:none;}}
+
+/* HERO */
+#s0{background:linear-gradient(135deg,#0d0733 0%,var(--deep) 60%,#1a0d45 100%);display:flex!important;flex-direction:column;justify-content:center;position:relative;overflow:hidden;padding:84px 72px 60px;}
+.hgrid{position:absolute;inset:0;background-image:linear-gradient(rgba(60,37,247,.07) 1px,transparent 1px),linear-gradient(90deg,rgba(60,37,247,.07) 1px,transparent 1px);background-size:60px 60px;}
 .orb{position:absolute;border-radius:50%;animation:pulse 7s ease-in-out infinite;}
-.orb1{width:560px;height:560px;background:radial-gradient(circle,rgba(182,28,167,.22) 0%,transparent 70%);right:-80px;top:-80px;}
-.orb2{width:380px;height:380px;background:radial-gradient(circle,rgba(60,37,247,.18) 0%,transparent 70%);left:-60px;bottom:0;animation-duration:9s;animation-direction:reverse;}
+.orb1{width:620px;height:620px;background:radial-gradient(circle,rgba(182,28,167,.22) 0%,transparent 70%);right:-80px;top:-80px;}
+.orb2{width:420px;height:420px;background:radial-gradient(circle,rgba(60,37,247,.18) 0%,transparent 70%);left:-60px;bottom:0;animation-duration:9s;animation-direction:reverse;}
 @keyframes pulse{0%,100%{transform:scale(1);}50%{transform:scale(1.08);}}
-.badge{display:inline-flex;align-items:center;gap:8px;background:rgba(182,28,167,.14);border:1px solid rgba(182,28,167,.4);border-radius:20px;padding:6px 16px;font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--mag);margin-bottom:22px;}
-.badge::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--mag);animation:blink 1.5s infinite;}
+.badge{display:inline-flex;align-items:center;gap:10px;background:rgba(182,28,167,.14);border:1px solid rgba(182,28,167,.4);border-radius:24px;padding:8px 20px;font-size:13px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--mag);margin-bottom:26px;}
+.badge::before{content:'';width:8px;height:8px;border-radius:50%;background:var(--mag);animation:blink 1.5s infinite;}
 @keyframes blink{0%,100%{opacity:1;}50%{opacity:0;}}
-.htitle{font-size:clamp(44px,6vw,74px);font-weight:900;line-height:1.04;letter-spacing:-2px;margin-bottom:18px;position:relative;z-index:1;}
+.htitle{font-size:clamp(56px,7vw,92px);font-weight:900;line-height:1.02;letter-spacing:-2.5px;margin-bottom:22px;position:relative;z-index:1;}
 .grad{background:linear-gradient(90deg,var(--mag),var(--elec),#a78bfa);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
-.hsub{font-size:17px;color:rgba(255,255,255,.62);max-width:580px;line-height:1.65;margin-bottom:36px;position:relative;z-index:1;}
-.htags{display:flex;gap:10px;flex-wrap:wrap;position:relative;z-index:1;}
-.htag{padding:7px 17px;border-radius:20px;font-size:12px;font-weight:600;background:rgba(60,37,247,.22);border:1px solid rgba(60,37,247,.45);color:#a78bfa;}
-.hero-deals{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:36px;position:relative;z-index:1;max-width:800px;}
-.hd-card{background:var(--glass);border:1px solid rgba(255,255,255,.09);border-radius:16px;padding:22px 24px;backdrop-filter:blur(8px);}
-.hd-card h3{font-size:16px;font-weight:800;margin-bottom:8px;letter-spacing:-.3px;}
-.hd-card p{font-size:13px;color:rgba(255,255,255,.55);line-height:1.6;}
-.hd-card .pill{margin-top:12px;display:inline-flex;align-items:center;gap:6px;background:linear-gradient(90deg,rgba(182,28,167,.25),rgba(60,37,247,.25));border:1px solid rgba(60,37,247,.35);border-radius:14px;padding:4px 12px;font-size:11px;font-weight:700;color:#a78bfa;}
-.hd-card .theme-tags{display:flex;gap:6px;flex-wrap:wrap;margin-top:12px;}
-.hd-card .ttag{padding:4px 10px;border-radius:10px;font-size:10px;font-weight:700;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);color:rgba(255,255,255,.7);}
-.hd-clickable{cursor:pointer;position:relative;transition:transform .2s,box-shadow .2s,border-color .2s;}
-.hd-clickable:hover{transform:translateY(-4px);box-shadow:0 12px 36px rgba(182,28,167,.35);border-color:rgba(182,28,167,.5);}
-.hd-click-hint{font-size:10px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;color:var(--mag);margin-bottom:10px;opacity:.7;transition:opacity .2s;}
+.hsub{font-size:clamp(17px,1.6vw,22px);color:var(--t2);max-width:680px;line-height:1.65;margin-bottom:38px;position:relative;z-index:1;}
+.htags{display:flex;gap:12px;flex-wrap:wrap;position:relative;z-index:1;}
+.htag{padding:10px 22px;border-radius:24px;font-size:15px;font-weight:700;background:rgba(60,37,247,.22);border:1px solid rgba(60,37,247,.5);color:#c4b5fd;}
+.hero-deals{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:40px;position:relative;z-index:1;max-width:900px;}
+.hd-card{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);border-radius:20px;padding:28px 30px;backdrop-filter:blur(8px);}
+.hd-card h3{font-size:20px;font-weight:900;margin-bottom:10px;letter-spacing:-.3px;}
+.hd-card p{font-size:15px;color:var(--t2);line-height:1.65;}
+.hd-card .theme-tags{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px;}
+.hd-card .ttag{padding:5px 13px;border-radius:10px;font-size:13px;font-weight:700;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);color:var(--t2);}
+.hd-card .pill{margin-top:14px;display:inline-flex;align-items:center;gap:6px;background:linear-gradient(90deg,rgba(182,28,167,.25),rgba(60,37,247,.25));border:1px solid rgba(60,37,247,.4);border-radius:16px;padding:6px 16px;font-size:13px;font-weight:700;color:#c4b5fd;}
+.hd-clickable{cursor:pointer;transition:transform .2s,box-shadow .2s,border-color .2s;}
+.hd-clickable:hover{transform:translateY(-5px);box-shadow:0 16px 40px rgba(182,28,167,.35);border-color:rgba(182,28,167,.55);}
+.hd-click-hint{font-size:12px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;color:var(--mag);margin-bottom:12px;opacity:.75;transition:opacity .2s;}
 .hd-clickable:hover .hd-click-hint{opacity:1;}
-.sec-grid-2{display:grid;grid-template-columns:1fr 1fr;gap:22px;}
-.sec-grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;}
-.sec-grid-4{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;}
-.card{background:var(--card);border:1px solid rgba(255,255,255,.07);border-radius:16px;padding:26px;transition:transform .2s;}
+
+/* GRIDS */
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:24px;}
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;}
+
+/* SECTION LABEL */
+.dlabel{font-size:13px;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:var(--mag);margin-bottom:18px;padding-bottom:10px;border-bottom:1px solid rgba(182,28,167,.25);}
+
+/* CARD */
+.card{background:var(--card);border:1px solid rgba(255,255,255,.09);border-radius:18px;padding:32px;transition:transform .2s;}
 .card:hover{transform:translateY(-3px);}
-.card.accent-mag{border-top:3px solid var(--mag);}
-.card.accent-elec{border-top:3px solid var(--elec);}
-.card.accent-purple{border-top:3px solid #a78bfa;}
-.card h3{font-size:16px;font-weight:800;margin-bottom:10px;letter-spacing:-.3px;}
-.card p{font-size:13px;color:rgba(255,255,255,.6);line-height:1.65;}
-.card .icon{font-size:26px;margin-bottom:12px;}
-.chip{display:inline-flex;align-items:center;gap:6px;padding:5px 12px;border-radius:10px;font-size:11px;font-weight:700;}
-.chip-mag{background:rgba(182,28,167,.18);border:1px solid rgba(182,28,167,.4);color:#f0a0e8;}
-.chip-elec{background:rgba(60,37,247,.2);border:1px solid rgba(60,37,247,.4);color:#a78bfa;}
-.chip-grn{background:rgba(34,197,94,.15);border:1px solid rgba(34,197,94,.35);color:#86efac;}
-.chip-yel{background:rgba(251,191,36,.12);border:1px solid rgba(251,191,36,.3);color:#fde68a;}
-.bnum{font-size:38px;font-weight:900;line-height:1;}
+.card.am{border-top:3px solid var(--mag);}
+.card.ae{border-top:3px solid var(--elec);}
+.card.ap{border-top:3px solid #a78bfa;}
+.card h3{font-size:20px;font-weight:800;margin-bottom:12px;color:var(--t1);}
+.card p{font-size:15px;color:var(--t2);line-height:1.7;}
+.card .icon{font-size:32px;margin-bottom:14px;}
+
+/* BIG NUMBER */
+.bnum{font-size:var(--fs-2xl);font-weight:900;line-height:1;}
 .bnum.mag{background:linear-gradient(135deg,var(--mag),#e040d0);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
 .bnum.elec{background:linear-gradient(135deg,var(--elec),#a78bfa);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
-.dlabel{font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--mag);margin-bottom:16px;padding-bottom:8px;border-bottom:1px solid rgba(182,28,167,.2);}
+.bnum.pur{background:linear-gradient(135deg,#a78bfa,var(--elec));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.bnum.pnk{background:linear-gradient(135deg,#f472b6,var(--mag));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.bsub{font-size:12px;font-weight:800;letter-spacing:.8px;text-transform:uppercase;color:var(--t3);margin:6px 0 12px;}
+
+/* CHIP */
+.chip{display:inline-flex;align-items:center;gap:6px;padding:6px 14px;border-radius:10px;font-size:13px;font-weight:700;}
+.cm{background:rgba(182,28,167,.18);border:1px solid rgba(182,28,167,.4);color:#f9a8d4;}
+.ce{background:rgba(60,37,247,.2);border:1px solid rgba(60,37,247,.4);color:#c4b5fd;}
+.cg{background:rgba(34,197,94,.15);border:1px solid rgba(34,197,94,.4);color:#86efac;}
+.cy{background:rgba(251,191,36,.12);border:1px solid rgba(251,191,36,.35);color:#fde68a;}
+
+/* LIST */
 .blist{list-style:none;}
-.blist li{font-size:13px;color:rgba(255,255,255,.65);padding:6px 0;border-bottom:1px solid rgba(255,255,255,.05);display:flex;align-items:flex-start;gap:10px;line-height:1.5;}
-.blist li::before{content:'→';color:var(--elec);font-weight:800;flex-shrink:0;margin-top:1px;}
-.tk{background:linear-gradient(135deg,var(--card),#0d0620);border:1px solid rgba(182,28,167,.18);border-radius:14px;padding:22px;}
-.tk .tk-icon{font-size:24px;margin-bottom:10px;}
-.tk .tk-title{font-size:14px;font-weight:800;margin-bottom:6px;}
-.tk .tk-sub{font-size:11px;color:var(--mag);font-weight:700;margin-bottom:10px;letter-spacing:.3px;}
-.tk .tk-desc{font-size:12px;color:rgba(255,255,255,.55);line-height:1.6;}
-.comp-row{display:grid;grid-template-columns:180px 1fr 1fr 1fr;gap:0;border-bottom:1px solid rgba(255,255,255,.06);}
-.comp-row:last-child{border-bottom:none;}
-.comp-cell{padding:12px 16px;font-size:12.5px;}
-.comp-head{font-size:11px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;color:rgba(255,255,255,.4);padding:10px 16px;background:rgba(255,255,255,.03);}
-.comp-label{font-weight:700;color:rgba(255,255,255,.8);}
-.comp-us{color:#86efac;font-weight:600;}
-.comp-them{color:rgba(255,255,255,.35);}
-.comp-wrap{background:var(--card);border:1px solid rgba(255,255,255,.07);border-radius:16px;overflow:hidden;}
-.pcard{background:var(--card);border:1px solid rgba(255,255,255,.07);border-radius:14px;padding:20px;display:flex;flex-direction:column;gap:10px;}
-.pcard .pname{font-size:14px;font-weight:800;}
-.pcard .prole{font-size:11px;color:var(--mag);font-weight:600;letter-spacing:.3px;}
-.pcard .pdesc{font-size:12px;color:rgba(255,255,255,.55);line-height:1.6;}
+.blist li{font-size:15px;color:var(--t2);padding:9px 0;border-bottom:1px solid rgba(255,255,255,.06);display:flex;align-items:flex-start;gap:12px;line-height:1.6;}
+.blist li::before{content:'→';color:var(--elec);font-weight:900;flex-shrink:0;margin-top:1px;}
+
+/* TOOLKIT */
+.tk{background:linear-gradient(135deg,var(--card),#0d0620);border:1px solid rgba(182,28,167,.2);border-radius:16px;padding:26px;}
+.tk-icon{font-size:28px;margin-bottom:12px;}
+.tk-title{font-size:17px;font-weight:800;margin-bottom:6px;color:var(--t1);}
+.tk-sub{font-size:12px;color:var(--mag);font-weight:700;margin-bottom:12px;letter-spacing:.4px;text-transform:uppercase;}
+.tk-desc{font-size:14px;color:var(--t2);line-height:1.65;}
+.tk-label{font-size:12px;color:var(--elec);font-weight:700;margin-top:10px;display:flex;align-items:center;gap:5px;}
+
+/* COMP TABLE */
+.ctable{background:var(--card);border:1px solid rgba(255,255,255,.09);border-radius:18px;overflow:hidden;margin-bottom:28px;}
+.crow{display:grid;grid-template-columns:200px 1fr 1fr 1fr;border-bottom:1px solid rgba(255,255,255,.06);}
+.crow:last-child{border-bottom:none;}
+.chead{font-size:12px;font-weight:800;letter-spacing:.8px;text-transform:uppercase;color:rgba(255,255,255,.45);padding:14px 20px;background:rgba(255,255,255,.03);}
+.ccell{padding:14px 20px;font-size:15px;line-height:1.5;}
+.clabel{font-weight:800;color:var(--t1);}
+.cus{color:#86efac;font-weight:700;}
+.cthem{color:var(--t3);}
+
+/* BCM TABLE */
+.btable{background:var(--card);border:1px solid rgba(255,255,255,.09);border-radius:18px;overflow:hidden;margin-bottom:28px;}
+.brow{display:grid;grid-template-columns:180px 1fr 1fr 1fr;border-bottom:1px solid rgba(255,255,255,.06);}
+.brow:last-child{border-bottom:none;}
+.bhead{font-size:12px;font-weight:800;letter-spacing:.8px;text-transform:uppercase;color:rgba(255,255,255,.4);padding:13px 20px;background:rgba(255,255,255,.03);}
+.bcell{padding:13px 20px;font-size:15px;line-height:1.5;}
+.blabel{font-weight:800;color:var(--t1);}
+
+/* OBJECTION */
+.obj{background:var(--glass);border:1px solid rgba(255,255,255,.08);border-radius:12px;padding:20px;}
+.obj .q{font-size:15px;font-weight:700;color:#fde68a;margin-bottom:10px;}
+.obj .a{font-size:14px;color:var(--t2);line-height:1.65;}
+
+/* PARTNER CARD */
+.pcard{background:var(--card);border:1px solid rgba(255,255,255,.09);border-radius:16px;padding:24px;display:flex;flex-direction:column;gap:10px;}
+.pname{font-size:17px;font-weight:900;}
+.prole{font-size:12px;color:var(--mag);font-weight:700;letter-spacing:.4px;text-transform:uppercase;}
+.pdesc{font-size:14px;color:var(--t2);line-height:1.65;}
+
+/* HEATMAP */
 .hm-wrap{overflow-x:auto;}
-table.hm{width:100%;border-collapse:separate;border-spacing:4px;}
-table.hm th{font-size:10.5px;font-weight:700;letter-spacing:.4px;text-transform:uppercase;color:rgba(255,255,255,.45);padding:7px 10px;text-align:center;}
-table.hm td.rl{font-size:13px;font-weight:700;color:rgba(255,255,255,.85);white-space:nowrap;padding:7px 14px;text-align:left;}
-table.hm td.hc{width:110px;height:66px;border-radius:9px;text-align:center;vertical-align:middle;cursor:pointer;transition:transform .18s,box-shadow .18s;}
-table.hm td.hc:hover{transform:scale(1.06);box-shadow:0 6px 20px rgba(0,0,0,.4);}
-.cv{font-size:17px;font-weight:900;}
-.cl{font-size:9px;font-weight:700;opacity:.85;text-transform:uppercase;letter-spacing:.4px;margin-top:1px;}
+table.hm{width:100%;border-collapse:separate;border-spacing:5px;}
+table.hm th{font-size:13px;font-weight:800;letter-spacing:.4px;text-transform:uppercase;color:rgba(255,255,255,.55);padding:10px 12px;text-align:center;}
+table.hm td.rl{font-size:16px;font-weight:800;color:var(--t1);white-space:nowrap;padding:10px 18px;text-align:left;}
+table.hm td.hc{width:120px;height:76px;border-radius:10px;text-align:center;vertical-align:middle;cursor:pointer;transition:transform .18s,box-shadow .18s;}
+table.hm td.hc:hover{transform:scale(1.07);box-shadow:0 8px 24px rgba(0,0,0,.4);}
+.cv{font-size:22px;font-weight:900;}
+.cl{font-size:11px;font-weight:700;opacity:.9;text-transform:uppercase;letter-spacing:.4px;margin-top:2px;}
 .h5{background:linear-gradient(135deg,#7c1fa7,var(--mag));color:#fff;}
 .h4{background:linear-gradient(135deg,var(--elec),#5b45ff);color:#fff;}
 .h3{background:linear-gradient(135deg,#4338ca,#312e81);color:#fff;}
-.h2{background:linear-gradient(135deg,#1e1560,#2d1f7a);color:rgba(255,255,255,.65);}
-.h1{background:rgba(255,255,255,.04);color:rgba(255,255,255,.28);border:1px solid rgba(255,255,255,.05);}
-.leg{display:flex;gap:14px;flex-wrap:wrap;margin-top:16px;}
-.li{display:flex;align-items:center;gap:7px;font-size:11.5px;color:rgba(255,255,255,.55);}
-.ld{width:13px;height:13px;border-radius:3px;}
-.obj{background:var(--glass);border:1px solid rgba(255,255,255,.06);border-radius:10px;padding:15px;}
-.obj .q{font-size:12px;font-weight:700;color:#fde68a;margin-bottom:7px;}
-.obj .a{font-size:12px;color:rgba(255,255,255,.65);line-height:1.6;}
-.cta{padding:15px 32px;border-radius:28px;font-size:14px;font-weight:700;cursor:pointer;border:none;transition:all .25s;}
-.cta-p{background:linear-gradient(90deg,var(--mag),var(--elec));color:#fff;}
-.cta-p:hover{transform:translateY(-2px);box-shadow:0 10px 32px rgba(182,28,167,.4);}
-.cta-s{background:var(--glass);border:1px solid rgba(255,255,255,.18);color:#fff;backdrop-filter:blur(10px);}
-.bcm-row{display:grid;grid-template-columns:160px 1fr 1fr 1fr;border-bottom:1px solid rgba(255,255,255,.05);}
-.bcm-row:last-child{border-bottom:none;}
-.bcm-cell{padding:12px 14px;font-size:12.5px;}
-.bcm-label{font-weight:700;color:rgba(255,255,255,.8);}
-.bcm-head{font-size:10px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;color:rgba(255,255,255,.38);padding:9px 14px;background:rgba(255,255,255,.03);}
-.ten{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
-.ten-card{background:var(--card);border:1px solid rgba(255,255,255,.07);border-radius:13px;padding:18px 20px;display:flex;gap:14px;align-items:flex-start;}
-.ten-n{width:32px;height:32px;border-radius:8px;background:linear-gradient(135deg,var(--mag),var(--elec));display:flex;align-items:center;justify-content:center;font-weight:900;font-size:13px;flex-shrink:0;}
-.ten-body h4{font-size:13.5px;font-weight:700;margin-bottom:5px;}
-.ten-body p{font-size:12px;color:rgba(255,255,255,.55);line-height:1.55;}
-.ten-body .tk-label{font-size:10px;color:var(--elec);font-weight:700;margin-top:7px;display:flex;align-items:center;gap:5px;}
-/* GCC THEME TABS */
-.gcc-tabs{display:flex;gap:0;margin-bottom:0;border-radius:12px 12px 0 0;overflow:hidden;border:1px solid rgba(255,255,255,.08);border-bottom:none;}
-.gcc-tab{flex:1;padding:12px 16px;font-size:12px;font-weight:700;cursor:pointer;text-align:center;background:rgba(255,255,255,.03);color:rgba(255,255,255,.45);border:none;transition:all .18s;letter-spacing:.3px;}
-.gcc-tab.active{background:linear-gradient(135deg,rgba(182,28,167,.25),rgba(60,37,247,.2));color:#fff;}
-.gcc-tab:hover:not(.active){background:rgba(255,255,255,.06);color:rgba(255,255,255,.75);}
-.gcc-panel{display:none;background:var(--card);border:1px solid rgba(255,255,255,.08);border-radius:0 0 16px 16px;padding:28px;}
+.h2{background:linear-gradient(135deg,#1e1560,#2d1f7a);color:rgba(255,255,255,.7);}
+.h1{background:rgba(255,255,255,.04);color:rgba(255,255,255,.3);border:1px solid rgba(255,255,255,.06);}
+.leg{display:flex;gap:18px;flex-wrap:wrap;margin-top:18px;}
+.li{display:flex;align-items:center;gap:8px;font-size:14px;color:var(--t2);}
+.ld{width:16px;height:16px;border-radius:4px;}
+
+/* GCC TABS */
+.gcc-tabs{display:flex;gap:0;border-radius:14px 14px 0 0;overflow:hidden;border:1px solid rgba(255,255,255,.09);border-bottom:none;}
+.gcc-tab{flex:1;padding:16px 20px;font-size:15px;font-weight:700;cursor:pointer;text-align:center;background:rgba(255,255,255,.03);color:var(--t3);border:none;transition:all .18s;letter-spacing:.3px;}
+.gcc-tab.active{background:linear-gradient(135deg,rgba(182,28,167,.28),rgba(60,37,247,.22));color:var(--t1);}
+.gcc-tab:hover:not(.active){background:rgba(255,255,255,.07);color:var(--t2);}
+.gcc-panel{display:none;background:var(--card);border:1px solid rgba(255,255,255,.09);border-radius:0 0 18px 18px;padding:34px;}
 .gcc-panel.active{display:block;animation:fi .25s ease;}
-.theme-badge{display:inline-flex;align-items:center;gap:8px;padding:5px 14px;border-radius:20px;font-size:11px;font-weight:700;margin-bottom:18px;}
+.theme-badge{display:inline-flex;align-items:center;gap:10px;padding:8px 18px;border-radius:24px;font-size:14px;font-weight:700;margin-bottom:22px;}
+
+/* AI BANNER */
+.ai-banner{background:linear-gradient(135deg,rgba(60,37,247,.18),rgba(182,28,167,.15));border:1px solid rgba(182,28,167,.3);border-radius:16px;padding:22px 28px;display:flex;align-items:center;gap:20px;margin-bottom:28px;}
+.ai-banner .ai-icon{font-size:34px;flex-shrink:0;}
+.ai-banner .ai-text{font-size:16px;color:var(--t2);line-height:1.6;}
+.ai-banner .ai-text strong{color:#c4b5fd;}
+
+/* 10 THINGS */
+.ten{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+.ten-card{background:var(--card);border:1px solid rgba(255,255,255,.09);border-radius:16px;padding:24px;display:flex;gap:18px;align-items:flex-start;}
+.ten-n{width:40px;height:40px;border-radius:10px;background:linear-gradient(135deg,var(--mag),var(--elec));display:flex;align-items:center;justify-content:center;font-weight:900;font-size:16px;flex-shrink:0;}
+.ten-body h4{font-size:17px;font-weight:800;margin-bottom:7px;color:var(--t1);}
+.ten-body p{font-size:14px;color:var(--t2);line-height:1.6;}
+
 /* CALENDAR */
-.cal-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:14px;margin-bottom:32px;}
-.cal-col{display:flex;flex-direction:column;gap:0;}
-.cal-header{border-radius:12px 12px 0 0;padding:14px 16px;text-align:center;}
-.cal-header .cal-period{font-size:22px;font-weight:900;letter-spacing:-1px;}
-.cal-header .cal-label{font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;opacity:.75;margin-top:2px;}
-.cal-body{background:var(--card);border:1px solid rgba(255,255,255,.07);border-radius:0 0 12px 12px;padding:16px;flex:1;}
-.cal-bullet{display:flex;align-items:flex-start;gap:10px;padding:9px 0;border-bottom:1px solid rgba(255,255,255,.05);}
+.cal-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:16px;margin-bottom:36px;}
+.cal-col{display:flex;flex-direction:column;}
+.cal-header{border-radius:14px 14px 0 0;padding:18px 18px 14px;text-align:center;}
+.cal-period{font-size:30px;font-weight:900;letter-spacing:-1px;}
+.cal-label{font-size:12px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;opacity:.8;margin-top:3px;}
+.cal-body{background:var(--card);border:1px solid rgba(255,255,255,.09);border-radius:0 0 14px 14px;padding:18px;flex:1;}
+.cal-bullet{display:flex;align-items:flex-start;gap:12px;padding:11px 0;border-bottom:1px solid rgba(255,255,255,.06);}
 .cal-bullet:last-child{border-bottom:none;}
-.cal-dot{width:7px;height:7px;border-radius:50%;flex-shrink:0;margin-top:5px;}
-.cal-text{font-size:12px;color:rgba(255,255,255,.7);line-height:1.55;}
-.cal-owner{margin-top:12px;padding-top:10px;border-top:1px solid rgba(255,255,255,.07);}
-.cal-owner-label{font-size:9px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;color:rgba(255,255,255,.3);margin-bottom:6px;}
-.cal-owner-chip{display:inline-flex;align-items:center;gap:5px;padding:4px 10px;border-radius:8px;font-size:10px;font-weight:700;margin:2px 2px 0 0;}
-.tip{position:fixed;background:#0d0733;border:1px solid var(--mag);border-radius:10px;padding:11px 15px;font-size:12.5px;pointer-events:none;z-index:9999;max-width:210px;display:none;box-shadow:0 8px 28px rgba(0,0,0,.5);}
-.tip strong{color:var(--mag);display:block;margin-bottom:3px;}
-.ai-banner{background:linear-gradient(135deg,rgba(60,37,247,.15),rgba(182,28,167,.15));border:1px solid rgba(182,28,167,.25);border-radius:14px;padding:16px 22px;display:flex;align-items:center;gap:16px;margin-bottom:24px;}
-.ai-banner .ai-icon{font-size:28px;flex-shrink:0;}
-.ai-banner .ai-text{font-size:13px;color:rgba(255,255,255,.75);line-height:1.55;}
-.ai-banner .ai-text strong{color:#a78bfa;}
-@media(max-width:1100px){.cal-grid{grid-template-columns:1fr 1fr;}.cal-col:last-child{grid-column:1/-1;}}
-@media(max-width:900px){
-  .sec-grid-2,.sec-grid-3,.sec-grid-4,.ten,.cal-grid,.gcc-tabs{grid-template-columns:1fr;flex-direction:column;}
-  nav{padding:0 14px;}
-  .nl{gap:1px;}
-  .nb2{padding:4px 7px;font-size:9px;}
-  section{padding:70px 18px 32px;}
-  #s0{padding:74px 22px 44px;}
-  .hero-deals{grid-template-columns:1fr;}
-  .comp-row,.bcm-row{grid-template-columns:1fr;}
-}
+.cal-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0;margin-top:6px;}
+.cal-text{font-size:14px;color:var(--t2);line-height:1.6;}
+.cal-owner{margin-top:14px;padding-top:12px;border-top:1px solid rgba(255,255,255,.07);}
+.cal-owner-label{font-size:10px;font-weight:800;letter-spacing:.8px;text-transform:uppercase;color:rgba(255,255,255,.35);margin-bottom:8px;}
+.cal-chip{display:inline-flex;padding:5px 12px;border-radius:8px;font-size:12px;font-weight:700;margin:2px 2px 0 0;}
+
+/* CTA */
+.cta{padding:18px 38px;border-radius:32px;font-size:16px;font-weight:700;cursor:pointer;border:none;transition:all .25s;}
+.cta-p{background:linear-gradient(90deg,var(--mag),var(--elec));color:#fff;}
+.cta-p:hover{transform:translateY(-2px);box-shadow:0 12px 36px rgba(182,28,167,.4);}
+.cta-s{background:var(--glass);border:1px solid rgba(255,255,255,.2);color:#fff;}
+
+/* TOOLTIP */
+.tip{position:fixed;background:#0d0733;border:1px solid var(--mag);border-radius:12px;padding:14px 18px;font-size:14px;pointer-events:none;z-index:9999;max-width:240px;display:none;box-shadow:0 10px 32px rgba(0,0,0,.5);}
+.tip strong{color:var(--mag);display:block;margin-bottom:4px;}
 </style>
 </head>
 <body>
@@ -166,7 +204,7 @@ table.hm td.hc:hover{transform:scale(1.06);box-shadow:0 6px 20px rgba(0,0,0,.4);
 <nav>
   <div class="nb">Bounteous <span>×</span> Disruptive Large Deals</div>
   <div class="nl">
-    <button class="nb2 active"  onclick="go('s0',this,12)">Overview</button>
+    <button class="nb2 active" onclick="go('s0',this,12)">Overview</button>
     <button class="nb2" onclick="go('s1',this,24)">Business Case</button>
     <button class="nb2" onclick="go('s2',this,36)">BD Toolkit</button>
     <button class="nb2" onclick="go('s3',this,48)">Beat Competition</button>
@@ -177,12 +215,12 @@ table.hm td.hc:hover{transform:scale(1.06);box-shadow:0 6px 20px rgba(0,0,0,.4);
   </div>
 </nav>
 
-<!-- ── S0 HERO ───────────────────────────────────────── -->
+<!-- ── S0 OVERVIEW ── -->
 <section id="s0" class="active">
   <div class="hgrid"></div>
   <div class="orb orb1"></div>
   <div class="orb orb2"></div>
-  <div class="badge">🚀 Executive Breakout Session · Disruptive Large Deals</div>
+  <div class="badge">🚀 Executive Breakout · Disruptive Large Deals</div>
   <div class="htitle">Winning Big.<br><span class="grad">AI-Led. Now.</span></div>
   <div class="hsub">Bounteous is positioned to capture disruptive, large-scale mandates across Financial Services, Telecom & Media, Payments & FinTech, and Consumer & Dining — led entirely through the lens of AI.</div>
   <div class="htags">
@@ -191,9 +229,8 @@ table.hm td.hc:hover{transform:scale(1.06);box-shadow:0 6px 20px rgba(0,0,0,.4);
     <span class="htag">💳 Payments & FinTech</span>
     <span class="htag">🍽️ Consumer & Dining</span>
   </div>
-  <!-- Vector 1 & 2 — Overview only -->
   <div class="hero-deals">
-    <div class="hd-card hd-clickable" onclick="go('s1',document.querySelectorAll('.nb2')[1],24);setTimeout(()=>{document.getElementById('v1anchor').scrollIntoView({behavior:'smooth'})},80)">
+    <div class="hd-card hd-clickable" onclick="go('s1',document.querySelectorAll('.nb2')[1],24);setTimeout(()=>document.getElementById('v1anchor').scrollIntoView({behavior:'smooth'}),80)">
       <div class="hd-click-hint">Click to explore →</div>
       <h3>🏗️ Vector 1 — GCC Playbook</h3>
       <p>A full-spectrum GCC strategy — from taking over underperforming centres to building AI-native ones from scratch and transitioning locations for competitive advantage.</p>
@@ -204,7 +241,7 @@ table.hm td.hc:hover{transform:scale(1.06);box-shadow:0 6px 20px rgba(0,0,0,.4);
       </div>
       <div class="pill">🤖 AI-First Operating Model</div>
     </div>
-    <div class="hd-card hd-clickable" onclick="go('s1',document.querySelectorAll('.nb2')[1],24);setTimeout(()=>{document.getElementById('v2anchor').scrollIntoView({behavior:'smooth'})},80)">
+    <div class="hd-card hd-clickable" onclick="go('s1',document.querySelectorAll('.nb2')[1],24);setTimeout(()=>document.getElementById('v2anchor').scrollIntoView({behavior:'smooth'}),80)">
       <div class="hd-click-hint">Click to explore →</div>
       <h3>⚡ Vector 2 — Large Transformation</h3>
       <p>Win platform modernization and AI product buildouts as the end-to-end partner — strategy, design, and engineering under one mandate.</p>
@@ -213,328 +250,251 @@ table.hm td.hc:hover{transform:scale(1.06);box-shadow:0 6px 20px rgba(0,0,0,.4);
   </div>
 </section>
 
-<!-- ── S1 BUSINESS CASE ───────────────────────────────── -->
+<!-- ── S1 BUSINESS CASE ── -->
 <section id="s1">
   <div class="dlabel">Business Case Model</div>
 
-  <!-- VECTOR 1 — GCC PLAYBOOK -->
-  <div id="v1anchor" style="margin-bottom:36px;">
-    <div style="font-size:20px;font-weight:900;margin-bottom:4px;">🏗️ Vector 1 — GCC Playbook</div>
-    <div style="font-size:13px;color:rgba(255,255,255,.5);margin-bottom:20px;">Three strategic themes — each addressing a distinct GCC challenge. Choose the theme that fits your prospect, or combine them for a full-spectrum mandate.</div>
+  <div id="v1anchor" style="margin-bottom:40px;">
+    <div style="font-size:28px;font-weight:900;margin-bottom:6px;">🏗️ Vector 1 — GCC Playbook</div>
+    <div style="font-size:16px;color:var(--t3);margin-bottom:24px;">Three strategic themes — choose the one that fits your prospect, or combine for a full-spectrum mandate.</div>
 
-    <!-- Theme tabs -->
     <div class="gcc-tabs">
       <button class="gcc-tab active" onclick="switchTab(0)">🔄 GCC Takeout</button>
       <button class="gcc-tab" onclick="switchTab(1)">🚀 Build &amp; Scale</button>
       <button class="gcc-tab" onclick="switchTab(2)">📍 Location Transition</button>
     </div>
 
-    <!-- PANEL 0: GCC TAKEOUT -->
+    <!-- PANEL 0: TAKEOUT -->
     <div class="gcc-panel active" id="gcc-panel-0">
-      <div class="theme-badge" style="background:rgba(182,28,167,.15);border:1px solid rgba(182,28,167,.35);color:#f0a0e8;">🔄 GCC Takeout — Acquire, Re-engineer &amp; AI-Transform Underperforming Centres</div>
-      <div style="font-size:13px;color:rgba(255,255,255,.5);margin-bottom:20px;">Applicable to sub-1000 headcount GCCs in BFSI, Telecom, and Payments that are cost-bloated, high-attrition, and AI-unequipped.</div>
-
-      <!-- Business Benefits -->
-      <div class="dlabel" style="margin-bottom:14px;">Business Benefits for the Client</div>
-      <div class="sec-grid-3" style="margin-bottom:22px;">
-        <div class="card accent-mag">
-          <div class="icon">💰</div>
-          <div class="bnum mag">$7–8M</div>
-          <div style="font-size:11px;color:rgba(255,255,255,.45);margin:4px 0 8px;text-transform:uppercase;letter-spacing:.5px;">Annual Cost Saving</div>
-          <p>800-person GCC reduced to 560 via AI-enabled delivery. Savings start from month 3. No loss of output quality or throughput.</p>
-        </div>
-        <div class="card accent-elec">
-          <div class="icon">⚡</div>
-          <div class="bnum elec">40%</div>
-          <div style="font-size:11px;color:rgba(255,255,255,.45);margin:4px 0 8px;text-transform:uppercase;letter-spacing:.5px;">Faster Engineering Velocity</div>
-          <p>AI agents in QA, code review, and data ops eliminate manual bottlenecks. Sprint throughput improves from week one of steady state.</p>
-        </div>
-        <div class="card accent-purple">
-          <div class="icon">🔒</div>
-          <div class="bnum" style="background:linear-gradient(135deg,#a78bfa,var(--elec));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">Zero</div>
-          <div style="font-size:11px;color:rgba(255,255,255,.45);margin:4px 0 8px;text-transform:uppercase;letter-spacing:.5px;">Operational Risk Transfer</div>
-          <p>Bounteous assumes full management, SLA accountability, and governance — eliminating client overhead and execution risk entirely.</p>
-        </div>
+      <div class="theme-badge" style="background:rgba(182,28,167,.15);border:1px solid rgba(182,28,167,.4);color:#f9a8d4;">🔄 GCC Takeout — Acquire, Re-engineer &amp; AI-Transform Underperforming Centres</div>
+      <div class="dlabel" style="margin-bottom:18px;">Business Benefits</div>
+      <div class="g3" style="margin-bottom:28px;">
+        <div class="card am"><div class="icon">💰</div><div class="bnum mag">$7–8M</div><div class="bsub">Annual Cost Saving</div><p>800-person GCC reduced to 560 via AI-enabled delivery. Savings start from month 3 with no loss in output quality.</p></div>
+        <div class="card ae"><div class="icon">⚡</div><div class="bnum elec">40%</div><div class="bsub">Faster Engineering Velocity</div><p>AI agents in QA, code review, and data ops eliminate manual bottlenecks from week one of steady state.</p></div>
+        <div class="card ap"><div class="icon">🔒</div><div class="bnum pur">Zero</div><div class="bsub">Client Operational Risk</div><p>Bounteous assumes full management, SLA accountability, and governance — eliminating client overhead entirely.</p></div>
       </div>
-
-      <!-- Bounteous Model BCM -->
-      <div class="dlabel" style="margin-bottom:14px;">The Bounteous Model</div>
-      <div class="card" style="padding:0;overflow:hidden;margin-bottom:0;">
-        <div style="display:grid;grid-template-columns:160px 1fr 1fr 1fr;">
-          <div class="bcm-head">Dimension</div><div class="bcm-head">Client Status Quo</div><div class="bcm-head">Bounteous Model</div><div class="bcm-head">Client Gain</div>
-        </div>
-        <div class="bcm-row"><div class="bcm-cell bcm-label">Headcount</div><div class="bcm-cell" style="color:rgba(255,255,255,.5);">800 FTEs, high attrition</div><div class="bcm-cell" style="color:#86efac;">560 FTEs + AI agents</div><div class="bcm-cell"><span class="chip chip-grn">30% Cost Out</span></div></div>
-        <div class="bcm-row"><div class="bcm-cell bcm-label">Annual Cost</div><div class="bcm-cell" style="color:rgba(255,255,255,.5);">~$24M/yr burdened</div><div class="bcm-cell" style="color:#86efac;">~$16–17M/yr managed</div><div class="bcm-cell"><span class="chip chip-grn">$7–8M Saving</span></div></div>
-        <div class="bcm-row"><div class="bcm-cell bcm-label">Output Quality</div><div class="bcm-cell" style="color:rgba(255,255,255,.5);">Declining, low automation</div><div class="bcm-cell" style="color:#86efac;">AI QA, 40% faster velocity</div><div class="bcm-cell"><span class="chip chip-grn">↑ Throughput</span></div></div>
-        <div class="bcm-row"><div class="bcm-cell bcm-label">Governance</div><div class="bcm-cell" style="color:rgba(255,255,255,.5);">Client-managed, heavy overhead</div><div class="bcm-cell" style="color:#86efac;">Bounteous managed + SLA</div><div class="bcm-cell"><span class="chip chip-grn">Risk Transfer</span></div></div>
-        <div class="bcm-row"><div class="bcm-cell bcm-label">Time to ROI</div><div class="bcm-cell" style="color:rgba(255,255,255,.5);">No clear ROI trajectory</div><div class="bcm-cell" style="color:#86efac;">Positive ROI by month 6</div><div class="bcm-cell"><span class="chip chip-grn">90-Day POC</span></div></div>
-        <div class="bcm-row"><div class="bcm-cell bcm-label">AI Leverage</div><div class="bcm-cell" style="color:rgba(255,255,255,.5);">Near zero AI adoption</div><div class="bcm-cell" style="color:#86efac;">Agents across QA, data, ops</div><div class="bcm-cell"><span class="chip chip-grn">Production AI</span></div></div>
+      <div class="dlabel" style="margin-bottom:16px;">The Bounteous Model</div>
+      <div class="btable">
+        <div class="brow"><div class="bhead">Dimension</div><div class="bhead">Client Status Quo</div><div class="bhead">Bounteous Model</div><div class="bhead">Client Gain</div></div>
+        <div class="brow"><div class="bcell blabel">Headcount</div><div class="bcell" style="color:var(--t3);">800 FTEs, high attrition</div><div class="bcell" style="color:#86efac;">560 FTEs + AI agents</div><div class="bcell"><span class="chip cg">30% Cost Out</span></div></div>
+        <div class="brow"><div class="bcell blabel">Annual Cost</div><div class="bcell" style="color:var(--t3);">~$24M/yr burdened</div><div class="bcell" style="color:#86efac;">~$16–17M/yr managed</div><div class="bcell"><span class="chip cg">$7–8M Saving</span></div></div>
+        <div class="brow"><div class="bcell blabel">Output Quality</div><div class="bcell" style="color:var(--t3);">Declining, low automation</div><div class="bcell" style="color:#86efac;">AI QA, 40% faster velocity</div><div class="bcell"><span class="chip cg">↑ Throughput</span></div></div>
+        <div class="brow"><div class="bcell blabel">Governance</div><div class="bcell" style="color:var(--t3);">Client-managed, heavy overhead</div><div class="bcell" style="color:#86efac;">Bounteous managed + SLA</div><div class="bcell"><span class="chip cg">Risk Transfer</span></div></div>
+        <div class="brow"><div class="bcell blabel">Time to ROI</div><div class="bcell" style="color:var(--t3);">No clear ROI trajectory</div><div class="bcell" style="color:#86efac;">Positive ROI by month 6</div><div class="bcell"><span class="chip cg">90-Day POC</span></div></div>
+        <div class="brow"><div class="bcell blabel">AI Leverage</div><div class="bcell" style="color:var(--t3);">Near zero AI adoption</div><div class="bcell" style="color:#86efac;">Agents across QA, data, ops</div><div class="bcell"><span class="chip cg">Production AI</span></div></div>
       </div>
     </div>
 
     <!-- PANEL 1: BUILD & SCALE -->
     <div class="gcc-panel" id="gcc-panel-1">
-      <div class="theme-badge" style="background:rgba(60,37,247,.15);border:1px solid rgba(60,37,247,.35);color:#a78bfa;">🚀 Build &amp; Scale — Design &amp; Launch an AI-Native GCC from the Ground Up</div>
-      <div style="font-size:13px;color:rgba(255,255,255,.5);margin-bottom:20px;">For clients who lack an India delivery presence or have a nascent GCC they want to grow rapidly with an AI-first operating model from day one.</div>
-
-      <!-- Business Benefits -->
-      <div class="dlabel" style="margin-bottom:14px;">Business Benefits for the Client</div>
-      <div class="sec-grid-3" style="margin-bottom:22px;">
-        <div class="card accent-elec">
-          <div class="icon">⏱️</div>
-          <div class="bnum elec">90</div>
-          <div style="font-size:11px;color:rgba(255,255,255,.45);margin:4px 0 8px;text-transform:uppercase;letter-spacing:.5px;">Days to First Live Team</div>
-          <p>Bounteous handles entity setup, talent acquisition, tooling, and onboarding. Client gets a productive, AI-enabled team in under 90 days — not 12 months.</p>
-        </div>
-        <div class="card accent-mag">
-          <div class="icon">📉</div>
-          <div class="bnum mag">50%</div>
-          <div style="font-size:11px;color:rgba(255,255,255,.45);margin:4px 0 8px;text-transform:uppercase;letter-spacing:.5px;">Lower Build Cost vs. DIY</div>
-          <p>Leveraging Bounteous' existing India delivery infrastructure, talent pools, and AI toolchain eliminates the cost of building capability from scratch.</p>
-        </div>
-        <div class="card accent-purple">
-          <div class="icon">📈</div>
-          <div class="bnum" style="background:linear-gradient(135deg,#a78bfa,var(--elec));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">3–5x</div>
-          <div style="font-size:11px;color:rgba(255,255,255,.45);margin:4px 0 8px;text-transform:uppercase;letter-spacing:.5px;">Scale Multiplier in Year 2</div>
-          <p>AI-native design means the GCC can scale 3–5x in output without proportional headcount growth — unlocking compounding ROI from year two.</p>
-        </div>
+      <div class="theme-badge" style="background:rgba(60,37,247,.15);border:1px solid rgba(60,37,247,.4);color:#c4b5fd;">🚀 Build &amp; Scale — Design &amp; Launch an AI-Native GCC from the Ground Up</div>
+      <div class="dlabel" style="margin-bottom:18px;">Business Benefits</div>
+      <div class="g3" style="margin-bottom:28px;">
+        <div class="card ae"><div class="icon">⏱️</div><div class="bnum elec">90</div><div class="bsub">Days to First Live Team</div><p>Entity setup, talent acquisition, tooling, and onboarding handled by Bounteous. Productive AI-enabled team in under 90 days.</p></div>
+        <div class="card am"><div class="icon">📉</div><div class="bnum mag">50%</div><div class="bsub">Lower Build Cost vs. DIY</div><p>Leveraging Bounteous' India delivery infrastructure, talent pools, and AI toolchain eliminates the cost of building from scratch.</p></div>
+        <div class="card ap"><div class="icon">📈</div><div class="bnum pur">3–5×</div><div class="bsub">Scale Multiplier in Year 2</div><p>AI-native design means the GCC scales 3–5× in output without proportional headcount growth — compounding ROI from year two.</p></div>
       </div>
-
-      <!-- Bounteous Model BCM -->
-      <div class="dlabel" style="margin-bottom:14px;">The Bounteous Model</div>
-      <div class="card" style="padding:0;overflow:hidden;margin-bottom:0;">
-        <div style="display:grid;grid-template-columns:160px 1fr 1fr 1fr;">
-          <div class="bcm-head">Dimension</div><div class="bcm-head">DIY Build Approach</div><div class="bcm-head">Bounteous Build &amp; Scale</div><div class="bcm-head">Client Gain</div>
-        </div>
-        <div class="bcm-row"><div class="bcm-cell bcm-label">Time to First Team</div><div class="bcm-cell" style="color:rgba(255,255,255,.5);">9–18 months typical</div><div class="bcm-cell" style="color:#86efac;">90 days to productive team</div><div class="bcm-cell"><span class="chip chip-grn">10× Faster</span></div></div>
-        <div class="bcm-row"><div class="bcm-cell bcm-label">Setup Cost</div><div class="bcm-cell" style="color:rgba(255,255,255,.5);">$3–6M entity + infra build</div><div class="bcm-cell" style="color:#86efac;">Shared infra, lower entry</div><div class="bcm-cell"><span class="chip chip-grn">50% Cost Reduction</span></div></div>
-        <div class="bcm-row"><div class="bcm-cell bcm-label">Talent Strategy</div><div class="bcm-cell" style="color:rgba(255,255,255,.5);">Cold hiring, high risk</div><div class="bcm-cell" style="color:#86efac;">Pre-screened AI talent pools</div><div class="bcm-cell"><span class="chip chip-grn">Proven Talent</span></div></div>
-        <div class="bcm-row"><div class="bcm-cell bcm-label">AI Toolchain</div><div class="bcm-cell" style="color:rgba(255,255,255,.5);">Assembled post-launch, ad hoc</div><div class="bcm-cell" style="color:#86efac;">Day-1 AI agents + governance</div><div class="bcm-cell"><span class="chip chip-grn">Native AI from Start</span></div></div>
-        <div class="bcm-row"><div class="bcm-cell bcm-label">Scalability</div><div class="bcm-cell" style="color:rgba(255,255,255,.5);">Linear headcount scaling</div><div class="bcm-cell" style="color:#86efac;">AI-multiplied output</div><div class="bcm-cell"><span class="chip chip-grn">3–5× Output/FTE</span></div></div>
-        <div class="bcm-row"><div class="bcm-cell bcm-label">Client Ownership</div><div class="bcm-cell" style="color:rgba(255,255,255,.5);">100% client overhead burden</div><div class="bcm-cell" style="color:#86efac;">Managed → Transition model</div><div class="bcm-cell"><span class="chip chip-grn">Flexible Exit Path</span></div></div>
+      <div class="dlabel" style="margin-bottom:16px;">The Bounteous Model</div>
+      <div class="btable">
+        <div class="brow"><div class="bhead">Dimension</div><div class="bhead">DIY Build Approach</div><div class="bhead">Bounteous Build &amp; Scale</div><div class="bhead">Client Gain</div></div>
+        <div class="brow"><div class="bcell blabel">Time to First Team</div><div class="bcell" style="color:var(--t3);">9–18 months typical</div><div class="bcell" style="color:#86efac;">90 days to productive team</div><div class="bcell"><span class="chip cg">10× Faster</span></div></div>
+        <div class="brow"><div class="bcell blabel">Setup Cost</div><div class="bcell" style="color:var(--t3);">$3–6M entity + infra build</div><div class="bcell" style="color:#86efac;">Shared infra, lower entry</div><div class="bcell"><span class="chip cg">50% Cost Reduction</span></div></div>
+        <div class="brow"><div class="bcell blabel">Talent Strategy</div><div class="bcell" style="color:var(--t3);">Cold hiring, high risk</div><div class="bcell" style="color:#86efac;">Pre-screened AI talent pools</div><div class="bcell"><span class="chip cg">Proven Talent</span></div></div>
+        <div class="brow"><div class="bcell blabel">AI Toolchain</div><div class="bcell" style="color:var(--t3);">Assembled post-launch, ad hoc</div><div class="bcell" style="color:#86efac;">Day-1 AI agents + governance</div><div class="bcell"><span class="chip cg">Native AI from Start</span></div></div>
+        <div class="brow"><div class="bcell blabel">Scalability</div><div class="bcell" style="color:var(--t3);">Linear headcount scaling</div><div class="bcell" style="color:#86efac;">AI-multiplied output</div><div class="bcell"><span class="chip cg">3–5× Output/FTE</span></div></div>
+        <div class="brow"><div class="bcell blabel">Client Ownership</div><div class="bcell" style="color:var(--t3);">100% client overhead burden</div><div class="bcell" style="color:#86efac;">Managed → Transition model</div><div class="bcell"><span class="chip cg">Flexible Exit Path</span></div></div>
       </div>
     </div>
 
     <!-- PANEL 2: LOCATION TRANSITION -->
     <div class="gcc-panel" id="gcc-panel-2">
-      <div class="theme-badge" style="background:rgba(244,114,182,.12);border:1px solid rgba(244,114,182,.35);color:#f9a8d4;">📍 Location Transition — Move &amp; Replatform a GCC to a Better-Value Location</div>
-      <div style="font-size:13px;color:rgba(255,255,255,.5);margin-bottom:20px;">For clients whose GCC is in a cost-inflating or talent-constrained location and need a transition partner to move operations with zero business disruption.</div>
-
-      <!-- Business Benefits -->
-      <div class="dlabel" style="margin-bottom:14px;">Business Benefits for the Client</div>
-      <div class="sec-grid-3" style="margin-bottom:22px;">
-        <div class="card" style="border-top:3px solid #f472b6;">
-          <div class="icon">🗺️</div>
-          <div class="bnum" style="background:linear-gradient(135deg,#f472b6,var(--mag));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">25%</div>
-          <div style="font-size:11px;color:rgba(255,255,255,.45);margin:4px 0 8px;text-transform:uppercase;letter-spacing:.5px;">Labour Arbitrage Recovery</div>
-          <p>Moving from a saturated Tier-1 location to a Tier-2 or alternative hub (e.g., Pune → Hyderabad, Eastern Europe → India) recovers 20–25% in burdened costs immediately.</p>
-        </div>
-        <div class="card accent-mag">
-          <div class="icon">🔄</div>
-          <div class="bnum mag">Zero</div>
-          <div style="font-size:11px;color:rgba(255,255,255,.45);margin:4px 0 8px;text-transform:uppercase;letter-spacing:.5px;">Business Disruption</div>
-          <p>Bounteous runs a parallel-operating model during transition — new location is live and productive before the old one winds down. No sprint interruption.</p>
-        </div>
-        <div class="card accent-elec">
-          <div class="icon">🤖</div>
-          <div class="bnum elec">AI+</div>
-          <div style="font-size:11px;color:rgba(255,255,255,.45);margin:4px 0 8px;text-transform:uppercase;letter-spacing:.5px;">Transition = Transformation</div>
-          <p>The move is also an opportunity to re-engineer the operating model with AI. Clients don't just relocate — they emerge leaner, faster, and AI-native on the other side.</p>
-        </div>
+      <div class="theme-badge" style="background:rgba(244,114,182,.12);border:1px solid rgba(244,114,182,.4);color:#f9a8d4;">📍 Location Transition — Move &amp; Replatform a GCC to a Better-Value Location</div>
+      <div class="dlabel" style="margin-bottom:18px;">Business Benefits</div>
+      <div class="g3" style="margin-bottom:28px;">
+        <div class="card" style="border-top:3px solid #f472b6;"><div class="icon">🗺️</div><div class="bnum pnk">25%</div><div class="bsub">Labour Arbitrage Recovery</div><p>Moving from a saturated Tier-1 hub to a Tier-2 or alternative location recovers 20–25% in burdened costs immediately.</p></div>
+        <div class="card am"><div class="icon">🔄</div><div class="bnum mag">Zero</div><div class="bsub">Business Disruption</div><p>Parallel-operating model during transition — new location is live and productive before the old one winds down.</p></div>
+        <div class="card ae"><div class="icon">🤖</div><div class="bnum elec">AI+</div><div class="bsub">Transition = Transformation</div><p>The move is an opportunity to re-engineer the operating model. Clients emerge leaner, faster, and AI-native on the other side.</p></div>
       </div>
-
-      <!-- Bounteous Model BCM -->
-      <div class="dlabel" style="margin-bottom:14px;">The Bounteous Model</div>
-      <div class="card" style="padding:0;overflow:hidden;margin-bottom:0;">
-        <div style="display:grid;grid-template-columns:160px 1fr 1fr 1fr;">
-          <div class="bcm-head">Dimension</div><div class="bcm-head">Client Status Quo</div><div class="bcm-head">Bounteous Transition Model</div><div class="bcm-head">Client Gain</div>
-        </div>
-        <div class="bcm-row"><div class="bcm-cell bcm-label">Location Strategy</div><div class="bcm-cell" style="color:rgba(255,255,255,.5);">Saturated hub, rising costs</div><div class="bcm-cell" style="color:#86efac;">Optimised Tier-2 or new market</div><div class="bcm-cell"><span class="chip chip-grn">25% Cost Recovery</span></div></div>
-        <div class="bcm-row"><div class="bcm-cell bcm-label">Transition Risk</div><div class="bcm-cell" style="color:rgba(255,255,255,.5);">High — knowledge loss, disruption</div><div class="bcm-cell" style="color:#86efac;">Parallel-run, zero sprint impact</div><div class="bcm-cell"><span class="chip chip-grn">Zero Downtime</span></div></div>
-        <div class="bcm-row"><div class="bcm-cell bcm-label">Knowledge Transfer</div><div class="bcm-cell" style="color:rgba(255,255,255,.5);">Manual, slow, incomplete</div><div class="bcm-cell" style="color:#86efac;">AI-assisted KT in weeks not months</div><div class="bcm-cell"><span class="chip chip-grn">3× Faster KT</span></div></div>
-        <div class="bcm-row"><div class="bcm-cell bcm-label">Talent in New Hub</div><div class="bcm-cell" style="color:rgba(255,255,255,.5);">Cold hiring with no brand</div><div class="bcm-cell" style="color:#86efac;">Bounteous talent pools, day-1 ready</div><div class="bcm-cell"><span class="chip chip-grn">Proven Talent</span></div></div>
-        <div class="bcm-row"><div class="bcm-cell bcm-label">AI Integration</div><div class="bcm-cell" style="color:rgba(255,255,255,.5);">Deferred to after transition</div><div class="bcm-cell" style="color:#86efac;">Embedded in transition plan</div><div class="bcm-cell"><span class="chip chip-grn">AI-Native on Day 1</span></div></div>
-        <div class="bcm-row"><div class="bcm-cell bcm-label">Time to Steady State</div><div class="bcm-cell" style="color:rgba(255,255,255,.5);">18–24 months typical</div><div class="bcm-cell" style="color:#86efac;">6–9 months with Bounteous</div><div class="bcm-cell"><span class="chip chip-grn">2× Faster</span></div></div>
+      <div class="dlabel" style="margin-bottom:16px;">The Bounteous Model</div>
+      <div class="btable">
+        <div class="brow"><div class="bhead">Dimension</div><div class="bhead">Client Status Quo</div><div class="bhead">Bounteous Transition Model</div><div class="bhead">Client Gain</div></div>
+        <div class="brow"><div class="bcell blabel">Location Strategy</div><div class="bcell" style="color:var(--t3);">Saturated hub, rising costs</div><div class="bcell" style="color:#86efac;">Optimised Tier-2 or new market</div><div class="bcell"><span class="chip cg">25% Cost Recovery</span></div></div>
+        <div class="brow"><div class="bcell blabel">Transition Risk</div><div class="bcell" style="color:var(--t3);">High — knowledge loss, disruption</div><div class="bcell" style="color:#86efac;">Parallel-run, zero sprint impact</div><div class="bcell"><span class="chip cg">Zero Downtime</span></div></div>
+        <div class="brow"><div class="bcell blabel">Knowledge Transfer</div><div class="bcell" style="color:var(--t3);">Manual, slow, incomplete</div><div class="bcell" style="color:#86efac;">AI-assisted KT in weeks not months</div><div class="bcell"><span class="chip cg">3× Faster KT</span></div></div>
+        <div class="brow"><div class="bcell blabel">Talent in New Hub</div><div class="bcell" style="color:var(--t3);">Cold hiring with no brand</div><div class="bcell" style="color:#86efac;">Bounteous talent pools, day-1 ready</div><div class="bcell"><span class="chip cg">Proven Talent</span></div></div>
+        <div class="brow"><div class="bcell blabel">AI Integration</div><div class="bcell" style="color:var(--t3);">Deferred to after transition</div><div class="bcell" style="color:#86efac;">Embedded in transition plan</div><div class="bcell"><span class="chip cg">AI-Native on Day 1</span></div></div>
+        <div class="brow"><div class="bcell blabel">Time to Steady State</div><div class="bcell" style="color:var(--t3);">18–24 months typical</div><div class="bcell" style="color:#86efac;">6–9 months with Bounteous</div><div class="bcell"><span class="chip cg">2× Faster</span></div></div>
       </div>
     </div>
   </div>
 
-  <!-- VECTOR 2 — LARGE TRANSFORMATION -->
+  <!-- VECTOR 2 -->
   <div id="v2anchor">
-    <div style="font-size:20px;font-weight:900;margin-bottom:4px;">⚡ Vector 2 — Large Transformation</div>
-    <div style="font-size:13px;color:rgba(255,255,255,.5);margin-bottom:18px;">Platform modernization, AI product engineering, and core system re-engineering — positioned as outcome-based mandates.</div>
-    <div class="sec-grid-2">
-      <div class="card accent-mag">
-        <div class="dlabel" style="margin-bottom:12px;">Value Levers</div>
+    <div style="font-size:28px;font-weight:900;margin-bottom:6px;">⚡ Vector 2 — Large Transformation</div>
+    <div style="font-size:16px;color:var(--t3);margin-bottom:22px;">Platform modernization, AI product engineering, and core system re-engineering — outcome-based mandates.</div>
+    <div class="g2">
+      <div class="card am">
+        <div class="dlabel" style="margin-bottom:14px;">Value Levers</div>
         <ul class="blist">
           <li>Platform modernization unlocks cloud-native cost economics (avg 35% infra saving)</li>
           <li>AI product engineering generates new revenue lines and reduces OpEx simultaneously</li>
           <li>KYC & compliance automation proven to cut $1M+/year in mismatched policy risk</li>
-          <li>Unified data platforms cut campaign prep time from hours to minutes</li>
+          <li>Unified data platforms cut campaign prep from hours to minutes</li>
           <li>Real-time settlement engines support 5M+ TPS across 120 currencies</li>
-          <li>Murex consolidation reduces operational risk and CI/CD accelerates release velocity</li>
+          <li>Murex consolidation reduces operational risk; CI/CD accelerates release velocity</li>
         </ul>
       </div>
-      <div class="card accent-elec">
-        <div class="dlabel" style="margin-bottom:12px;">Deal Structure Options</div>
-        <div style="margin-bottom:12px;"><div style="font-size:13px;font-weight:700;margin-bottom:5px;">🏷️ Time & Materials (Entry)</div><div style="font-size:12px;color:rgba(255,255,255,.5);">Low risk for client. Ideal for beachhead engagements. Grow through delivery trust.</div></div>
-        <div style="background:rgba(60,37,247,.1);border-left:3px solid var(--elec);padding:10px 14px;border-radius:0 8px 8px 0;margin-bottom:12px;"><div style="font-size:13px;font-weight:700;margin-bottom:4px;">🎯 Outcome-Based (Preferred)</div><div style="font-size:12px;color:rgba(255,255,255,.6);">We commit to measurable KPIs (savings, velocity, uptime). Premium pricing justified by proven ROI. Differentiating vs. large SIs.</div></div>
-        <div style="font-size:13px;font-weight:700;margin-bottom:5px;">🔄 Managed Service (Long-term)</div>
-        <div style="font-size:12px;color:rgba(255,255,255,.5);">Multi-year annuity revenue. Client gets predictable costs; Bounteous gets recurring scale.</div>
+      <div class="card ae">
+        <div class="dlabel" style="margin-bottom:14px;">Deal Structure Options</div>
+        <div style="margin-bottom:16px;"><div style="font-size:17px;font-weight:800;margin-bottom:6px;">🏷️ Time &amp; Materials (Entry)</div><div style="font-size:15px;color:var(--t2);">Low risk for client. Ideal for beachhead engagements. Grow through delivery trust.</div></div>
+        <div style="background:rgba(60,37,247,.12);border-left:4px solid var(--elec);padding:14px 18px;border-radius:0 10px 10px 0;margin-bottom:16px;"><div style="font-size:17px;font-weight:800;margin-bottom:6px;">🎯 Outcome-Based (Preferred)</div><div style="font-size:15px;color:var(--t2);">We commit to measurable KPIs. Premium pricing justified by proven ROI. Differentiates us from large SIs.</div></div>
+        <div style="font-size:17px;font-weight:800;margin-bottom:6px;">🔄 Managed Service (Long-term)</div>
+        <div style="font-size:15px;color:var(--t2);">Multi-year annuity. Client gets predictable costs; Bounteous gets recurring scale.</div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ── S2 BD TOOLKIT ──────────────────────────────────── -->
+<!-- ── S2 BD TOOLKIT ── -->
 <section id="s2">
   <div class="dlabel">BD Toolkit for Field Teams</div>
-  <div style="font-size:13px;color:rgba(255,255,255,.5);margin-bottom:16px;max-width:680px;">Everything a deal originator, account executive, or practice leader needs to identify, qualify, and advance a disruptive large deal from first conversation to commercial close.</div>
+  <div style="font-size:16px;color:var(--t2);margin-bottom:22px;max-width:780px;line-height:1.65;">Everything a deal originator, account executive, or practice leader needs — from first conversation to commercial close.</div>
   <div class="ai-banner">
     <div class="ai-icon">🤖</div>
-    <div class="ai-text"><strong>AI Use Case &amp; Demo Library — Active across BD and 10 Things To Do.</strong> Every BD conversation should be anchored in a live, sector-specific AI demo drawn from the library. Use Case cards are indexed by BU and deal stage, with quantified outcomes ready to deploy in any executive meeting.</div>
+    <div class="ai-text"><strong>AI Use Case &amp; Demo Library — active across BD and 10 Things To Do.</strong> Every BD conversation must be anchored in a live, sector-specific AI demo. Use Case cards are indexed by BU and deal stage with quantified outcomes ready for any executive meeting.</div>
   </div>
-  <div class="sec-grid-3" style="margin-bottom:22px;">
-    <div class="tk"><div class="tk-icon">🔭</div><div class="tk-title">GCC Radar — Signal Sheet</div><div class="tk-sub">Targeting Tool</div><div class="tk-desc">A scored shortlist template to identify GCC Playbook candidates: headcount, attrition signals, reported cost overruns, board commentary in earnings calls, and absence of AI roadmap in public disclosures.</div></div>
-    <div class="tk"><div class="tk-icon">💼</div><div class="tk-title">Executive Discovery Deck</div><div class="tk-sub">Meeting 1 Asset</div><div class="tk-desc">A 6-slide "burning platform" narrative tailored per BU. Opens with the client's pain (not our capability) and ends with a co-innovation workshop invite.</div></div>
-    <div class="tk"><div class="tk-icon">📊</div><div class="tk-title">ROI Business Case Calculator</div><div class="tk-sub">Qualification Tool</div><div class="tk-desc">A pre-built Excel/Google Sheet model. Input: current GCC headcount, burdened cost, attrition rate. Output: projected saving, payback period, and 3-year NPV under Bounteous AI-led model.</div></div>
-    <div class="tk" style="border:1px solid rgba(167,139,250,.35);background:linear-gradient(135deg,#1a0d45,#0d0433);">
+  <div class="g3" style="margin-bottom:28px;">
+    <div class="tk"><div class="tk-icon">🔭</div><div class="tk-title">GCC Radar — Signal Sheet</div><div class="tk-sub">Targeting Tool</div><div class="tk-desc">Scored shortlist template: GCC headcount, attrition signals, cost overruns, board commentary in earnings calls, and absence of AI roadmap in public disclosures.</div></div>
+    <div class="tk"><div class="tk-icon">💼</div><div class="tk-title">Executive Discovery Deck</div><div class="tk-sub">Meeting 1 Asset</div><div class="tk-desc">6-slide "burning platform" narrative per BU. Opens with client pain, not our capability — ends with a co-innovation workshop invite.</div></div>
+    <div class="tk"><div class="tk-icon">📊</div><div class="tk-title">ROI Business Case Calculator</div><div class="tk-sub">Qualification Tool</div><div class="tk-desc">Input: GCC headcount, burdened cost, attrition rate. Output: projected saving, payback period, and 3-year NPV under the Bounteous AI-led model.</div></div>
+    <div class="tk" style="border:1px solid rgba(167,139,250,.4);background:linear-gradient(135deg,#1a0d45,#0d0433);">
       <div class="tk-icon">🤖</div>
       <div class="tk-title">AI Use Case &amp; Demo Library</div>
       <div class="tk-sub" style="color:#a78bfa;">Core BD Asset · Used in 10 Things To Do</div>
-      <div class="tk-desc">Curated AI use cases by BU with quantified outcomes — KYC (2hr/analyst/day), document reconciliation ($1M+ risk), settlement engine (5M TPS). Live demo environments per BU. Referenced directly in actions 3, 4, and 9 of the 10 Things plan.</div>
+      <div class="tk-desc">Curated AI use cases by BU with quantified outcomes — KYC (2hr/analyst/day), document reconciliation ($1M+ risk), settlement engine (5M TPS). Live demo environments per BU. Referenced in actions 3, 4, and 9.</div>
     </div>
-    <div class="tk"><div class="tk-icon">🧪</div><div class="tk-title">AI Co-Innovation Workshop Kit</div><div class="tk-sub">Land & Qualify</div><div class="tk-desc">A facilitated 2-day workshop playbook for C-suite and VP audiences. Outputs: a prioritised AI use case map, a 90-day POC roadmap, and a rough deal size estimate.</div></div>
-    <div class="tk"><div class="tk-icon">⚔️</div><div class="tk-title">Competitive Battle Cards</div><div class="tk-sub">Deal Defence</div><div class="tk-desc">One-pagers per competitor (Accenture, Wipro, HCL, EPAM, Thoughtworks). Covers: where they win, where they lose, our attack angles, and verbatim responses to objections.</div></div>
-    <div class="tk"><div class="tk-icon">📋</div><div class="tk-title">Deal Qualification Scorecard</div><div class="tk-sub">Pipeline Hygiene</div><div class="tk-desc">A MEDDIC-aligned scoring template to assess budget authority, decision timeline, GCC pain depth, AI maturity, competitive landscape, and sponsor access.</div></div>
-    <div class="tk"><div class="tk-icon">🎯</div><div class="tk-title">Proposal Response Accelerator</div><div class="tk-sub">RFP / RFI Response</div><div class="tk-desc">A modular library of pre-approved content blocks for RFP responses — capability statements, case studies by BU, AI differentiation narrative, and pricing model templates.</div></div>
-    <div class="tk"><div class="tk-icon">📣</div><div class="tk-title">Account Expansion Playbook</div><div class="tk-sub">Grow The Deal</div><div class="tk-desc">A structured approach to expanding from initial GCC Playbook or beachhead engagement to a multi-service mandate — with trigger events and expansion conversation guides.</div></div>
+    <div class="tk"><div class="tk-icon">🧪</div><div class="tk-title">AI Co-Innovation Workshop Kit</div><div class="tk-sub">Land & Qualify</div><div class="tk-desc">2-day C-suite workshop playbook. Outputs: prioritised AI use case map, 90-day POC roadmap, and rough deal size estimate. Acts as the commercial entry point.</div></div>
+    <div class="tk"><div class="tk-icon">⚔️</div><div class="tk-title">Competitive Battle Cards</div><div class="tk-sub">Deal Defence</div><div class="tk-desc">One-pagers per competitor (Accenture, Wipro, HCL, EPAM, Thoughtworks): where they win, where they lose, our attack angles, and verbatim objection responses.</div></div>
+    <div class="tk"><div class="tk-icon">📋</div><div class="tk-title">Deal Qualification Scorecard</div><div class="tk-sub">Pipeline Hygiene</div><div class="tk-desc">MEDDIC-aligned scoring: budget authority, decision timeline, GCC pain depth, AI maturity, competitive landscape, and sponsor access.</div></div>
+    <div class="tk"><div class="tk-icon">🎯</div><div class="tk-title">Proposal Response Accelerator</div><div class="tk-sub">RFP / RFI Response</div><div class="tk-desc">Modular library of pre-approved RFP content blocks — capability statements, BU case studies, AI differentiation narrative, and pricing model templates.</div></div>
+    <div class="tk"><div class="tk-icon">📣</div><div class="tk-title">Account Expansion Playbook</div><div class="tk-sub">Grow The Deal</div><div class="tk-desc">Structured approach from GCC beachhead to multi-service mandate — with trigger events, stakeholder mapping templates, and expansion conversation guides.</div></div>
   </div>
-  <div class="card" style="background:linear-gradient(135deg,rgba(182,28,167,.12),rgba(60,37,247,.12));border-color:rgba(182,28,167,.25);">
-    <div class="dlabel">Quick Qualification Test — Ask These 5 Questions</div>
-    <div class="sec-grid-2" style="gap:12px;margin-top:0;">
-      <div class="obj"><div class="q">1. What is your current GCC headcount and annual all-in cost?</div><div class="a">If &lt;1000 people and cost &gt;$10M — it's a GCC Playbook candidate. Qualify which theme (Takeout, Build & Scale, or Location Transition) fits.</div></div>
-      <div class="obj"><div class="q">2. How many AI pilots have you run in the last 18 months — and how many are in production?</div><div class="a">If pilots ≥ 3 and production = 0, they are stuck. This is our most winnable deal type.</div></div>
-      <div class="obj"><div class="q">3. What is your attrition rate and average tenure of senior engineers?</div><div class="a">Attrition &gt;18% is a red flag for the client and a green flag for Bounteous.</div></div>
-      <div class="obj"><div class="q">4. Do you have a board-level mandate to reduce cost or improve engineering velocity?</div><div class="a">A board mandate = urgency = faster deal cycle. Always qualify for executive sponsor.</div></div>
+  <div class="card" style="background:linear-gradient(135deg,rgba(182,28,167,.1),rgba(60,37,247,.1));border-color:rgba(182,28,167,.3);">
+    <div class="dlabel">Quick Qualification — 5 Questions</div>
+    <div class="g2" style="gap:14px;margin-top:4px;">
+      <div class="obj"><div class="q">1. What is your GCC headcount and annual all-in cost?</div><div class="a">If &lt;1000 people and cost &gt;$10M — it's a GCC Playbook candidate. Qualify which theme fits: Takeout, Build &amp; Scale, or Location Transition.</div></div>
+      <div class="obj"><div class="q">2. How many AI pilots in the last 18 months are now in production?</div><div class="a">If pilots ≥ 3 and production = 0, they are stuck. This is our most winnable deal type.</div></div>
+      <div class="obj"><div class="q">3. What is your GCC attrition rate and average senior engineer tenure?</div><div class="a">Attrition &gt;18% is a red flag for the client and a green flag for Bounteous.</div></div>
+      <div class="obj"><div class="q">4. Is there a board mandate to reduce cost or improve engineering velocity?</div><div class="a">A board mandate = urgency = faster deal cycle. Always qualify for executive sponsor access.</div></div>
       <div class="obj"><div class="q">5. What is your current vendor landscape — SI, boutique, or in-house GCC?</div><div class="a">Heavy SI dependency = lead with agility + domain depth. In-house GCC = lead with cost + AI value.</div></div>
     </div>
   </div>
 </section>
 
-<!-- ── S3 COMPETITION ──────────────────────────────────── -->
+<!-- ── S3 COMPETITION ── -->
 <section id="s3">
   <div class="dlabel">Competitive Positioning</div>
-  <div style="font-size:13px;color:rgba(255,255,255,.5);margin-bottom:24px;max-width:680px;">How Bounteous wins — and impresses — in a crowded field of large SIs, boutique shops, and offshore factories.</div>
-  <div class="comp-wrap" style="margin-bottom:24px;">
-    <div class="comp-row">
-      <div class="comp-head">Dimension</div>
-      <div class="comp-head" style="color:var(--mag);">✦ Bounteous</div>
-      <div class="comp-head">Large SI (Accenture/Wipro)</div>
-      <div class="comp-head">Boutique (EPAM/Thoughtworks)</div>
-    </div>
-    <div class="comp-row"><div class="comp-cell comp-label">AI in Delivery</div><div class="comp-cell comp-us">Native AI agents across QA, data, code — in production</div><div class="comp-cell comp-them">Marketed heavily; often PowerPoint-stage</div><div class="comp-cell comp-them">Strong engineering; limited AI governance</div></div>
-    <div class="comp-row"><div class="comp-cell comp-label">Domain Depth</div><div class="comp-cell comp-us">Deep FSI, Payments, Telecom vertical expertise</div><div class="comp-cell comp-them">Broad but shallow — generalist model</div><div class="comp-cell comp-them">Engineering-first; limited strategy or design</div></div>
-    <div class="comp-row"><div class="comp-cell comp-label">Speed to Value</div><div class="comp-cell comp-us">60-day AI POC with real metrics</div><div class="comp-cell comp-them">6–12 month mobilisation typical</div><div class="comp-cell comp-them">Fast dev; slow to prove business ROI</div></div>
-    <div class="comp-row"><div class="comp-cell comp-label">Outcome Risk</div><div class="comp-cell comp-us">Willing to go at-risk on KPIs</div><div class="comp-cell comp-them">Fixed-fee or T&M; rarely at-risk</div><div class="comp-cell comp-them">Rarely commit to business outcomes</div></div>
-    <div class="comp-row"><div class="comp-cell comp-label">GCC Playbook</div><div class="comp-cell comp-us">All 3 themes: Takeout, Build & Scale, Location Transition</div><div class="comp-cell comp-them">Compete but over-engineer the solution</div><div class="comp-cell comp-them">Limited GCC transition capability</div></div>
-    <div class="comp-row"><div class="comp-cell comp-label">Vendor Lock-in</div><div class="comp-cell comp-us">Model & platform agnostic — best of breed</div><div class="comp-cell comp-them">Push preferred partners / cloud vendors</div><div class="comp-cell comp-them">Often AWS or GCP biased</div></div>
-    <div class="comp-row"><div class="comp-cell comp-label">Design + Eng</div><div class="comp-cell comp-us">Integrated — one team, one P&L</div><div class="comp-cell comp-them">Separate design and engineering tracks</div><div class="comp-cell comp-them">Engineering-led; design is secondary</div></div>
-    <div class="comp-row"><div class="comp-cell comp-label">Price Point</div><div class="comp-cell comp-us">Premium boutique at competitive offshore rates</div><div class="comp-cell comp-them">Expensive with large overhead layers</div><div class="comp-cell comp-them">Comparable but limited AI leverage</div></div>
+  <div style="font-size:16px;color:var(--t2);margin-bottom:24px;max-width:780px;line-height:1.65;">How Bounteous wins — and impresses — in a crowded field of large SIs, boutique shops, and offshore factories.</div>
+  <div class="ctable" style="margin-bottom:32px;">
+    <div class="crow"><div class="chead">Dimension</div><div class="chead" style="color:var(--mag);">✦ Bounteous</div><div class="chead">Large SI (Accenture / Wipro)</div><div class="chead">Boutique (EPAM / Thoughtworks)</div></div>
+    <div class="crow"><div class="ccell clabel">AI in Delivery</div><div class="ccell cus">Native AI agents across QA, data, code — in production</div><div class="ccell cthem">Marketed heavily; often PowerPoint-stage</div><div class="ccell cthem">Strong engineering; limited AI governance</div></div>
+    <div class="crow"><div class="ccell clabel">Domain Depth</div><div class="ccell cus">Deep FSI, Payments, Telecom vertical expertise</div><div class="ccell cthem">Broad but shallow — generalist model</div><div class="ccell cthem">Engineering-first; limited strategy or design</div></div>
+    <div class="crow"><div class="ccell clabel">Speed to Value</div><div class="ccell cus">60-day AI POC with real metrics</div><div class="ccell cthem">6–12 month mobilisation typical</div><div class="ccell cthem">Fast dev; slow to prove business ROI</div></div>
+    <div class="crow"><div class="ccell clabel">Outcome Risk</div><div class="ccell cus">Willing to go at-risk on KPIs</div><div class="ccell cthem">Fixed-fee or T&M; rarely at-risk</div><div class="ccell cthem">Rarely commit to business outcomes</div></div>
+    <div class="crow"><div class="ccell clabel">GCC Playbook</div><div class="ccell cus">Takeout, Build &amp; Scale, Location Transition</div><div class="ccell cthem">Compete but over-engineer</div><div class="ccell cthem">Limited GCC transition capability</div></div>
+    <div class="crow"><div class="ccell clabel">Design + Eng</div><div class="ccell cus">Integrated — one team, one P&L</div><div class="ccell cthem">Separate design and engineering tracks</div><div class="ccell cthem">Engineering-led; design secondary</div></div>
+    <div class="crow"><div class="ccell clabel">Price Point</div><div class="ccell cus">Premium boutique at competitive offshore rates</div><div class="ccell cthem">Expensive with large overhead layers</div><div class="ccell cthem">Comparable but limited AI leverage</div></div>
   </div>
-  <div class="dlabel" style="margin-top:4px;">How to Impress in the Room</div>
-  <div class="sec-grid-3" style="margin-bottom:22px;">
-    <div class="card accent-mag"><div class="icon">🎯</div><h3>Open with Their Pain, Not Our Story</h3><p>Lead with a data point specific to their sector — e.g., "GCCs in your peer group are spending 28% more per FTE than 2 years ago. Here's why." Show we've done the homework before we walked in.</p></div>
-    <div class="card accent-elec"><div class="icon">⚡</div><h3>Live AI Demo — Not a Slide</h3><p>In every executive meeting, show a working AI agent relevant to their business — KYC extraction, document reconciliation, or a code review bot. Real outputs. Real seconds. Nothing accelerates trust faster.</p></div>
-    <div class="card accent-purple"><div class="icon">📊</div><h3>Pre-Built ROI for Their Numbers</h3><p>Walk in with a rough business case using their public headcount data. Show what a 30% AI-optimised GCC saves them specifically. Make it personal and immediate.</p></div>
-    <div class="card accent-mag"><div class="icon">🏆</div><h3>Reference at Peer Level</h3><p>Name a client in their industry (with permission) and offer a peer reference call. Executives trust peers far more than vendors. One reference call is worth five slide decks.</p></div>
-    <div class="card accent-elec"><div class="icon">🔓</div><h3>Go At-Risk on 60-Day POC</h3><p>Offer to run a fully funded or at-risk 60-day AI POC. If we don't deliver the metric, they don't pay or we refund. This converts sceptics into champions overnight.</p></div>
-    <div class="card accent-purple"><div class="icon">🤝</div><h3>Co-Create, Don't Present</h3><p>Run the AI Co-Innovation Studio as a working session, not a pitch. When clients co-create the solution, they own it — and they champion it internally.</p></div>
+  <div class="dlabel">How to Impress in the Room</div>
+  <div class="g3" style="margin-bottom:32px;">
+    <div class="card am"><div class="icon">🎯</div><h3>Open with Their Pain</h3><p>Lead with a data point specific to their sector — "GCCs in your peer group are spending 28% more per FTE than 2 years ago." Show you've done the homework before walking in.</p></div>
+    <div class="card ae"><div class="icon">⚡</div><h3>Live AI Demo — Not a Slide</h3><p>Show a working AI agent in every exec meeting — KYC extraction, document reconciliation, or a code review bot. Real outputs in real seconds. Nothing accelerates trust faster.</p></div>
+    <div class="card ap"><div class="icon">📊</div><h3>Pre-Built ROI for Their Numbers</h3><p>Walk in with a rough business case using their public headcount data. Show what a 30% AI-optimised GCC saves them specifically. Make it personal.</p></div>
+    <div class="card am"><div class="icon">🏆</div><h3>Reference at Peer Level</h3><p>Name a client in their industry and offer a peer reference call. One reference call is worth five slide decks — executives trust peers, not vendors.</p></div>
+    <div class="card ae"><div class="icon">🔓</div><h3>Go At-Risk on 60-Day POC</h3><p>Offer a fully funded or at-risk 60-day AI POC. If we don't deliver the metric, they don't pay. This converts sceptics into champions overnight.</p></div>
+    <div class="card ap"><div class="icon">🤝</div><h3>Co-Create, Don't Present</h3><p>Run the AI Co-Innovation Studio as a working session. When clients co-create the solution they own it — and champion it internally. Our most powerful sales tool.</p></div>
   </div>
-  <div class="dlabel">Competitive Objection Responses</div>
-  <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
-    <div class="obj"><div class="q">❝ Accenture said they can do the same thing ❞</div><div class="a">They can claim it. We can show it — today, in this meeting. Ask to see their production AI agent for your industry. Ask for reference outcomes, not case study slides.</div></div>
-    <div class="obj"><div class="q">❝ We prefer to work with a top-3 SI for risk management ❞</div><div class="a">Large SIs manage their risk, not yours. Bounteous brings specialist depth, faster mobilisation, and outcome accountability that generalists structurally cannot offer.</div></div>
-    <div class="obj"><div class="q">❝ You're too small to handle our scale ❞</div><div class="a">We operate delivery across US, Canada, Mexico, Europe, and India with 5,000+ people and 100+ Global 2000 clients. Scale is there — without the overhead tax of a megacap SI.</div></div>
-    <div class="obj"><div class="q">❝ Our incumbent vendor knows our systems ❞</div><div class="a">Knowledge debt is a trap. AI-enabled fresh eyes combined with structured discovery often outperform years of accumulated technical debt. We'll prove it in 60 days.</div></div>
+  <div class="dlabel">Objection Responses</div>
+  <div class="g2" style="gap:14px;">
+    <div class="obj"><div class="q">❝ Accenture said they can do the same thing ❞</div><div class="a">They can claim it. We can show it — today, in this room. Ask to see their production AI agent for your industry. Ask for reference outcomes, not case study slides.</div></div>
+    <div class="obj"><div class="q">❝ We prefer a top-3 SI for risk management ❞</div><div class="a">Large SIs manage their risk, not yours. Bounteous brings specialist depth, faster mobilisation, and outcome accountability that generalists structurally cannot offer.</div></div>
+    <div class="obj"><div class="q">❝ You're too small to handle our scale ❞</div><div class="a">5,000+ people across US, Canada, Mexico, Europe, and India. 100+ Global 2000 clients. Scale is there — without the overhead tax of a megacap SI.</div></div>
+    <div class="obj"><div class="q">❝ Our incumbent vendor knows our systems ❞</div><div class="a">Knowledge debt is a trap. AI-enabled fresh eyes often outperform years of accumulated technical debt. We'll prove it in 60 days.</div></div>
   </div>
 </section>
 
-<!-- ── S4 TEN THINGS ───────────────────────────────────── -->
+<!-- ── S4 TEN THINGS ── -->
 <section id="s4">
-  <div class="dlabel">10 Things We Must Do — With Toolkit</div>
-  <div style="font-size:13px;color:rgba(255,255,255,.5);margin-bottom:16px;max-width:680px;">A prioritised action list for BU leaders, BD teams, and practice heads to begin winning disruptive large deals in the next 90 days.</div>
+  <div class="dlabel">10 Things We Must Do</div>
+  <div style="font-size:16px;color:var(--t2);margin-bottom:22px;max-width:780px;line-height:1.65;">Prioritised actions for BU leaders, BD teams, and practice heads to begin winning disruptive large deals in the next 90 days.</div>
   <div class="ai-banner">
     <div class="ai-icon">🤖</div>
-    <div class="ai-text"><strong>AI Use Case &amp; Demo Library underpins actions 3, 4, and 9.</strong> This shared asset is maintained by the AI Core Team and made available to all BD leads and practice leads as a living resource. Every executive meeting should draw from it — no meeting without a live demo.</div>
+    <div class="ai-text"><strong>AI Use Case &amp; Demo Library underpins actions 3, 4, and 9.</strong> Maintained by the AI Core Team and available to all BD leads as a living resource. No executive meeting without a live demo.</div>
   </div>
   <div class="ten">
-    <div class="ten-card"><div class="ten-n">1</div><div class="ten-body"><h4>Build the GCC Playbook Target List</h4><p>Identify 15–20 GCC candidates across our 4 BUs. Score by theme fit (Takeout, Build & Scale, or Location Transition), attrition signals, cost exposure, and AI maturity.</p><div class="tk-label">🔧 Tool: GCC Radar Signal Sheet + LinkedIn Sales Navigator</div></div></div>
-    <div class="ten-card"><div class="ten-n">2</div><div class="ten-body"><h4>Assign a Deal Owner per BU</h4><p>Each of the 4 business units needs a named senior BD or practice leader accountable for originating 2–3 disruptive deal opportunities in H1.</p><div class="tk-label">🔧 Tool: Deal Qualification Scorecard + CRM template</div></div></div>
-    <div class="ten-card"><div class="ten-n">3</div><div class="ten-body"><h4>Activate the AI Use Case &amp; Demo Library</h4><p>Build and maintain 4–6 sector-specific AI demos accessible to all BD leads. Every exec meeting must include a live demo — no slides only.</p><div class="tk-label">🔧 Tool: AI Use Case &amp; Demo Library (shared, indexed by BU)</div></div></div>
-    <div class="ten-card"><div class="ten-n">4</div><div class="ten-body"><h4>Run 3 AI Co-Innovation Workshops in Q1</h4><p>Identify 3 warm accounts and run Co-Innovation Studio sessions. Each session should produce a signed POC statement of work within 30 days.</p><div class="tk-label">🔧 Tool: AI Co-Innovation Workshop Kit + Demo Library</div></div></div>
-    <div class="ten-card"><div class="ten-n">5</div><div class="ten-body"><h4>Build the ROI Business Case Calculator</h4><p>Finance and practice leads to build a dynamic GCC ROI model that BDs can populate with prospect data and present same-day as a first-meeting leave-behind.</p><div class="tk-label">🔧 Tool: ROI Business Case Calculator (Excel/Sheets)</div></div></div>
-    <div class="ten-card"><div class="ten-n">6</div><div class="ten-body"><h4>Produce Competitive Battle Cards</h4><p>Strategy and marketing to produce one-page battle cards for Accenture, Wipro, HCL, EPAM, and Thoughtworks. Distribute to all BD and account management staff.</p><div class="tk-label">🔧 Tool: Competitive Battle Cards (per rival)</div></div></div>
-    <div class="ten-card"><div class="ten-n">7</div><div class="ten-body"><h4>Establish a Disruptive Deals Council</h4><p>A bi-weekly cross-BU deal review with BU heads and deal owners. Reviews top 10 deals, removes blockers, and ensures pursuit investment decisions are made fast.</p><div class="tk-label">🔧 Tool: Deal Review Dashboard (Salesforce / Notion)</div></div></div>
-    <div class="ten-card"><div class="ten-n">8</div><div class="ten-body"><h4>Create an At-Risk POC Commercial Model</h4><p>Legal and finance to define a standard 60-day at-risk POC contract template with success metrics, payment triggers, and expansion clause — ready to deploy without lengthy negotiation.</p><div class="tk-label">🔧 Tool: POC Commercial Template + Legal Playbook</div></div></div>
-    <div class="ten-card"><div class="ten-n">9</div><div class="ten-body"><h4>Activate Partner Co-Sell Motions</h4><p>Engage Anthropic, Databricks, OpenAI, AWS, GCP/Gemini, and Salesforce partner teams to co-identify GCC Playbook and transformation targets. Use the AI Demo Library in joint pursuits.</p><div class="tk-label">🔧 Tool: Partner Co-Sell Brief + Demo Library + Joint Outreach Templates</div></div></div>
-    <div class="ten-card"><div class="ten-n">10</div><div class="ten-body"><h4>Publish 2 New AI Proof Points per Quarter</h4><p>Marketing and delivery to document each AI production deployment as a quantified case study. No outcome = no publish. Use these as BD collateral, press, and awards entries.</p><div class="tk-label">🔧 Tool: Case Study Template + Proof Point Tracker</div></div></div>
+    <div class="ten-card"><div class="ten-n">1</div><div class="ten-body"><h4>Build the GCC Playbook Target List</h4><p>Identify 15–20 GCC candidates across all 4 BUs. Score by theme fit (Takeout, Build &amp; Scale, or Location Transition), attrition signals, cost exposure, and AI maturity.</p><div class="tk-label">🔧 GCC Radar Signal Sheet + LinkedIn Sales Navigator</div></div></div>
+    <div class="ten-card"><div class="ten-n">2</div><div class="ten-body"><h4>Assign a Deal Owner per BU</h4><p>Each of the 4 business units needs a named senior BD or practice leader accountable for originating 2–3 disruptive deal opportunities in H1.</p><div class="tk-label">🔧 Deal Qualification Scorecard + CRM template</div></div></div>
+    <div class="ten-card"><div class="ten-n">3</div><div class="ten-body"><h4>Activate the AI Use Case &amp; Demo Library</h4><p>Build and maintain 4–6 sector-specific AI demos accessible to all BD leads. Every executive meeting must include a live demo — no slides only.</p><div class="tk-label">🔧 AI Use Case &amp; Demo Library (shared, indexed by BU)</div></div></div>
+    <div class="ten-card"><div class="ten-n">4</div><div class="ten-body"><h4>Run 3 AI Co-Innovation Workshops in Q1</h4><p>Identify 3 warm accounts and run Co-Innovation Studio sessions. Each session should produce a signed POC statement of work within 30 days.</p><div class="tk-label">🔧 AI Co-Innovation Workshop Kit + Demo Library</div></div></div>
+    <div class="ten-card"><div class="ten-n">5</div><div class="ten-body"><h4>Build the ROI Business Case Calculator</h4><p>Finance and practice leads build a dynamic GCC ROI model BDs can populate with prospect data and present same-day as a first-meeting leave-behind.</p><div class="tk-label">🔧 ROI Business Case Calculator (Excel/Sheets)</div></div></div>
+    <div class="ten-card"><div class="ten-n">6</div><div class="ten-body"><h4>Produce Competitive Battle Cards</h4><p>Strategy and marketing to produce one-page battle cards for Accenture, Wipro, HCL, EPAM, and Thoughtworks — distributed to all BD and account management staff.</p><div class="tk-label">🔧 Competitive Battle Cards (per rival)</div></div></div>
+    <div class="ten-card"><div class="ten-n">7</div><div class="ten-body"><h4>Establish a Disruptive Deals Council</h4><p>Bi-weekly cross-BU deal review with BU heads and deal owners. Reviews top 10 deals, removes blockers, and makes pursuit investment decisions fast.</p><div class="tk-label">🔧 Deal Review Dashboard (Salesforce / Notion)</div></div></div>
+    <div class="ten-card"><div class="ten-n">8</div><div class="ten-body"><h4>Create an At-Risk POC Commercial Model</h4><p>Legal and finance define a standard 60-day at-risk POC contract template with success metrics, payment triggers, and expansion clause — deployable without lengthy negotiation.</p><div class="tk-label">🔧 POC Commercial Template + Legal Playbook</div></div></div>
+    <div class="ten-card"><div class="ten-n">9</div><div class="ten-body"><h4>Activate Partner Co-Sell Motions</h4><p>Engage Anthropic, Databricks, OpenAI, AWS, GCP/Gemini, and Salesforce to co-identify GCC Playbook and transformation targets. Use the AI Demo Library in joint pursuits.</p><div class="tk-label">🔧 Partner Co-Sell Brief + Demo Library + Outreach Templates</div></div></div>
+    <div class="ten-card"><div class="ten-n">10</div><div class="ten-body"><h4>Publish 2 AI Proof Points per Quarter</h4><p>Marketing and delivery document each AI production deployment as a quantified case study. No outcome = no publish. Used as BD collateral, press, and awards entries.</p><div class="tk-label">🔧 Case Study Template + Proof Point Tracker</div></div></div>
   </div>
 </section>
 
-<!-- ── S5 OFFERINGS & PARTNERS ─────────────────────────── -->
+<!-- ── S5 OFFERINGS & PARTNERS ── -->
 <section id="s5">
   <div class="dlabel">What This Means for Bounteous</div>
-  <div style="font-size:13px;color:rgba(255,255,255,.5);margin-bottom:24px;max-width:700px;">Disruptive large deals are not just a revenue strategy — they reshape how Bounteous is perceived, priced, and positioned in the market for the next five years.</div>
-  <div class="sec-grid-3" style="margin-bottom:28px;">
-    <div class="card accent-mag"><div class="icon">💹</div><h3>Revenue Concentration Shift</h3><p>Moving from many small engagements to fewer, larger mandates increases margin, reduces sales cost per dollar, and creates multi-year revenue visibility. Each GCC Playbook engagement is a $5–10M+ annuity.</p></div>
-    <div class="card accent-elec"><div class="icon">🏷️</div><h3>Market Repositioning</h3><p>Winning disruptive deals in BFSI and Telecom signals to the market that Bounteous competes at Tier-1 scale — elevating brand, attracting talent, and justifying premium pricing.</p></div>
-    <div class="card accent-purple"><div class="icon">🤖</div><h3>AI Delivery Flywheel</h3><p>Each AI deployment generates reusable agents, datasets, and governance frameworks. Over time, our AI delivery capability compounds — meaning each new deal costs less to deliver and wins faster.</p></div>
-    <div class="card accent-mag"><div class="icon">🌍</div><h3>Geo-Expansion Signal</h3><p>GCC Playbook deals establish Bounteous as a credible India delivery leader — not just an offshore vendor. This creates new market positioning in the US, UK, and EU buyer communities.</p></div>
-    <div class="card accent-elec"><div class="icon">🎓</div><h3>Talent Magnet</h3><p>High-profile AI-led deals attract the engineers, AI architects, and domain specialists we need to grow. Winning a tier-1 bank GCC is recruiting collateral as much as it is a commercial win.</p></div>
-    <div class="card accent-purple"><div class="icon">📡</div><h3>Platform for Thought Leadership</h3><p>Quantified AI outcomes become published assets, conference talks, and analyst briefings — building inbound deal flow at zero cost.</p></div>
+  <div style="font-size:16px;color:var(--t2);margin-bottom:26px;max-width:780px;line-height:1.65;">Disruptive large deals reshape how Bounteous is perceived, priced, and positioned for the next five years.</div>
+  <div class="g3" style="margin-bottom:36px;">
+    <div class="card am"><div class="icon">💹</div><h3>Revenue Concentration Shift</h3><p>Fewer, larger mandates increase margin, reduce sales cost per dollar, and create multi-year revenue visibility. Each GCC Playbook engagement is a $5–10M+ annuity.</p></div>
+    <div class="card ae"><div class="icon">🏷️</div><h3>Market Repositioning</h3><p>Winning BFSI and Telecom deals signals Tier-1 scale — elevating brand, attracting talent, and justifying premium pricing across all engagements.</p></div>
+    <div class="card ap"><div class="icon">🤖</div><h3>AI Delivery Flywheel</h3><p>Each AI deployment generates reusable agents, datasets, and governance frameworks. Delivery capability compounds — each new deal costs less and wins faster.</p></div>
+    <div class="card am"><div class="icon">🌍</div><h3>Geo-Expansion Signal</h3><p>GCC Playbook deals establish Bounteous as a credible India delivery leader — creating new positioning in the US, UK, and EU buyer communities.</p></div>
+    <div class="card ae"><div class="icon">🎓</div><h3>Talent Magnet</h3><p>High-profile AI-led deals attract engineers, AI architects, and domain specialists. Winning a tier-1 bank GCC is recruiting collateral as much as a commercial win.</p></div>
+    <div class="card ap"><div class="icon">📡</div><h3>Thought Leadership Engine</h3><p>Quantified AI outcomes become published assets, conference talks, and analyst briefings — building inbound deal flow at zero cost.</p></div>
   </div>
-  <div class="dlabel">Service Offerings — Revenue Potential per Disruptive Deal</div>
-  <div class="comp-wrap" style="margin-bottom:28px;">
-    <div class="comp-row">
-      <div class="comp-head" style="width:200px;">Service Offering</div>
-      <div class="comp-head">Entry Deal Type</div>
-      <div class="comp-head">Typical TCV Range</div>
-      <div class="comp-head">AI Leverage Factor</div>
-    </div>
-    <div class="comp-row"><div class="comp-cell comp-label">GCC Playbook — Takeout</div><div class="comp-cell comp-us">GCC Acquisition</div><div class="comp-cell">$8–15M / yr managed</div><div class="comp-cell"><span class="chip chip-grn">Very High</span></div></div>
-    <div class="comp-row"><div class="comp-cell comp-label">GCC Playbook — Build &amp; Scale</div><div class="comp-cell comp-us">New GCC Setup</div><div class="comp-cell">$5–12M build + managed</div><div class="comp-cell"><span class="chip chip-grn">Very High</span></div></div>
-    <div class="comp-row"><div class="comp-cell comp-label">GCC Playbook — Location Transition</div><div class="comp-cell comp-us">GCC Relocation</div><div class="comp-cell">$4–10M transition + managed</div><div class="comp-cell"><span class="chip chip-grn">Very High</span></div></div>
-    <div class="comp-row"><div class="comp-cell comp-label">AI Product Engineering</div><div class="comp-cell comp-us">Co-Innovation POC</div><div class="comp-cell">$3–10M per program</div><div class="comp-cell"><span class="chip chip-grn">Very High</span></div></div>
-    <div class="comp-row"><div class="comp-cell comp-label">Core Platform Modernisation</div><div class="comp-cell comp-us">Transformation RFP</div><div class="comp-cell">$5–20M multi-year</div><div class="comp-cell"><span class="chip chip-mag">High</span></div></div>
-    <div class="comp-row"><div class="comp-cell comp-label">Data & AI Foundations</div><div class="comp-cell comp-us">Data Strategy</div><div class="comp-cell">$2–8M buildout</div><div class="comp-cell"><span class="chip chip-grn">Very High</span></div></div>
-    <div class="comp-row"><div class="comp-cell comp-label">CX & Loyalty Platforms</div><div class="comp-cell comp-us">Experience Discovery</div><div class="comp-cell">$2–6M per platform</div><div class="comp-cell"><span class="chip chip-mag">High</span></div></div>
+
+  <div class="dlabel">Service Offerings</div>
+  <div class="ctable" style="margin-bottom:36px;">
+    <div class="crow"><div class="chead" style="width:220px;">Service Offering</div><div class="chead">Entry Deal Type</div><div class="chead">Typical TCV Range</div><div class="chead">AI Leverage</div></div>
+    <div class="crow"><div class="ccell clabel">GCC Playbook — Takeout</div><div class="ccell cus">GCC Acquisition</div><div class="ccell">$8–15M / yr managed</div><div class="ccell"><span class="chip cg">Very High</span></div></div>
+    <div class="crow"><div class="ccell clabel">GCC Playbook — Build &amp; Scale</div><div class="ccell cus">New GCC Setup</div><div class="ccell">$5–12M build + managed</div><div class="ccell"><span class="chip cg">Very High</span></div></div>
+    <div class="crow"><div class="ccell clabel">GCC Playbook — Location Transition</div><div class="ccell cus">GCC Relocation</div><div class="ccell">$4–10M transition + managed</div><div class="ccell"><span class="chip cg">Very High</span></div></div>
+    <div class="crow"><div class="ccell clabel">AI Product Engineering</div><div class="ccell cus">Co-Innovation POC</div><div class="ccell">$3–10M per program</div><div class="ccell"><span class="chip cg">Very High</span></div></div>
+    <div class="crow"><div class="ccell clabel">Core Platform Modernisation</div><div class="ccell cus">Transformation RFP</div><div class="ccell">$5–20M multi-year</div><div class="ccell"><span class="chip cm">High</span></div></div>
+    <div class="crow"><div class="ccell clabel">Data & AI Foundations</div><div class="ccell cus">Data Strategy</div><div class="ccell">$2–8M buildout</div><div class="ccell"><span class="chip cg">Very High</span></div></div>
+    <div class="crow"><div class="ccell clabel">CX & Loyalty Platforms</div><div class="ccell cus">Experience Discovery</div><div class="ccell">$2–6M per platform</div><div class="ccell"><span class="chip cm">High</span></div></div>
   </div>
-  <div class="dlabel">Strategic Partnerships — How They Accelerate Deals</div>
-  <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:16px;">
-    <div class="pcard" style="border-top:3px solid #d97706;"><div class="pname">🧠 Anthropic</div><div class="prole">Enterprise AI &amp; Claude Models</div><div class="pdesc">Leverage Claude for safe, enterprise-grade AI deployments in regulated industries. Anthropic's model governance and safety frameworks are a differentiator in BFSI and Compliance AI conversations.</div></div>
-    <div class="pcard" style="border-top:3px solid #ef4444;"><div class="pname">🔴 OpenAI</div><div class="prole">GPT &amp; AI Platform</div><div class="pdesc">GPT-4/o model integrations for productivity, co-pilot, and agentic workflows. OpenAI partnership enables rapid AI product engineering at the frontier of enterprise AI deployment.</div></div>
-    <div class="pcard" style="border-top:3px solid #f59e0b;"><div class="pname">🧱 Databricks</div><div class="prole">Data &amp; AI Lakehouse</div><div class="pdesc">Joint GTM for Lakehouse modernisation and MLOps pipelines. Databricks' enterprise data platform is the foundation for AI-ready GCC transformations in FSI and Payments data estates.</div></div>
-    <div class="pcard" style="border-top:3px solid #4285f4;"><div class="pname">🔷 GCP / Gemini</div><div class="prole">Gemini AI &amp; Cloud Platform</div><div class="pdesc">Vertex AI, BigQuery, and Gemini integrations for Telecom and Payments data modernisation. Google's FSI-specific Gemini push creates strong joint pursuit opportunities.</div></div>
-    <div class="pcard"><div class="pname">☁️ AWS</div><div class="prole">Cloud &amp; AI Infrastructure</div><div class="pdesc">Co-sell motions through AWS FSI practice. Joint pursuit of cloud migration + AI modernisation deals. AWS credits reduce POC friction for prospects.</div></div>
-    <div class="pcard"><div class="pname">🪟 Microsoft Azure</div><div class="prole">Copilot &amp; OpenAI Integration</div><div class="pdesc">Azure OpenAI partnerships position us on regulated AI deployments. Copilot integration in banking and insurance workflows opens new budget lines.</div></div>
-    <div class="pcard"><div class="pname">❄️ Snowflake</div><div class="prole">Data &amp; AI Foundations</div><div class="pdesc">Joint GTM for data modernisation leads to AI-readiness mandates. Snowflake's enterprise customer base is a qualified prospecting list for our data practice.</div></div>
-    <div class="pcard"><div class="pname">🌊 Salesforce</div><div class="prole">CRM &amp; Agentforce AI</div><div class="pdesc">Agentforce deployments in FSI and Consumer are a net-new deal entry point. Salesforce partner ecosystem provides co-funded pipeline development opportunities.</div></div>
-    <div class="pcard"><div class="pname">🅰️ Adobe</div><div class="prole">CX &amp; Commerce Platforms</div><div class="pdesc">Adobe AEM and AEP implementations in Payments and Consumer unlock multi-year CX transformation mandates.</div></div>
-    <div class="pcard"><div class="pname">🔵 Murex</div><div class="prole">Capital Markets Platform</div><div class="pdesc">Proven Murex modernisation and consolidation delivery positions Bounteous as the preferred implementation partner for banks in APAC, Europe, and Americas.</div></div>
-    <div class="pcard"><div class="pname">⛓️ Corda / R3</div><div class="prole">Distributed Ledger</div><div class="pdesc">Smart contract and DLT implementation capability for capital markets and cross-border payments opens niche, high-value deal streams with limited competition.</div></div>
+
+  <div class="dlabel">Strategic Partnerships</div>
+  <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:18px;">
+    <div class="pcard" style="border-top:3px solid #d97706;"><div class="pname">🧠 Anthropic</div><div class="prole">Enterprise AI &amp; Claude Models</div><div class="pdesc">Claude for safe, enterprise-grade AI in regulated industries. Anthropic's safety frameworks differentiate us in BFSI and Compliance AI conversations.</div></div>
+    <div class="pcard" style="border-top:3px solid #ef4444;"><div class="pname">🔴 OpenAI</div><div class="prole">GPT &amp; AI Platform</div><div class="pdesc">GPT-4/o integrations for productivity, co-pilot, and agentic workflows. Positions Bounteous at the frontier of enterprise AI deployment.</div></div>
+    <div class="pcard" style="border-top:3px solid #f59e0b;"><div class="pname">🧱 Databricks</div><div class="prole">Data &amp; AI Lakehouse</div><div class="pdesc">Joint GTM for Lakehouse modernisation and MLOps. The foundation for AI-ready GCC transformations in FSI and Payments data estates.</div></div>
+    <div class="pcard" style="border-top:3px solid #4285f4;"><div class="pname">🔷 GCP / Gemini</div><div class="prole">Gemini AI &amp; Cloud Platform</div><div class="pdesc">Vertex AI, BigQuery, and Gemini integrations for Telecom and Payments. Google's FSI-specific Gemini push creates strong joint pursuit opportunities.</div></div>
+    <div class="pcard"><div class="pname">☁️ AWS</div><div class="prole">Cloud &amp; AI Infrastructure</div><div class="pdesc">Co-sell through AWS FSI practice. Joint pursuit of cloud migration + AI modernisation. AWS credits reduce POC friction for prospects.</div></div>
+    <div class="pcard"><div class="pname">🪟 Microsoft Azure</div><div class="prole">Copilot &amp; OpenAI Integration</div><div class="pdesc">Azure OpenAI for regulated AI deployments. Copilot integration in banking and insurance opens new budget lines.</div></div>
+    <div class="pcard"><div class="pname">❄️ Snowflake</div><div class="prole">Data &amp; AI Foundations</div><div class="pdesc">Joint GTM for data modernisation leads to AI-readiness mandates. Snowflake's customer base is a qualified prospecting list for our data practice.</div></div>
+    <div class="pcard"><div class="pname">🌊 Salesforce</div><div class="prole">CRM &amp; Agentforce AI</div><div class="pdesc">Agentforce in FSI and Consumer is a net-new deal entry point. Co-funded pipeline development through the Salesforce partner ecosystem.</div></div>
+    <div class="pcard"><div class="pname">🅰️ Adobe</div><div class="prole">CX &amp; Commerce Platforms</div><div class="pdesc">AEM and AEP implementations in Payments and Consumer unlock multi-year CX transformation mandates.</div></div>
+    <div class="pcard"><div class="pname">🔵 Murex</div><div class="prole">Capital Markets Platform</div><div class="pdesc">Proven Murex modernisation delivery positions Bounteous as the preferred implementation partner for banks in APAC, Europe, and Americas.</div></div>
+    <div class="pcard"><div class="pname">⛓️ Corda / R3</div><div class="prole">Distributed Ledger</div><div class="pdesc">Smart contract and DLT capability for capital markets and cross-border payments — niche, high-value deal streams with limited competition.</div></div>
   </div>
 </section>
 
-<!-- ── S6 HEATMAP ──────────────────────────────────────── -->
+<!-- ── S6 HEATMAP ── -->
 <section id="s6">
   <div class="dlabel">Opportunity Heatmap — Deal Signal by BU × Service</div>
-  <div style="font-size:13px;color:rgba(255,255,255,.5);margin-bottom:20px;">Hover over any cell for contextual insight. Higher score = stronger deal signal, deeper client pain, and faster conversion probability.</div>
+  <div style="font-size:16px;color:var(--t2);margin-bottom:22px;">Hover over any cell for contextual insight. Higher score = stronger deal signal and faster conversion probability.</div>
   <div class="hm-wrap">
     <table class="hm">
       <thead>
         <tr>
-          <th style="text-align:left;padding-left:14px;">Business Unit</th>
+          <th style="text-align:left;padding-left:18px;">Business Unit</th>
           <th>GCC Playbook</th><th>AI Product Eng</th><th>Platform Modern.</th><th>Data & AI</th><th>Compliance AI</th><th>CX & Loyalty</th><th>Cloud Modern.</th>
         </tr>
       </thead>
@@ -548,80 +508,86 @@ table.hm td.hc:hover{transform:scale(1.06);box-shadow:0 6px 20px rgba(0,0,0,.4);
     <div class="li"><div class="ld h2"></div>Low 30–49</div>
     <div class="li"><div class="ld h1"></div>Minimal &lt;30</div>
   </div>
-  <div style="margin-top:24px;display:grid;grid-template-columns:repeat(4,1fr);gap:14px;">
-    <div class="card" style="padding:18px;text-align:center;"><div class="bnum mag" style="font-size:28px;">FS</div><div style="font-size:11px;color:rgba(255,255,255,.45);margin-top:6px;">Highest overall signal. GCC Playbook + compliance AI are the breakout vectors.</div></div>
-    <div class="card" style="padding:18px;text-align:center;"><div class="bnum elec" style="font-size:28px;">T&M</div><div style="font-size:11px;color:rgba(255,255,255,.45);margin-top:6px;">BSS/OSS modernisation + AI ops are primary large-deal entry points.</div></div>
-    <div class="card" style="padding:18px;text-align:center;"><div class="bnum" style="font-size:28px;background:linear-gradient(135deg,#a78bfa,var(--elec));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">P&F</div><div style="font-size:11px;color:rgba(255,255,255,.45);margin-top:6px;">Embedded finance AI + data platforms create multi-year deal flow.</div></div>
-    <div class="card" style="padding:18px;text-align:center;"><div class="bnum" style="font-size:28px;background:linear-gradient(135deg,#f472b6,var(--mag));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">C&D</div><div style="font-size:11px;color:rgba(255,255,255,.45);margin-top:6px;">Loyalty, personalisation AI, and commerce platforms are clear entry points.</div></div>
+  <div style="margin-top:28px;display:grid;grid-template-columns:repeat(4,1fr);gap:18px;">
+    <div class="card" style="padding:22px;text-align:center;"><div class="bnum mag" style="font-size:34px;">FS</div><div style="font-size:14px;color:var(--t2);margin-top:8px;line-height:1.6;">Highest overall signal. GCC Playbook + Compliance AI are the breakout vectors.</div></div>
+    <div class="card" style="padding:22px;text-align:center;"><div class="bnum elec" style="font-size:34px;">T&M</div><div style="font-size:14px;color:var(--t2);margin-top:8px;line-height:1.6;">BSS/OSS modernisation + AI ops are primary large-deal entry points.</div></div>
+    <div class="card" style="padding:22px;text-align:center;"><div class="bnum pur" style="font-size:34px;">P&F</div><div style="font-size:14px;color:var(--t2);margin-top:8px;line-height:1.6;">Embedded finance AI + data platforms create multi-year deal flow.</div></div>
+    <div class="card" style="padding:22px;text-align:center;"><div class="bnum pnk" style="font-size:34px;">C&D</div><div style="font-size:14px;color:var(--t2);margin-top:8px;line-height:1.6;">Loyalty, personalisation AI, and commerce platforms are clear entry points.</div></div>
   </div>
 </section>
 
-<!-- ── S7 NEXT STEPS ───────────────────────────────────── -->
+<!-- ── S7 NEXT STEPS ── -->
 <section id="s7">
   <div class="dlabel">Next Steps — Action Calendar</div>
-  <div style="font-size:13px;color:rgba(255,255,255,.5);margin-bottom:28px;max-width:660px;">10 strategic actions from session to first deal closed. Simple, time-bound, and easy to speak through as a team.</div>
+  <div style="font-size:16px;color:var(--t2);margin-bottom:32px;max-width:680px;line-height:1.65;">10 strategic actions from today's session to first deal closed — simple, time-bound, and easy to speak through as a team.</div>
   <div class="cal-grid">
+    <!-- W1 -->
     <div class="cal-col">
-      <div class="cal-header" style="background:linear-gradient(135deg,rgba(182,28,167,.45),rgba(182,28,167,.25));">
+      <div class="cal-header" style="background:linear-gradient(135deg,rgba(182,28,167,.5),rgba(182,28,167,.28));">
         <div class="cal-period">W1</div>
         <div class="cal-label">Assign &amp; Align · Days 1–5</div>
       </div>
       <div class="cal-body">
-        <div class="cal-bullet"><div class="cal-dot" style="background:var(--mag);"></div><div class="cal-text">Nominate one Disruptive Deals Champion per BU (FS, T&M, P&F, C&D) and schedule the first Deals Council for end of Week 2</div></div>
-        <div class="cal-bullet"><div class="cal-dot" style="background:var(--mag);"></div><div class="cal-text">Greenlight the At-Risk POC commercial model and begin GCC Playbook Radar Signal Sheet build using LinkedIn and earnings data</div></div>
-        <div class="cal-owner"><div class="cal-owner-label">Owners</div><span class="cal-owner-chip chip-mag">CCO</span><span class="cal-owner-chip chip-mag">CGO</span></div>
+        <div class="cal-bullet"><div class="cal-dot" style="background:var(--mag);"></div><div class="cal-text">Nominate one Disruptive Deals Champion per BU and schedule the first Deals Council for end of Week 2</div></div>
+        <div class="cal-bullet"><div class="cal-dot" style="background:var(--mag);"></div><div class="cal-text">Greenlight the At-Risk POC commercial model and begin GCC Playbook Radar Signal Sheet build</div></div>
+        <div class="cal-owner"><div class="cal-owner-label">Owners</div><span class="cal-chip cm">CCO</span><span class="cal-chip cm">CGO</span></div>
       </div>
     </div>
+    <!-- W2 -->
     <div class="cal-col">
-      <div class="cal-header" style="background:linear-gradient(135deg,rgba(60,37,247,.45),rgba(60,37,247,.25));">
+      <div class="cal-header" style="background:linear-gradient(135deg,rgba(60,37,247,.5),rgba(60,37,247,.28));">
         <div class="cal-period">W2</div>
         <div class="cal-label">Build the Toolkit · Days 6–12</div>
       </div>
       <div class="cal-body">
-        <div class="cal-bullet"><div class="cal-dot" style="background:var(--elec);"></div><div class="cal-text">BD leads complete first GCC Playbook Target List (15–20 accounts, scored by theme). AI core team activates Demo Library with 4–6 live BU-specific use cases</div></div>
+        <div class="cal-bullet"><div class="cal-dot" style="background:var(--elec);"></div><div class="cal-text">BD leads complete GCC Playbook Target List (15–20 accounts, scored by theme). AI core team activates Demo Library with 4–6 live use cases</div></div>
         <div class="cal-bullet"><div class="cal-dot" style="background:var(--elec);"></div><div class="cal-text">Practice leads begin ROI Calculator build (v1 by W3). Marketing drafts competitive battle cards for top 3 rivals per BU</div></div>
-        <div class="cal-owner"><div class="cal-owner-label">Owners</div><span class="cal-owner-chip chip-elec">BD Leads</span><span class="cal-owner-chip chip-elec">AI Core Team</span><span class="cal-owner-chip chip-elec">Practice Leads</span><span class="cal-owner-chip chip-elec">Marketing</span></div>
+        <div class="cal-owner"><div class="cal-owner-label">Owners</div><span class="cal-chip ce">BD Leads</span><span class="cal-chip ce">AI Core Team</span><span class="cal-chip ce">Practice Leads</span><span class="cal-chip ce">Marketing</span></div>
       </div>
     </div>
+    <!-- M1 -->
     <div class="cal-col">
-      <div class="cal-header" style="background:linear-gradient(135deg,rgba(167,139,250,.45),rgba(167,139,250,.25));">
+      <div class="cal-header" style="background:linear-gradient(135deg,rgba(167,139,250,.5),rgba(167,139,250,.28));">
         <div class="cal-period">M1</div>
         <div class="cal-label">Activate Pipeline · Day 30</div>
       </div>
       <div class="cal-body">
-        <div class="cal-bullet"><div class="cal-dot" style="background:#a78bfa;"></div><div class="cal-text">First 5 executive outreaches to GCC Playbook prospects with pre-built ROI case and a live AI demo from the library</div></div>
-        <div class="cal-bullet"><div class="cal-dot" style="background:#a78bfa;"></div><div class="cal-text">Partner co-sell briefs activated with Anthropic, OpenAI, Databricks, and GCP/Gemini. AI Co-Innovation Workshop invite sent to a warm FS or P&F account</div></div>
-        <div class="cal-owner"><div class="cal-owner-label">Owners</div><span class="cal-owner-chip" style="background:rgba(167,139,250,.18);border:1px solid rgba(167,139,250,.4);color:#c4b5fd;">BU Champions</span></div>
+        <div class="cal-bullet"><div class="cal-dot" style="background:#a78bfa;"></div><div class="cal-text">First 5 executive outreaches to GCC Playbook prospects with pre-built ROI case and a live AI demo</div></div>
+        <div class="cal-bullet"><div class="cal-dot" style="background:#a78bfa;"></div><div class="cal-text">Partner co-sell briefs activated with Anthropic, OpenAI, Databricks, and GCP/Gemini. Co-Innovation Workshop invite sent to a warm FS or P&F account</div></div>
+        <div class="cal-owner"><div class="cal-owner-label">Owners</div><span class="cal-chip" style="background:rgba(167,139,250,.2);border:1px solid rgba(167,139,250,.4);color:#c4b5fd;">BU Champions</span></div>
       </div>
     </div>
+    <!-- M3 -->
     <div class="cal-col">
-      <div class="cal-header" style="background:linear-gradient(135deg,rgba(34,197,94,.3),rgba(34,197,94,.15));">
+      <div class="cal-header" style="background:linear-gradient(135deg,rgba(34,197,94,.35),rgba(34,197,94,.18));">
         <div class="cal-period">M3</div>
         <div class="cal-label">First POC Live · Day 90</div>
       </div>
       <div class="cal-body">
-        <div class="cal-bullet"><div class="cal-dot" style="background:#86efac;"></div><div class="cal-text">At least 1 signed 60-day At-Risk AI POC in active delivery. 3 disruptive deals formally qualified at CRM Stage 3+</div></div>
-        <div class="cal-bullet"><div class="cal-dot" style="background:#86efac;"></div><div class="cal-text">First AI Co-Innovation Workshop completed — SOW in negotiation. Deals Council reviewing pipeline fortnightly</div></div>
-        <div class="cal-owner"><div class="cal-owner-label">Owners</div><span class="cal-owner-chip chip-grn">BU Champions</span><span class="cal-owner-chip chip-grn">Delivery</span></div>
+        <div class="cal-bullet"><div class="cal-dot" style="background:#86efac;"></div><div class="cal-text">At least 1 signed 60-day At-Risk AI POC in active delivery. 3 disruptive deals at CRM Stage 3+</div></div>
+        <div class="cal-bullet"><div class="cal-dot" style="background:#86efac;"></div><div class="cal-text">First Co-Innovation Workshop completed — SOW in negotiation. Deals Council reviewing pipeline fortnightly</div></div>
+        <div class="cal-owner"><div class="cal-owner-label">Owners</div><span class="cal-chip cg">BU Champions</span><span class="cal-chip cg">Delivery</span></div>
       </div>
     </div>
+    <!-- M6 -->
     <div class="cal-col">
-      <div class="cal-header" style="background:linear-gradient(135deg,rgba(251,191,36,.35),rgba(251,191,36,.15));">
+      <div class="cal-header" style="background:linear-gradient(135deg,rgba(251,191,36,.4),rgba(251,191,36,.18));">
         <div class="cal-period">M6</div>
         <div class="cal-label">First Deal Closed · Day 180</div>
       </div>
       <div class="cal-body">
-        <div class="cal-bullet"><div class="cal-dot" style="background:#fde68a;"></div><div class="cal-text">First GCC Playbook or $5M+ transformation deal commercially signed. POC outcomes published as a quantified case study</div></div>
-        <div class="cal-bullet"><div class="cal-dot" style="background:#fde68a;"></div><div class="cal-text">Deal expansion conversation initiated (target 3x scope in 12 months). Second cohort of target accounts identified from learnings</div></div>
-        <div class="cal-owner"><div class="cal-owner-label">Milestone</div><span class="cal-owner-chip chip-yel">🏆 First Large Deal</span></div>
+        <div class="cal-bullet"><div class="cal-dot" style="background:#fde68a;"></div><div class="cal-text">First GCC Playbook or $5M+ transformation deal commercially signed. POC outcomes published as quantified case study</div></div>
+        <div class="cal-bullet"><div class="cal-dot" style="background:#fde68a;"></div><div class="cal-text">Deal expansion initiated (target 3× scope in 12 months). Second cohort of target accounts identified</div></div>
+        <div class="cal-owner"><div class="cal-owner-label">Milestone</div><span class="cal-chip cy">🏆 First Large Deal</span></div>
       </div>
     </div>
   </div>
-  <div style="background:linear-gradient(135deg,rgba(182,28,167,.15),rgba(60,37,247,.15));border:1px solid rgba(182,28,167,.3);border-radius:18px;padding:36px;text-align:center;">
-    <div style="font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--mag);margin-bottom:14px;">The Commitment</div>
-    <div style="font-size:clamp(28px,4vw,48px);font-weight:900;letter-spacing:-1.5px;line-height:1.1;margin-bottom:16px;">Own the <span class="grad">Disruption.</span><br>Don't React to It.</div>
-    <div style="font-size:15px;color:rgba(255,255,255,.6);max-width:560px;margin:0 auto 30px;line-height:1.7;">Bounteous has the AI, the domain, and the delivery model to win deals that no one else can. The only question is how fast we move. Let's move now.</div>
-    <div style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap;">
+
+  <div style="background:linear-gradient(135deg,rgba(182,28,167,.15),rgba(60,37,247,.15));border:1px solid rgba(182,28,167,.35);border-radius:22px;padding:48px;text-align:center;">
+    <div style="font-size:13px;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:var(--mag);margin-bottom:16px;">The Commitment</div>
+    <div style="font-size:clamp(32px,4.5vw,58px);font-weight:900;letter-spacing:-2px;line-height:1.08;margin-bottom:20px;">Own the <span class="grad">Disruption.</span><br>Don't React to It.</div>
+    <div style="font-size:18px;color:var(--t2);max-width:580px;margin:0 auto 36px;line-height:1.75;">Bounteous has the AI, the domain, and the delivery model to win deals no one else can. The only question is how fast we move.</div>
+    <div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap;">
       <button class="cta cta-p" onclick="go('s1',document.querySelectorAll('.nb2')[1],24)">Review Business Case</button>
       <button class="cta cta-s" onclick="go('s0',document.querySelectorAll('.nb2')[0],12)">↺ Restart</button>
     </div>
@@ -633,7 +599,7 @@ function go(id,btn,p){
   document.querySelectorAll('section').forEach(s=>s.classList.remove('active'));
   document.getElementById(id).classList.add('active');
   document.querySelectorAll('.nb2').forEach(b=>b.classList.remove('active'));
-  if(btn) btn.classList.add('active');
+  if(btn)btn.classList.add('active');
   document.getElementById('prog').style.width=p+'%';
   window.scrollTo(0,0);
 }
@@ -642,14 +608,14 @@ function switchTab(idx){
   document.querySelectorAll('.gcc-panel').forEach((p,i)=>p.classList.toggle('active',i===idx));
 }
 const hmData=[
-  {bu:'Financial Services',scores:[93,91,88,86,95,72,76],color:'#B61CA7'},
-  {bu:'Telecom & Media',scores:[82,85,92,83,44,73,89],color:'#3C25F7'},
-  {bu:'Payments & FinTech',scores:[76,89,80,91,82,66,78],color:'#a78bfa'},
-  {bu:'Consumer & Dining',scores:[44,67,68,73,34,92,58],color:'#f472b6'},
+  {bu:'Financial Services',scores:[93,91,88,86,95,72,76],color:'#f0a0e8'},
+  {bu:'Telecom & Media',scores:[82,85,92,83,44,73,89],color:'#a78bfa'},
+  {bu:'Payments & FinTech',scores:[76,89,80,91,82,66,78],color:'#c4b5fd'},
+  {bu:'Consumer & Dining',scores:[44,67,68,73,34,92,58],color:'#f9a8d4'},
 ];
 const hmCols=['GCC Playbook','AI Product Eng','Platform Modern.','Data & AI','Compliance AI','CX & Loyalty','Cloud Modern.'];
 const insights={
-  'Financial Services_GCC Playbook':'Sub-1000 BFSI GCCs — high cost, high attrition. All 3 Playbook themes applicable: Takeout, Build & Scale, Location Transition.',
+  'Financial Services_GCC Playbook':'Sub-1000 BFSI GCCs — high cost, high attrition. All 3 Playbook themes apply: Takeout, Build & Scale, Location Transition.',
   'Financial Services_Compliance AI':'KYC & AML automation is urgent. Proven 2hr/analyst/day savings and $1M+ risk reduction.',
   'Telecom & Media_Platform Modern.':'BSS/OSS re-platforming mandates are multi-year, $10M+ deals.',
   'Payments & FinTech_Data & AI':'Real-time settlement and fraud detection require advanced data infrastructure.',
@@ -664,7 +630,7 @@ hmData.forEach(r=>{
   const tr=document.createElement('tr');
   const lbl=document.createElement('td');
   lbl.className='rl';
-  lbl.innerHTML=`<span style="color:${r.color};font-weight:800;">${r.bu}</span>`;
+  lbl.innerHTML=`<span style="color:${r.color};font-weight:800;font-size:16px;">${r.bu}</span>`;
   tr.appendChild(lbl);
   r.scores.forEach((s,i)=>{
     const td=document.createElement('td');
@@ -673,9 +639,9 @@ hmData.forEach(r=>{
     td.addEventListener('mouseenter',e=>{
       tip.style.display='block';
       const key=`${r.bu}_${hmCols[i]}`;
-      tip.innerHTML=`<strong>${r.bu}</strong>${hmCols[i]}: <b style="color:#a78bfa">${s}/100</b><br><span style="font-size:11px;color:rgba(255,255,255,.6)">${insights[key]||'Strong deal signal. Prioritise BD resource allocation.'}</span>`;
+      tip.innerHTML=`<strong>${r.bu}</strong>${hmCols[i]}: <b style="color:#c4b5fd">${s}/100</b><br><span style="font-size:13px;color:var(--t2)">${insights[key]||'Strong deal signal. Prioritise BD resource allocation.'}</span>`;
     });
-    td.addEventListener('mousemove',e=>{tip.style.left=(e.clientX+12)+'px';tip.style.top=(e.clientY-44)+'px';});
+    td.addEventListener('mousemove',e=>{tip.style.left=(e.clientX+14)+'px';tip.style.top=(e.clientY-50)+'px';});
     td.addEventListener('mouseleave',()=>tip.style.display='none');
     tr.appendChild(td);
   });
@@ -684,8 +650,8 @@ hmData.forEach(r=>{
 document.addEventListener('keydown',e=>{
   const btns=[...document.querySelectorAll('.nb2')];
   const idx=btns.findIndex(b=>b.classList.contains('active'));
-  if(e.key==='ArrowRight'&&idx<btns.length-1) btns[idx+1].click();
-  if(e.key==='ArrowLeft'&&idx>0) btns[idx-1].click();
+  if(e.key==='ArrowRight'&&idx<btns.length-1)btns[idx+1].click();
+  if(e.key==='ArrowLeft'&&idx>0)btns[idx-1].click();
 });
 </script>
 </body>
