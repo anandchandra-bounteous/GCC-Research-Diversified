@@ -134,6 +134,7 @@ tr:hover td{background:rgba(60,37,247,.02)}tr:last-child td{border-bottom:none}
   <div class="tb" onclick="showTab('cost',this)">💰 Cost Synergies</div>
   <div class="tb" onclick="showTab('margins',this)">📊 Margin Analysis</div>
   <div class="tb" onclick="showTab('intg',this)">🔗 Integration Roadmap</div>
+  <div class="tb" onclick="showTab('can',this)">🍁 Canada GTM</div>
 </div>
 
 <div class="cnt">
@@ -517,6 +518,102 @@ tr:hover td{background:rgba(60,37,247,.02)}tr:last-child td{border-bottom:none}
   </div>
 </div>
 
+
+<!-- ====== TAB 9: CANADA GTM ====== -->
+<div id="tab-can" class="tc">
+  <div class="vcard">
+    <div style="font-size:19px;font-weight:800;margin-bottom:8px">🍁 Canada GTM: New Logo Program — Acquisition Impact Assessment</div>
+    <p style="font-size:13px;opacity:.85;line-height:1.75">The BrainRidge acquisition is a <strong>strategic catalyst for Bounteous's Canada GTM</strong>. BrainRidge's established Tier-1 FS credentials (BMO, Intact, Equitable Bank), 200+ onshore Canadian consultants, PulseAI platform, and senior partner relationships (CIBC via Michael Moerman, Scotiabank via Vikas Sharma) unlock new logo programmes that would take Bounteous 3–5 years to build independently. The combined entity creates a <strong>uniquely differentiated offer</strong> for Canada's major banks, insurers, pension funds, FinTechs, and telecoms. Estimated Canada new logo pipeline enabled by acquisition: <strong>CAD $22M–$95M incremental by Year 3.</strong></p>
+    <div class="pgrid">
+      <div class="pill"><div class="picon">🏦</div><div class="ptitle">12 Tier 1 FS Logos</div><div class="ptxt">RBC, CIBC, National Bank, Desjardins, Manulife, Sun Life, Intact, iA, CDPQ, PSP, TMX, Interac — all directly enabled by BrainRidge credentials. None winnable without acquisition.</div></div>
+      <div class="pill"><div class="picon">🤝</div><div class="ptitle">Warm Relationship Entry</div><div class="ptxt">CIBC (Michael Moerman's direct network) and Scotiabank (Vikas Sharma) provide immediate senior-level pipeline access — no cold outreach required from Day 1 post-close.</div></div>
+      <div class="pill"><div class="picon">🗺️</div><div class="ptitle">Quebec Market Unlock</div><div class="ptxt">BrainRidge's Moncton delivery centre + French-Canada bilingual capability = differentiated access to Desjardins, iA Financial, CDPQ, National Bank, and Quebecor media — markets where Bounteous has limited footing today.</div></div>
+    </div>
+  </div>
+
+  <div class="scsel">
+    <label>📊 Scenario:</label>
+    <select id="canSel" onchange="updateCanSc()">
+      <option value="low">🔵 Low Case — Conservative</option>
+      <option value="mid" selected>🟡 Base Case — Most Likely</option>
+      <option value="high">🟢 High Case — Upside</option>
+    </select>
+    <span class="scnote" id="canNote">Base: 6 Tier 1 wins averaging $7M + 4 Tier 2 wins averaging $3M. BrainRidge credentials actively leveraged within 18 months post-close.</span>
+  </div>
+
+  <div class="g4" style="margin-bottom:18px">
+    <div class="mc"><div class="mv" id="canTtl">CAD ~$56M</div><div class="ml">Total Canada New Logo Revenue (Year 3)</div><div class="mch">↑ Incremental — enabled by acquisition</div></div>
+    <div class="mc a"><div class="mv" id="canT1">$44M</div><div class="ml">Tier 1 FS Logo Revenue (6 wins)</div><div class="mch">↑ BrainRidge-enabled pursuits</div></div>
+    <div class="mc g"><div class="mv" id="canT2">$12M</div><div class="ml">Tier 2 Mixed-Fit Logo Revenue</div><div class="mch">↑ Partial BrainRidge leverage</div></div>
+    <div class="mc o"><div class="mv" id="canLogos">10 logos</div><div class="ml">Expected New Logo Wins by Year 3</div><div class="mch">↑ Base case win probability</div></div>
+  </div>
+
+  <div class="card" style="margin-bottom:16px;padding:14px 22px">
+    <div style="display:flex;gap:22px;flex-wrap:wrap;align-items:center">
+      <div style="font-size:12.5px;font-weight:700;color:var(--tm)">Tier Key:</div>
+      <div style="display:flex;align-items:center;gap:7px"><span class="bdg" style="padding:3px 10px;background:rgba(60,37,247,.1);color:var(--s)">T1</span><span style="font-size:12px;color:var(--tm)">FS Core — directly BrainRidge-enabled (12 logos)</span></div>
+      <div style="display:flex;align-items:center;gap:7px"><span class="bdg" style="padding:3px 10px;background:rgba(245,158,11,.1);color:#d97706">T2</span><span style="font-size:12px;color:var(--tm)">Mixed fit — partial BrainRidge applicability (7 logos)</span></div>
+      <div style="display:flex;align-items:center;gap:7px"><span class="bdg" style="padding:3px 10px;background:rgba(148,163,184,.1);color:#94a3b8">T3</span><span style="font-size:12px;color:var(--tm)">Non-FS — Bounteous-primary, acquisition-independent (5 logos)</span></div>
+      <div style="display:flex;align-items:center;gap:7px"><span style="font-size:11px;color:#16a34a;font-weight:700;padding:3px 10px;background:rgba(34,197,94,.08);border-radius:10px">✓ BR-Enabled</span><span style="font-size:12px;color:var(--tm)">Acquisition directly unlocks pursuit</span></div>
+    </div>
+  </div>
+
+  <div class="lgrid" id="cangrid" style="grid-template-columns:repeat(4,1fr)"></div>
+  <div id="candetail" class="card hdtl" style="display:none;margin-top:16px"><div id="candetailcnt"></div></div>
+
+  <div class="card" style="margin-top:18px">
+    <div class="ct" style="margin-bottom:14px">Canada GTM Priority Pursuit Register — Acquisition-Enabled vs. Standalone</div>
+    <table>
+      <thead><tr><th>Priority</th><th>Logo</th><th>Acquisition Impact</th><th>BrainRidge Entry Point</th><th>Year 1–3 Opportunity</th><th>Lead</th></tr></thead>
+      <tbody>
+        <tr><td><span style="background:var(--p);color:#fff;padding:2px 10px;border-radius:10px;font-size:11px;font-weight:700">P1</span></td><td><strong>CIBC</strong></td><td><span class="rlow" style="background:rgba(34,197,94,.1);color:#16a34a">🔓 Unlocked</span></td><td>Michael Moerman's direct CIBC senior relationships — immediate Day 1 pipeline, zero cold outreach</td><td>$5–20M</td><td>Michael Moerman + Bounteous FS Sales</td></tr>
+        <tr><td><span style="background:var(--p);color:#fff;padding:2px 10px;border-radius:10px;font-size:11px;font-weight:700">P1</span></td><td><strong>Interac Corp</strong></td><td><span class="rlow" style="background:rgba(34,197,94,.1);color:#16a34a">🔓 Unlocked</span></td><td>BrainRidge already in advanced MSA discussions — acquisition closes this deal immediately</td><td>$2–9M</td><td>Rahul Goel + Bounteous Payments</td></tr>
+        <tr><td><span style="background:var(--p);color:#fff;padding:2px 10px;border-radius:10px;font-size:11px;font-weight:700">P1</span></td><td><strong>Intact Financial</strong></td><td><span class="rlow" style="background:rgba(34,197,94,.1);color:#16a34a">🔓 Expand Existing</span></td><td>BrainRidge's existing Intact relationship + Bounteous capabilities = immediate scope expansion</td><td>$2–12M</td><td>BrainRidge Account Team + Bounteous Digital</td></tr>
+        <tr><td><span style="background:var(--a);color:#fff;padding:2px 10px;border-radius:10px;font-size:11px;font-weight:700">P2</span></td><td><strong>Desjardins</strong></td><td><span class="rlow" style="background:rgba(34,197,94,.1);color:#16a34a">🔓 Unlocked</span></td><td>BrainRidge Quebec market (Moncton) + insurance AI credentials = direct differentiated access</td><td>$4–18M</td><td>Vikas Sharma + Bounteous Design</td></tr>
+        <tr><td><span style="background:var(--a);color:#fff;padding:2px 10px;border-radius:10px;font-size:11px;font-weight:700">P2</span></td><td><strong>Manulife</strong></td><td><span class="rlow" style="background:rgba(34,197,94,.1);color:#16a34a">🔓 Unlocked</span></td><td>BrainRidge Intact/Guidewire + Bounteous health digital = unmatched combined insurance pitch</td><td>$4–18M</td><td>Bounteous FS + BrainRidge Insurance Lead</td></tr>
+        <tr><td><span style="background:var(--a);color:#fff;padding:2px 10px;border-radius:10px;font-size:11px;font-weight:700">P2</span></td><td><strong>Sun Life</strong></td><td><span class="rlow" style="background:rgba(34,197,94,.1);color:#16a34a">🔓 Unlocked</span></td><td>Lumino Health + group benefits = perfect Bounteous+BrainRidge combined target</td><td>$3–14M</td><td>Bounteous Insurance + BrainRidge AI</td></tr>
+        <tr><td><span style="background:var(--a);color:#fff;padding:2px 10px;border-radius:10px;font-size:11px;font-weight:700">P2</span></td><td><strong>National Bank</strong></td><td><span class="rmed">⬆ Significantly Enhanced</span></td><td>BMO core banking track record = prerequisite credential for National Bank conversations</td><td>$3–14M</td><td>Bounteous FS Sales + BrainRidge Delivery</td></tr>
+        <tr><td><span style="background:var(--a);color:#fff;padding:2px 10px;border-radius:10px;font-size:11px;font-weight:700">P2</span></td><td><strong>iA Financial</strong></td><td><span class="rmed">⬆ Significantly Enhanced</span></td><td>Quebec bilingual delivery + insurance AI + wealth platform = unique access to Quebec FI market</td><td>$2–9M</td><td>BrainRidge Quebec Team + Bounteous</td></tr>
+        <tr><td><span style="background:var(--s);color:#fff;padding:2px 10px;border-radius:10px;font-size:11px;font-weight:700">P3</span></td><td><strong>RBC</strong></td><td><span class="rmed">⬆ Significantly Enhanced</span></td><td>Long-term target — BMO Tier-1 credentials needed. 18–24 month relationship build required</td><td>$6–20M</td><td>Bounteous FS + Senior BrainRidge Partner</td></tr>
+        <tr><td><span style="background:var(--s);color:#fff;padding:2px 10px;border-radius:10px;font-size:11px;font-weight:700">P3</span></td><td><strong>CDPQ / PSP</strong></td><td><span class="rmed">⬆ Enhanced</span></td><td>Alternative investment data platform CoE — BrainRidge's only comparable credentials in Canada</td><td>$2–11M</td><td>BrainRidge Data Practice + Bounteous</td></tr>
+        <tr><td><span style="background:var(--s);color:#fff;padding:2px 10px;border-radius:10px;font-size:11px;font-weight:700">P3</span></td><td><strong>Nuvei / Symcor</strong></td><td><span class="rmed">⬆ Enhanced</span></td><td>Payments engineering + document AI — BrainRidge adds engineering depth Bounteous lacks</td><td>$1–7M each</td><td>Bounteous Commerce + BrainRidge Payments</td></tr>
+        <tr><td><span style="background:#94a3b8;color:#fff;padding:2px 10px;border-radius:10px;font-size:11px;font-weight:700">P4</span></td><td><strong>Bell / Telecoms / Media</strong></td><td><span class="rhi">— Acquisition-Independent</span></td><td>Bounteous digital and marketing — no BrainRidge relevance. Pursue as Bounteous-standalone</td><td>$1–4M each</td><td>Bounteous Digital/Marketing</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="g2" style="margin-top:18px">
+    <div class="card">
+      <div class="ct" style="margin-bottom:14px">🎯 Logos Only Winnable With BrainRidge — Acquisition-Dependent Pursuits</div>
+      <ul class="ilist">
+        <li><strong>CIBC:</strong> Michael Moerman's CIBC relationships are entirely acquisition-dependent. Without BrainRidge, this pipeline literally does not exist for Bounteous today.</li>
+        <li><strong>Interac Corp:</strong> BrainRidge's advanced MSA discussions are the access point. Bounteous standalone has no credible payments infrastructure play for Canada's national payments network.</li>
+        <li><strong>Desjardins:</strong> Quebec market access + bilingual delivery (Moncton) + insurance AI (Intact/Guidewire) = only available via BrainRidge. Bounteous has limited Quebec FS presence today.</li>
+        <li><strong>Intact expansion:</strong> BrainRidge's existing relationship is the most efficient path. Bounteous cannot independently access Intact's engineering budget without BrainRidge's proven multi-brand CMS and Guidewire credentials.</li>
+        <li><strong>CDPQ / PSP Investments:</strong> BrainRidge's alternative investment data platform is the only current Bounteous credential for Quebec-centric pension funds. Acquisition-dependent entry.</li>
+        <li><strong>Manulife / Sun Life (insurance AI):</strong> The combined BrainRidge insurance AI + Bounteous health digital pitch is impossible without the acquisition. Each firm is strong alone; together they're uniquely differentiated.</li>
+        <li><strong>National Bank / TMX:</strong> BrainRidge's Tier-1 Canadian bank and market infrastructure track record is the prerequisite for these relationships. Bounteous cannot credibly pitch these today.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="ct" style="margin-bottom:16px">📊 Canada GTM Revenue — Scenario Comparison (Year 3 CAD)</div>
+      <div style="margin-bottom:18px">
+        <div style="font-size:12px;font-weight:700;color:var(--p);margin-bottom:9px">Tier 1 FS (BrainRidge-enabled) — Expected Wins</div>
+        <div class="sbar"><div class="slab">Low (3–4 wins)</div><div class="bcon"><div class="bfill bp" style="width:25%">$18M</div></div><div class="bval">$18M</div></div>
+        <div class="sbar"><div class="slab">Base (6 wins)</div><div class="bcon"><div class="bfill ba" style="width:61%">$44M</div></div><div class="bval">$44M</div></div>
+        <div class="sbar"><div class="slab">High (8–9 wins)</div><div class="bcon"><div class="bfill bg2" style="width:100%">$72M</div></div><div class="bval">$72M</div></div>
+      </div>
+      <div>
+        <div style="font-size:12px;font-weight:700;color:var(--p);margin-bottom:9px">Tier 2 Mixed-Fit Logos — Expected Wins</div>
+        <div class="sbar"><div class="slab">Low (1–2 wins)</div><div class="bcon"><div class="bfill bp" style="width:17%">$4M</div></div><div class="bval">$4M</div></div>
+        <div class="sbar"><div class="slab">Base (4 wins)</div><div class="bcon"><div class="bfill ba" style="width:52%">$12M</div></div><div class="bval">$12M</div></div>
+        <div class="sbar"><div class="slab">High (5–6 wins)</div><div class="bcon"><div class="bfill bg2" style="width:100%">$23M</div></div><div class="bval">$23M</div></div>
+      </div>
+      <div class="hbox" style="margin-top:16px"><p><strong>Key insight:</strong> The acquisition transforms the Canada GTM plan from a <em>blank-slate market entry</em> into a <em>credential-backed expansion programme</em>. Tier 1 FS logos — which represent Canada's most valuable long-term relationships — are entirely inaccessible without BrainRidge's track record and relationships.</p></div>
+    </div>
+  </div>
+</div>
+
 </div><!-- end .cnt -->
 
 <div class="ft">
@@ -600,6 +697,90 @@ function updateSc(){
 }
 
 renderLogos();updateSc();
+
+// ===== CANADA GTM =====
+const cad=[
+[1,'RBC','Royal Bank of Canada','Retail & Commercial Banking',true,['Core Banking AI','Managed Services','Wealth'],{l:6,m:12,h:20},'hi',["Canada's largest bank ($1.8T assets). Multi-year AI and cloud modernisation heavily funded. Mission-critical delivery partner appetite is high across retail, wealth, and commercial divisions.","BMO Tier-1 track record is the gold-standard credential at RBC. BrainRidge's Neuron accelerators and dark factory managed services directly address RBC's delivery velocity challenges. PulseAI is applicable at enterprise scale.","RBC Wealth (Dominion Securities, MyAdvisor), digital retail banking, and RBC commercial modernisation are priority targets. Bounteous adds loyalty, marketing activation, and UX design towers unavailable from engineering-only firms."]],
+[1,'CIBC','CIBC','Retail & Commercial Banking',true,['AI Platform','Core Banking','Cloud'],{l:5,m:12,h:20},'hi',["BrainRidge AI Partner Michael Moerman has direct senior CIBC relationships from Capco/CIBC career. Immediate Day 1 pipeline post-close — lowest cost-of-entry new logo in Canada.","Michael's direct CIBC network = zero cold outreach. BMO core banking AI and PulseAI Neuron credentials are directly applicable. Fastest possible path to a Tier-1 Canadian bank beyond BMO.","CIBC's Simplii Financial digital bank modernisation and CIBC Wood Gundy wealth platform are priority targets. Bounteous adds client experience design and marketing activation on top of BrainRidge's engineering delivery."]],
+[1,'National Bank','National Bank of Canada','Retail & Commercial Banking',true,['Core Banking','AI','Data Platform'],{l:3,m:8,h:14},'hi',["Canada's 6th largest bank. Active AI and cloud investment underway. Moncton delivery centre gives BrainRidge bilingual credibility in the Quebec market — a competitive differentiator.","BrainRidge's BMO core banking modernisation is a direct credential for National Bank conversations. National Bank's Flinks investment signals appetite for engineering-led AI partners.","National Bank's Altamira Wealth, international banking, and digital retail channels are targets. Combined BrainRidge AI engineering + Bounteous digital experience and loyalty is a complete differentiated offer."]],
+[1,'Desjardins','Desjardins Group','Cooperative Banking & Insurance',true,['Core Banking','Insurance AI','Quebec Market'],{l:4,m:10,h:18},'hi',["Largest cooperative FI in North America ($400B+ assets). Massive digital transformation across banking and insurance simultaneously. Bilingual Quebec market — BrainRidge Moncton centre is a rare competitive differentiator.","BrainRidge's Intact insurance AI, Guidewire credentials, core banking modernisation, and French-Canada bilingual delivery are directly applicable. No comparable competitor offers this combination for Quebec's largest FI.","Desjardins P&C insurance (Desjardins Insurance), retail banking digital, and wealth management are all targets. BrainRidge claims AI + Bounteous loyalty and digital design = comprehensive combined pitch for the Quebec market."]],
+[1,'Manulife','Manulife Financial','Life & Health Insurance / Wealth',true,['Insurance AI','Wealth Platform','Digital Health'],{l:4,m:10,h:18},'hi',["One of Canada's largest insurers ($1.4T AUM). Aggressive AI and digital health agenda. John Hancock (US division) creates cross-border multi-geography opportunity leveraging BrainRidge's US presence.","BrainRidge's Intact/Guidewire credentials, BMO Wealth platform engineering (100+ system integration), and AI-driven underwriting are directly applicable at Manulife's enterprise scale.","Manulife Vitality, group benefits administration, and Manulife Investment Management platforms are priority combined targets. Bounteous health digital UX + BrainRidge insurance AI = uniquely differentiated combined pitch."]],
+[1,'Sun Life','Sun Life Financial','Life & Health Insurance',true,['Insurance Tech','Claims AI','Digital Health'],{l:3,m:8,h:14},'hi',["Canada's 2nd largest insurer. Sun Life's Lumino Health and Simply Benefits platforms align perfectly with the combined Bounteous health digital + BrainRidge insurance AI capabilities.","BrainRidge's Intact Financial and Guidewire ClaimCenter cloud migration credentials are direct proof points. PulseAI Neuron accelerators can dramatically speed Sun Life's modernisation roadmap.","Sun Life's Lumino Health platform and group benefits administration are priority combined targets. A single combined pitch addresses both the technology engineering gap and the digital experience design gap."]],
+[1,'Intact Financial','Intact Financial Corporation','P&C Insurance',true,['Guidewire Migration','Claims AI','Multi-Brand CMS'],{l:2,m:6,h:12},'hi',["Already a BrainRidge client ($25K 2025A) — lowest-risk expansion in Canada portfolio. Largest P&C insurer in Canada (35,000+ employees). BrainRidge delivered Guidewire cloud migration and CMS for 4 brands.","BrainRidge's existing Intact relationship is a near-zero-cost expansion via new capability towers. Guidewire and multi-brand CMS are proven credentials for major scope increase.","Intact's belairdirect, Intact Insurance, and Intact Bank are priority expansion targets. Bounteous adds loyalty, marketing activation, and digital experience — entirely new towers absent from current scope."]],
+[1,'iA Financial','iA Financial Group','Insurance & Wealth Mgmt',true,['Insurance AI','Wealth Platform','Data'],{l:2,m:5,h:9},'med',["Quebec-based life and health insurer with wealth management ($220B+ AUM). Strong fit given BrainRidge's Quebec delivery presence, insurance credentials, and dual insurance+wealth platform track record.","BrainRidge's insurance AI (Intact/Guidewire) and wealth platform engineering (BMO Wealth — 100+ system integration) are directly applicable at iA's scale.","iA group insurance and iA Clarington wealth management are priority BrainRidge targets. Bounteous adds client portal UX and marketing automation capabilities for iA's advisor-facing tools."]],
+[1,'Interac','Interac Corp','Canadian Payments Infrastructure',true,['Real-Time Payments','Open Banking','Fraud AI'],{l:2,m:5,h:9},'hi',["Canada's national payments backbone (e-Transfer, Interac Debit). Actively modernising for open banking and digital identity. BrainRidge is already in advanced MSA discussions per their own CIM — acquisition closes this deal.","BrainRidge's own growth plan explicitly cites Interac as an advanced MSA target. Payment rails, real-time payments, and fraud AI are core BrainRidge capabilities perfectly matched to Interac's mandate.","Interac's open banking and Interac Digital ID initiatives are priority combined targets. Bounteous adds the consumer digital product and experience layer essential for Interac's public-facing products."]],
+[1,'CDPQ','CDPQ (Caisse de dépôt)','Pension Fund / Alternatives',true,['Data Platform','Portfolio Analytics','AI'],{l:2,m:6,h:11},'med',["$420B AUM Quebec pension fund. Accelerating technology investment in portfolio management, risk analytics, ESG data platforms, and AI-driven investment operations modernisation.","BrainRidge's alternative investment data platform case study (multi-strategy hedge fund, front-to-back office tools) is directly applicable. Enterprise data using Snowflake/Databricks proven at scale.","CDPQ's Ivanhoé Cambridge (real estate) and Otéra Capital (commercial real estate lending) subsidiaries are additional BrainRidge targets for AI-driven portfolio analytics and data orchestration."]],
+[1,'PSP Investments','PSP Investments','Pension Fund / Alternatives',true,['Data Platform','Portfolio Analytics','AI'],{l:1,m:4,h:7},'med',["$264B AUM federal pension fund. PSP's alternatives-heavy portfolio across private equity, infrastructure, and real assets creates demand for sophisticated data platforms and AI-driven investment analytics.","BrainRidge's alternative investment enterprise data platform and front-to-back office tools are the strongest available credentials in Canada for PSP's investment operations modernisation.","PSP's private equity and infrastructure analytics platforms are priority targets. BrainRidge's proven alternative investment CoE provides immediate credibility in pension fund conversations."]],
+[1,'TMX Group','TMX Group','Market Infrastructure / Exchange',true,['High-Availability Systems','Data Products','Managed Services'],{l:2,m:5,h:9},'med',["TSX, TSXV, and Montréal Exchange operator. TMX's technology modernisation of trading systems and data products requires mission-critical delivery partners capable of 99.999% SLAs.","BrainRidge's high-availability managed services (81% outage reduction at BMO US digital) are directly applicable to TMX's exchange infrastructure. Dark factory model is purpose-built for mission-critical environments.","TMX's Datalinx data products and CDCC clearing infrastructure are BrainRidge targets. Bounteous adds analytics UI and data product experience design on top of BrainRidge's platform engineering."]],
+// Tier 2
+[2,'Nuvei','Nuvei Corporation','Payments FinTech',true,['Payments Platform','API Engineering','Global Scale'],{l:1,m:4,h:7},'med',["Montreal-HQ'd global payments FinTech (TSX: NVEI). Aggressive LATAM/EMEA expansion requiring scalable engineering. Growing at 30%+ annually with active demand for payments engineering partners.","BrainRidge's payment rails and reconciliation expertise (5M+ txns/day across 120 currencies at investment bank scale) are directly applicable to Nuvei's global processing platform.","Nuvei's LATAM and EMEA expansion require scalable API engineering. PulseAI Neuron + Bounteous digital commerce creates a compelling combined pitch for Nuvei's merchant-facing products."]],
+[2,'Fidelity Intl','Fidelity International (Canada)','Asset Management',true,['Wealth Platform','Advisor Tools','AI'],{l:1,m:4,h:7},'med',["Global asset manager with significant Canada operations. Advisor workstation modernisation and client portal upgrades create active institutional demand.","BrainRidge's BMO Wealth Management platform (100+ system integration) is the strongest available credential for Fidelity's advisor workstation modernisation — directly comparable engagement scope.","Fidelity's advisor tools and fund distribution platforms are priority targets. BrainRidge engineering + Bounteous UX design is strongly differentiated vs. pure-play SI competitors."]],
+[2,'Symcor','Symcor Inc','Financial Back-Office Services',true,['Document AI','Payments Clearing','Automation'],{l:1,m:3,h:6},'med',["Bank-owned shared services provider (owned by Big 5 Canadian banks) for cheque processing, payments clearing, and document management. Prime AI automation candidate with large manual processing base.","BrainRidge's AI-driven document processing and automation (KYC extraction: 2 hrs/day saved per analyst) are directly applicable to Symcor's core operations. Similar use case, larger scale.","Symcor's cheque image archive modernisation and payment clearing AI automation are priority BrainRidge targets. AI-driven document processing can significantly reduce Symcor's operational cost base."]],
+[2,'MSCI Canada','MSCI (Canada Operations)','Financial Data & Analytics',false,['Data Platform','ESG AI','Analytics'],{l:1,m:3,h:6},'med',["MSCI's Canada operations focus on ESG analytics, climate risk data, and index products. Growing demand for AI-enhanced analytics engineering and data platform modernisation.","BrainRidge's enterprise data platform expertise (Snowflake, Databricks) and emerging GenAI capabilities are applicable for MSCI's ESG data product engineering and climate risk analytics.","MSCI's ESG and Climate analytics products are primary targets. BrainRidge data engineering + Bounteous analytics UI and digital product design creates a differentiated combined offer."]],
+[2,'Flinks','Flinks Technology','Open Banking / FinTech',false,['Open Banking','API Engineering','Financial Data'],{l:0.5,m:2,h:4},'low',["Canadian open banking infrastructure startup (National Bank is an investor). BrainRidge's API engineering and regulated-environment expertise are applicable as Flinks scales its financial data network.","BrainRidge's regulated-environment microservices API engineering and PulseAI could accelerate Flinks's platform development. Consider strategic partnership pathway before full commercial engagement.","As Canada's open banking regulations advance, Flinks's growth creates demand for BrainRidge's regulated API engineering. A combined Bounteous+BrainRidge partnership with Flinks could unlock multiple downstream banking clients."]],
+[2,'Lightspeed','Lightspeed Commerce','Commerce Platform / FinTech',false,['Digital Commerce','Payments','Merchant AI'],{l:0.5,m:2,h:4},'low',["Montreal-HQ'd global commerce platform (TSX: LSPD). Lightspeed Capital (merchant cash advance) and Lightspeed Payments expansion create demand for AI and data engineering capabilities.","Bounteous's digital commerce capabilities are primary. BrainRidge adds payments engineering for Lightspeed Capital and AI-driven merchant analytics. Partially acquisition-enhanced.","Lightspeed's merchant data platform and Lightspeed Capital lending product are BrainRidge + Bounteous combined targets. Primarily a Bounteous-led digital commerce relationship."]],
+[2,'Dialogue','Dialogue Technologies','Digital Health / InsurTech',false,['Digital Health','AI','Employee Benefits'],{l:0.5,m:2,h:3},'low',["Canadian digital health platform (TSX: CARE) serving group benefits and employee wellness. Growing at intersection of Bounteous health digital and BrainRidge insurance AI.","BrainRidge's insurance AI credentials are partially applicable for Dialogue's insurance partnerships. Primarily a Bounteous-led digital health opportunity with BrainRidge AI as a supplementary capability.","Dialogue's mental health and chronic disease management expansion creates AI demand. Combined BrainRidge + Bounteous is relevant for health data analytics and experience engineering."]],
+// Tier 3 — Non-FS
+[3,'Bell Canada','Bell Canada','Telecom (Non-FS)',false,['Digital Transformation','Marketing','Cloud'],{l:0.5,m:2,h:4},'low',["Canada's largest telecom. Very limited BrainRidge FS relevance. Bounteous's digital product, marketing, and loyalty capabilities are the primary entry point for Bell's consumer and enterprise divisions.","BrainRidge's FS AI has minimal direct application at Bell. Cloud DevOps is applicable but Bell has large-vendor relationships (IBM, Ericsson). Treat as Bounteous-standalone pursuit.","Bounteous's digital commerce, loyalty, and marketing activation for Bell's Crave streaming and retail channels. This pursuit is largely acquisition-independent."]],
+[3,'Quebecor','Quebecor Inc','Media & Telecom',false,['Digital Commerce','Marketing','Media Tech'],{l:0.5,m:1.5,h:3},'low',["Quebec media/telecom group (Vidéotron, TVA, Journal de Montréal). Minimal BrainRidge relevance. BrainRidge's Moncton/Quebec footprint marginally enhances Bounteous's Quebec market credibility.","No direct BrainRidge applicability. Bounteous-standalone digital and marketing opportunity. Acquisition has minimal impact on this pursuit.","Bounteous's content strategy, digital experience, and marketing activation for Quebecor's media and telecom brands. Acquisition-independent."]],
+[3,'Videotron','Vidéotron','Telecom / Cable',false,['Digital','Marketing','AI'],{l:0.5,m:1.5,h:3},'low',["Quebec telecom subsidiary of Quebecor. BrainRidge's Quebec presence marginally helps. Primarily a Bounteous digital and marketing opportunity.","No direct BrainRidge applicability. Follow Bounteous-standalone digital and marketing strategy for Vidéotron's consumer digital channels.","Bounteous's digital experience and marketing activation for Vidéotron's consumer brand. Largely acquisition-independent."]],
+[3,'Cogeco','Cogeco Communications','Telecom / Media',false,['Digital','Marketing','Cloud'],{l:0.5,m:1,h:2},'low',["Quebec-based cable and media company. Very limited BrainRidge applicability.","No direct BrainRidge applicability. Bounteous-standalone digital and marketing strategy only.","Bounteous's digital experience and marketing activation for Cogeco's cable and media brands. Acquisition-independent."]],
+[3,'Radio-Canada','Radio-Canada (CBC/SRC)','Public Media',false,['Content Management','Digital','CMS'],{l:0.5,m:1,h:2},'low',["Canada's French public broadcaster. No BrainRidge applicability. CMS and content management are Bounteous-led opportunities.","No BrainRidge relevance. Purely a Bounteous content management, CMS, and digital experience play. Acquisition does not affect this pursuit.","Bounteous content strategy, digital experience, and CMS capabilities only. Acquisition-independent."]]
+];
+
+const canSc={
+  low:{ttl:'CAD ~$22M',t1:'$18M (3–4 wins)',t2:'$4M (1–2 wins)',note:'Conservative: 3–4 Tier 1 FS logos won by Year 3, 1–2 Tier 2. Limited PulseAI leverage. Primarily relationship-dependent wins (CIBC, Interac, Intact expansion).',logos:'4–6 logos'},
+  mid:{ttl:'CAD ~$56M',t1:'$44M (6 wins)',t2:'$12M (4 wins)',note:'Base: 6 Tier 1 wins averaging $7M, 4 Tier 2 at $3M. BrainRidge credentials actively leveraged in pursuits within 18 months post-close. CIBC, Desjardins, Manulife, Interac, National Bank, Sun Life all in scope.',logos:'~10 logos'},
+  high:{ttl:'CAD ~$95M',t1:'$72M (8–9 wins)',t2:'$23M (5–6 wins)',note:'Upside: 8–9 Tier 1 wins at $9M avg. CIBC+Scotiabank+Desjardins multi-tower. PulseAI commercialised. RBC and TMX landed. All BrainRidge relationship channels and credentials fully activated.',logos:'14–15 logos'}
+};
+
+function renderCan(){
+  const g=document.getElementById('cangrid');
+  if(!g)return;
+  const tierCols={1:'rgba(60,37,247,.1)',2:'rgba(245,158,11,.1)',3:'rgba(148,163,184,.1)'};
+  const tierTxt={1:'var(--s)',2:'#d97706',3:'#94a3b8'};
+  const tagCls=t=>t.includes('AI')||t.includes('Platform')?'t-ai':t.includes('Data')||t.includes('Analytics')?'t-data':t.includes('Cloud')||t.includes('Core')||t.includes('System')?'t-cloud':t.includes('Payment')||t.includes('Rail')?'t-pay':'t-ms';
+  g.innerHTML=cad.map((c,i)=>{
+    const[tier,n,full,seg,br,tags,rev,imp]=c;
+    return`<div class="lcard ${imp==='hi'?'hi':imp==='med'?'med':''}" onclick="showCanD(${i})" style="position:relative">
+      <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:4px">
+        <div class="lname">${n}</div>
+        <span style="font-size:10px;padding:2px 9px;border-radius:10px;font-weight:700;background:${tierCols[tier]};color:${tierTxt[tier]}">T${tier}</span>
+      </div>
+      <div class="lseg">${seg}</div>
+      <div class="stags">${tags.map(t=>`<span class="tag ${tagCls(t)}">${t}</span>`).join('')}</div>
+      ${br?'<div style="font-size:10px;color:#16a34a;font-weight:700;margin-top:5px">✓ BrainRidge-Enabled</div>':'<div style="font-size:10px;color:#94a3b8;margin-top:5px">Bounteous-Primary</div>'}
+      <div class="opp ${imp==='hi'?'oh':imp==='med'?'om':'ol'}" style="margin-top:5px">${imp==='hi'?'●':imp==='med'?'◐':'○'} ${imp==='hi'?'High':imp==='med'?'Med':'Low'} Impact &nbsp;·&nbsp; ${rev.l}–${rev.h}M</div>
+    </div>`;
+  }).join('');
+}
+
+function showCanD(i){
+  const c=cad[i];
+  const[tier,n,full,seg,br,tags,rev,imp,det]=c;
+  const box=document.getElementById('candetail');
+  box.style.display='block';
+  document.getElementById('candetailcnt').innerHTML=`
+    <div style="font-size:16px;font-weight:800;color:var(--p);margin-bottom:4px">${full} — Canada GTM Deep Dive</div>
+    <div style="font-size:12px;color:var(--tl);margin-bottom:16px">${seg} &nbsp;·&nbsp; Opportunity: ${rev.l}M–${rev.h}M &nbsp;·&nbsp; ${br?'<span style="color:#16a34a;font-weight:700">✓ BrainRidge-Enabled</span>':'<span style="color:#94a3b8">Bounteous-Primary</span>'}</div>
+    <div class="g3">
+      <div><div style="font-size:11px;font-weight:700;color:var(--s);text-transform:uppercase;margin-bottom:7px">Why Now</div><p style="font-size:12.5px;color:var(--tm);line-height:1.65">${det[0]}</p></div>
+      <div><div style="font-size:11px;font-weight:700;color:var(--a);text-transform:uppercase;margin-bottom:7px">BrainRidge Acquisition Impact</div><p style="font-size:12.5px;color:var(--tm);line-height:1.65">${det[1]}</p></div>
+      <div><div style="font-size:11px;font-weight:700;color:#16a34a;text-transform:uppercase;margin-bottom:7px">Combined Cross-Sell</div><p style="font-size:12.5px;color:var(--tm);line-height:1.65">${det[2]}</p></div>
+    </div>`;
+  box.scrollIntoView({behavior:'smooth',block:'nearest'});
+}
+
+function updateCanSc(){
+  const k=document.getElementById('canSel').value,s=canSc[k];
+  document.getElementById('canTtl').textContent=s.ttl;
+  document.getElementById('canT1').textContent=s.t1;
+  document.getElementById('canT2').textContent=s.t2;
+  document.getElementById('canNote').textContent=s.note;
+  document.getElementById('canLogos').textContent=s.logos;
+}
+
+renderCan();updateCanSc();
 </script>
 </body>
 </html>
