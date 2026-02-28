@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Project Pulse — M&A Synergy Dashboard</title>
+<style>
+:root{--p:#2E1869;--bg:#F3F3F5;--a:#B61CA7;--w:#FFFFFF;--s:#3C25F7;--tm:#4a4a6a;--tl:#8888aa;--sh:0 2px 14px rgba(46,24,105,0.10)}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:var(--bg);color:#1a1a2e;font-size:14px}
+.hdr{background:linear-gradient(135deg,var(--p) 0%,#1a0d4a 100%);color:#fff;padding:20px 36px;display:flex;justify-content:space-between;align-items:center;box-shadow:0 4px 20px rgba(46,24,105,.35)}
+.hdr h1{font-size:22px;font-weight:800;letter-spacing:-.4px}
+.hdr p{font-size:12px;opacity:.65;margin-top:3px}
+.hbadges{display:flex;gap:10px}
+.bdg{padding:5px 14px;border-radius:20px;font-size:12px;font-weight:700}
+.bdg-go{background:#22c55e;color:#fff}
+.bdg-c{background:rgba(255,255,255,.12);color:#fff;border:1px solid rgba(255,255,255,.3)}
+.tabbar{background:var(--p);padding:0 36px;display:flex;gap:0;overflow-x:auto;border-bottom:3px solid var(--a);scrollbar-width:none}
+.tabbar::-webkit-scrollbar{display:none}
+.tb{padding:13px 18px;color:rgba(255,255,255,.55);cursor:pointer;font-size:12.5px;font-weight:500;white-space:nowrap;border-bottom:3px solid transparent;margin-bottom:-3px;transition:all .2s;flex-shrink:0}
+.tb:hover{color:rgba(255,255,255,.9)}
+.tb.active{color:#fff;border-bottom-color:var(--a);font-weight:700}
+.cnt{padding:28px 36px;max-width:1400px;margin:0 auto}
+.tc{display:none}
+.tc.active{display:block}
+.card{background:#fff;border-radius:12px;padding:22px;box-shadow:var(--sh);margin-bottom:18px}
+.ct{font-size:15px;font-weight:700;color:var(--p);margin-bottom:4px}
+.cs{font-size:12px;color:var(--tl)}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.g3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:18px}
+.g4{display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:14px}
+.mc{background:#fff;border-radius:12px;padding:18px;box-shadow:var(--sh);border-left:4px solid var(--s)}
+.mc.a{border-left-color:var(--a)}.mc.g{border-left-color:#22c55e}.mc.o{border-left-color:#f59e0b}
+.mv{font-size:26px;font-weight:800;color:var(--p);line-height:1}
+.ml{font-size:11px;color:var(--tl);margin-top:5px}
+.mch{font-size:11px;color:#22c55e;font-weight:600;margin-top:3px}
+.vcard{background:linear-gradient(135deg,var(--p),#1a0d4a);color:#fff;border-radius:16px;padding:28px;margin-bottom:22px;position:relative;overflow:hidden}
+.vcard::before{content:'';position:absolute;top:-50px;right:-50px;width:200px;height:200px;border-radius:50%;background:rgba(182,28,167,.18)}
+.vbadge{display:inline-flex;align-items:center;gap:7px;background:#22c55e;color:#fff;padding:7px 18px;border-radius:28px;font-size:16px;font-weight:800;margin-bottom:14px}
+.vtitle{font-size:20px;font-weight:700;margin-bottom:10px}
+.vtxt{font-size:13px;line-height:1.75;opacity:.85;max-width:920px}
+.pgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:18px}
+.pill{background:rgba(255,255,255,.1);border-radius:10px;padding:15px;border:1px solid rgba(255,255,255,.14)}
+.picon{font-size:22px;margin-bottom:7px}.ptitle{font-size:12.5px;font-weight:700;margin-bottom:5px}
+.ptxt{font-size:11.5px;opacity:.72;line-height:1.55}
+.lgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:11px}
+.lcard{background:#fff;border-radius:10px;padding:15px;box-shadow:var(--sh);border:1.5px solid #eee;cursor:pointer;transition:all .2s}
+.lcard:hover{border-color:var(--s);transform:translateY(-2px);box-shadow:0 8px 24px rgba(60,37,247,.14)}
+.lcard.hi{border-color:rgba(34,197,94,.4);background:rgba(34,197,94,.03)}
+.lcard.med{border-color:rgba(245,158,11,.3);background:rgba(245,158,11,.03)}
+.lname{font-size:12.5px;font-weight:700;color:var(--p);margin-bottom:4px}
+.lseg{font-size:10.5px;color:var(--tl);margin-bottom:8px}
+.stags{display:flex;flex-wrap:wrap;gap:3px}
+.tag{font-size:10px;padding:2px 7px;border-radius:8px;font-weight:600}
+.t-ai{background:rgba(60,37,247,.1);color:var(--s)}
+.t-data{background:rgba(46,24,105,.1);color:var(--p)}
+.t-cloud{background:rgba(182,28,167,.1);color:var(--a)}
+.t-ms{background:rgba(34,197,94,.1);color:#16a34a}
+.t-pay{background:rgba(245,158,11,.1);color:#d97706}
+.opp{font-size:11px;font-weight:700;margin-top:7px}
+.oh{color:#22c55e}.om{color:#f59e0b}.ol{color:#94a3b8}
+table{width:100%;border-collapse:collapse}
+th{background:var(--p);color:#fff;padding:11px 14px;text-align:left;font-size:11.5px;font-weight:600;letter-spacing:.3px}
+th:first-child{border-radius:8px 0 0 0}th:last-child{border-radius:0 8px 0 0}
+td{padding:10px 14px;border-bottom:1px solid #f0f0f8;font-size:12.5px;vertical-align:top}
+tr:hover td{background:rgba(60,37,247,.02)}tr:last-child td{border-bottom:none}
+.rlow{background:rgba(34,197,94,.1);color:#16a34a;padding:2px 9px;border-radius:10px;font-size:11px;font-weight:700;display:inline-block}
+.rmed{background:rgba(245,158,11,.1);color:#d97706;padding:2px 9px;border-radius:10px;font-size:11px;font-weight:700;display:inline-block}
+.rhi{background:rgba(239,68,68,.1);color:#dc2626;padding:2px 9px;border-radius:10px;font-size:11px;font-weight:700;display:inline-block}
+.tl2{font-size:17px;font-weight:700;color:var(--p);margin-bottom:14px;display:flex;align-items:center;gap:10px}
+.tl2::after{content:'';flex:1;height:1px;background:linear-gradient(to right,var(--s),transparent);opacity:.3}
+.ilist{list-style:none}
+.ilist li{padding:9px 0;border-bottom:1px solid #f0f0f8;font-size:12.5px;display:flex;align-items:flex-start;gap:9px;line-height:1.55;color:var(--tm)}
+.ilist li::before{content:'●';color:var(--a);flex-shrink:0;margin-top:1px;font-size:9px}
+.ilist li:last-child{border-bottom:none}
+.hbox{background:linear-gradient(135deg,rgba(46,24,105,.05),rgba(60,37,247,.05));border-left:4px solid var(--s);border-radius:0 10px 10px 0;padding:14px 18px;margin:14px 0}
+.hbox p{font-size:12.5px;color:var(--tm);line-height:1.65}
+.tline{position:relative;padding-left:30px}
+.tline::before{content:'';position:absolute;left:9px;top:0;bottom:0;width:2px;background:linear-gradient(to bottom,var(--s),var(--a))}
+.ti{position:relative;margin-bottom:22px}
+.tdot{position:absolute;left:-25px;top:4px;width:13px;height:13px;border-radius:50%;background:var(--s);border:2px solid #fff;box-shadow:0 0 0 3px rgba(60,37,247,.18)}
+.tph{font-size:11px;font-weight:700;color:var(--s);text-transform:uppercase;letter-spacing:.4px}
+.ttitle{font-size:13px;font-weight:700;color:var(--p);margin:3px 0}
+.ttxt{font-size:12.5px;color:var(--tm);line-height:1.6}
+.sbar{display:flex;align-items:center;gap:10px;margin-bottom:12px}
+.slab{width:185px;font-size:12px;font-weight:500;flex-shrink:0}
+.bcon{flex:1;background:#f0f0f8;border-radius:6px;height:30px;overflow:hidden}
+.bfill{height:100%;border-radius:6px;display:flex;align-items:center;padding-left:10px;font-size:11.5px;font-weight:700;color:#fff;transition:width .5s ease}
+.bp{background:linear-gradient(90deg,var(--p),var(--s))}
+.ba{background:linear-gradient(90deg,var(--a),#e040b5)}
+.bg2{background:linear-gradient(90deg,#22c55e,#16a34a)}
+.bo{background:linear-gradient(90deg,#f59e0b,#d97706)}
+.bval{width:72px;text-align:right;font-size:12.5px;font-weight:700;color:var(--p);flex-shrink:0}
+.scsel{display:flex;gap:12px;margin-bottom:22px;align-items:center;flex-wrap:wrap}
+.scsel label{font-size:13px;font-weight:600;color:var(--tm)}
+.scsel select{padding:7px 14px;border:2px solid var(--s);border-radius:8px;background:#fff;color:var(--p);font-size:13px;font-weight:600;cursor:pointer;outline:none}
+.tsbox{color:#fff;border-radius:14px;padding:24px;text-align:center}
+.tsbox h2{font-size:13px;opacity:.78;margin-bottom:6px}
+.tsbox .bn{font-size:40px;font-weight:900;line-height:1}
+.tsbox .sub{font-size:12px;opacity:.7;margin-top:5px}
+.schip{display:flex;align-items:center;justify-content:center;gap:16px;margin-bottom:22px;flex-wrap:wrap}
+.cchn{background:var(--p);color:#fff;padding:9px 20px;border-radius:28px;font-size:13px;font-weight:700}
+.plus{width:34px;height:34px;border-radius:50%;background:linear-gradient(135deg,var(--s),var(--a));color:#fff;display:flex;align-items:center;justify-content:center;font-size:20px;font-weight:700}
+.bub{display:inline-flex;align-items:center;justify-content:center;width:30px;height:30px;border-radius:50%;font-size:13px;font-weight:800;margin-right:10px;flex-shrink:0}
+.bp2{background:var(--p);color:#fff}.ba2{background:var(--a);color:#fff}.bs2{background:var(--s);color:#fff}
+.stpc{display:flex;align-items:flex-start;gap:14px;background:#fff;border-radius:10px;padding:15px;box-shadow:var(--sh);margin-bottom:11px}
+.stpc h4{font-size:13px;font-weight:700;color:var(--p);margin-bottom:3px}
+.stpc p{font-size:12px;color:var(--tm);line-height:1.55}
+.scnote{font-size:11.5px;color:var(--tl);margin-left:8px}
+.ft{background:var(--p);color:rgba(255,255,255,.5);text-align:center;padding:14px;font-size:11px;margin-top:36px}
+.hdtl{border-left:4px solid var(--a)!important}
+::-webkit-scrollbar{width:5px;height:5px}::-webkit-scrollbar-track{background:transparent}::-webkit-scrollbar-thumb{background:rgba(46,24,105,.3);border-radius:3px}
+</style>
+</head>
+<body>
+
+<div class="hdr">
+  <div>
+    <h1>🔬 Project Pulse — M&A Synergy Dashboard</h1>
+    <p>Bounteous (Acquirer) × BrainRidge Consulting Inc. (Target) &nbsp;|&nbsp; Confidential &nbsp;|&nbsp; Q1 2026</p>
+  </div>
+  <div class="hbadges">
+    <span class="bdg bdg-go">✓ RECOMMEND: GO</span>
+    <span class="bdg bdg-c">🔒 Highly Confidential</span>
+  </div>
+</div>
+
+<div class="tabbar">
+  <div class="tb active" onclick="showTab('exec',this)">📋 Executive Summary</div>
+  <div class="tb" onclick="showTab('logos',this)">🏦 Strategic Fit & Logos</div>
+  <div class="tb" onclick="showTab('rev',this)">📈 Revenue Synergies</div>
+  <div class="tb" onclick="showTab('bmo',this)">🏛 BMO Cross-Sell</div>
+  <div class="tb" onclick="showTab('india',this)">🇮🇳 India Expansion</div>
+  <div class="tb" onclick="showTab('cost',this)">💰 Cost Synergies</div>
+  <div class="tb" onclick="showTab('margins',this)">📊 Margin Analysis</div>
+  <div class="tb" onclick="showTab('intg',this)">🔗 Integration Roadmap</div>
+</div>
+
+<div class="cnt">
+
+<!-- ====== TAB 1: EXEC SUMMARY ====== -->
+<div id="tab-exec" class="tc active">
+
+  <div class="vcard">
+    <div class="vbadge">✓ RECOMMENDATION: GO</div>
+    <div class="vtitle">BrainRidge Consulting presents a compelling, high-conviction acquisition for Bounteous</div>
+    <div class="vtxt">BrainRidge is a rare asset — an AI-native, pure-play financial services consultancy growing at <strong>84%+ CAGR</strong> with <strong>>31% EBITDA margins</strong> and a proven track record at Tier-1 institutions. For Bounteous, this acquisition unlocks immediate penetration into BMO (Canada's #2 bank), accelerates the AI-native delivery narrative across existing Global 2000 FS accounts, and delivers a proprietary AI engineering platform (PulseAI / Neuron) that can be leveraged across Bounteous's entire FS client base. The combined entity would be significantly differentiated against McKinsey/BCG in advisory and Accenture/Cognizant in delivery — uniquely positioned as the <strong>AI-native, end-to-end FS transformation partner</strong>. Total synergy potential: <strong>CAD $45M–$152M+ incremental revenue</strong> and <strong>CAD $5M–$22M annual cost synergies</strong> by Year 3.</div>
+    <div class="pgrid">
+      <div class="pill"><div class="picon">🚀</div><div class="ptitle">Accelerated FS Market Entry</div><div class="ptxt">BrainRidge's Tier-1 banking relationships (BMO, Intact, Equitable) and PulseAI credentials de-risk Bounteous's FS go-to-market significantly — years of trust compressed into one deal.</div></div>
+      <div class="pill"><div class="picon">🤖</div><div class="ptitle">Proprietary AI Platform (PulseAI)</div><div class="ptxt">Neuron suite (Dev/QA/Code Maintenance) is production-grade, regulated-environment IP. Rare in the consulting market — genuinely defensible differentiation for Bounteous's full FS client portfolio.</div></div>
+      <div class="pill"><div class="picon">🌏</div><div class="ptitle">India Delivery Arbitrage</div><div class="ptxt">BrainRidge is 97% onshore today. Bounteous's India infrastructure can immediately expand margins by 8–12 percentage points — the largest single value creation lever.</div></div>
+      <div class="pill"><div class="picon">🏦</div><div class="ptitle">BMO as $100M+ Platform</div><div class="ptxt">BMO is BrainRidge's anchor client at $30.6M today. BrainRidge's own thesis sizes it at $100M+ medium-term. Bounteous's marketing, loyalty, and design capabilities add entirely new towers.</div></div>
+      <div class="pill"><div class="picon">📊</div><div class="ptitle">Cross-Sell into Global FS Accounts</div><div class="ptxt">BrainRidge's AI/managed services/core banking engineering can be rapidly introduced to Bounteous's Morgan Stanley, JPMC, Goldman, Fidelity, Fiserv, and Sun Life relationships.</div></div>
+      <div class="pill"><div class="picon">⚠️</div><div class="ptitle">Key Risk: BMO Concentration</div><div class="ptxt">~94% of revenue from BMO. Primary mitigation: lock-in 3-year MSA at close, retain founders with equity, and aggressively diversify into Bounteous accounts within 18 months.</div></div>
+    </div>
+  </div>
+
+  <div class="g4" style="margin-bottom:18px">
+    <div class="mc"><div class="mv">$55M</div><div class="ml">BrainRidge 2026F Revenue (CAD)</div><div class="mch">↑ 84% CAGR since 2023</div></div>
+    <div class="mc a"><div class="mv">~31%</div><div class="ml">BrainRidge Adj. EBITDA Margin</div><div class="mch">↑ Best-in-class for boutique consulting</div></div>
+    <div class="mc g"><div class="mv">$74–152M</div><div class="ml">Year 3 Revenue Synergy Range (CAD)</div><div class="mch">↑ Base to High case incremental</div></div>
+    <div class="mc o"><div class="mv">$14–22M</div><div class="ml">Annual Cost Synergies – High Case (CAD)</div><div class="mch">↑ Primarily India leverage + shared services</div></div>
+  </div>
+
+  <div class="g2">
+    <div class="card">
+      <div class="ct" style="margin-bottom:14px">✅ GO Factors — Conviction Drivers</div>
+      <ul class="ilist">
+        <li>PulseAI / Neuron is AI delivery IP impossible to replicate organically in under 2 years — directly aligned with Bounteous's AI-enabled workforce strategy</li>
+        <li>100% FS focus means zero capability dilution — BrainRidge deepens, not distracts from, Bounteous's financial services vertical</li>
+        <li>Leadership bench (CEO from EY/Capco, Founder from Capco/IBM/Wipro) brings deep Tier-1 FS relationships at Scotiabank, CIBC, BMO — relationships Bounteous cannot otherwise buy</li>
+        <li>Proven execution track record: 100% production AI success rate vs. 79% industry failure rate is a powerful joint sales credential across all Bounteous FS accounts</li>
+        <li>North America onshore model (Canada/US) is structurally complementary to Bounteous's India/Mexico model — no cultural or delivery model conflict</li>
+        <li>$34M backlog for 2026 provides strong revenue visibility and materially de-risks acquisition price justification</li>
+        <li>Great Place to Work 2025 certification (96% satisfaction) signals low integration attrition risk — critical for a people business</li>
+        <li>PulseAI Lab introduces a product/platform revenue dimension — SaaS upside above the services baseline</li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="ct" style="margin-bottom:14px">🚨 NO-GO Risks — Must Mitigate</div>
+      <ul class="ilist">
+        <li><strong>BMO concentration (~94% of revenue):</strong> Single-client dependency is the #1 structural risk. Mitigation: 3-year MSA extension at close; Bounteous BD deployed to diversify within 6 months post-close</li>
+        <li><strong>Founder dependency (Rahul Goel, Vikas Sharma):</strong> Institutional relationships sit in key individuals. Non-negotiable retention packages with 3-year vesting tied to delivery targets</li>
+        <li><strong>Canada-first talent base (197/216 in Canada):</strong> Strong for BMO but limits global reach; India ramp is required to scale into Bounteous's international FS accounts</li>
+        <li><strong>Revenue recognition inconsistency:</strong> 2023/2024 on cash basis; 2025+ IFRS-adjusted — clean P&L harmonisation is required for consolidated reporting</li>
+        <li><strong>PulseAI Lab commercialisation maturity:</strong> Neuron tools are early-stage SaaS; platform revenue multiples should not be attributed until a rigorous product roadmap review is completed</li>
+        <li><strong>Post-close talent attrition risk:</strong> Premium onshore Canadian consultants have abundant alternatives — equity participation and culture preservation are critical and non-negotiable</li>
+        <li><strong>Canada-US trade dynamics (2026):</strong> Geopolitical/tariff uncertainty could impact BMO US digital programme investment; monitor closely through close</li>
+      </ul>
+    </div>
+  </div>
+
+</div>
+
+<!-- ====== TAB 2: LOGOS ====== -->
+<div id="tab-logos" class="tc">
+  <div class="schip">
+    <div class="cchn">Bounteous FS Target Accounts</div>
+    <div class="plus">+</div>
+    <div class="cchn">BrainRidge FS Capabilities</div>
+  </div>
+  <div class="card" style="margin-bottom:16px">
+    <div class="ct" style="margin-bottom:8px">Synergy Mapping: BrainRidge AI / Cloud / Managed Services into Bounteous Target Accounts</div>
+    <p style="font-size:12.5px;color:var(--tm);line-height:1.7">BrainRidge brings <strong>production-grade AI engineering, managed services, and cloud modernization</strong> purpose-built for regulated financial institutions — capabilities that Bounteous's current offering (strong in experience design, marketing, and front-end digital) can directly cross-sell into its existing Global 2000 FS relationships. <strong>Click any account card for a detailed synergy breakdown.</strong></p>
+  </div>
+  <div class="lgrid" id="lgrid"></div>
+  <div id="ldetail" class="card hdtl" style="display:none;margin-top:16px"><div id="ldetailcnt"></div></div>
+
+  <div class="card" style="margin-top:18px">
+    <div class="ct" style="margin-bottom:14px">Capability Fit Matrix — BrainRidge vs. Bounteous FS Target Accounts</div>
+    <table>
+      <thead><tr><th>Capability</th><th>Bounteous Today</th><th>BrainRidge Adds</th><th>Target Accounts</th><th>Opp.</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Core Banking AI & Automation</strong></td><td>Limited — primarily front-end & UX</td><td>✅ Proven at BMO Canada core banking modernisation</td><td>JPMC, ANZ, NatWest, Rabobank, BBVA</td><td><span class="rlow">High</span></td></tr>
+        <tr><td><strong>Managed Services (24/7 SRE)</strong></td><td>Partial — cloud managed services</td><td>✅ Dark factory model; 81% outage reduction at BMO US</td><td>Morgan Stanley, Goldman, Fidelity, Nasdaq</td><td><span class="rlow">High</span></td></tr>
+        <tr><td><strong>Wealth Management Platform</strong></td><td>Moderate — portal design & CMS</td><td>✅ 100+ system wealth platform (BMO Canada Wealth)</td><td>Goldman, Morgan Stanley, KKR, Fidelity</td><td><span class="rlow">High</span></td></tr>
+        <tr><td><strong>Insurance Tech (Policy/Claims AI)</strong></td><td>Moderate — health insurance digital</td><td>✅ Intact Financial, Guidewire cloud migration</td><td>Sun Life, Fidelity Insurance</td><td><span class="rmed">Med</span></td></tr>
+        <tr><td><strong>Payments Modernisation</strong></td><td>Strong — payment platform design</td><td>✅ Payment rails, ACH, real-time settlements</td><td>Fiserv, Klarna, Western Union, FAB</td><td><span class="rlow">High</span></td></tr>
+        <tr><td><strong>PulseAI / Neuron Accelerators</strong></td><td>None — no comparable proprietary AI tooling</td><td>✅ 40–60% faster delivery; regulated-env. AI</td><td>All accounts — universal delivery differentiator</td><td><span class="rlow">High</span></td></tr>
+        <tr><td><strong>Cloud Migration (AWS-native)</strong></td><td>Strong — multi-cloud strategy</td><td>✅ AWS APN Partner; Journey to Cloud toolkit</td><td>MSCI, Nasdaq, CIT Bank, Standard Bank</td><td><span class="rmed">Med</span></td></tr>
+        <tr><td><strong>M&A Technology Execution</strong></td><td>Limited</td><td>✅ Led data integration in largest Canadian bank US acquisition</td><td>CIT Bank, Standard Bank, BBVA</td><td><span class="rmed">Med</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- ====== TAB 3: REVENUE SYNERGIES ====== -->
+<div id="tab-rev" class="tc">
+  <div class="scsel">
+    <label>📊 Scenario:</label>
+    <select id="scSel" onchange="updateSc()">
+      <option value="low">🔵 Low Case — Conservative</option>
+      <option value="mid" selected>🟡 Base Case — Most Likely</option>
+      <option value="high">🟢 High Case — Upside</option>
+    </select>
+    <span class="scnote" id="scnote">Year 3 run-rate. Assumes successful integration and moderate cross-sell execution.</span>
+  </div>
+
+  <div class="g3" style="margin-bottom:18px">
+    <div class="tsbox" style="background:linear-gradient(135deg,var(--p),#1a0d4a)"><h2>Total Revenue Synergy (Year 3 Run-Rate)</h2><div class="bn" id="ttl">CAD $74M</div><div class="sub">Incremental over standalone BrainRidge 2026F</div></div>
+    <div class="tsbox" style="background:linear-gradient(135deg,var(--a),#8a0e7a)"><h2>BMO Wallet Expansion</h2><div class="bn" id="bmoT">CAD $18M</div><div class="sub">Cross-sell Bounteous capabilities into BMO</div></div>
+    <div class="tsbox" style="background:linear-gradient(135deg,var(--s),#2a1bc4)"><h2>New FS Logo Revenue</h2><div class="bn" id="logoT">CAD $22M</div><div class="sub">BrainRidge AI/managed services into Bounteous accounts</div></div>
+  </div>
+
+  <div class="g2">
+    <div class="card">
+      <div class="ct" style="margin-bottom:4px">Revenue Bridge — Standalone → Combined (Year 3)</div>
+      <div class="cs" id="bsub" style="margin-bottom:16px">Base Case projections in CAD millions</div>
+      <div id="rbridge"></div>
+    </div>
+    <div class="card">
+      <div class="ct" style="margin-bottom:16px">Synergy Breakdown by Category (CAD millions)</div>
+      <div id="sbkdn"></div>
+    </div>
+  </div>
+
+  <div class="card" style="margin-top:18px">
+    <div class="ct" style="margin-bottom:14px">Full Scenario Comparison — Assumptions & Annual Run-Rate by Year 3</div>
+    <table>
+      <thead><tr><th>Synergy Category</th><th>Low Case</th><th>Base Case</th><th>High Case</th><th>Key Driver</th><th>Risk</th></tr></thead>
+      <tbody>
+        <tr><td><strong>BMO Cross-Sell (Bounteous → BMO)</strong></td><td>$5M</td><td>$18M</td><td>$35M</td><td>Marketing activation, loyalty, digital commerce, experience design at BMO</td><td><span class="rmed">Med</span></td></tr>
+        <tr><td><strong>BrainRidge AI/Managed → Bounteous FS Accounts</strong></td><td>$8M</td><td>$22M</td><td>$45M</td><td>PulseAI + core banking AI + 24/7 SRE into Morgan Stanley, JPMC, Goldman, Fiserv, Fidelity</td><td><span class="rmed">Med</span></td></tr>
+        <tr><td><strong>Canada Banking Expansion (New MSAs)</strong></td><td>$3M</td><td>$10M</td><td>$20M</td><td>Scotiabank (Vikas relationship) + CIBC (Michael relationship) + Interac via Bounteous scale</td><td><span class="rmed">Med</span></td></tr>
+        <tr><td><strong>Insurance Vertical (Sun Life / Fidelity)</strong></td><td>$2M</td><td>$8M</td><td>$15M</td><td>BrainRidge's Intact/Guidewire credentials + Bounteous health insurance digital experience</td><td><span class="rmed">Med</span></td></tr>
+        <tr><td><strong>PulseAI Platform Commercialisation</strong></td><td>$0</td><td>$5M</td><td>$12M</td><td>Neuron Suite licensed into Bounteous FS delivery globally; SaaS revenue from regulated institutions</td><td><span class="rhi">High</span></td></tr>
+        <tr><td><strong>India Capacity Uplift (Reinvestment)</strong></td><td>$3M</td><td>$11M</td><td>$25M</td><td>Cost savings redeployed into additional consultant hiring and revenue-generating capacity Y2-3</td><td><span class="rlow">Low</span></td></tr>
+        <tr style="background:rgba(46,24,105,.04)"><td><strong>TOTAL REVENUE SYNERGIES (Year 3)</strong></td><td><strong>$21M</strong></td><td><strong>$74M</strong></td><td><strong>$152M</strong></td><td colspan="2"><em>Before cost synergies. High case targets $200M+ combined CAD revenue by Year 3.</em></td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- ====== TAB 4: BMO ====== -->
+<div id="tab-bmo" class="tc">
+  <div class="card" style="background:linear-gradient(135deg,var(--p),#1a0d4a);color:#fff;margin-bottom:18px">
+    <div style="font-size:19px;font-weight:800;margin-bottom:8px">🏛 BMO: The $100M+ Platform Opportunity</div>
+    <p style="font-size:13px;opacity:.85;line-height:1.75">BMO generates <strong>CAD $30.6M</strong> for BrainRidge in 2025 — 94% of total revenue. BrainRidge's own thesis projects BMO as a <strong>CAD $100M+ account</strong> in the medium term. For Bounteous, this is not just a client — it's a beachhead. Bounteous's capabilities in marketing activation, loyalty, digital commerce, and experience innovation are <strong>entirely absent from BrainRidge's current BMO scope</strong>, representing a CAD $15M–$35M near-term incremental opportunity — accessible from Day 1 post-close.</p>
+  </div>
+  <div class="g3" style="margin-bottom:18px">
+    <div class="mc"><div class="mv">$30.6M</div><div class="ml">BrainRidge Revenue from BMO (2025A CAD)</div><div class="mch">↑ +126% YoY; 4 engagement towers</div></div>
+    <div class="mc a"><div class="mv">$100M+</div><div class="ml">BMO Long-Term Account Potential</div><div class="mch">↑ BrainRidge's own published thesis</div></div>
+    <div class="mc g"><div class="mv">$15–35M</div><div class="ml">Incremental Bounteous Cross-Sell at BMO</div><div class="mch">↑ New capability towers — zero overlap today</div></div>
+  </div>
+  <div class="g2">
+    <div class="card">
+      <div class="ct" style="margin-bottom:14px">BrainRidge Current BMO Revenue Split (2025A)</div>
+      <table>
+        <thead><tr><th>BMO Entity</th><th>Revenue (CAD)</th><th>%</th><th>Engagement Type</th></tr></thead>
+        <tbody>
+          <tr><td>BMO U.S. (Digital Operations)</td><td>$20,490,966</td><td>65.8%</td><td>Managed Services + Dev</td></tr>
+          <tr><td>BMO Canada (Wealth Platform)</td><td>$7,557,648</td><td>24.3%</td><td>Platform Modernisation</td></tr>
+          <tr><td>BMO Canada Wealth</td><td>$1,316,236</td><td>4.2%</td><td>Advisory + Engineering</td></tr>
+          <tr><td>BMO U.S. Wealth</td><td>$1,248,900</td><td>4.0%</td><td>Engineering</td></tr>
+          <tr style="background:rgba(46,24,105,.04)"><td><strong>Total BMO</strong></td><td><strong>$30,613,750</strong></td><td><strong>98.3%</strong></td><td><strong>4 Active Towers</strong></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="card">
+      <div class="ct" style="margin-bottom:14px">Bounteous Cross-Sell into BMO — New Capability Towers</div>
+      <table>
+        <thead><tr><th>Bounteous Capability</th><th>BMO Relevance</th><th>Opp.</th><th>Timeline</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Marketing Activation & Loyalty</strong></td><td>BMO retail banking loyalty programs; Bounteous's CRM/loyalty stack directly applicable</td><td>$5–8M</td><td>6–18 mos</td></tr>
+          <tr><td><strong>Digital Commerce & Personalization</strong></td><td>BMO retail digital; Adobe/personalization complements BrainRidge engineering</td><td>$3–6M</td><td>12–24 mos</td></tr>
+          <tr><td><strong>Experience Innovation & Design</strong></td><td>BrainRidge is engineering-led; Bounteous UX/design fills gap in current BMO scope</td><td>$4–8M</td><td>6–12 mos</td></tr>
+          <tr><td><strong>Data Analytics & CDP</strong></td><td>BMO Wealth and commercial banking BI; Bounteous analytics layer adds value</td><td>$3–7M</td><td>12–24 mos</td></tr>
+          <tr><td><strong>AI Strategy & Governance</strong></td><td>Bounteous enterprise AI governance complements BrainRidge's implementation</td><td>$2–6M</td><td>6–18 mos</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="card" style="margin-top:18px">
+    <div class="ct" style="margin-bottom:18px">BMO Account Expansion Roadmap — Combined Entity</div>
+    <div class="tline">
+      <div class="ti"><div class="tdot"></div><div class="tph">Day 1 – Month 3</div><div class="ttitle">Protect & Stabilise the BMO Relationship</div><div class="ttxt">CEO-to-CEO communication to BMO — reinforce team continuity commitment. Secure 3-year+ MSA extension. Execute retention packages for Rahul Goel, Vikas Sharma, Michael Moerman. Joint account planning with Bounteous's FS sales leads. Target: Zero revenue disruption and positive relationship signal within 30 days.</div></div>
+      <div class="ti"><div class="tdot" style="background:var(--a)"></div><div class="tph">Month 3 – Month 9</div><div class="ttitle">Introduce Bounteous Capabilities to BMO Stakeholders</div><div class="ttxt">Joint workshops with BMO digital, marketing, and data teams mapping Bounteous's capabilities against BMO's 2026–2027 roadmap. Pilot: One Bounteous capability (e.g., loyalty design) as low-risk entry point into new BMO budget. Target: $3–5M in new Bounteous-originated BMO revenue by Month 9.</div></div>
+      <div class="ti"><div class="tdot" style="background:#22c55e"></div><div class="tph">Month 9 – Month 18</div><div class="ttitle">Scale into Multi-Tower Combined Engagement</div><div class="ttxt">Expand to 2–3 Bounteous towers at BMO. Introduce AI strategy & governance layer above BrainRidge's delivery. Deploy Bounteous data analytics and CDP into BMO Wealth and BMO U.S. digital. Embed PulseAI into Bounteous-delivered BMO programmes. Target: $10–15M incremental Bounteous revenue at BMO annually.</div></div>
+      <div class="ti"><div class="tdot" style="background:#f59e0b"></div><div class="tph">Month 18+</div><div class="ttitle">Path to $80–100M+ Combined BMO Account</div><div class="ttxt">Position combined entity as BMO's primary end-to-end digital transformation partner — competing with Accenture and Deloitte for the largest strategic programmes. Leverage PulseAI as an embedded AI operating platform offering. Target: $80–100M combined annual revenue from BMO by Year 4.</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ====== TAB 5: INDIA ====== -->
+<div id="tab-india" class="tc">
+  <div class="g3" style="margin-bottom:18px">
+    <div class="mc"><div class="mv">6</div><div class="ml">BrainRidge India Headcount Today (Haryana)</div><div class="mch">→ Almost entirely untapped offshore capability</div></div>
+    <div class="mc a"><div class="mv">5,000+</div><div class="ml">Bounteous India-Enabled Workforce</div><div class="mch">→ Mature delivery infrastructure available immediately</div></div>
+    <div class="mc g"><div class="mv">$8–12M</div><div class="ml">Annual Margin Improvement from India Leverage (CAD)</div><div class="mch">→ Year 2–3 run-rate post-acquisition</div></div>
+  </div>
+  <div class="g2">
+    <div class="card">
+      <div class="ct" style="margin-bottom:14px">Current BrainRidge Delivery Model — The Structural Cost Issue</div>
+      <div class="hbox"><p><strong>Core Issue:</strong> BrainRidge operates a premium onshore (Canada/US) model. While this drives exceptional quality and client intimacy, it structurally caps margins at ~31% EBITDA. With 200+ onshore consultants at Canadian market rates (avg. CAD $120–160K/year fully loaded), COGS are unavoidably high. Bounteous's India infrastructure is the single most powerful value creation lever in this deal.</p></div>
+      <table style="margin-top:14px">
+        <thead><tr><th>Location</th><th>Current HC</th><th>% of Total</th><th>Avg. Fully-Loaded Cost</th></tr></thead>
+        <tbody>
+          <tr><td>Canada (Toronto, Moncton)</td><td>197</td><td>91%</td><td>~$120–160K CAD/yr</td></tr>
+          <tr><td>United States (New York)</td><td>13</td><td>6%</td><td>~$150–200K CAD/yr</td></tr>
+          <tr><td>India (Haryana)</td><td>6</td><td>3%</td><td>~$30–45K CAD/yr</td></tr>
+        </tbody>
+      </table>
+      <div style="margin-top:18px">
+        <div style="font-size:13px;font-weight:700;color:var(--p);margin-bottom:10px">Blended Cost Reduction Scenarios</div>
+        <div class="sbar"><div class="slab" style="width:160px">Current (97% onshore)</div><div class="bcon"><div class="bfill bp" style="width:100%">~$130K CAD avg</div></div></div>
+        <div class="sbar"><div class="slab" style="width:160px">Target (25% offshore)</div><div class="bcon"><div class="bfill ba" style="width:78%">~$101K CAD avg</div></div></div>
+        <div class="sbar"><div class="slab" style="width:160px">Target (40% offshore)</div><div class="bcon"><div class="bfill bg2" style="width:60%">~$78K CAD avg</div></div></div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="ct" style="margin-bottom:16px">India Expansion Roadmap — 24 Months</div>
+      <div class="tline">
+        <div class="ti"><div class="tdot"></div><div class="tph">Month 1–6: Foundation</div><div class="ttitle">Stand up BrainRidge CoE within Bounteous India</div><div class="ttxt">Leverage Bounteous's existing India offices, HR, and recruitment infrastructure — no greenfield setup. Identify BrainRidge workstreams suitable for India: QA automation, code maintenance, monitoring/SRE, data engineering. Hire initial cohort of 20–30 India consultants calibrated to PulseAI Neuron tooling. Transfer Neuron for QA and Code Maintenance workflows to India pods.</div></div>
+        <div class="ti"><div class="tdot" style="background:var(--a)"></div><div class="tph">Month 6–12: Scale</div><div class="ttitle">Ramp to 60–80 India Headcount</div><div class="ttxt">Expand India team to support BMO's 24/7 managed services (currently nearshore Canada/US). Deploy India as the follow-the-sun tier of BrainRidge's dark factory model. Target: India handling 25–30% of BrainRidge's QA, monitoring, and Tier 1–2 support workloads.</div></div>
+        <div class="ti"><div class="tdot" style="background:#22c55e"></div><div class="tph">Month 12–24: Optimise</div><div class="ttitle">30–40% Offshore Ratio → $8–12M Annual Margin Benefit</div><div class="ttxt">Achieve target offshore ratio while maintaining BrainRidge's premium onshore client-facing model. India handles: PulseAI development, QA automation, SRE monitoring, data engineering. Canada/US focuses on: client relationships, advisory, architecture, senior delivery. India also becomes primary PulseAI R&D centre — dramatically accelerating product roadmap.</div></div>
+      </div>
+    </div>
+  </div>
+  <div class="card" style="margin-top:18px">
+    <div class="ct" style="margin-bottom:14px">India Expansion — Financial Impact Summary</div>
+    <table>
+      <thead><tr><th>Metric</th><th>Year 1 (Ramp)</th><th>Year 2</th><th>Year 3 (Full Run-Rate)</th><th>Notes</th></tr></thead>
+      <tbody>
+        <tr><td>BrainRidge India CoE Headcount</td><td>30–40</td><td>60–80</td><td>80–100+</td><td>Using Bounteous India infra — no greenfield cost</td></tr>
+        <tr><td>Offshore Delivery Ratio</td><td>15%</td><td>25%</td><td>30–40%</td><td>Aligned to industry standard for premium FS consulting</td></tr>
+        <tr><td>COGS Reduction (CAD)</td><td>$2–3M</td><td>$5–7M</td><td>$8–12M</td><td>Blended cost reduction on offshore-eligible workloads</td></tr>
+        <tr><td>EBITDA Margin Uplift</td><td>+2–3pp</td><td>+5–7pp</td><td>+8–10pp</td><td>BrainRidge EBITDA: 31% → 39–41% at full run-rate</td></tr>
+        <tr><td>India Setup Investment</td><td>$(1.5M)</td><td>$(0.5M)</td><td>—</td><td>Absorbed by Bounteous existing India infrastructure</td></tr>
+        <tr><td><strong>Net Cost Synergy (CAD)</strong></td><td>$0.5–1.5M</td><td>$4.5–6.5M</td><td>$8–12M</td><td>After ramp investment; strong ROI by Month 18</td></tr>
+        <tr><td>PulseAI R&D Engineering Capacity</td><td>+10 engineers</td><td>+25 engineers</td><td>+40 engineers</td><td>India as primary AI product development centre</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- ====== TAB 6: COST SYNERGIES ====== -->
+<div id="tab-cost" class="tc">
+  <div class="g4" style="margin-bottom:18px">
+    <div class="mc"><div class="mv">$8–12M</div><div class="ml">India Delivery Arbitrage (Annual CAD)</div><div class="mch">→ Largest single cost synergy lever</div></div>
+    <div class="mc a"><div class="mv">$1.5–2.5M</div><div class="ml">Shared Services Consolidation (Annual CAD)</div><div class="mch">→ Finance, HR, legal, IT</div></div>
+    <div class="mc g"><div class="mv">$1–2M</div><div class="ml">SR&ED Tax Credit Expansion (Annual CAD)</div><div class="mch">→ Combined R&D activities in Canada</div></div>
+    <div class="mc o"><div class="mv">$22M</div><div class="ml">Total Annual Cost Synergies — High Case (CAD)</div><div class="mch">→ Full run-rate by Year 2–3</div></div>
+  </div>
+  <div class="card">
+    <div class="ct" style="margin-bottom:16px">Cost Synergy Register — Full Breakdown</div>
+    <table>
+      <thead><tr><th>Category</th><th>Low Case (CAD)</th><th>Base Case (CAD)</th><th>High Case (CAD)</th><th>Timeline</th><th>Risk</th><th>Notes</th></tr></thead>
+      <tbody>
+        <tr><td><strong>1. India Delivery Leverage</strong><br><span style="font-size:11px;color:var(--tl)">Replace onshore delivery for non-client-facing work</span></td><td>$3M</td><td>$7M</td><td>$12M</td><td>Year 1–2</td><td><span class="rlow">Low</span></td><td>Bounteous India infra exists; largest and most certain synergy</td></tr>
+        <tr><td><strong>2. Shared Services Consolidation</strong><br><span style="font-size:11px;color:var(--tl)">HR, Finance, Legal, IT, Procurement</span></td><td>$0.5M</td><td>$1.5M</td><td>$2.5M</td><td>Year 1</td><td><span class="rlow">Low</span></td><td>BrainRidge has 14-person shared services team — largely absorbed</td></tr>
+        <tr><td><strong>3. Technology & Tooling Rationalisation</strong><br><span style="font-size:11px;color:var(--tl)">SaaS licenses, dev tools, AWS, monitoring</span></td><td>$0.3M</td><td>$0.8M</td><td>$1.2M</td><td>Year 1</td><td><span class="rlow">Low</span></td><td>Consolidate Atlassian, GitHub, Dynatrace, cloud accounts</td></tr>
+        <tr><td><strong>4. Insurance & Benefits Consolidation</strong><br><span style="font-size:11px;color:var(--tl)">Employee benefits, D&O, E&O insurance</span></td><td>$0.1M</td><td>$0.3M</td><td>$0.5M</td><td>Year 1</td><td><span class="rlow">Low</span></td><td>Volume discounts on combined employee base (216 + Bounteous CA/US)</td></tr>
+        <tr><td><strong>5. Real Estate Optimisation</strong><br><span style="font-size:11px;color:var(--tl)">Toronto and New York office consolidation</span></td><td>$0.1M</td><td>$0.3M</td><td>$0.6M</td><td>Year 1–2</td><td><span class="rlow">Low</span></td><td>BrainRidge recently moved to Toronto office ($200K/yr); Bounteous has existing presence</td></tr>
+        <tr><td><strong>6. Sales & Marketing Overlap</strong><br><span style="font-size:11px;color:var(--tl)">Consolidated FS go-to-market functions</span></td><td>$0.2M</td><td>$0.5M</td><td>$1.0M</td><td>Year 1</td><td><span class="rlow">Low</span></td><td>Eliminate duplicate FS marketing; leverage Bounteous global marketing platform</td></tr>
+        <tr><td><strong>7. SR&ED Tax Credit Optimisation</strong><br><span style="font-size:11px;color:var(--tl)">Expanded R&D credit via combined Canada operations</span></td><td>$0.5M</td><td>$1.0M</td><td>$2.0M</td><td>Year 1–2</td><td><span class="rmed">Med</span></td><td>BrainRidge claims ~$1M SR&ED in 2025; Bounteous R&D activities may qualify additional credits</td></tr>
+        <tr><td><strong>8. Contractor → FTE + India Conversion</strong><br><span style="font-size:11px;color:var(--tl)">Rationalise $10M contractor spend post-India ramp</span></td><td>$0.5M</td><td>$1.5M</td><td>$2.5M</td><td>Year 2</td><td><span class="rmed">Med</span></td><td>BrainRidge spent $10M on contractors in 2025; India FTE conversion reduces unit cost materially</td></tr>
+        <tr style="background:rgba(46,24,105,.04)"><td><strong>TOTAL COST SYNERGIES (Annual Run-Rate)</strong></td><td><strong>$5.2M</strong></td><td><strong>$12.9M</strong></td><td><strong>$22.3M</strong></td><td>Year 2–3 full realisation</td><td><span class="rlow">Low–Med</span></td><td><em>Before one-time integration costs of $2.5–4.1M</em></td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="g2" style="margin-top:18px">
+    <div class="card">
+      <div class="ct" style="margin-bottom:14px">One-Time Integration Costs</div>
+      <table>
+        <thead><tr><th>Item</th><th>Estimated Cost (CAD)</th><th>Timing</th></tr></thead>
+        <tbody>
+          <tr><td>Retention packages (key BrainRidge leadership)</td><td>$1.0–1.5M</td><td>Close</td></tr>
+          <tr><td>Systems integration (ERP, HR, billing, project mgmt)</td><td>$0.5–0.8M</td><td>Year 1</td></tr>
+          <tr><td>India CoE setup (branding, hiring, onboarding)</td><td>$0.5–1.0M</td><td>Year 1</td></tr>
+          <tr><td>Legal / M&A advisory / IP transfer</td><td>$0.3–0.5M</td><td>Close</td></tr>
+          <tr><td>Client communication & rebrand</td><td>$0.2–0.3M</td><td>Year 1</td></tr>
+          <tr style="background:rgba(46,24,105,.04)"><td><strong>Total One-Time Integration Costs</strong></td><td><strong>$2.5–4.1M</strong></td><td>Year 0–1</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="card">
+      <div class="ct" style="margin-bottom:16px">Cost Synergy Phasing (Base Case, CAD)</div>
+      <div class="sbar"><div class="slab">Year 1 (Partial)</div><div class="bcon"><div class="bfill bp" style="width:35%">~$4.5M</div></div><div class="bval">~$4.5M</div></div>
+      <div class="sbar"><div class="slab">Year 2 (Ramping)</div><div class="bcon"><div class="bfill ba" style="width:70%">~$9M</div></div><div class="bval">~$9M</div></div>
+      <div class="sbar"><div class="slab">Year 3 (Full Run-Rate)</div><div class="bcon"><div class="bfill bg2" style="width:100%">~$12.9M</div></div><div class="bval">~$12.9M</div></div>
+      <div class="hbox" style="margin-top:16px"><p><strong>Payback analysis:</strong> One-time integration costs of $2.5–4.1M against Year 1 savings of ~$4.5M implies <strong>payback in under 12 months</strong> at base case. The India ramp is the key gating factor for realising the full run-rate.</p></div>
+    </div>
+  </div>
+</div>
+
+<!-- ====== TAB 7: MARGINS ====== -->
+<div id="tab-margins" class="tc">
+  <div class="g4" style="margin-bottom:18px">
+    <div class="mc"><div class="mv">31%</div><div class="ml">BrainRidge Current EBITDA Margin (2026F)</div><div class="mch">→ Already exceptional for pure consulting</div></div>
+    <div class="mc a"><div class="mv">38–41%</div><div class="ml">Target EBITDA Margin (Year 3, Post-India)</div><div class="mch">↑ +7–10pp from India delivery leverage</div></div>
+    <div class="mc g"><div class="mv">40.2%</div><div class="ml">BrainRidge 2026F Gross Margin</div><div class="mch">→ Strong baseline for expansion</div></div>
+    <div class="mc o"><div class="mv">44–46%</div><div class="ml">Target EBITDA with PulseAI Platform Revenue</div><div class="mch">↑ Platform/SaaS adds high-margin revenue layer</div></div>
+  </div>
+  <div class="g2">
+    <div class="card">
+      <div class="ct" style="margin-bottom:16px">P&L Bridge: Standalone vs. Combined (Base Case, CAD M)</div>
+      <table>
+        <thead><tr><th>P&L Item</th><th>BrainRidge Standalone 2026F</th><th>Combined (Year 3 Base)</th><th>Driver</th></tr></thead>
+        <tbody>
+          <tr><td>Revenue</td><td>$55.0M</td><td>$129M+</td><td>+$74M synergies at base case</td></tr>
+          <tr><td>Gross Profit</td><td>$22.1M (40%)</td><td>$60M+ (46%+)</td><td>India leverage + scale efficiency</td></tr>
+          <tr><td>SG&A</td><td>$4.8M</td><td>~$7M (consolidated)</td><td>Shared services savings partially offset by growth</td></tr>
+          <tr><td>EBITDA</td><td>$17.2M (31%)</td><td>$50M+ (38–40%)</td><td>India + consolidation + platform revenue</td></tr>
+          <tr><td>India Delivery Cost (share of COGS)</td><td>$0.5M (3% HC)</td><td>$6M (30–40% HC)</td><td>Net COGS reduction ~$8M after ramp</td></tr>
+          <tr><td>PulseAI Platform Revenue</td><td>~$0 (early stage)</td><td>$5–12M (Year 3)</td><td>New near-pure-margin revenue stream</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="card">
+      <div class="ct" style="margin-bottom:18px">Margin Expansion Waterfall — Key Drivers</div>
+      <div style="margin-bottom:13px"><div style="display:flex;justify-content:space-between;margin-bottom:4px"><span style="font-size:12px">BrainRidge Standalone EBITDA (2026F)</span><span style="font-size:12px;font-weight:700">31%</span></div><div class="bcon" style="height:18px"><div class="bfill bp" style="width:62%"></div></div></div>
+      <div style="margin-bottom:13px"><div style="display:flex;justify-content:space-between;margin-bottom:4px"><span style="font-size:12px">+ India Delivery Leverage (+8pp)</span><span style="font-size:12px;font-weight:700;color:var(--s)">39%</span></div><div class="bcon" style="height:18px"><div class="bfill ba" style="width:78%"></div></div></div>
+      <div style="margin-bottom:13px"><div style="display:flex;justify-content:space-between;margin-bottom:4px"><span style="font-size:12px">+ Shared Services Consolidation (+1pp)</span><span style="font-size:12px;font-weight:700;color:var(--a)">40%</span></div><div class="bcon" style="height:18px"><div class="bfill bg2" style="width:80%"></div></div></div>
+      <div style="margin-bottom:13px"><div style="display:flex;justify-content:space-between;margin-bottom:4px"><span style="font-size:12px">+ Revenue Scale Leverage (+2pp)</span><span style="font-size:12px;font-weight:700;color:#22c55e">42%</span></div><div class="bcon" style="height:18px"><div class="bfill" style="width:84%;background:linear-gradient(90deg,#22c55e,#16a34a)"></div></div></div>
+      <div><div style="display:flex;justify-content:space-between;margin-bottom:4px"><span style="font-size:12px;font-weight:700">+ PulseAI Platform Revenue (+2–4pp)</span><span style="font-size:12px;font-weight:800;color:var(--p)">44–46%</span></div><div class="bcon" style="height:22px"><div class="bfill bp" style="width:92%"><span style="padding-left:8px;font-size:11px;font-weight:800">Target: 44–46% EBITDA</span></div></div></div>
+      <div class="hbox" style="margin-top:16px"><p><strong>Margin expansion thesis:</strong> BrainRidge's 31% EBITDA is structurally capped by 97% onshore delivery. Bounteous's India infrastructure unlocks <strong>+13–15 percentage points of EBITDA expansion</strong> by Year 3, placing the combined entity among the highest-margin FS technology consulting businesses globally.</p></div>
+    </div>
+  </div>
+  <div class="card" style="margin-top:18px">
+    <div class="ct" style="margin-bottom:14px">BrainRidge P&L Trajectory — Standalone vs. Post-Acquisition (CAD Millions)</div>
+    <table>
+      <thead><tr><th>Year</th><th>Revenue Standalone</th><th>Revenue Combined</th><th>EBITDA Standalone</th><th>EBITDA Combined</th><th>EBITDA Margin (Combined)</th></tr></thead>
+      <tbody>
+        <tr><td>2025A</td><td>$31.4M</td><td>—</td><td>$9.4M</td><td>—</td><td>30%</td></tr>
+        <tr><td>2026F (Close Year)</td><td>$55.0M</td><td>$58–62M</td><td>$17.2M</td><td>$19–21M</td><td>32–34%</td></tr>
+        <tr><td>2027F (Year 1)</td><td>~$70M</td><td>$85–95M</td><td>~$21M</td><td>$28–33M</td><td>33–36%</td></tr>
+        <tr><td>2028F (Year 2)</td><td>~$85M</td><td>$110–130M</td><td>~$26M</td><td>$42–52M</td><td>38–40%</td></tr>
+        <tr style="background:rgba(46,24,105,.04)"><td><strong>2029F (Year 3)</strong></td><td><strong>~$100M</strong></td><td><strong>$140–200M+</strong></td><td><strong>~$30M</strong></td><td><strong>$60–90M</strong></td><td><strong>42–46%</strong></td></tr>
+      </tbody>
+    </table>
+    <p style="font-size:11px;color:var(--tl);margin-top:10px">* All figures CAD. Combined figures include Bounteous FS revenue attributable to BrainRidge synergies. High case assumes aggressive cross-sell and PulseAI commercialisation.</p>
+  </div>
+</div>
+
+<!-- ====== TAB 8: INTEGRATION ====== -->
+<div id="tab-intg" class="tc">
+  <div class="card" style="background:linear-gradient(135deg,var(--p),#1a0d4a);color:#fff;margin-bottom:18px">
+    <div style="font-size:18px;font-weight:700;margin-bottom:8px">Integration Philosophy: "Premium AI-Native FS Consulting at Scale"</div>
+    <p style="font-size:13px;opacity:.85;line-height:1.75">Preserve BrainRidge's core assets — execution-first mentality, FS domain depth, and PulseAI engineering rigour — while rapidly deploying Bounteous's scale, India infrastructure, and Global 2000 relationships. <strong>Speed is critical:</strong> the BMO relationship is the primary dependency. Any perceived instability post-close could jeopardise the core revenue stream. Operate BrainRidge as a semi-autonomous FS Centre of Excellence within Bounteous for at least 18 months.</p>
+  </div>
+  <div class="g3" style="margin-bottom:18px">
+    <div class="mc"><div class="mv">Day 1</div><div class="ml">Non-negotiable: BMO Client Communication</div><div class="mch">→ CEO-to-CEO; positive signal within 24 hrs</div></div>
+    <div class="mc a"><div class="mv">30 days</div><div class="ml">Retention packages executed for top 5 leaders</div><div class="mch">→ 3-year vesting with delivery KPIs</div></div>
+    <div class="mc g"><div class="mv">90 days</div><div class="ml">India CoE Operational + First Cross-Sell Win</div><div class="mch">→ $1–2M pipeline within 90 days of close</div></div>
+  </div>
+  <div class="card" style="margin-bottom:18px">
+    <div class="ct" style="margin-bottom:18px">100-Day Integration Plan</div>
+    <div class="tline">
+      <div class="ti"><div class="tdot"></div><div class="tph">Day 1–7: Communication & Stabilisation</div><div class="ttitle">Protect BMO & Retain Key Talent</div><div class="ttxt">Joint Bounteous–BrainRidge CEO communication to BMO (reinforce team continuity). All-hands for BrainRidge: emphasise culture preservation, delivery staff protected. Execute retention packages for top 5 (Rahul Goel, Vikas Sharma, Michael Moerman + 2 senior directors). Lock in BMO 3-year MSA extension. Establish Integration Management Office (IMO) with dedicated programme lead.</div></div>
+      <div class="ti"><div class="tdot" style="background:var(--a)"></div><div class="tph">Day 7–30: Discovery & Planning</div><div class="ttitle">Deep Workstream Mapping & Quick Wins</div><div class="ttxt">Joint account planning — map Bounteous capabilities to BrainRidge clients and vice versa. Systems audit: HR, billing, PM tools, DevOps. Identify 3–5 quick-win cross-sell opportunities (first target: Bounteous experience design at BMO). India CoE planning: identify Bounteous India entity and hire BrainRidge India lead. PulseAI Lab IP review and productisation assessment.</div></div>
+      <div class="ti"><div class="tdot" style="background:#22c55e"></div><div class="tph">Day 30–60: Integration Execution</div><div class="ttitle">Systems, Structure & First Revenue</div><div class="ttxt">Integrate HR/payroll systems; apply Bounteous benefits rates across BrainRidge. Consolidate tech tooling (GitHub, Atlassian, monitoring platforms). Launch first joint pursuit at BMO (e.g., loyalty design or experience innovation). Begin PulseAI deployment within 2 Bounteous FS engagements as pilot. India CoE: first 5–10 hires with Neuron for QA training underway.</div></div>
+      <div class="ti"><div class="tdot" style="background:#f59e0b"></div><div class="tph">Day 60–100: Revenue Activation</div><div class="ttitle">First Synergy Revenue & India Delivery Live</div><div class="ttxt">Close first cross-sell deal at BMO or BrainRidge cross-sell into Bounteous FS account (target: $1–2M). India CoE operational with 15–20 consultants handling QA and monitoring. Shared services consolidated — single billing entity. Launch "Bounteous | AI-Native FS" combined market positioning. Open pipeline discussions with Scotiabank (Vikas) and CIBC (Michael).</div></div>
+    </div>
+  </div>
+  <div class="g2">
+    <div class="card">
+      <div class="ct" style="margin-bottom:14px">Integration Risk Register</div>
+      <table>
+        <thead><tr><th>Risk</th><th>Impact</th><th>Probability</th><th>Mitigation</th></tr></thead>
+        <tbody>
+          <tr><td>BMO relationship disruption post-close</td><td><span class="rhi">Critical</span></td><td><span class="rmed">Med</span></td><td>CEO-to-CEO Day 1; team continuity commitments; MSA lock-in</td></tr>
+          <tr><td>Key talent attrition (founders + AI leads)</td><td><span class="rhi">High</span></td><td><span class="rmed">Med</span></td><td>3-year retention packages with equity; role expansion in combined entity</td></tr>
+          <tr><td>Culture clash (boutique vs. large firm)</td><td><span class="rmed">Med</span></td><td><span class="rmed">Med</span></td><td>Semi-autonomous BU structure for 18 months; preserve BrainRidge brand in FS vertical</td></tr>
+          <tr><td>India ramp slower than expected</td><td><span class="rmed">Med</span></td><td><span class="rlow">Low</span></td><td>Bounteous infrastructure de-risks; start with non-client-facing Neuron QA workloads</td></tr>
+          <tr><td>PulseAI IP transfer complexity</td><td><span class="rmed">Med</span></td><td><span class="rlow">Low</span></td><td>IP audit pre-close; assign Bounteous IP counsel during due diligence</td></tr>
+          <tr><td>BMO revenue concentration (~94%)</td><td><span class="rhi">High</span></td><td><span class="rlow">Low</span></td><td>Aggressive diversification post-close using Bounteous FS accounts as pipeline</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="card">
+      <div class="ct" style="margin-bottom:14px">Post-Acquisition Operating Model</div>
+      <div class="stpc"><div class="bub bp2">1</div><div><h4>BrainRidge as Bounteous FS Centre of Excellence</h4><p>Semi-autonomous FS CoE — preserve brand, leadership, and culture. BrainRidge leadership becomes Bounteous's global FS vertical leadership, reporting directly into Bounteous executive committee.</p></div></div>
+      <div class="stpc"><div class="bub ba2">2</div><div><h4>PulseAI Lab as Bounteous-Wide AI Accelerator</h4><p>PulseAI Neuron tools (Dev/QA/Code Maintenance) deployed across all Bounteous FS engagements globally — differentiating Bounteous's AI-native delivery in every major market.</p></div></div>
+      <div class="stpc"><div class="bub bs2">3</div><div><h4>Unified Go-to-Market for Global FS Accounts</h4><p>Single combined pursuit team for Bounteous target accounts: Bounteous brings experience design and marketing; BrainRidge brings AI engineering and managed services. One pitch — full stack.</p></div></div>
+      <div class="stpc"><div class="bub" style="background:#22c55e;color:#fff">4</div><div><h4>India-Blended Delivery Across Both Organisations</h4><p>BrainRidge delivery moves to blended onshore/India model via Bounteous centres. All Bounteous FS accounts benefit from Neuron accelerators in India-based delivery pods.</p></div></div>
+    </div>
+  </div>
+</div>
+
+</div><!-- end .cnt -->
+
+<div class="ft">
+  <div style="margin-bottom:6px">🔒 Private & Confidential &nbsp;|&nbsp; For Bounteous Internal Use Only &nbsp;|&nbsp; Project Pulse &nbsp;|&nbsp; Q1 2026</div>
+  <div>Prepared for evaluation purposes only. Financials sourced from BrainRidge CIM (Q1 2026) and Bounteous internal data. Not for external distribution.</div>
+</div>
+
+<script>
+function showTab(id,el){
+  document.querySelectorAll('.tc').forEach(t=>t.classList.remove('active'));
+  document.querySelectorAll('.tb').forEach(t=>t.classList.remove('active'));
+  document.getElementById('tab-'+id).classList.add('active');
+  el.classList.add('active');
+}
+
+const logos=[
+  {n:'Morgan Stanley',seg:'Wealth & Asset Management',fit:'hi',tags:['AI','Managed Services','Wealth Platform'],opp:'$8–15M',d:{cur:"Bounteous likely engaged in digital experience and advisor portal design. BrainRidge adds wealth platform modernisation (proven at BMO Wealth — 100+ system integration), AI-driven analytics, and 24/7 SRE managed services.",br:"Wealth Management Platform (100+ system integration), AI-driven advisor tools, PulseAI for faster delivery, dark factory managed services model proven at Tier-1 scale.",xsell:"BrainRidge's advisor platform and portfolio analytics credentials (from BMO Canada Wealth) are directly applicable. Morgan Stanley's ongoing legacy wealth system modernisation is a multi-year $10M+ opportunity."}},
+  {n:'Goldman Sachs',seg:'Capital Markets / Wealth',fit:'hi',tags:['AI','Data Platform','Cloud'],opp:'$10–18M',d:{cur:"Bounteous has potential engagement in digital product and front-end experience for Goldman. BrainRidge adds cloud-native engineering, AI/ML for capital markets workflows, and enterprise data platforms.",br:"Enterprise data platforms (Snowflake/Databricks), GenAI for market intelligence, core platform modernisation, managed services. Goldman's Marcus consumer bank is a strong target.",xsell:"Goldman's Alternatives platform, Marcus digital bank, and Private Wealth Management modernisation are direct BrainRidge targets. AI-driven decisioning and cloud migration are immediate needs."}},
+  {n:'JPMorgan Chase',seg:'Retail & Commercial Banking',fit:'hi',tags:['Core Banking AI','Managed Services','Payments'],opp:'$15–25M',d:{cur:"Major Bounteous client in payments and digital banking. BrainRidge's core banking AI, M&A technology execution, and 24/7 managed services are highly complementary to Bounteous's digital experience work.",br:"Core banking AI, payment rails modernisation, SRE managed services, M&A technology execution (proven at BMO/Bank of the West acquisition). All directly applicable at JPMC scale.",xsell:"JPMC's Chase app modernisation and commercial banking digital transformation are multi-tower opportunities. BrainRidge's dark factory managed services is immediately compelling for JPMC's operational scale."}},
+  {n:'Fiserv',seg:'Payments & FinTech',fit:'hi',tags:['Payments Platform','API Engineering','AI'],opp:'$8–12M',d:{cur:"Bounteous has strong payments experience design. Fiserv as a platform company benefits from BrainRidge's payment rail modernisation, reconciliation, and real-time settlement expertise.",br:"Payment rails, ACH processing, real-time settlement, reconciliation platforms — identical to BrainRidge's investment bank settlement work (5M+ txns/day across 120 currencies).",xsell:"Fiserv's bank client ecosystem is a force multiplier — BrainRidge capabilities embedded in Fiserv's platform could reach thousands of FIs. PulseAI Neuron could be white-labeled through Fiserv."}},
+  {n:'Klarna',seg:'BNPL / Digital Payments',fit:'med',tags:['Digital Commerce','AI','Payments'],opp:'$5–8M',d:{cur:"Bounteous has BNPL digital commerce and experience design expertise. BrainRidge adds backend payment rails engineering, regulatory compliance, and AI-driven risk and fraud capabilities.",br:"Consumer lending risk analytics, AI-driven underwriting, payment orchestration — perfectly aligned with Klarna's expansion into full banking products requiring regulated-environment engineering.",xsell:"Klarna's pursuit of banking licences and expansion into financial services products creates immediate demand for BrainRidge's regulatory-grade engineering and compliance capabilities."}},
+  {n:'Nasdaq',seg:'Market Infrastructure / Data',fit:'med',tags:['Data Platform','Cloud','AI'],opp:'$6–10M',d:{cur:"Bounteous engaged in data analytics and digital experience for market infrastructure clients. BrainRidge adds enterprise data platform engineering and AI/ML for financial market data at scale.",br:"Enterprise data platforms (Snowflake/Databricks), AI-driven market analytics, cloud modernisation for high-availability trading systems.",xsell:"Nasdaq's Financial Technology division (post-Adenza acquisition) is aggressively modernising. BrainRidge's cloud-native engineering and AI capabilities are a strong fit for their FinTech platform."}},
+  {n:'MSCI',seg:'Financial Data & Analytics',fit:'med',tags:['Data Platform','AI','Cloud'],opp:'$5–8M',d:{cur:"Bounteous has data analytics and BI experience applicable to MSCI's index and analytics business. BrainRidge adds the deep data engineering and AI/ML layer.",br:"Enterprise data platform engineering, GenAI for financial research, cloud-native analytics at scale — directly applicable to MSCI's data product and ESG analytics roadmap.",xsell:"MSCI's Climate and ESG analytics products are a greenfield BrainRidge opportunity — AI-driven data engineering for ESG scoring and regulatory reporting workflows."}},
+  {n:'KKR',seg:'Alternative Investments',fit:'hi',tags:['Wealth Platform','Data','AI'],opp:'$8–14M',d:{cur:"Alternative investment firms are accelerating digital transformation for investor portals and operational platforms. Bounteous's experience design and portal work is a natural entry point.",br:"Proven at multi-strategy hedge funds and alternative investment firms — enterprise data platforms, front-to-back office tools, portfolio analytics. Directly mirrors documented BrainRidge success stories.",xsell:"KKR's build-out of KKR Infrastructure's client portal and portfolio reporting modernisation is a direct BrainRidge opportunity. AI-driven portfolio analytics and data orchestration are immediate needs."}},
+  {n:'Fidelity',seg:'Asset Management / Wealth',fit:'hi',tags:['Wealth Platform','AI','Managed Services'],opp:'$10–16M',d:{cur:"Bounteous has wealth management digital experience and portal design. BrainRidge adds the platform engineering depth and 24/7 managed services required for Fidelity's scale.",br:"Advisor platforms, client portals, portfolio analytics (identical to BMO Wealth program), 24/7 managed services for trading platforms, AI-driven personalisation.",xsell:"Fidelity's Workplace Investing and Retail platforms are undergoing significant modernisation. BrainRidge's managed services and AI capabilities are a direct fit with immediate procurement appetite."}},
+  {n:'ANZ Bank',seg:'Retail & Commercial Banking',fit:'hi',tags:['Core Banking','Cloud','AI'],opp:'$8–12M',d:{cur:"Bounteous has APAC banking digital experience. BrainRidge's core banking modernisation credentials (proven at BMO) are directly applicable at ANZ's scale.",br:"Core banking modernisation, cloud migration (Journey to Cloud toolkit), contact centre modernisation, AI-driven customer insights — proven at Tier-1 Canadian banks with direct APAC applicability.",xsell:"ANZ Plus digital bank is undergoing significant infrastructure modernisation. BrainRidge's Neuron accelerators and managed services are compelling differentiators vs. offshore-heavy competitors."}},
+  {n:'Natl. Australia Bank',seg:'Retail Banking (AU)',fit:'med',tags:['Core Banking','Data','AI'],opp:'$6–10M',d:{cur:"NAB's digital transformation is one of Australia's most ambitious programmes. Bounteous's digital product engineering is relevant.",br:"NAB's multi-year legacy transformation needs BrainRidge's execution track record. BrainRidge's 'outcomes over hours' model is a direct differentiator against strategy-only incumbents.",xsell:"NAB's UBank digital bank and wealth management platforms are strong targets for BrainRidge's managed services and AI engineering, especially given NAB's ongoing cloud modernisation."}},
+  {n:'NatWest',seg:'Retail & Commercial (UK)',fit:'med',tags:['Cloud','AI','Core Banking'],opp:'$6–10M',d:{cur:"Bounteous has European FS presence. NatWest's Mettle SME bank and retail modernisation are strong targets.",br:"Core banking AI, cloud-native migration, SRE managed services — all proven at Tier-1 North American banks with direct applicability to NatWest's UK modernisation programme.",xsell:"NatWest's open banking API initiatives and Marqeta card programme align with BrainRidge's API engineering and payment rail modernisation expertise."}},
+  {n:'Rabobank',seg:'Commercial & Agri Banking',fit:'med',tags:['Data Platform','Cloud','AI'],opp:'$5–8M',d:{cur:"Rabobank's digital transformation in commercial banking and agriculture finance is a specialist opportunity for BrainRidge's engineering model.",br:"Commercial lending risk analytics, enterprise data platforms, cloud migration — applicable to Rabobank's complex multi-geography data infrastructure.",xsell:"Rabobank's DLL (commercial leasing) and Rabo Investments subsidiaries are strong BrainRidge targets for AI-driven credit decisioning platforms."}},
+  {n:'Standard Bank',seg:'Pan-African Banking',fit:'med',tags:['Cloud','Payments','Data'],opp:'$4–7M',d:{cur:"Standard Bank's digital transformation across Africa requires cloud-native engineering partners. Bounteous's global scale provides the entry point.",br:"Payment rails modernisation, cloud migration, cross-border payments — applicable to Standard Bank's pan-African real-time payments initiative.",xsell:"Standard Bank's StandardBank.io FinTech subsidiary and cross-border payments infrastructure are strong BrainRidge opportunities as the combined entity expands geographically."}},
+  {n:'BBVA',seg:'Retail Banking (Global)',fit:'med',tags:['AI','Cloud','Digital Banking'],opp:'$6–10M',d:{cur:"BBVA is one of the world's most digitally advanced banks. Bounteous's design and digital product capabilities are very relevant.",br:"BBVA's AI-first approach aligns with BrainRidge's PulseAI model. Cloud-native engineering, GenAI for banking workflows, and managed services are all applicable.",xsell:"BBVA's Open Platform (API banking) and Valora (real estate analytics) initiatives are strong BrainRidge/PulseAI targets for AI-driven data engineering."}},
+  {n:'Sun Life Insurance',seg:'Life & Health Insurance',fit:'hi',tags:['Insurance Tech','AI Underwriting','Claims AI'],opp:'$8–14M',d:{cur:"Bounteous has health and specialty insurance digital experience. BrainRidge's Intact Financial and Guidewire cloud migration credentials are directly applicable at Sun Life.",br:"Policy administration modernisation, claims AI automation, Guidewire migration expertise (proven), AI-driven underwriting — all proven at Intact Financial, directly applicable to Sun Life.",xsell:"Sun Life's digital health and group benefits platforms are a direct Bounteous + BrainRidge combined sell — Bounteous's health digital UX + BrainRidge's insurance AI engineering."}},
+  {n:'Western Union',seg:'Cross-Border Payments',fit:'hi',tags:['Payments','AI','Data Platform'],opp:'$7–12M',d:{cur:"Western Union's WU+ digital transformation is a major initiative. Bounteous's digital experience and loyalty capabilities are highly relevant.",br:"Cross-border payment rails, real-time settlement, fraud and risk controls, reconciliation — identical to BrainRidge's investment bank settlement work (5M+ txns/day, 120 currencies).",xsell:"Western Union's digital wallet modernisation is a direct BrainRidge target. Payment rails + AI fraud detection + Bounteous customer experience is an unbeatable combined pitch."}},
+  {n:'FAB (First Abu Dhabi)',seg:'Middle East Banking',fit:'med',tags:['Payments','Cloud','Data'],opp:'$4–7M',d:{cur:"FAB's digital transformation in MENA is accelerating. BrainRidge's cloud and payments capabilities are relevant for FAB's regional ambitions.",br:"Cloud migration, payment rails, enterprise data platforms — applicable to FAB's MENA digital banking expansion and cross-border payment initiatives.",xsell:"FAB's digital bank and UAE infrastructure projects are strong targets for BrainRidge's Neuron-accelerated delivery model as the combined entity expands into MENA."}},
+  {n:'CIT Bank',seg:'Commercial Banking (US)',fit:'med',tags:['M&A Tech','Cloud','AI'],opp:'$4–6M',d:{cur:"CIT (now First Citizens Bank post-SVB acquisition) has ongoing digital integration programmes. BrainRidge's M&A technology execution experience is directly relevant.",br:"M&A technology execution (data strategy, customer migration — proven at BMO/Bank of the West), cloud modernisation, commercial banking platforms.",xsell:"First Citizens/CIT's ongoing SVB integration is a direct BrainRidge opportunity — M&A tech execution is one of BrainRidge's most distinctive and differentiated credentials."}},
+  {n:'RMB',seg:'Investment Banking (Africa)',fit:'lo',tags:['Data','Cloud','Capital Markets'],opp:'$2–4M',d:{cur:"RMB's South African capital markets digital transformation has growing demand for cloud-native engineering.",br:"Capital markets platform engineering, enterprise data, cloud migration — applicable but geographically distant from BrainRidge's current North American focus.",xsell:"RMB's FirstRand Group relationship creates a longer-term opportunity as BrainRidge expands geographically post-acquisition into EMEA markets."}}
+];
+
+function renderLogos(){
+  const g=document.getElementById('lgrid');
+  g.innerHTML=logos.map((l,i)=>`
+    <div class="lcard ${l.fit}" onclick="showLD(${i})">
+      <div class="lname">${l.n}</div>
+      <div class="lseg">${l.seg}</div>
+      <div class="stags">${l.tags.map(t=>`<span class="tag t-${t==='AI'?'ai':t.includes('Data')||t.includes('Platform')?'data':t.includes('Cloud')?'cloud':t.includes('Managed')||t.includes('Services')?'ms':'pay'}">${t}</span>`).join('')}</div>
+      <div class="opp ${l.fit==='hi'?'oh':l.fit==='med'?'om':'ol'}">${l.fit==='hi'?'● High':l.fit==='med'?'◐ Med':'○ Low'} Fit &nbsp;|&nbsp; ${l.opp}</div>
+    </div>`).join('');
+}
+
+function showLD(i){
+  const l=logos[i],d=l.d;
+  const box=document.getElementById('ldetail');
+  box.style.display='block';
+  document.getElementById('ldetailcnt').innerHTML=`
+    <div style="font-size:16px;font-weight:800;color:var(--p);margin-bottom:4px">${l.n} — Synergy Deep Dive</div>
+    <div style="font-size:12px;color:var(--tl);margin-bottom:16px">${l.seg} &nbsp;·&nbsp; Estimated Opportunity: ${l.opp}</div>
+    <div class="g3">
+      <div><div style="font-size:11px;font-weight:700;color:var(--s);text-transform:uppercase;margin-bottom:7px">Current Bounteous Engagement</div><p style="font-size:12.5px;color:var(--tm);line-height:1.65">${d.cur}</p></div>
+      <div><div style="font-size:11px;font-weight:700;color:var(--a);text-transform:uppercase;margin-bottom:7px">BrainRidge Adds</div><p style="font-size:12.5px;color:var(--tm);line-height:1.65">${d.br}</p></div>
+      <div><div style="font-size:11px;font-weight:700;color:#16a34a;text-transform:uppercase;margin-bottom:7px">Cross-Sell Opportunity</div><p style="font-size:12.5px;color:var(--tm);line-height:1.65">${d.xsell}</p></div>
+    </div>`;
+  box.scrollIntoView({behavior:'smooth',block:'nearest'});
+}
+
+const sc={
+  low:{ttl:'CAD $21M',bmo:'CAD $5M',logo:'CAD $8M',note:'Year 3 conservative estimates — limited cross-sell execution, slow India ramp, no PulseAI platform revenue.',bridge:[['BrainRidge Standalone (2026F)',55,'bp'],['+ BMO Cross-Sell',5,'ba'],['+  New FS Logo Revenue',8,'ba'],['+ Canada Banking',3,'ba'],['+ Insurance Vertical',2,'ba'],['+ India Capacity Uplift',3,'bg2'],['= Total (Year 3)',76,'bp']],bkdn:[['BMO Cross-Sell',5,35],['BrainRidge → Bounteous Accounts',8,45],['Canada Banking Expansion',3,20],['Insurance Vertical',2,15],['PulseAI Platform',0,12],['India Capacity Uplift',3,25]]},
+  mid:{ttl:'CAD $74M',bmo:'CAD $18M',logo:'CAD $22M',note:'Year 3 most-likely estimates — moderate cross-sell, successful India ramp by Y2, early PulseAI platform revenue.',bridge:[['BrainRidge Standalone (2026F)',55,'bp'],['+ BMO Cross-Sell',18,'ba'],['+ New FS Logo Revenue',22,'ba'],['+ Canada Banking',10,'ba'],['+ Insurance Vertical',8,'ba'],['+ PulseAI Platform',5,'bo'],['+ India Capacity Uplift',11,'bg2'],['= Total (Year 3)',129,'bp']],bkdn:[['BMO Cross-Sell',18,35],['BrainRidge → Bounteous Accounts',22,45],['Canada Banking Expansion',10,20],['Insurance Vertical',8,15],['PulseAI Platform',5,12],['India Capacity Uplift',11,25]]},
+  high:{ttl:'CAD $152M',bmo:'CAD $35M',logo:'CAD $45M',note:'Year 3 upside — aggressive cross-sell, rapid India ramp, PulseAI commercialised, new Tier-1 accounts (Scotiabank, CIBC).',bridge:[['BrainRidge Standalone (2026F)',55,'bp'],['+ BMO Cross-Sell',35,'ba'],['+ New FS Logo Revenue',45,'ba'],['+ Canada Banking',20,'ba'],['+ Insurance Vertical',15,'ba'],['+ PulseAI Platform',12,'bo'],['+ India Capacity Uplift',25,'bg2'],['= Total (Year 3)',207,'bp']],bkdn:[['BMO Cross-Sell',35,35],['BrainRidge → Bounteous Accounts',45,45],['Canada Banking Expansion',20,20],['Insurance Vertical',15,15],['PulseAI Platform',12,12],['India Capacity Uplift',25,25]]}
+};
+
+function updateSc(){
+  const k=document.getElementById('scSel').value,s=sc[k];
+  document.getElementById('ttl').textContent=s.ttl;
+  document.getElementById('bmoT').textContent=s.bmo;
+  document.getElementById('logoT').textContent=s.logo;
+  document.getElementById('scnote').textContent=s.note;
+  document.getElementById('bsub').textContent=({low:'Low',mid:'Base',high:'High'}[k])+' Case projections in CAD millions';
+  const mx=Math.max(...s.bridge.map(b=>b[1]));
+  document.getElementById('rbridge').innerHTML=s.bridge.map(b=>`<div class="sbar"><div class="slab" style="width:175px;font-size:12px">${b[0]}</div><div class="bcon"><div class="bfill ${b[2]}" style="width:${Math.round(b[1]/mx*100)}%;min-width:${b[1]>0?'45px':'0'}">$${b[1]}M</div></div></div>`).join('');
+  document.getElementById('sbkdn').innerHTML=s.bkdn.map(b=>`<div style="margin-bottom:12px"><div style="display:flex;justify-content:space-between;margin-bottom:3px"><span style="font-size:12px">${b[0]}</span><span style="font-size:12px;font-weight:700;color:var(--p)">$${b[1]}M</span></div><div class="bcon" style="height:18px"><div class="bfill bp" style="width:${b[1]>0?Math.round(b[1]/b[2]*100):0}%;min-width:${b[1]>0?'2px':'0'}"></div></div></div>`).join('');
+}
+
+renderLogos();updateSc();
+</script>
+</body>
+</html>
