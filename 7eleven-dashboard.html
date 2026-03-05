@@ -1,0 +1,1417 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>7-Eleven Inc | Account Based Outreach Plan | Bounteous</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--p1:#2E1869;--p2:#B61CA7;--p3:#3C25F7;--bg:#F3F3F5;--w:#FFFFFF;--dk:#1a1a2e;--g1:linear-gradient(135deg,#2E1869,#3C25F7);--g2:linear-gradient(135deg,#B61CA7,#3C25F7)}
+body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;background:var(--bg);color:#333;font-size:14px}
+.header{background:var(--g1);color:#fff;padding:18px 30px;display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;z-index:100;box-shadow:0 4px 20px rgba(46,24,105,.3)}
+.header h1{font-size:20px;font-weight:700;letter-spacing:.5px}
+.header h1 span{color:#B61CA7}
+.header .meta{font-size:12px;opacity:.85;text-align:right}
+.sidebar{position:fixed;top:60px;left:0;width:230px;height:calc(100vh - 60px);background:var(--p1);overflow-y:auto;z-index:99;padding:14px 0;scrollbar-width:thin;transition:transform .3s}
+.sidebar::-webkit-scrollbar{width:4px}
+.sidebar::-webkit-scrollbar-thumb{background:var(--p2);border-radius:4px}
+.phase-label{padding:10px 18px 4px;font-size:10px;text-transform:uppercase;letter-spacing:1.2px;color:rgba(255,255,255,.4);font-weight:700;margin-top:6px}
+.phase-label:first-child{margin-top:0}
+.nav-item{padding:9px 18px 9px 22px;color:rgba(255,255,255,.55);cursor:pointer;font-size:12px;font-weight:500;transition:all .2s;border-left:3px solid transparent;display:flex;align-items:center;gap:8px;line-height:1.3;background:transparent}
+.nav-item:hover{color:#fff;background:rgba(255,255,255,.08);border-left-color:rgba(182,28,167,.4)}
+.nav-item.active{color:#fff !important;background:linear-gradient(90deg,rgba(182,28,167,.25),rgba(60,37,247,.15)) !important;border-left-color:var(--p2) !important;font-weight:700}
+.nav-item .nav-icon{font-size:14px;width:20px;text-align:center;flex-shrink:0}
+.phase-divider{height:1px;background:rgba(255,255,255,.08);margin:8px 16px}
+.content{padding:20px 25px;max-width:1200px;margin:0 auto;margin-left:230px}
+.sidebar-toggle{display:none;position:fixed;top:68px;left:8px;z-index:100;background:var(--p2);color:#fff;border:none;border-radius:8px;width:36px;height:36px;font-size:18px;cursor:pointer;box-shadow:0 2px 8px rgba(0,0,0,.3)}
+@media(max-width:900px){
+.sidebar{transform:translateX(-100%)}
+.sidebar.open{transform:translateX(0)}
+.sidebar-toggle{display:block}
+.content{margin-left:0}
+}
+.tabs{display:none}
+.panel{display:none}
+.panel.active{display:block}
+.card{background:var(--w);border-radius:12px;padding:22px;margin-bottom:18px;box-shadow:0 2px 12px rgba(0,0,0,.06);border-left:4px solid var(--p2)}
+.card h3{color:var(--p1);font-size:16px;margin-bottom:12px;display:flex;align-items:center;gap:8px}
+.card h3 .icon{width:28px;height:28px;background:var(--g2);border-radius:8px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:14px;flex-shrink:0}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:18px}
+.grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+@media(max-width:900px){.grid2,.grid3,.grid4{grid-template-columns:1fr}}
+.metric{background:var(--g1);color:#fff;border-radius:12px;padding:18px;text-align:center;border-left:none}
+.metric .val{font-size:28px;font-weight:800}
+.metric .lbl{font-size:11px;opacity:.8;margin-top:4px;text-transform:uppercase;letter-spacing:.5px}
+table{width:100%;border-collapse:collapse;font-size:13px}
+th{background:var(--p1);color:#fff;padding:10px 12px;text-align:left;font-weight:600;font-size:12px;text-transform:uppercase;letter-spacing:.5px}
+td{padding:9px 12px;border-bottom:1px solid #eee}
+tr:hover{background:rgba(60,37,247,.03)}
+.badge{display:inline-block;padding:3px 10px;border-radius:20px;font-size:11px;font-weight:600}
+.badge.high{background:#e8f5e9;color:#2e7d32}
+.badge.med{background:#fff3e0;color:#e65100}
+.badge.low{background:#fce4ec;color:#c62828}
+.badge.info{background:#e8eaf6;color:#3C25F7}
+.heatmap{width:100%;border-collapse:collapse;font-size:12px}
+.heatmap th{background:var(--p1);color:#fff;padding:8px 10px;font-size:11px}
+.heatmap td{padding:8px 10px;text-align:center;font-weight:600;border:1px solid #eee}
+.h-high{background:#2e7d32;color:#fff}
+.h-med{background:#ff9800;color:#fff}
+.h-low{background:#e0e0e0;color:#555}
+.h-crit{background:#B61CA7;color:#fff}
+.h-blue{background:#3C25F7;color:#fff}
+.section-title{font-size:18px;color:var(--p1);font-weight:700;margin:20px 0 14px;padding-bottom:8px;border-bottom:2px solid var(--p2);display:flex;align-items:center;gap:10px}
+.ai-block{background:linear-gradient(135deg,#2E1869 0%,#B61CA7 50%,#3C25F7 100%);border-radius:16px;padding:28px;color:#fff;margin-bottom:18px;border-left:none;position:relative;overflow:hidden}
+.ai-block::before{content:'';position:absolute;top:-50%;right:-20%;width:300px;height:300px;background:radial-gradient(circle,rgba(255,255,255,.08),transparent);border-radius:50%}
+.ai-block h3{color:#fff;font-size:18px}
+.ai-block .sub{opacity:.85;font-size:13px;margin-top:6px}
+.ai-card{background:rgba(255,255,255,.12);border-radius:12px;padding:18px;margin-top:14px;backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,.15)}
+.ai-card h4{font-size:15px;margin-bottom:8px}
+.ai-card p{font-size:12px;opacity:.9;line-height:1.6}
+.tag{display:inline-block;background:rgba(255,255,255,.2);padding:2px 8px;border-radius:12px;font-size:10px;margin:2px}
+.progress-bar{height:8px;background:rgba(255,255,255,.2);border-radius:4px;margin-top:8px;overflow:hidden}
+.progress-fill{height:100%;border-radius:4px;background:linear-gradient(90deg,#B61CA7,#3C25F7)}
+.filter-row{display:flex;gap:10px;margin-bottom:16px;flex-wrap:wrap}
+.filter-btn{padding:6px 14px;border-radius:20px;border:2px solid var(--p2);background:var(--w);color:var(--p1);cursor:pointer;font-size:12px;font-weight:600;transition:all .2s}
+.filter-btn.active,.filter-btn:hover{background:var(--p2);color:#fff}
+.tooltip{position:relative;cursor:help}
+.kpi-strip{display:flex;gap:12px;margin-bottom:20px;overflow-x:auto;padding-bottom:8px}
+.kpi{background:var(--w);border-radius:10px;padding:14px 20px;min-width:160px;border-top:3px solid var(--p2);box-shadow:0 2px 8px rgba(0,0,0,.05)}
+.kpi .v{font-size:22px;font-weight:800;color:var(--p1)}
+.kpi .l{font-size:11px;color:#666;margin-top:2px}
+.timeline{position:relative;padding-left:30px}
+.timeline::before{content:'';position:absolute;left:12px;top:0;bottom:0;width:3px;background:var(--g2)}
+.tl-item{position:relative;margin-bottom:20px;padding-left:20px}
+.tl-item::before{content:'';position:absolute;left:-22px;top:6px;width:14px;height:14px;border-radius:50%;background:var(--p2);border:3px solid var(--w);box-shadow:0 0 0 2px var(--p2)}
+.tl-item .date{font-size:11px;color:var(--p2);font-weight:700}
+.tl-item .desc{font-size:13px;margin-top:4px}
+.stakeholder-card{background:var(--w);border-radius:10px;padding:16px;border-left:4px solid var(--p3);margin-bottom:10px}
+.stakeholder-card .name{font-weight:700;color:var(--p1);font-size:14px}
+.stakeholder-card .title{font-size:12px;color:var(--p2)}
+.stakeholder-card .loc{font-size:11px;color:#888;margin-top:2px}
+.stakeholder-card .angle{font-size:12px;color:#555;margin-top:6px;background:#f5f0ff;padding:8px;border-radius:6px}
+.download-btn{position:fixed;bottom:20px;right:20px;background:var(--g2);color:#fff;border:none;padding:12px 24px;border-radius:30px;cursor:pointer;font-weight:700;font-size:13px;box-shadow:0 4px 20px rgba(182,28,167,.4);z-index:200;transition:transform .2s}
+.download-btn:hover{transform:scale(1.05)}
+.propensity{display:flex;gap:4px;align-items:center}
+.dot{width:14px;height:14px;border-radius:50%}
+.dot.filled{background:var(--p2)}
+.dot.empty{background:#e0e0e0}
+</style>
+</head>
+<body>
+<!-- LOGIN OVERLAY -->
+<div id="loginOverlay" style="position:fixed;top:0;left:0;width:100%;height:100%;background:linear-gradient(135deg,#2E1869 0%,#1a0f3d 40%,#0d0620 100%);z-index:9999;display:flex;align-items:center;justify-content:center">
+<div style="width:420px;max-width:90vw">
+<div style="text-align:center;margin-bottom:36px">
+<div style="font-size:42px;font-weight:800;color:#fff;letter-spacing:1px">bounteous</div>
+<div style="width:60px;height:4px;background:linear-gradient(90deg,#B61CA7,#3C25F7);margin:14px auto;border-radius:2px"></div>
+<div style="color:rgba(255,255,255,.6);font-size:14px;margin-top:8px">7-Eleven Inc — GCC Account Intelligence</div>
+<div style="color:rgba(255,255,255,.4);font-size:11px;margin-top:4px">Proprietary & Confidential</div>
+</div>
+<div style="background:rgba(255,255,255,.06);backdrop-filter:blur(20px);border:1px solid rgba(255,255,255,.1);border-radius:16px;padding:32px">
+<div style="margin-bottom:20px">
+<label style="display:block;color:rgba(255,255,255,.7);font-size:12px;font-weight:600;margin-bottom:6px;text-transform:uppercase;letter-spacing:.5px">Email Address</label>
+<input id="loginUser" type="email" placeholder="Enter your email" style="width:100%;padding:12px 16px;border-radius:10px;border:2px solid rgba(255,255,255,.15);background:rgba(255,255,255,.08);color:#fff;font-size:14px;outline:none;transition:border .2s;box-sizing:border-box" onfocus="this.style.borderColor='#B61CA7'" onblur="this.style.borderColor='rgba(255,255,255,.15)'">
+</div>
+<div style="margin-bottom:24px">
+<label style="display:block;color:rgba(255,255,255,.7);font-size:12px;font-weight:600;margin-bottom:6px;text-transform:uppercase;letter-spacing:.5px">Password</label>
+<div style="position:relative">
+<input id="loginPass" type="password" placeholder="Enter your password" style="width:100%;padding:12px 16px;border-radius:10px;border:2px solid rgba(255,255,255,.15);background:rgba(255,255,255,.08);color:#fff;font-size:14px;outline:none;transition:border .2s;box-sizing:border-box" onfocus="this.style.borderColor='#B61CA7'" onblur="this.style.borderColor='rgba(255,255,255,.15)'" onkeydown="if(event.key==='Enter')doLogin()">
+<div onclick="var p=document.getElementById('loginPass');p.type=p.type==='password'?'text':'password'" style="position:absolute;right:12px;top:50%;transform:translateY(-50%);cursor:pointer;color:rgba(255,255,255,.5);font-size:18px;user-select:none">👁</div>
+</div>
+</div>
+<div id="loginError" style="display:none;color:#ff5252;font-size:12px;margin-bottom:14px;padding:8px 12px;background:rgba(255,82,82,.1);border-radius:8px;text-align:center">Invalid credentials. Please try again.</div>
+<div id="loginAttempts" style="display:none;color:#ff9800;font-size:11px;margin-bottom:14px;text-align:center"></div>
+<button onclick="doLogin()" style="width:100%;padding:14px;border:none;border-radius:10px;background:linear-gradient(135deg,#B61CA7,#3C25F7);color:#fff;font-size:15px;font-weight:700;cursor:pointer;letter-spacing:.5px;transition:transform .2s,box-shadow .2s;box-shadow:0 4px 20px rgba(182,28,167,.4)" onmouseover="this.style.transform='translateY(-1px)';this.style.boxShadow='0 6px 24px rgba(182,28,167,.5)'" onmouseout="this.style.transform='translateY(0)';this.style.boxShadow='0 4px 20px rgba(182,28,167,.4)'">Sign In</button>
+</div>
+<div style="text-align:center;margin-top:20px;color:rgba(255,255,255,.3);font-size:10px">© 2026 Bounteous — Proprietary & Confidential. Unauthorized access prohibited.</div>
+</div>
+</div>
+<script>
+var _0xf=[46,42,42,59,44,58,44,40,59,42,33,9,43,38,60,39,61,44,38,60,58,103,42,38,36];
+var _0xa=[11,38,60,39,61,44,38,60,58,9,125,121,121,126];
+var _0xk=73;var _0xc=0;
+function _0xd(a){return a.map(function(c){return String.fromCharCode(c^_0xk)}).join('')}
+function doLogin(){
+var u=document.getElementById('loginUser').value.trim().toLowerCase();
+var p=document.getElementById('loginPass').value;
+if(u===_0xd(_0xf)&&p===_0xd(_0xa)){
+document.getElementById('loginOverlay').style.display='none';
+document.getElementById('dashboardMain').style.display='block';
+}else{
+_0xc++;
+document.getElementById('loginError').style.display='block';
+if(_0xc>=3){document.getElementById('loginAttempts').style.display='block';document.getElementById('loginAttempts').textContent='Attempt '+_0xc+' of 5. Account may be locked after 5 failed attempts.';}
+if(_0xc>=5){document.getElementById('loginError').innerHTML='Account locked. Contact your administrator.';var b=document.querySelector('#loginOverlay button');b.disabled=true;b.style.opacity='0.4';b.style.cursor='not-allowed';}
+document.getElementById('loginPass').value='';
+document.getElementById('loginPass').style.borderColor='#ff5252';
+setTimeout(function(){document.getElementById('loginPass').style.borderColor='rgba(255,255,255,.15)'},2000);
+}
+}
+</script>
+
+<!-- MAIN DASHBOARD (hidden until login) -->
+<div id="dashboardMain" style="display:none">
+<div class="header">
+<div><h1>7-Eleven Inc <span>× Bounteous</span></h1><div style="font-size:11px;opacity:.7;margin-top:2px">Account Based Outreach Plan — India GCC Focus</div></div>
+<div class="meta">Analysis Date: March 5, 2026<br>Confidence: HIGH (95%+) | Action: PURSUE AGGRESSIVELY</div>
+</div>
+
+<button class="sidebar-toggle" onclick="document.querySelector('.sidebar').classList.toggle('open')">☰</button>
+
+<div class="sidebar">
+<div class="phase-label">🔎 Phase 1 — Know the Account</div>
+<div class="nav-item active" onclick="showP('panel-0',this)"><span class="nav-icon">📊</span> Account Overview</div>
+<div class="nav-item" onclick="showP('panel-9',this)"><span class="nav-icon">🇮🇳</span> India GCC</div>
+<div class="nav-item" onclick="showP('panel-2',this)"><span class="nav-icon">🔍</span> Intelligence Brief</div>
+<div class="nav-item" onclick="showP('panel-5',this)"><span class="nav-icon">🛠️</span> Tech Stack Radar</div>
+<div class="nav-item" onclick="showP('panel-7',this)"><span class="nav-icon">🤖</span> AI Initiatives</div>
+<div class="phase-divider"></div>
+<div class="phase-label">⚔️ Phase 2 — Know the Battlefield</div>
+<div class="nav-item" onclick="showP('panel-4',this)"><span class="nav-icon">⚔️</span> Competitive Landscape</div>
+<div class="nav-item" onclick="showP('panel-15',this)"><span class="nav-icon">⭐</span> Bounteous Edge</div>
+<div class="nav-item" onclick="showP('panel-6',this)"><span class="nav-icon">🤝</span> Tech Partnerships</div>
+<div class="nav-item" onclick="showP('panel-1',this)"><span class="nav-icon">👥</span> Stakeholder Map</div>
+<div class="phase-divider"></div>
+<div class="phase-label">🎯 Phase 3 — Plan the Attack</div>
+<div class="nav-item" onclick="showP('panel-3',this)"><span class="nav-icon">🔗</span> Value Alignment</div>
+<div class="nav-item" onclick="showP('panel-8',this)"><span class="nav-icon">🧠</span> AI for Enterprise</div>
+<div class="nav-item" onclick="showP('panel-11',this)"><span class="nav-icon">📦</span> Program Propensity</div>
+<div class="nav-item" onclick="showP('panel-10',this)"><span class="nav-icon">🔥</span> Heatmaps</div>
+<div class="phase-divider"></div>
+<div class="phase-label">🚀 Phase 4 — Execute the Win</div>
+<div class="nav-item" onclick="showP('panel-13',this)"><span class="nav-icon">💰</span> ROI Builder</div>
+<div class="nav-item" onclick="showP('panel-12',this)"><span class="nav-icon">🎯</span> Outreach Playbook</div>
+<div class="nav-item" onclick="showP('panel-14',this)"><span class="nav-icon">🏆</span> Win Themes</div>
+</div>
+
+<div class="content">
+
+<!-- TAB 0: Account Overview -->
+<div class="panel active" id="panel-0">
+<div class="section-title">📊 Account Overview — 7-Eleven Inc</div>
+<div class="kpi-strip">
+<div class="kpi"><div class="v">~$729M</div><div class="l">Revenue (2024 USD)</div></div>
+<div class="kpi"><div class="v">+5.2%</div><div class="l">Revenue Growth YoY</div></div>
+<div class="kpi"><div class="v">~$15M</div><div class="l">IT Spend (2024 USD)</div></div>
+<div class="kpi"><div class="v">+5.1%</div><div class="l">IT Spend Growth YoY</div></div>
+<div class="kpi"><div class="v">11,382</div><div class="l">Global Employees</div></div>
+<div class="kpi"><div class="v">1,155</div><div class="l">India GCC Headcount</div></div>
+<div class="kpi"><div class="v">134</div><div class="l">Active Vendor Relations</div></div>
+<div class="kpi"><div class="v">13,000+</div><div class="l">US & Canada Stores</div></div>
+</div>
+<div class="grid2">
+<div class="card">
+<h3><span class="icon">🏢</span> Company Snapshot</h3>
+<table>
+<tr><td><strong>Industry</strong></td><td>Retail / Food, Beverages & Consumer Goods</td></tr>
+<tr><td><strong>Headquarters</strong></td><td>Dallas-Fort Worth (Irving, TX), United States</td></tr>
+<tr><td><strong>Founded</strong></td><td>1927 (nearly 100 years)</td></tr>
+<tr><td><strong>Type</strong></td><td>Private Company (IPO in Preparation)</td></tr>
+<tr><td><strong>Parent</strong></td><td>Seven & i Holdings Co., Ltd. (Japan)</td></tr>
+<tr><td><strong>Global Stores</strong></td><td>83,000+ stores worldwide (13,000+ in US/CA)</td></tr>
+<tr><td><strong>Brands</strong></td><td>7-Eleven, Speedway, Stripes, Laredo Taco Co., Raise the Roost</td></tr>
+<tr><td><strong>Key Platforms</strong></td><td>7NOW (Delivery), 7Rewards (Loyalty), 7Wallet, Gold Pass</td></tr>
+<tr><td><strong>India GCC</strong></td><td>Active & Expanding — Bengaluru (est. 2020)</td></tr>
+<tr><td><strong>Globalization Index</strong></td><td>9.76 (High Maturity)</td></tr>
+</table>
+</div>
+<div class="card">
+<h3><span class="icon">🎯</span> Strategic Priorities (2025–2026)</h3>
+<table>
+<tr><td><span class="badge high">P1</span></td><td><strong>IPO Preparation</strong> — Leadership & portfolio optimization, governance automation</td></tr>
+<tr><td><span class="badge high">P2</span></td><td><strong>Fresh Food & Foodservice Innovation</strong> — IoT vending, robotic vending, smart stores</td></tr>
+<tr><td><span class="badge high">P3</span></td><td><strong>Experiential Marketing</strong> — AR product trials, digital signage, data-driven positioning</td></tr>
+<tr><td><span class="badge high">P4</span></td><td><strong>Loyalty & Mobile Offers</strong> — Gold Pass, digital coupons, personalization engines</td></tr>
+<tr><td><span class="badge med">P5</span></td><td><strong>Executive & Category Hiring</strong> — Virtual onboarding, HR automation</td></tr>
+<tr><td><span class="badge med">P6</span></td><td><strong>Global Tech Strategy</strong> — Center of Excellence, AI adoption, data analytics</td></tr>
+<tr><td><span class="badge med">P7</span></td><td><strong>Product-Led Transformation</strong> — Product discipline replacing project-based delivery</td></tr>
+<tr><td><span class="badge info">P8</span></td><td><strong>Transformation Plan (Sep 2025)</strong> — Global integration, disciplined execution framework</td></tr>
+</table>
+</div>
+</div>
+<div class="card">
+<h3><span class="icon">💡</span> Existing Bounteous Engagement & Expansion Rationale</h3>
+<p style="line-height:1.7">Bounteous has an existing engagement within the <strong>CMO (Chief Marketing Officer)</strong> area in the US. The objective is to <strong>broaden outreach into IT Services</strong> and <strong>expand the relationship into the India GCC</strong>. 7-Eleven's GSC in Bengaluru has evolved from operational support to a strategic value hub, now co-owning global platforms across technology, finance, and customer experience. With recent expansion (232K sq ft in Feb 2026), zero active India hiring, and leadership churn in AI/ML roles, the timing is optimal for Bounteous to position as a strategic partner for specialized, on-demand expertise in high-value white space areas.</p>
+</div>
+</div>
+
+<!-- TAB 1: Stakeholder Map -->
+<div class="panel" id="panel-1">
+<div class="section-title">👥 Stakeholder Map</div>
+<div class="filter-row">
+<button class="filter-btn active" onclick="filterStk('all',this)">All</button>
+<button class="filter-btn" onclick="filterStk('india',this)">India GCC</button>
+<button class="filter-btn" onclick="filterStk('us',this)">US HQ</button>
+<button class="filter-btn" onclick="filterStk('exec',this)">C-Suite / SVP</button>
+<button class="filter-btn" onclick="filterStk('tech',this)">Technology</button>
+<button class="filter-btn" onclick="filterStk('data',this)">Data & AI</button>
+<button class="filter-btn" onclick="filterStk('ops',this)">Ops & GBS</button>
+</div>
+<div class="grid2" id="stkContainer">
+<div class="stakeholder-card" data-region="india" data-fn="exec tech">
+<div class="name">Malahar Pinnelli</div><div class="title">VP & Country Leader, 7-Eleven GSC</div><div class="loc">📍 Bengaluru | 24.9 yrs exp</div>
+<div class="angle"><strong>🎯 PRIMARY CONTACT</strong> — Owns GCC strategy & digital transformation. Built GCCs at Ecolab, PFS. Recognized as Top Retail GCC Head (AIM 2025). Spoke at EY GCC Conclave on scaling the center from tech/cyber to finance, merchandising, HR, marketing. Key platforms: 7NOW, 7Rewards, 7Wallet.</div>
+</div>
+<div class="stakeholder-card" data-region="india" data-fn="exec tech ops">
+<div class="name">Atul Mahajan</div><div class="title">SVP & Head Operations, IT, Training</div><div class="loc">📍 Bengaluru | 27.2 yrs exp</div>
+<div class="angle"><strong>🔧 TECHNICAL SPONSOR</strong> — Oversees IT infrastructure, store operations & training programs. Key decision-maker for platform transformation, cloud & managed services.</div>
+</div>
+<div class="stakeholder-card" data-region="us" data-fn="exec">
+<div class="name">Hardeep Singh</div><div class="title">CEO, 7-Eleven India</div><div class="loc">📍 Mumbai | 31.3 yrs exp</div>
+<div class="angle"><strong>👔 EXECUTIVE SPONSOR</strong> — Overall strategy & P&L ownership. Engage at Week 9-12 for strategic alignment and MSA negotiation.</div>
+</div>
+<div class="stakeholder-card" data-region="india" data-fn="tech">
+<div class="name">Sunil Kalkunte</div><div class="title">Director of Engineering</div><div class="loc">📍 Bengaluru | 23.6 yrs exp</div>
+<div class="angle"><strong>⚙️ ENGINEERING LEAD</strong> — Product development & engineering practices. Target for Digital Product Engineering, Platform Modernization pitches.</div>
+</div>
+<div class="stakeholder-card" data-region="india" data-fn="tech data">
+<div class="name">Vivekanand R</div><div class="title">Director of Engineering</div><div class="loc">📍 Bengaluru | 22.5 yrs exp | Joined Dec 2025 from Walmart Global Tech</div>
+<div class="angle"><strong>🤖 AI/ML CHAMPION</strong> — Software Engineering & AI/ML. New hire — key influencer for AI initiatives. Target for AI for Enterprise, Data Programs pitches.</div>
+</div>
+<div class="stakeholder-card" data-region="india" data-fn="data">
+<div class="name">PRAG TYAGI</div><div class="title">Director, Enterprise Data Platform</div><div class="loc">📍 Bengaluru | 17.7 yrs exp</div>
+<div class="angle"><strong>📊 DATA LEADER</strong> — Data engineering, analytics & governance. Primary target for Data Programs, AI for Enterprise pitches.</div>
+</div>
+<div class="stakeholder-card" data-region="india" data-fn="ops">
+<div class="name">Padma Srinivasan</div><div class="title">Senior Director, GBS</div><div class="loc">📍 Bengaluru | 18.5 yrs exp</div>
+<div class="angle"><strong>🏗️ GBS LEADER</strong> — Global Business Services, analytics & operations. Target for managed services, operational transformation programs.</div>
+</div>
+<div class="stakeholder-card" data-region="india" data-fn="ops">
+<div class="name">Chetana Parashar</div><div class="title">Director — HR</div><div class="loc">📍 Bengaluru | 19.4 yrs exp</div>
+<div class="angle"><strong>👥 HR STRATEGY</strong> — Talent acquisition & HR strategy. Target for Tailored Graduate Cohorts and upskilling programs.</div>
+</div>
+<div class="stakeholder-card" data-region="india" data-fn="ops">
+<div class="name">Sneha Undale</div><div class="title">Director — Transformation, Strategy, Excellence</div><div class="loc">📍 Bengaluru | Joined Oct 2025 from Lowe's</div>
+<div class="angle"><strong>🚀 TRANSFORMATION LEAD</strong> — New hire focused on transformation & excellence. Key target for Enterprise Digital Transformation, Platform Modernization.</div>
+</div>
+<div class="stakeholder-card" data-region="india" data-fn="tech data">
+<div class="name">Sudipto Maulik</div><div class="title">Director — IT</div><div class="loc">📍 Bengaluru | 21.9 yrs exp</div>
+<div class="angle"><strong>🖥️ IT INFRASTRUCTURE</strong> — IT Infrastructure & project management. Target for Cloud Transformation, Platform Transformation.</div>
+</div>
+<div class="stakeholder-card" data-region="us" data-fn="tech">
+<div class="name">Scott Albert</div><div class="title">VP & Head of Store & Enterprise Products</div><div class="loc">📍 US (Irving, TX)</div>
+<div class="angle"><strong>📱 PRODUCT LEADER (US)</strong> — Leads digital product for store systems, fuel, restaurants, merchandising. Architect of product-led transformation & 7-BOSS cloud platform. Champion of AI-assisted ordering.</div>
+</div>
+</div>
+</div>
+
+<!-- TAB 2: Intelligence Brief -->
+<div class="panel" id="panel-2">
+<div class="section-title">🔍 Intelligence Brief — Draup & Market Signals</div>
+<div class="grid2">
+<div class="card">
+<h3><span class="icon">📰</span> Key Signal: GCC Expansion (Feb 2026)</h3>
+<p>7-Eleven GSC expanded by <strong>232,090 sq ft</strong> in Bengaluru, creating a large workspace with a mock store. Now employs 900+ professionals. Evolved from operational support to strategic value hub, co-owning global platforms across technology, finance, and customer experience. Great Place to Work certified (2025).</p>
+</div>
+<div class="card">
+<h3><span class="icon">📰</span> Key Signal: Zero Active Hiring in India</h3>
+<p>As of March 2026, <strong>zero active job postings</strong> in India despite massive expansion. Indicates either hiring freeze post-expansion, shift to strategic hiring, or <strong>opportunity for managed services</strong> to fill capacity gaps. This is a prime opening for Bounteous talent pods.</p>
+</div>
+<div class="card">
+<h3><span class="icon">📰</span> Key Signal: AI/ML Leadership Churn</h3>
+<p><strong>Shahmeer Mirza</strong> (Sr. Director Data, AI/ML, R&D) departed Oct 2025 to Mirion Technologies. <strong>Kristen Cook</strong> (Chief of Staff to CEO) departed Jul 2025. Meanwhile, new hires: <strong>Vivekanand R</strong> (Director Engineering, from Walmart) and <strong>Sneha Undale</strong> (Director Transformation, from Lowe's). Indicates aggressive talent competition and need for stable specialized teams.</p>
+</div>
+<div class="card">
+<h3><span class="icon">📰</span> Key Signal: Transformation Plan (Sep 2025)</h3>
+<p>Seven & i Holdings announced a comprehensive <strong>Transformation Plan</strong> — first-ever truly global plan with clear priorities, timelines, and trackable deliverables. Focus on technology, AI, data analytics. Establishing Centers of Excellence. IPO of SEI being planned. Represents a clear break from past siloed operations.</p>
+</div>
+</div>
+<div class="card">
+<h3><span class="icon">📋</span> Draup Battle Cards — White Space Analysis</h3>
+<table>
+<tr><th>Workload</th><th>Current Vendors</th><th>Opportunity</th><th>Priority</th></tr>
+<tr><td>DevOps & CI/CD</td><td>4 engagements</td><td>Low saturation — HIGH opportunity for acceleration</td><td><span class="badge high">HIGH</span></td></tr>
+<tr><td>AI & Data Science</td><td>2 engagements</td><td>Emerging need despite high strategic priority</td><td><span class="badge high">HIGH</span></td></tr>
+<tr><td>Mobile App Dev</td><td>2 engagements</td><td>Android trending, mobile-first strategy</td><td><span class="badge high">HIGH</span></td></tr>
+<tr><td>Cybersecurity</td><td>1 engagement</td><td>Critical gap, essential for IPO readiness</td><td><span class="badge high">HIGH</span></td></tr>
+<tr><td>Cloud Computing</td><td>1 engagement</td><td>Azure-heavy stack, optimization needed</td><td><span class="badge high">HIGH</span></td></tr>
+<tr><td>E-Commerce</td><td>1 engagement</td><td>Digital transformation priority</td><td><span class="badge high">HIGH</span></td></tr>
+<tr><td>Software Testing</td><td>11 engagements</td><td>QA automation opportunity</td><td><span class="badge med">MED</span></td></tr>
+<tr><td>BI & Analytics</td><td>8 engagements</td><td>Advanced analytics, AI integration</td><td><span class="badge med">MED</span></td></tr>
+<tr><td>Product Support</td><td>7 engagements</td><td>Technical support services</td><td><span class="badge med">MED</span></td></tr>
+<tr><td>Data Engineering</td><td>23 engagements</td><td>Saturated — differentiate with AI/ML</td><td><span class="badge low">LOW</span></td></tr>
+<tr><td>App Dev & Maintenance</td><td>19 engagements</td><td>Competitive — focus on modernization angle</td><td><span class="badge low">LOW</span></td></tr>
+</table>
+</div>
+<div class="card">
+<h3><span class="icon">📈</span> Trending Skills (Global — Last 12 Months)</h3>
+<table>
+<tr><th>Skill</th><th>Job Postings</th><th>Trend</th><th>Bounteous Relevance</th></tr>
+<tr><td>Upselling</td><td>147</td><td>📈 Up</td><td>Sales enablement / CRM optimization</td></tr>
+<tr><td>Loss Prevention</td><td>110</td><td>📈 Up</td><td>Computer vision / AI for retail ops</td></tr>
+<tr><td>Phone Etiquette</td><td>101</td><td>📈 Up</td><td>Customer service automation</td></tr>
+<tr><td>Sales Performance</td><td>38</td><td>📈 Up</td><td>Revenue optimization / analytics</td></tr>
+<tr><td>IP VPN</td><td>17</td><td>📈 Up</td><td>Network infrastructure</td></tr>
+<tr><td>Remote Troubleshooting</td><td>17</td><td>📈 Up</td><td>IT support / managed services</td></tr>
+<tr><td>Android</td><td>8</td><td>📈 Up</td><td>Mobile development — direct fit</td></tr>
+</table>
+</div>
+</div>
+
+<!-- TAB 3: Value Alignment -->
+<div class="panel" id="panel-3">
+<div class="section-title">🔗 Value Alignment — Bounteous ↔ 7-Eleven</div>
+<div class="card" style="border-left-color:#2e7d32">
+<h3><span class="icon">✅</span> Overall Strategic Alignment: EXCELLENT (95%)</h3>
+<p>Bounteous' core competencies in digital transformation, experience design, marketing technology, cloud & data, AI solutions, and analytics map directly to 7-Eleven's top strategic priorities.</p>
+</div>
+<div class="card">
+<h3><span class="icon">🗺️</span> Priority-to-Offering Mapping</h3>
+<table>
+<tr><th>7-Eleven Priority</th><th>Bounteous Offering</th><th>Fit</th><th>Entry Point</th></tr>
+<tr><td>IPO Preparation & Governance</td><td>Enterprise Digital Transformation, Data Programs</td><td><span class="badge high">★★★★★</span></td><td>Compliance automation, investor dashboards</td></tr>
+<tr><td>Fresh Food & Foodservice Innovation</td><td>Digital Product Engineering, AI for Enterprise</td><td><span class="badge high">★★★★☆</span></td><td>IoT solutions, POS modernization</td></tr>
+<tr><td>Experiential Marketing</td><td>Growth Marketing, Experience Design</td><td><span class="badge high">★★★★★</span></td><td>AR product trials, digital signage, Adobe/SFMC</td></tr>
+<tr><td>Loyalty & Mobile Offers</td><td>Growth Marketing, AI for Enterprise, Digital Product Eng.</td><td><span class="badge high">★★★★★</span></td><td>Personalization engine, mobile app enhancement</td></tr>
+<tr><td>Global Tech Strategy & CoE</td><td>Platform Transformation, Cloud Transformation</td><td><span class="badge high">★★★★★</span></td><td>Azure optimization, CI/CD, Kubernetes</td></tr>
+<tr><td>Product-Led Transformation</td><td>Platform Modernisation, Digital Product Engineering</td><td><span class="badge high">★★★★☆</span></td><td>Microservices, API engineering, mobile</td></tr>
+<tr><td>AI/Data Analytics Adoption</td><td>AI for Enterprise, Data Programs</td><td><span class="badge high">★★★★★</span></td><td>AI/ML CoE, GenAI marketing, computer vision</td></tr>
+<tr><td>GCC Scaling & Talent</td><td>Tailored Graduate Cohorts, Managed Services</td><td><span class="badge high">★★★★☆</span></td><td>Talent pods, upskilling programs</td></tr>
+</table>
+</div>
+<div class="grid3">
+<div class="metric"><div class="val">6</div><div class="lbl">High-Value White Spaces</div></div>
+<div class="metric"><div class="val">$2-3M</div><div class="lbl">12-Month Run Rate Target</div></div>
+<div class="metric"><div class="val">3.5x</div><div class="lbl">Expected ROI</div></div>
+</div>
+</div>
+
+<!-- TAB 4: Competitive Landscape -->
+<div class="panel" id="panel-4">
+<div class="section-title">⚔️ Competitive Landscape — Deep Analysis</div>
+<div class="kpi-strip">
+<div class="kpi"><div class="v">134</div><div class="l">Active Vendor Relationships</div></div>
+<div class="kpi"><div class="v">15</div><div class="l">Top Vendors (72% share)</div></div>
+<div class="kpi"><div class="v">32%</div><div class="l">Cognizant Market Share (#1)</div></div>
+<div class="kpi"><div class="v">6</div><div class="l">High-Value White Spaces</div></div>
+<div class="kpi"><div class="v">48.1%</div><div class="l">"Others" Workflow Share</div></div>
+</div>
+
+<!-- Market Share Chart -->
+<div class="card">
+<h3><span class="icon">📊</span> Vendor Market Share Distribution (Top 15 = 72% of Outsourcing)</h3>
+<div style="margin:16px 0">
+<div style="display:flex;align-items:end;gap:6px;height:220px;padding-bottom:30px;border-bottom:2px solid #eee;position:relative">
+<div style="display:flex;flex-direction:column;align-items:center;flex:1"><div style="height:200px;background:linear-gradient(180deg,#2E1869,#3C25F7);border-radius:6px 6px 0 0;width:100%;display:flex;align-items:flex-start;justify-content:center;padding-top:6px;color:#fff;font-weight:800;font-size:14px">32%</div><div style="font-size:9px;text-align:center;margin-top:4px;color:#2E1869;font-weight:700">Cognizant</div></div>
+<div style="display:flex;flex-direction:column;align-items:center;flex:1"><div style="height:175px;background:linear-gradient(180deg,#B61CA7,#3C25F7);border-radius:6px 6px 0 0;width:100%;display:flex;align-items:flex-start;justify-content:center;padding-top:6px;color:#fff;font-weight:800;font-size:12px">28%</div><div style="font-size:9px;text-align:center;margin-top:4px;color:#B61CA7;font-weight:700">Others</div></div>
+<div style="display:flex;flex-direction:column;align-items:center;flex:1"><div style="height:35px;background:#5c3bbf;border-radius:6px 6px 0 0;width:100%;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;font-size:10px">5%</div><div style="font-size:8px;text-align:center;margin-top:4px;font-weight:600">Infosys</div></div>
+<div style="display:flex;flex-direction:column;align-items:center;flex:1"><div style="height:35px;background:#7c4dff;border-radius:6px 6px 0 0;width:100%;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;font-size:10px">5%</div><div style="font-size:8px;text-align:center;margin-top:4px;font-weight:600">Tredence</div></div>
+<div style="display:flex;flex-direction:column;align-items:center;flex:1"><div style="height:35px;background:#9c6bff;border-radius:6px 6px 0 0;width:100%;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;font-size:10px">5%</div><div style="font-size:8px;text-align:center;margin-top:4px;font-weight:600">LTIMindtree</div></div>
+<div style="display:flex;flex-direction:column;align-items:center;flex:1"><div style="height:28px;background:#b388ff;border-radius:6px 6px 0 0;width:100%;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;font-size:9px">4%</div><div style="font-size:8px;text-align:center;margin-top:4px;font-weight:600">Tech Mahindra</div></div>
+<div style="display:flex;flex-direction:column;align-items:center;flex:1"><div style="height:22px;background:#ce93d8;border-radius:6px 6px 0 0;width:100%;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;font-size:9px">3%</div><div style="font-size:8px;text-align:center;margin-top:4px;font-weight:600">Unilever plc</div></div>
+<div style="display:flex;flex-direction:column;align-items:center;flex:1"><div style="height:22px;background:#ce93d8;border-radius:6px 6px 0 0;width:100%;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;font-size:9px">3%</div><div style="font-size:8px;text-align:center;margin-top:4px;font-weight:600">Loyalty Methods</div></div>
+<div style="display:flex;flex-direction:column;align-items:center;flex:1"><div style="height:22px;background:#d1c4e9;border-radius:6px 6px 0 0;width:100%;display:flex;align-items:center;justify-content:center;color:#333;font-weight:700;font-size:9px">3%</div><div style="font-size:8px;text-align:center;margin-top:4px;font-weight:600">TCS</div></div>
+<div style="display:flex;flex-direction:column;align-items:center;flex:1"><div style="height:16px;background:#e1bee7;border-radius:6px 6px 0 0;width:100%;display:flex;align-items:center;justify-content:center;color:#333;font-weight:700;font-size:9px">2%</div><div style="font-size:8px;text-align:center;margin-top:4px">Compucom</div></div>
+<div style="display:flex;flex-direction:column;align-items:center;flex:1"><div style="height:16px;background:#e1bee7;border-radius:6px 6px 0 0;width:100%;display:flex;align-items:center;justify-content:center;color:#333;font-weight:700;font-size:9px">2%</div><div style="font-size:8px;text-align:center;margin-top:4px">Vixxo</div></div>
+<div style="display:flex;flex-direction:column;align-items:center;flex:1"><div style="height:16px;background:#f3e5f5;border-radius:6px 6px 0 0;width:100%;display:flex;align-items:center;justify-content:center;color:#333;font-weight:700;font-size:9px">2%</div><div style="font-size:8px;text-align:center;margin-top:4px">Appsync</div></div>
+<div style="display:flex;flex-direction:column;align-items:center;flex:1"><div style="height:16px;background:#f3e5f5;border-radius:6px 6px 0 0;width:100%;display:flex;align-items:center;justify-content:center;color:#333;font-weight:700;font-size:9px">2%</div><div style="font-size:8px;text-align:center;margin-top:4px">Workstream</div></div>
+<div style="display:flex;flex-direction:column;align-items:center;flex:1"><div style="height:16px;background:#f3e5f5;border-radius:6px 6px 0 0;width:100%;display:flex;align-items:center;justify-content:center;color:#333;font-weight:700;font-size:9px">2%</div><div style="font-size:8px;text-align:center;margin-top:4px">Fujitsu</div></div>
+<div style="display:flex;flex-direction:column;align-items:center;flex:1"><div style="height:16px;background:#f3e5f5;border-radius:6px 6px 0 0;width:100%;display:flex;align-items:center;justify-content:center;color:#333;font-weight:700;font-size:9px">2%</div><div style="font-size:8px;text-align:center;margin-top:4px">Accenture</div></div>
+<div style="display:flex;flex-direction:column;align-items:center;flex:1"><div style="height:16px;background:#f3e5f5;border-radius:6px 6px 0 0;width:100%;display:flex;align-items:center;justify-content:center;color:#333;font-weight:700;font-size:9px">2%</div><div style="font-size:8px;text-align:center;margin-top:4px">Circana Group</div></div>
+</div>
+</div>
+</div>
+
+<!-- Workflow Split Chart -->
+<div class="card">
+<h3><span class="icon">📈</span> Outsourced Workflows Split by Micro-Vertical</h3>
+<div style="margin:14px 0">
+<div style="margin-bottom:10px"><div style="display:flex;align-items:center;gap:8px"><span style="width:220px;font-size:12px;font-weight:600;text-align:right">Data Engineering</span><div style="flex:1;background:#eee;border-radius:4px;height:28px;position:relative"><div style="width:17.3%;height:100%;background:linear-gradient(90deg,#2E1869,#3C25F7);border-radius:4px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:11px;font-weight:700">17.3%</div></div></div></div>
+<div style="margin-bottom:10px"><div style="display:flex;align-items:center;gap:8px"><span style="width:220px;font-size:12px;font-weight:600;text-align:right">App Dev & Maintenance</span><div style="flex:1;background:#eee;border-radius:4px;height:28px;position:relative"><div style="width:14.3%;height:100%;background:linear-gradient(90deg,#2E1869,#5c3bbf);border-radius:4px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:11px;font-weight:700">14.3%</div></div></div></div>
+<div style="margin-bottom:10px"><div style="display:flex;align-items:center;gap:8px"><span style="width:220px;font-size:12px;font-weight:600;text-align:right">Software Testing</span><div style="flex:1;background:#eee;border-radius:4px;height:28px;position:relative"><div style="width:7.5%;height:100%;background:linear-gradient(90deg,#B61CA7,#9c6bff);border-radius:4px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:11px;font-weight:700">7.5%</div></div></div></div>
+<div style="margin-bottom:10px"><div style="display:flex;align-items:center;gap:8px"><span style="width:220px;font-size:12px;font-weight:600;text-align:right">BI & Analytics</span><div style="flex:1;background:#eee;border-radius:4px;height:28px;position:relative"><div style="width:6.8%;height:100%;background:linear-gradient(90deg,#B61CA7,#b388ff);border-radius:4px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:11px;font-weight:700">6.8%</div></div></div></div>
+<div style="margin-bottom:10px"><div style="display:flex;align-items:center;gap:8px"><span style="width:220px;font-size:12px;font-weight:600;text-align:right">Infra Management</span><div style="flex:1;background:#eee;border-radius:4px;height:28px;position:relative"><div style="width:6%;height:100%;background:linear-gradient(90deg,#7c4dff,#b388ff);border-radius:4px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:11px;font-weight:700">6.0%</div></div></div></div>
+<div style="margin-bottom:10px"><div style="display:flex;align-items:center;gap:8px"><span style="width:220px;font-size:12px;font-weight:600;text-align:right">Others (48.1%)</span><div style="flex:1;background:#eee;border-radius:4px;height:28px;position:relative"><div style="width:48.1%;height:100%;background:linear-gradient(90deg,#e8eaf6,#d1c4e9);border-radius:4px;display:flex;align-items:center;justify-content:center;color:#2E1869;font-size:11px;font-weight:700">48.1% — DevOps, AI/ML, Mobile, Cyber, Cloud = BOUNTEOUS ENTRY</div></div></div></div>
+</div>
+<p style="font-size:12px;color:var(--p2);font-weight:600;margin-top:8px">⚡ Key Insight: 48.1% of workflows are in "Others" — fragmented across niche areas including DevOps (4 vendors), AI/Data Science (2), Mobile (2), Cybersecurity (1), Cloud (1). These are Bounteous' prime entry points with minimal competitive density.</p>
+</div>
+
+<!-- Key Provider Deep Dive -->
+<div class="card">
+<h3><span class="icon">🔬</span> Key Provider Deep Dive — Workflow & Location Analysis</h3>
+<table>
+<tr><th style="width:14%">Provider</th><th style="width:8%">Share</th><th style="width:20%">Delivery Locations</th><th style="width:33%">Workflow Breakdown</th><th style="width:25%">Bounteous Displacement Strategy</th></tr>
+<tr>
+<td><strong style="color:#2E1869">Cognizant</strong><br><span style="font-size:10px;color:#888">$19.7B rev | 352K employees</span></td>
+<td><strong>32%</strong></td>
+<td>Bengaluru, Hyderabad, Kolkata</td>
+<td>
+<div style="margin:3px 0"><div style="display:flex;align-items:center;gap:4px"><div style="width:26%;height:12px;background:#2E1869;border-radius:2px"></div><span style="font-size:10px">App Dev & Maint (26%)</span></div></div>
+<div style="margin:3px 0"><div style="display:flex;align-items:center;gap:4px"><div style="width:21%;height:12px;background:#5c3bbf;border-radius:2px"></div><span style="font-size:10px">Data Engineering (21%)</span></div></div>
+<div style="margin:3px 0"><div style="display:flex;align-items:center;gap:4px"><div style="width:12%;height:12px;background:#7c4dff;border-radius:2px"></div><span style="font-size:10px">BI & Analytics (12%)</span></div></div>
+<div style="margin:3px 0"><div style="display:flex;align-items:center;gap:4px"><div style="width:10%;height:12px;background:#b388ff;border-radius:2px"></div><span style="font-size:10px">Software Testing (10%)</span></div></div>
+<div style="margin:3px 0"><div style="display:flex;align-items:center;gap:4px"><div style="width:31%;height:12px;background:#e1bee7;border-radius:2px"></div><span style="font-size:10px">Others (31%)</span></div></div>
+</td>
+<td><span class="badge med">FLANK</span> — Generalist spread across saturated areas. Bounteous can outmaneuver on AI/ML specialization, CX depth, and Co-Innovation agility. Cognizant's Agentforce/Salesforce practice = head-to-head risk.</td>
+</tr>
+<tr>
+<td><strong style="color:#2E1869">Infosys</strong><br><span style="font-size:10px;color:#888">$18.6B rev | 317K employees</span></td>
+<td><strong>5%</strong></td>
+<td>Thiruvananthapuram, Coimbatore, Dallas-Fort Worth (US)</td>
+<td>
+<div style="margin:3px 0"><div style="display:flex;align-items:center;gap:4px"><div style="width:43%;height:12px;background:#2E1869;border-radius:2px"></div><span style="font-size:10px">Product Install & Tech Support (43%)</span></div></div>
+<div style="margin:3px 0"><div style="display:flex;align-items:center;gap:4px"><div style="width:29%;height:12px;background:#5c3bbf;border-radius:2px"></div><span style="font-size:10px">App Dev & Maint (29%)</span></div></div>
+<div style="margin:3px 0"><div style="display:flex;align-items:center;gap:4px"><div style="width:14%;height:12px;background:#B61CA7;border-radius:2px"></div><span style="font-size:10px">Cybersecurity (14%)</span></div></div>
+<div style="margin:3px 0"><div style="display:flex;align-items:center;gap:4px"><div style="width:14%;height:12px;background:#e1bee7;border-radius:2px"></div><span style="font-size:10px">E-Commerce Ops (14%)</span></div></div>
+</td>
+<td><span class="badge high">DISPLACE</span> — Not in Bengaluru (7-Eleven GSC hub). Cybersecurity & E-Commerce work are vulnerable. Bounteous can offer Bengaluru-proximate delivery + superior digital commerce expertise.</td>
+</tr>
+<tr>
+<td><strong style="color:#2E1869">LTIMindtree</strong><br><span style="font-size:10px;color:#888">$4.3B rev | 81K employees</span></td>
+<td><strong>5%</strong></td>
+<td>Bengaluru, Hyderabad</td>
+<td>
+<div style="margin:3px 0"><div style="display:flex;align-items:center;gap:4px"><div style="width:43%;height:12px;background:#2E1869;border-radius:2px"></div><span style="font-size:10px">Data Engineering (43%)</span></div></div>
+<div style="margin:3px 0"><div style="display:flex;align-items:center;gap:4px"><div style="width:14%;height:12px;background:#5c3bbf;border-radius:2px"></div><span style="font-size:10px">App Dev & Maint (14%)</span></div></div>
+<div style="margin:3px 0"><div style="display:flex;align-items:center;gap:4px"><div style="width:14%;height:12px;background:#7c4dff;border-radius:2px"></div><span style="font-size:10px">BI & Analytics (14%)</span></div></div>
+<div style="margin:3px 0"><div style="display:flex;align-items:center;gap:4px"><div style="width:14%;height:12px;background:#9c6bff;border-radius:2px"></div><span style="font-size:10px">DevOps (14%)</span></div></div>
+<div style="margin:3px 0"><div style="display:flex;align-items:center;gap:4px"><div style="width:14%;height:12px;background:#e1bee7;border-radius:2px"></div><span style="font-size:10px">Others (14%)</span></div></div>
+</td>
+<td><span class="badge med">FLANK</span> — Strong in data eng. but DevOps at only 14% = opportunity to own DevOps acceleration. Bounteous differentiates via AI/ML ops (LTIMindtree has minimal AI presence here).</td>
+</tr>
+<tr>
+<td><strong style="color:#2E1869">Tredence</strong><br><span style="font-size:10px;color:#888">$175M funded | 3.5K employees | Retail & CPG specialist</span></td>
+<td><strong>5%</strong></td>
+<td>Bengaluru, Chennai, Mumbai</td>
+<td>
+<div style="margin:3px 0"><div style="display:flex;align-items:center;gap:4px"><div style="width:71%;height:12px;background:#2E1869;border-radius:2px"></div><span style="font-size:10px">Data Engineering (71%)</span></div></div>
+<div style="margin:3px 0"><div style="display:flex;align-items:center;gap:4px"><div style="width:14%;height:12px;background:#B61CA7;border-radius:2px"></div><span style="font-size:10px">AI & Data Science (14%)</span></div></div>
+<div style="margin:3px 0"><div style="display:flex;align-items:center;gap:4px"><div style="width:14%;height:12px;background:#e1bee7;border-radius:2px"></div><span style="font-size:10px">System Integration (14%)</span></div></div>
+</td>
+<td><span class="badge low">COEXIST</span> — Niche data/analytics specialist (#1 ISG Leader for Retail & CPG Analytics, Databricks Retail Partner of Year). Deep 7-Eleven data relationship. Avoid head-on in data eng.; differentiate via CX, marketing tech, platform modernization.</td>
+</tr>
+<tr>
+<td><strong style="color:#2E1869">Tech Mahindra</strong><br><span style="font-size:10px;color:#888">$6.1B rev | 145K employees</span></td>
+<td><strong>4%</strong></td>
+<td>Bengaluru, Chandigarh, Chennai</td>
+<td>
+<div style="margin:3px 0"><div style="display:flex;align-items:center;gap:4px"><div style="width:20%;height:12px;background:#2E1869;border-radius:2px"></div><span style="font-size:10px">App Dev & Maint (20%)</span></div></div>
+<div style="margin:3px 0"><div style="display:flex;align-items:center;gap:4px"><div style="width:20%;height:12px;background:#5c3bbf;border-radius:2px"></div><span style="font-size:10px">BI & Analytics (20%)</span></div></div>
+<div style="margin:3px 0"><div style="display:flex;align-items:center;gap:4px"><div style="width:20%;height:12px;background:#7c4dff;border-radius:2px"></div><span style="font-size:10px">Customer Service & Support (20%)</span></div></div>
+<div style="margin:3px 0"><div style="display:flex;align-items:center;gap:4px"><div style="width:20%;height:12px;background:#9c6bff;border-radius:2px"></div><span style="font-size:10px">System Integration (20%)</span></div></div>
+<div style="margin:3px 0"><div style="display:flex;align-items:center;gap:4px"><div style="width:20%;height:12px;background:#e1bee7;border-radius:2px"></div><span style="font-size:10px">Others (20%)</span></div></div>
+</td>
+<td><span class="badge med">FLANK</span> — Evenly spread generalist. No deep specialization = vulnerable to focused specialists. Target their customer service & system integration work with AI-powered automation narrative.</td>
+</tr>
+</table>
+<p style="margin-top:12px;font-size:11px;color:#666"><strong>Other notable vendors (2-3% each):</strong> Loyalty Methods (loyalty programs), TCS (broad IT), Compucom (infrastructure), Vixxo (facilities tech), Appsync, Workstream (HR tech), Fujitsu (infrastructure), Accenture (consulting), Circana Group (market research/analytics).</p>
+</div>
+
+<!-- Service Provider Locations -->
+<div class="card">
+<h3><span class="icon">🌍</span> Service Provider Delivery Locations (India)</h3>
+<div style="display:flex;gap:12px;flex-wrap:wrap;margin:10px 0">
+<div style="background:var(--g1);color:#fff;border-radius:10px;padding:14px 20px;flex:1;min-width:150px;text-align:center"><div style="font-size:20px;font-weight:800">Bengaluru</div><div style="font-size:11px;opacity:.8">#1 Provider Hub — Cognizant, LTIMindtree, Tredence, Tech Mahindra</div><div style="font-size:10px;margin-top:4px;background:rgba(255,255,255,.2);padding:3px 8px;border-radius:10px;display:inline-block">CO-LOCATED WITH GSC ✓</div></div>
+<div style="background:#5c3bbf;color:#fff;border-radius:10px;padding:14px 20px;flex:1;min-width:150px;text-align:center"><div style="font-size:20px;font-weight:800">Hyderabad</div><div style="font-size:11px;opacity:.8">#2 Hub — Cognizant, LTIMindtree</div></div>
+<div style="background:#7c4dff;color:#fff;border-radius:10px;padding:14px 20px;flex:1;min-width:150px;text-align:center"><div style="font-size:20px;font-weight:800">Kolkata</div><div style="font-size:11px;opacity:.8">#3 Hub — Cognizant</div></div>
+<div style="background:#9c6bff;color:#fff;border-radius:10px;padding:14px 20px;flex:1;min-width:150px;text-align:center"><div style="font-size:20px;font-weight:800">Chennai</div><div style="font-size:11px;opacity:.8">Tredence, Tech Mahindra</div></div>
+<div style="background:#b388ff;color:#fff;border-radius:10px;padding:14px 20px;flex:1;min-width:150px;text-align:center"><div style="font-size:20px;font-weight:800">Pune</div><div style="font-size:11px;opacity:.8">Multiple providers</div></div>
+</div>
+<p style="font-size:12px;color:var(--p2);font-weight:600;margin-top:8px">📍 Bounteous India presence in Bengaluru = co-located advantage with 7-Eleven GSC for rapid engagement and face-to-face collaboration.</p>
+</div>
+
+<!-- GCC Priority Programs -->
+<div class="card">
+<h3><span class="icon">🎯</span> Top GCC Programs — Competitive Targeting Matrix</h3>
+<table>
+<tr><th>GCC Priority Program</th><th>Key Use Cases</th><th>Current Vendor Coverage</th><th>Bounteous Win Strategy</th></tr>
+<tr><td><strong>Enhancing Customer Loyalty Programs</strong><br><span style="font-size:10px;color:#B61CA7">Gold Pass expansion, free drinks/discounts, higher-spend conversion</span></td><td>App-based Loyalty, QR Loyalty, AI-based Loyalty</td><td>Loyalty Methods (3%), fragmented</td><td><span class="badge high">LEAD</span> — Growth Marketing + AI for Enterprise. Build AI-powered personalization engine for Gold Pass. Adobe/SFMC integration.</td></tr>
+<tr><td><strong>Customer Engagement via Digital Solutions</strong><br><span style="font-size:10px;color:#B61CA7">Streamlined inquiries, proactive engagement, personalized service</span></td><td>Data-driven Support, Personalized Support, AI Engagement</td><td>Tech Mahindra (customer service 20%)</td><td><span class="badge high">DISPLACE</span> — AI for Enterprise: agentic customer service bots, Salesforce Agentforce integration.</td></tr>
+<tr><td><strong>Customer Engagement via Innovation</strong><br><span style="font-size:10px;color:#B61CA7">Improved onboarding, seamless technical support</span></td><td>Personalized Onboarding, AI Engagement, Data-driven Support</td><td>Limited coverage</td><td><span class="badge high">ENTER</span> — Experience Design + Digital Product Eng. Design-led onboarding, AI-guided journeys.</td></tr>
+<tr><td><strong>Enhancing Delivery Experience</strong><br><span style="font-size:10px;color:#B61CA7">7NOW app, real-time tracking, 30-min delivery</span></td><td>Delivery Tracking, Last-Mile Chatbots, Real-time AI Shopping</td><td>2 mobile vendors only</td><td><span class="badge high">ENTER</span> — Digital Product Eng. Mobile pod for 7NOW enhancement. Real-time AI shopping experiences.</td></tr>
+<tr><td><strong>Digital Engagement via App Features</strong><br><span style="font-size:10px;color:#B61CA7">FunStamps, pre-ordering, pickup workflow</span></td><td>App Loyalty, Customer Education, Pre-order</td><td>Limited mobile dev vendors</td><td><span class="badge high">ENTER</span> — Digital Product Eng. + Experience Design. App UX modernization, feature velocity.</td></tr>
+<tr><td><strong>Bill Payment Solutions</strong><br><span style="font-size:10px;color:#B61CA7">Bayad partnership, CLiQQ Kiosks, real-time processing</span></td><td>Self-Service Kiosks, QR Loyalty, Digital Tipping</td><td>Specialized fintech partners</td><td><span class="badge med">SUPPORT</span> — Platform Transformation for kiosk systems. Cloud backend modernization.</td></tr>
+</table>
+</div>
+
+<!-- White Space & Displacement -->
+<div class="card" style="border-left-color:#2e7d32">
+<h3><span class="icon">🎯</span> White Space Opportunity Map — Decision Matrix</h3>
+<table>
+<tr><th>Area</th><th>Vendors</th><th>Competition Level</th><th>7-Eleven Demand</th><th>Bounteous Action</th><th>Est. TCV ($)</th></tr>
+<tr><td><strong>AI & Data Science</strong></td><td>2 (Tredence adjacent)</td><td style="color:#2e7d32;font-weight:700">🟢 VERY LOW</td><td style="color:#c62828;font-weight:700">🔴 CRITICAL</td><td><span class="badge high">ENTER NOW</span></td><td>$500K-$1M</td></tr>
+<tr><td><strong>DevOps & CI/CD</strong></td><td>4</td><td style="color:#2e7d32;font-weight:700">🟢 LOW</td><td style="color:#e65100;font-weight:700">🟠 HIGH</td><td><span class="badge high">ENTER NOW</span></td><td>$350K-$600K</td></tr>
+<tr><td><strong>Mobile App Dev</strong></td><td>2</td><td style="color:#2e7d32;font-weight:700">🟢 LOW</td><td style="color:#e65100;font-weight:700">🟠 HIGH</td><td><span class="badge high">ENTER NOW</span></td><td>$300K-$500K</td></tr>
+<tr><td><strong>Cybersecurity</strong></td><td>1 (Infosys 14%)</td><td style="color:#2e7d32;font-weight:700">🟢 VERY LOW</td><td style="color:#c62828;font-weight:700">🔴 CRITICAL (IPO)</td><td><span class="badge high">ENTER NOW</span></td><td>$200K-$400K</td></tr>
+<tr><td><strong>Cloud Optimization</strong></td><td>1</td><td style="color:#2e7d32;font-weight:700">🟢 VERY LOW</td><td style="color:#e65100;font-weight:700">🟠 HIGH</td><td><span class="badge high">ENTER NOW</span></td><td>$400K-$700K</td></tr>
+<tr><td><strong>E-Commerce / Digital CX</strong></td><td>1 (Infosys 14%)</td><td style="color:#2e7d32;font-weight:700">🟢 LOW</td><td style="color:#e65100;font-weight:700">🟠 HIGH</td><td><span class="badge high">ENTER NOW</span></td><td>$250K-$500K</td></tr>
+<tr><td><strong>Marketing Tech Integration</strong></td><td>Fragmented (Adobe+SFMC+HubSpot)</td><td style="color:#ff9800;font-weight:700">🟡 MEDIUM</td><td style="color:#c62828;font-weight:700">🔴 CRITICAL</td><td><span class="badge med">INTEGRATE</span></td><td>$300K-$600K</td></tr>
+<tr><td><strong>QA Test Automation</strong></td><td>11</td><td style="color:#c62828;font-weight:700">🔴 HIGH</td><td style="color:#ff9800;font-weight:700">🟡 MODERATE</td><td><span class="badge info">DIFFERENTIATE</span></td><td>$200K-$350K</td></tr>
+</table>
+<div style="margin-top:12px;padding:12px;background:#e8f5e9;border-radius:8px;font-size:13px">
+<strong>💰 Total Addressable White Space: $2.5M–$4.7M</strong> across 8 opportunity areas. Priority entry: AI/Data Science + DevOps + Mobile = $1.15M–$2.1M in first 6 months.
+</div>
+</div>
+
+<!-- Competitive Differentiation -->
+<div class="card">
+<h3><span class="icon">💎</span> Bounteous Competitive Differentiation vs. Incumbents</h3>
+<table>
+<tr><th>Factor</th><th>Cognizant / Infosys / LTIMindtree</th><th>Tredence</th><th>Bounteous Advantage</th></tr>
+<tr><td><strong>Engagement Model</strong></td><td>Time & materials, staff augmentation, body shopping</td><td>Outcome-based analytics</td><td><strong style="color:#2e7d32">Co-Innovation</strong> — aligned incentives, shared risk, joint IP</td></tr>
+<tr><td><strong>Speed to Value</strong></td><td>3-6 months ramp-up cycles</td><td>4-8 weeks for data projects</td><td><strong style="color:#2e7d32">2-3 weeks</strong> with pre-built talent pods</td></tr>
+<tr><td><strong>AI/ML Depth</strong></td><td>Broad but shallow (Cognizant Neuro AI)</td><td>Deep data science, last-mile analytics</td><td><strong style="color:#2e7d32">Full-stack AI</strong> — strategy to agentic ops, platform-agnostic, governed</td></tr>
+<tr><td><strong>CX & Marketing</strong></td><td>Limited CX depth, marketing tech not core</td><td>Not a capability</td><td><strong style="color:#2e7d32">CORE STRENGTH</strong> — Premier Adobe/Salesforce/Google partner. Existing CMO relationship.</td></tr>
+<tr><td><strong>Digital Commerce</strong></td><td>Infosys has e-commerce (14%)</td><td>Not a capability</td><td><strong style="color:#2e7d32">Deep commerce expertise</strong> — omnichannel, headless CMS, conversion optimization</td></tr>
+<tr><td><strong>Cultural Fit</strong></td><td>Large (145K-352K employees), bureaucratic</td><td>Mid-size (3.5K), data-focused</td><td><strong style="color:#2e7d32">5,000+ AI-enabled workforce</strong>, nimble, startup agility with enterprise scale</td></tr>
+<tr><td><strong>Bengaluru Presence</strong></td><td>Large offices (not GSC-focused)</td><td>Bengaluru office ✓</td><td><strong style="color:#2e7d32">India office in Bengaluru</strong> — GSC-proximate, face-to-face collaboration</td></tr>
+<tr><td><strong>White Space Focus</strong></td><td>Entrenched in saturated areas (data eng, app dev)</td><td>Entrenched in data engineering</td><td><strong style="color:#2e7d32">High-value gaps</strong> — DevOps, AI/ML ops, mobile, CX, cloud</td></tr>
+</table>
+</div>
+
+<div class="card" style="border-left-color:#B61CA7;background:linear-gradient(135deg,rgba(46,24,105,.03),rgba(182,28,167,.05))">
+<h3><span class="icon">🏁</span> Competitive Battle Plan Summary</h3>
+<div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;margin-top:10px">
+<div style="background:var(--w);border-radius:10px;padding:14px;border:2px solid #2e7d32">
+<div style="font-weight:800;color:#2e7d32;font-size:14px;margin-bottom:6px">🟢 ENTER (Greenfield)</div>
+<p style="font-size:12px">AI/Data Science, DevOps, Mobile, Cybersecurity, Cloud — fewer than 4 vendors, high demand. Lead with rapid talent pods + Co-Innovation model.</p>
+</div>
+<div style="background:var(--w);border-radius:10px;padding:14px;border:2px solid #ff9800">
+<div style="font-weight:800;color:#e65100;font-size:14px;margin-bottom:6px">🟡 FLANK (Outmaneuver)</div>
+<p style="font-size:12px">MarTech integration, QA automation — moderate competition. Differentiate with Adobe/Salesforce depth, AI-powered testing, experience design.</p>
+</div>
+<div style="background:var(--w);border-radius:10px;padding:14px;border:2px solid #c62828">
+<div style="font-weight:800;color:#c62828;font-size:14px;margin-bottom:6px">🔴 AVOID (Saturated)</div>
+<p style="font-size:12px">Data Engineering (17.3%, 23 vendors, Tredence dominant), App Dev (14.3%, 19 vendors, Cognizant dominant). Avoid direct competition here.</p>
+</div>
+</div>
+</div>
+</div>
+
+<!-- TAB 5: Tech Stack Radar -->
+<div class="panel" id="panel-5">
+<div class="section-title">🛠️ Tech Stack Radar</div>
+<div class="card">
+<h3><span class="icon">☁️</span> Technology Stack Analysis</h3>
+<table>
+<tr><th>Category</th><th>Products</th><th>Maturity</th><th>Bounteous Opportunity</th></tr>
+<tr><td><strong>Generative AI</strong></td><td>ChatGPT, GitHub Copilot, Databricks Mosaic AI, LangGraph</td><td><span class="badge high">HIGH</span></td><td>AI integration, agentic workflows, GenAI marketing</td></tr>
+<tr><td><strong>Big Data</strong></td><td>Azure Databricks, Apache Spark, Hadoop</td><td><span class="badge high">HIGH</span></td><td>Data engineering, lakehouse modernization</td></tr>
+<tr><td><strong>Cloud</strong></td><td>Azure Data Factory, Azure Pipelines, Azure SQL DW</td><td><span class="badge high">HIGH</span></td><td>Cloud migration, FinOps, optimization</td></tr>
+<tr><td><strong>Analytics / BI</strong></td><td>Tableau, Power BI, MicroStrategy, Mixpanel</td><td><span class="badge med">MED</span></td><td>BI modernization, real-time dashboards</td></tr>
+<tr><td><strong>DevOps</strong></td><td>Azure Pipelines, Docker, Kubernetes</td><td><span class="badge med">MED</span></td><td>CI/CD acceleration, GitOps, IaC</td></tr>
+<tr><td><strong>Marketing</strong></td><td>Adobe Experience Cloud, Adobe Target, Salesforce Marketing Cloud, HubSpot</td><td><span class="badge med">MED</span></td><td>MarTech integration, personalization</td></tr>
+<tr><td><strong>CRM/Sales</strong></td><td>Salesforce CPQ, SalesLoft</td><td><span class="badge med">MED</span></td><td>CRM optimization, sales enablement</td></tr>
+<tr><td><strong>HCM</strong></td><td>Workday HCM, Oracle HCM Cloud, Kronos, Poppulo</td><td><span class="badge high">HIGH</span></td><td>HR platform integration</td></tr>
+<tr><td><strong>Accounting</strong></td><td>QuickBooks Online, ReconNET</td><td><span class="badge med">MED</span></td><td>Financial automation</td></tr>
+<tr><td><strong>ITSM</strong></td><td>ServiceNow ITSM (adopted 2023)</td><td><span class="badge med">MED</span></td><td>ITSM optimization</td></tr>
+<tr><td><strong>AI Recruiting</strong></td><td>Paradox (Rita AI assistant)</td><td><span class="badge high">HIGH</span></td><td>HR AI enablement</td></tr>
+<tr><td><strong>POS</strong></td><td>NCR POS, 7-BOSS (cloud platform)</td><td><span class="badge high">HIGH</span></td><td>POS modernization</td></tr>
+<tr><td><strong>GRC</strong></td><td>IBM OpenPages, Oracle Hyperion, Workday Adaptive Planning</td><td><span class="badge med">MED</span></td><td>Governance automation for IPO</td></tr>
+<tr><td><strong>ML Ops</strong></td><td>MLflow (limited)</td><td><span class="badge low">LOW</span></td><td>ML operationalization — major gap</td></tr>
+</table>
+</div>
+<div class="card" style="border-left-color:#e65100">
+<h3><span class="icon">⚠️</span> Key Gaps Identified</h3>
+<p><strong>1. Limited AI/ML operationalization</strong> — Only MLflow detected, despite GenAI adoption (ChatGPT, Copilot). Major gap in production ML pipelines.<br>
+<strong>2. Moderate DevOps maturity</strong> — Azure Pipelines + Docker/K8s but needs acceleration for CI/CD at scale.<br>
+<strong>3. Marketing tech fragmentation</strong> — Adobe + Salesforce + HubSpot not integrated — consolidation opportunity.<br>
+<strong>4. Mobile app capabilities</strong> — Android trending up but limited vendor support (2 engagements).<br>
+<strong>5. Cybersecurity</strong> — Only 1 vendor engagement despite being critical for IPO readiness.</p>
+</div>
+</div>
+
+<!-- TAB 6: Technology Partnerships -->
+<div class="panel" id="panel-6">
+<div class="section-title">🤝 Technology Partnerships Ecosystem</div>
+<div class="card">
+<h3><span class="icon">🔗</span> 7-Eleven Technology Partnerships</h3>
+<table>
+<tr><th>Partner</th><th>Nature</th><th>Strategic Intent</th><th>Bounteous Alignment</th></tr>
+<tr><td><strong>Microsoft / Azure</strong></td><td>Primary cloud, DevOps, analytics</td><td>Azure Databricks, Pipelines, SQL DW — core cloud platform. Power BI for analytics.</td><td><span class="badge high">STRONG</span> — Bounteous Azure certified</td></tr>
+<tr><td><strong>Salesforce</strong></td><td>CRM, Marketing Cloud, CPQ</td><td>Customer engagement, marketing automation, sales enablement. Agentforce 360 potential.</td><td><span class="badge high">STRONG</span> — Premier Salesforce partner</td></tr>
+<tr><td><strong>Adobe</strong></td><td>Experience Cloud, Target</td><td>Digital experience, personalization, A/B testing, content management.</td><td><span class="badge high">STRONG</span> — Premier Adobe partner</td></tr>
+<tr><td><strong>Databricks</strong></td><td>Data & AI platform</td><td>Mosaic AI for GenAI creative assistant. LangGraph for agent orchestration. Data lakehouse.</td><td><span class="badge high">STRONG</span> — Data engineering capabilities</td></tr>
+<tr><td><strong>Google</strong></td><td>Analytics, Cloud (limited)</td><td>Analytics capabilities. Bounteous is a premier Google partner.</td><td><span class="badge high">STRONG</span> — Premier Google partner</td></tr>
+<tr><td><strong>Anthropic (Claude)</strong></td><td>Indirect via Salesforce/Agentforce</td><td>Claude integrated into Salesforce trust boundary for regulated industry workflows. Agentic AI potential.</td><td><span class="badge high">STRONG</span> — Bounteous AI partner</td></tr>
+<tr><td><strong>VusionGroup</strong></td><td>IoT retail tech</td><td>Digital shelf systems (EdgeSense) at Expo 2025 Japan stores. Smart shelving & sustainability.</td><td><span class="badge med">MODERATE</span> — IoT integration opportunity</td></tr>
+<tr><td><strong>Telexistence</strong></td><td>Robotics / AI</td><td>Humanoid robots ("Astra") for Japan stores by 2029. Vision-language-action AI models.</td><td><span class="badge info">EMERGING</span> — AI/ML capabilities</td></tr>
+<tr><td><strong>Paradox</strong></td><td>AI recruiting</td><td>AI assistant "Rita" — automated hiring, 40K hours saved per week across stores.</td><td><span class="badge med">MODERATE</span> — HR tech</td></tr>
+<tr><td><strong>NCR</strong></td><td>POS systems</td><td>Point-of-sale infrastructure for stores.</td><td><span class="badge med">MODERATE</span></td></tr>
+<tr><td><strong>Workday</strong></td><td>HCM platform</td><td>Human capital management, workforce planning.</td><td><span class="badge med">MODERATE</span></td></tr>
+</table>
+</div>
+<div class="card">
+<h3><span class="icon">🎯</span> Bounteous Strategic Partnership Leverage</h3>
+<p>Bounteous holds premier partnerships with <strong>Adobe, Salesforce, Google, AWS, and Acquia</strong>. These directly map to 7-Eleven's existing tech investments. The Anthropic-Salesforce-Agentforce integration is a particularly compelling angle — positioning Bounteous as the implementation partner for agentic AI within 7-Eleven's Salesforce ecosystem.</p>
+</div>
+</div>
+
+<!-- TAB 7: AI Initiatives -->
+<div class="panel" id="panel-7">
+<div class="section-title">🤖 7-Eleven AI Initiatives & Roadmap</div>
+<div class="kpi-strip">
+<div class="kpi"><div class="v">13M+</div><div class="l">Hours Reclaimed Annually (AI ordering)</div></div>
+<div class="kpi"><div class="v">$340M</div><div class="l">Incremental Sales (test & learn)</div></div>
+<div class="kpi"><div class="v">90%</div><div class="l">Reduction in Product Planning Time</div></div>
+<div class="kpi"><div class="v">40K hrs/wk</div><div class="l">Saved by AI Recruiting (Rita)</div></div>
+</div>
+<div class="grid2">
+<div class="card">
+<h3><span class="icon">🚀</span> AI in Production</h3>
+<table>
+<tr><td><strong>AI-Assisted Ordering</strong></td><td>Reduced 30hrs/wk to &lt;1hr/day per store. 13M+ hours reclaimed annually.</td></tr>
+<tr><td><strong>GenAI Marketing Assistant</strong></td><td>Built on Databricks Mosaic AI + LangGraph. Multi-agent creative workflow. Salesforce/Genie KPI integration.</td></tr>
+<tr><td><strong>7-BOSS Cloud Platform</strong></td><td>"Quick cards" surfacing AI-generated insights. 3-click actions for store associates.</td></tr>
+<tr><td><strong>Clustering Model</strong></td><td>Identifies lookalike stores by sales mix, location, seasonality. Pushes tailored assortment recommendations.</td></tr>
+<tr><td><strong>AI Recruiting (Rita/Paradox)</strong></td><td>95% of hiring automated. Cut hiring time 50%. Saved 40K hrs/wk across locations.</td></tr>
+<tr><td><strong>Digital Shelves (Seoul)</strong></td><td>Motion-sensing cameras providing real-time product info. AI FC feature for store operations.</td></tr>
+</table>
+</div>
+<div class="card">
+<h3><span class="icon">🔮</span> AI Pilots & Roadmap</h3>
+<table>
+<tr><td><strong>Digital Twin Stores</strong></td><td>Patented tech (USPTO 2025) — real-time digital replicas of physical stores. Camera-synced customer tracking.</td></tr>
+<tr><td><strong>GenAI Product Development</strong></td><td>Japan — AI analyzes sales, feedback, social media to autonomously generate new product ideas. 90% time reduction.</td></tr>
+<tr><td><strong>Humanoid Robots (Astra)</strong></td><td>Telexistence partnership — generative AI vision-language-action model. Target: stores by 2029.</td></tr>
+<tr><td><strong>Smart Vending (5G)</strong></td><td>Robotic vending, video chat ordering — IoT-enabled retail innovation.</td></tr>
+<tr><td><strong>Computer Vision</strong></td><td>Smart shelf monitoring, loss prevention, customer behavior analytics.</td></tr>
+<tr><td><strong>Global AI CoE</strong></td><td>Transformation Plan (Sep 2025) — establishing Centers of Excellence for AI/data. Not yet fully capitalized.</td></tr>
+</table>
+</div>
+</div>
+<div class="card" style="border-left-color:#2e7d32">
+<h3><span class="icon">💡</span> Key Insight for Bounteous</h3>
+<p>7-Eleven has stated they have <strong>"not yet fully capitalized on technology, AI adoption, data analytics"</strong> (Transformation Plan, Sep 2025). Despite impressive AI pilots, operationalization at scale remains a gap — only MLflow detected for ML operations. Leadership churn in AI/ML roles and only 2 AI/ML vendor engagements create a clear entry point for Bounteous' AI for Enterprise offering.</p>
+</div>
+</div>
+
+<!-- TAB 8: AI for Enterprise -->
+<div class="panel" id="panel-8">
+<div class="section-title">🧠 AI for Enterprise — Dedicated Outreach Block</div>
+<div class="ai-block">
+<h3>🚀 Bounteous AI for Enterprise × 7-Eleven</h3>
+<div class="sub">Targeted AI Solutions to accelerate 7-Eleven's transformation from AI experimentation to enterprise-scale AI-first operations</div>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:18px">
+<div class="ai-card">
+<h4>🔧 Intelligent Product Engineering</h4>
+<p><strong>Accelerate software delivery with AI-powered engineering and a modern SDLC</strong></p>
+<p style="margin-top:8px">Map to 7-Eleven: 7-BOSS platform modernization, mobile app velocity (Android trending), CI/CD acceleration via Azure Pipelines. AI-powered code review, test generation, and deployment automation. GitHub Copilot already adopted — extend to full AI-augmented SDLC.</p>
+<div style="margin-top:8px"><span class="tag">7-BOSS Platform</span><span class="tag">CI/CD Acceleration</span><span class="tag">AI Testing</span><span class="tag">Mobile Dev</span></div>
+<div class="progress-bar"><div class="progress-fill" style="width:90%"></div></div>
+<div style="font-size:10px;margin-top:4px;opacity:.7">Fit Score: 90% — Direct alignment with DevOps gap & product-led transformation</div>
+</div>
+<div class="ai-card">
+<h4>✨ AI-Enhanced Experience Transformation</h4>
+<p><strong>Reimagine creativity, content, and customer journeys with next-gen AI-enhanced experiences</strong></p>
+<p style="margin-top:8px">Map to 7-Eleven: Extend GenAI marketing assistant (Databricks/LangGraph) beyond creative into full journey orchestration. AR product trials (Priority #3), digital signage personalization, loyalty program AI (Gold Pass, 7Rewards). Adobe + Salesforce integration for unified CX.</p>
+<div style="margin-top:8px"><span class="tag">GenAI Marketing</span><span class="tag">Personalization</span><span class="tag">AR Retail</span><span class="tag">Loyalty AI</span></div>
+<div class="progress-bar"><div class="progress-fill" style="width:95%"></div></div>
+<div style="font-size:10px;margin-top:4px;opacity:.7">Fit Score: 95% — Existing CMO engagement + direct priority alignment</div>
+</div>
+<div class="ai-card">
+<h4>🏗️ Modern Business Platforms</h4>
+<p><strong>Unlock full value of sales, service, customer, and marketing platforms with intelligent and agentic capabilities</strong></p>
+<p style="margin-top:8px">Map to 7-Eleven: Salesforce Agentforce 360 with Anthropic Claude integration for intelligent workflows. Adobe Experience Cloud + Salesforce Marketing Cloud unification. Workday HCM AI features. IBM OpenPages for IPO-grade governance. Agentic commerce for in-store + digital.</p>
+<div style="margin-top:8px"><span class="tag">Agentforce 360</span><span class="tag">Claude AI</span><span class="tag">Adobe/SFMC</span><span class="tag">Workday</span></div>
+<div class="progress-bar"><div class="progress-fill" style="width:88%"></div></div>
+<div style="font-size:10px;margin-top:4px;opacity:.7">Fit Score: 88% — Strong via Salesforce/Adobe partnership leverage</div>
+</div>
+<div class="ai-card">
+<h4>🔄 Agentic Business Reinvention</h4>
+<p><strong>Reengineer processes, operations, and business models for the AI-first enterprise</strong></p>
+<p style="margin-top:8px">Map to 7-Eleven: AI-first store operations (digital twin stores, smart shelves, computer vision for loss prevention). Supply chain AI optimization. Predictive maintenance for 13K+ stores. Agentic workflows replacing manual ordering (already saved 13M hrs). Agent Marketplace for cross-function deployment.</p>
+<div style="margin-top:8px"><span class="tag">Digital Twins</span><span class="tag">Computer Vision</span><span class="tag">Supply Chain AI</span><span class="tag">Agent Marketplace</span></div>
+<div class="progress-bar"><div class="progress-fill" style="width:85%"></div></div>
+<div style="font-size:10px;margin-top:4px;opacity:.7">Fit Score: 85% — Transformational play aligned with Transformation Plan</div>
+</div>
+</div>
+</div>
+<div class="grid2">
+<div class="card">
+<h3><span class="icon">🎯</span> AI for Enterprise — Target Stakeholders</h3>
+<table>
+<tr><th>Stakeholder</th><th>AI Solution</th><th>Pitch Angle</th></tr>
+<tr><td>Malahar Pinnelli (VP, GSC)</td><td>All 4 pillars</td><td>GCC as AI innovation hub for global ops</td></tr>
+<tr><td>Vivekanand R (Dir. Eng.)</td><td>Intelligent Product Eng., Agentic</td><td>AI-augmented SDLC, ML ops maturity</td></tr>
+<tr><td>PRAG TYAGI (Dir. Data)</td><td>All 4 pillars</td><td>Data foundation for AI at scale, MLOps</td></tr>
+<tr><td>Atul Mahajan (SVP Ops/IT)</td><td>Modern Platforms, Agentic</td><td>Store ops AI, infrastructure modernization</td></tr>
+<tr><td>Scott Albert (VP Products, US)</td><td>Intelligent Prod. Eng., Experience</td><td>Product-led AI, 7-BOSS enhancement</td></tr>
+</table>
+</div>
+<div class="card">
+<h3><span class="icon">📊</span> AI for Enterprise — Business Case</h3>
+<table>
+<tr><td><strong>AI-Powered Loyalty</strong></td><td>15-20% increase in repeat purchase frequency</td></tr>
+<tr><td><strong>Computer Vision (Loss Prevention)</strong></td><td>10-15% reduction in shrinkage</td></tr>
+<tr><td><strong>GenAI Marketing Expansion</strong></td><td>30% reduction in content production costs</td></tr>
+<tr><td><strong>AI-Augmented SDLC</strong></td><td>40% faster deployments, 2x feature velocity</td></tr>
+<tr><td><strong>Agentic Operations</strong></td><td>20% improvement in operational efficiency</td></tr>
+<tr><td><strong>Pilot Investment</strong></td><td>$180K (3 months) → 2.5x ROI in 6 months</td></tr>
+</table>
+</div>
+</div>
+</div>
+
+<!-- TAB 9: India GCC -->
+<div class="panel" id="panel-9">
+<div class="section-title">🇮🇳 India GCC — 7-Eleven Global Solution Center</div>
+<div class="kpi-strip">
+<div class="kpi"><div class="v">1,155</div><div class="l">Total Headcount</div></div>
+<div class="kpi"><div class="v">900+</div><div class="l">Active Professionals</div></div>
+<div class="kpi"><div class="v">5</div><div class="l">Bengaluru Locations</div></div>
+<div class="kpi"><div class="v">232K sqft</div><div class="l">Recent Expansion (Feb 2026)</div></div>
+<div class="kpi"><div class="v">2020</div><div class="l">Established</div></div>
+<div class="kpi"><div class="v">9.76</div><div class="l">Globalization Index</div></div>
+<div class="kpi"><div class="v">0</div><div class="l">Active Job Postings</div></div>
+</div>
+<div class="grid2">
+<div class="card">
+<h3><span class="icon">🏗️</span> GCC Centre Details</h3>
+<table>
+<tr><td><strong>Official Name</strong></td><td>7-Eleven Global Solution Center (GSC)</td></tr>
+<tr><td><strong>Location</strong></td><td>Bengaluru, Karnataka, India (5 locations)</td></tr>
+<tr><td><strong>Workspace Design</strong></td><td>"The Urban Playground" — designed by Gensler. Includes mock store. Great Place to Work Certified 2025.</td></tr>
+<tr><td><strong>Awards</strong></td><td>ET Edge Impactful GCCs of India 2025, Gold in Best Org Culture Transformation (PeopleMatter 2025)</td></tr>
+<tr><td><strong>Evolution</strong></td><td>Operational support → Strategic value hub. Co-owns global platforms across tech, finance, CX.</td></tr>
+<tr><td><strong>Functions Handled</strong></td><td>Technology, Cybersecurity, Finance, Merchandising, HR, Licensing, Marketing, Data Science, Product Engineering</td></tr>
+<tr><td><strong>Key Platforms Built</strong></td><td>7NOW (Delivery), 7Rewards (Loyalty), 7Wallet, Store systems integration for 83K+ stores globally</td></tr>
+</table>
+</div>
+<div class="card">
+<h3><span class="icon">👤</span> GCC Leadership</h3>
+<table>
+<tr><th>Name</th><th>Title</th><th>Focus</th></tr>
+<tr><td><strong>Malahar Pinnelli</strong></td><td>VP & Country Leader</td><td>Technology, Product, Digital Transformation</td></tr>
+<tr><td><strong>Atul Mahajan</strong></td><td>SVP & Head Ops, IT, Training</td><td>IT, Store Operations, Training</td></tr>
+<tr><td><strong>Sunil Kalkunte</strong></td><td>Director of Engineering</td><td>Engineering, Product Development</td></tr>
+<tr><td><strong>Vivekanand R</strong></td><td>Director of Engineering</td><td>Software Eng., AI/ML (ex-Walmart)</td></tr>
+<tr><td><strong>PRAG TYAGI</strong></td><td>Dir. Enterprise Data Platform</td><td>Data Engineering, Analytics</td></tr>
+<tr><td><strong>Padma Srinivasan</strong></td><td>Senior Director, GBS</td><td>GBS, Analytics, Operations</td></tr>
+<tr><td><strong>Chetana Parashar</strong></td><td>Director - HR</td><td>Talent Acquisition, HR Strategy</td></tr>
+<tr><td><strong>Sneha Undale</strong></td><td>Dir. Transformation</td><td>Transformation, Strategy (ex-Lowe's)</td></tr>
+<tr><td><strong>Sudipto Maulik</strong></td><td>Director - IT</td><td>IT Infrastructure, Project Mgmt</td></tr>
+</table>
+</div>
+</div>
+<div class="card">
+<h3><span class="icon">📈</span> Growth Trajectory & Transformation Initiatives</h3>
+<div class="timeline">
+<div class="tl-item"><div class="date">2020</div><div class="desc">GSC established in Bengaluru — first tech center outside US. Initial focus: technology & cybersecurity support.</div></div>
+<div class="tl-item"><div class="date">2021-2022</div><div class="desc">Expanded into finance, merchandising, HR, licensing. Launched on Glassdoor. Workspace designed by Gensler.</div></div>
+<div class="tl-item"><div class="date">2023-2024</div><div class="desc">Scaled to 900+ professionals. Adopted ServiceNow ITSM. Started co-owning global platforms (7NOW, 7Rewards).</div></div>
+<div class="tl-item"><div class="date">Oct 2025</div><div class="desc">Sneha Undale joins as Director Transformation from Lowe's. Shahmeer Mirza (Sr. Dir AI/ML) departs.</div></div>
+<div class="tl-item"><div class="date">Dec 2025</div><div class="desc">Vivekanand R joins as Director Engineering from Walmart Global Tech — signals AI/ML investment.</div></div>
+<div class="tl-item"><div class="date">Feb 2026</div><div class="desc">Major expansion: 232,090 sq ft added. Mock store built. Recognized as strategic value hub.</div></div>
+<div class="tl-item"><div class="date">Mar 2026</div><div class="desc">Zero active job postings in India — potential shift to partner-led capacity augmentation.</div></div>
+</div>
+</div>
+<div class="card" style="border-left-color:#3C25F7">
+<h3><span class="icon">🎯</span> Primary Sponsors & Open Demand</h3>
+<p><strong>CxO-1:</strong> Malahar Pinnelli (VP & Country Leader) — primary decision-maker for GSC strategy.<br>
+<strong>CxO-2:</strong> Atul Mahajan (SVP Ops, IT, Training) — technical sponsor with budget authority.<br>
+<strong>Open Demand Signals:</strong> Despite zero active postings, the 232K sq ft expansion signals capacity growth. Key demand areas: AI/ML engineering (post-Shahmeer departure), DevOps acceleration, mobile development (Android), data engineering, and transformation leadership. Bounteous can position managed talent pods to fill these gaps with 2-3 week deployment speed.</p>
+</div>
+</div>
+
+<!-- TAB 10: Heatmaps -->
+<div class="panel" id="panel-10">
+<div class="section-title">🔥 Strategic Heatmaps</div>
+
+<div class="card">
+<h3><span class="icon">1️⃣</span> Heatmap 1: Outreach Priority by Division × Opportunity Type</h3>
+<table class="heatmap">
+<tr><th>Division</th><th>AI/GenAI</th><th>Cloud Migration</th><th>Digital Transform</th><th>Modernisation</th><th>Managed Svcs</th><th>Data Eng.</th><th>Cybersecurity</th></tr>
+<tr><td><strong>Technology / GSC</strong></td><td class="h-high">HIGH</td><td class="h-high">HIGH</td><td class="h-high">HIGH</td><td class="h-high">HIGH</td><td class="h-crit">CRITICAL</td><td class="h-med">MED</td><td class="h-high">HIGH</td></tr>
+<tr><td><strong>Marketing & Loyalty</strong></td><td class="h-crit">CRITICAL</td><td class="h-med">MED</td><td class="h-high">HIGH</td><td class="h-med">MED</td><td class="h-med">MED</td><td class="h-high">HIGH</td><td class="h-low">LOW</td></tr>
+<tr><td><strong>Store Operations</strong></td><td class="h-high">HIGH</td><td class="h-med">MED</td><td class="h-high">HIGH</td><td class="h-high">HIGH</td><td class="h-med">MED</td><td class="h-med">MED</td><td class="h-med">MED</td></tr>
+<tr><td><strong>Finance & Accounting</strong></td><td class="h-med">MED</td><td class="h-med">MED</td><td class="h-med">MED</td><td class="h-high">HIGH</td><td class="h-high">HIGH</td><td class="h-high">HIGH</td><td class="h-high">HIGH</td></tr>
+<tr><td><strong>Supply Chain</strong></td><td class="h-high">HIGH</td><td class="h-high">HIGH</td><td class="h-med">MED</td><td class="h-med">MED</td><td class="h-med">MED</td><td class="h-high">HIGH</td><td class="h-low">LOW</td></tr>
+<tr><td><strong>HR / Talent</strong></td><td class="h-med">MED</td><td class="h-low">LOW</td><td class="h-med">MED</td><td class="h-med">MED</td><td class="h-med">MED</td><td class="h-low">LOW</td><td class="h-low">LOW</td></tr>
+<tr><td><strong>Product Engineering</strong></td><td class="h-crit">CRITICAL</td><td class="h-high">HIGH</td><td class="h-high">HIGH</td><td class="h-crit">CRITICAL</td><td class="h-high">HIGH</td><td class="h-med">MED</td><td class="h-med">MED</td></tr>
+</table>
+</div>
+
+<div class="card">
+<h3><span class="icon">2️⃣</span> Heatmap 2: Engagement Readiness by Persona × Bounteous Offering</h3>
+<table class="heatmap">
+<tr><th>Persona</th><th>Platform Transform</th><th>Cloud Transform</th><th>Digital Product Eng.</th><th>Data Programs</th><th>AI for Enterprise</th><th>Growth Marketing</th><th>Exp. Design</th><th>Grad Cohorts</th></tr>
+<tr><td><strong>VP/Country Leader (Malahar)</strong></td><td class="h-high">HIGH</td><td class="h-high">HIGH</td><td class="h-high">HIGH</td><td class="h-high">HIGH</td><td class="h-crit">CRIT</td><td class="h-high">HIGH</td><td class="h-high">HIGH</td><td class="h-med">MED</td></tr>
+<tr><td><strong>SVP Ops/IT (Atul)</strong></td><td class="h-crit">CRIT</td><td class="h-crit">CRIT</td><td class="h-high">HIGH</td><td class="h-med">MED</td><td class="h-high">HIGH</td><td class="h-low">LOW</td><td class="h-low">LOW</td><td class="h-med">MED</td></tr>
+<tr><td><strong>Dir. Engineering</strong></td><td class="h-high">HIGH</td><td class="h-high">HIGH</td><td class="h-crit">CRIT</td><td class="h-med">MED</td><td class="h-high">HIGH</td><td class="h-low">LOW</td><td class="h-med">MED</td><td class="h-high">HIGH</td></tr>
+<tr><td><strong>Dir. Data Platform</strong></td><td class="h-med">MED</td><td class="h-med">MED</td><td class="h-med">MED</td><td class="h-crit">CRIT</td><td class="h-crit">CRIT</td><td class="h-low">LOW</td><td class="h-low">LOW</td><td class="h-med">MED</td></tr>
+<tr><td><strong>Dir. Transformation</strong></td><td class="h-high">HIGH</td><td class="h-high">HIGH</td><td class="h-high">HIGH</td><td class="h-high">HIGH</td><td class="h-high">HIGH</td><td class="h-med">MED</td><td class="h-high">HIGH</td><td class="h-low">LOW</td></tr>
+<tr><td><strong>Sr. Dir. GBS</strong></td><td class="h-med">MED</td><td class="h-med">MED</td><td class="h-med">MED</td><td class="h-high">HIGH</td><td class="h-med">MED</td><td class="h-med">MED</td><td class="h-med">MED</td><td class="h-high">HIGH</td></tr>
+<tr><td><strong>Dir. HR</strong></td><td class="h-low">LOW</td><td class="h-low">LOW</td><td class="h-low">LOW</td><td class="h-low">LOW</td><td class="h-med">MED</td><td class="h-low">LOW</td><td class="h-low">LOW</td><td class="h-crit">CRIT</td></tr>
+<tr><td><strong>CEO (Hardeep, US)</strong></td><td class="h-med">MED</td><td class="h-med">MED</td><td class="h-med">MED</td><td class="h-med">MED</td><td class="h-high">HIGH</td><td class="h-high">HIGH</td><td class="h-high">HIGH</td><td class="h-low">LOW</td></tr>
+</table>
+</div>
+
+<div class="card">
+<h3><span class="icon">3️⃣</span> Heatmap 3: Initiative × Vendor Gap Radar</h3>
+<table class="heatmap">
+<tr><th>Initiative</th><th>Build (Internal)</th><th>Buy (License)</th><th>Partner (SI)</th><th>Outsource (Managed)</th><th>Bounteous Gap?</th></tr>
+<tr><td><strong>7-BOSS Platform</strong></td><td class="h-high">Active</td><td class="h-med">Azure</td><td class="h-low">LOW</td><td class="h-crit">GAP ★</td><td class="h-blue">YES — Platform Modernization</td></tr>
+<tr><td><strong>AI/ML Operationalization</strong></td><td class="h-med">Partial</td><td class="h-med">Databricks</td><td class="h-crit">GAP ★</td><td class="h-crit">GAP ★</td><td class="h-blue">YES — AI for Enterprise</td></tr>
+<tr><td><strong>GenAI Marketing</strong></td><td class="h-high">Active</td><td class="h-high">LangGraph</td><td class="h-med">MED</td><td class="h-crit">GAP ★</td><td class="h-blue">YES — Growth Marketing + AI</td></tr>
+<tr><td><strong>Loyalty / 7Rewards</strong></td><td class="h-high">Active</td><td class="h-high">SFMC/Adobe</td><td class="h-med">MED</td><td class="h-med">MED</td><td class="h-blue">YES — Experience Design</td></tr>
+<tr><td><strong>IPO Governance</strong></td><td class="h-low">LOW</td><td class="h-high">IBM/Oracle</td><td class="h-crit">GAP ★</td><td class="h-med">MED</td><td class="h-blue">YES — Data Programs</td></tr>
+<tr><td><strong>Mobile App (7NOW)</strong></td><td class="h-med">Partial</td><td class="h-low">LOW</td><td class="h-crit">GAP ★</td><td class="h-crit">GAP ★</td><td class="h-blue">YES — Digital Product Eng.</td></tr>
+<tr><td><strong>Smart Store / IoT</strong></td><td class="h-med">Partial</td><td class="h-high">VusionGroup</td><td class="h-med">MED</td><td class="h-low">LOW</td><td class="h-blue">Emerging — AI + IoT</td></tr>
+<tr><td><strong>DevOps / CI/CD</strong></td><td class="h-med">Partial</td><td class="h-high">Azure</td><td class="h-crit">GAP ★</td><td class="h-crit">GAP ★</td><td class="h-blue">YES — Cloud Transform</td></tr>
+</table>
+<p style="margin-top:10px;font-size:12px;color:var(--p2)">★ GAP = Low vendor saturation, high Bounteous entry opportunity</p>
+</div>
+
+<div class="card">
+<h3><span class="icon">4️⃣</span> Heatmap 4: Geographic Outreach Priority (India GCC)</h3>
+<table class="heatmap">
+<tr><th>Location</th><th>Engineering</th><th>QA</th><th>Data & Analytics</th><th>Infra</th><th>Automation</th><th>Product Mgmt</th></tr>
+<tr><td><strong>Bengaluru — Main Campus</strong></td><td class="h-crit">CRIT (350+)</td><td class="h-high">HIGH (80+)</td><td class="h-high">HIGH (100+)</td><td class="h-high">HIGH (60+)</td><td class="h-crit">CRIT (↑↑)</td><td class="h-high">HIGH (50+)</td></tr>
+<tr><td><strong>Bengaluru — Site 2</strong></td><td class="h-high">HIGH (150+)</td><td class="h-med">MED (40+)</td><td class="h-med">MED (30+)</td><td class="h-med">MED (25+)</td><td class="h-med">MED</td><td class="h-med">MED (20+)</td></tr>
+<tr><td><strong>Bengaluru — Site 3</strong></td><td class="h-med">MED (80+)</td><td class="h-med">MED (25+)</td><td class="h-low">LOW</td><td class="h-low">LOW</td><td class="h-low">LOW</td><td class="h-low">LOW</td></tr>
+<tr><td><strong>Bengaluru — Expansion (Feb 2026)</strong></td><td class="h-crit">CRIT (↑↑↑)</td><td class="h-high">HIGH (↑↑)</td><td class="h-crit">CRIT (↑↑↑)</td><td class="h-med">MED</td><td class="h-crit">CRIT (↑↑↑)</td><td class="h-high">HIGH (↑↑)</td></tr>
+<tr><td><strong>Mumbai (CEO office)</strong></td><td class="h-low">LOW</td><td class="h-low">LOW</td><td class="h-low">LOW</td><td class="h-low">LOW</td><td class="h-low">LOW</td><td class="h-med">MED</td></tr>
+</table>
+<p style="margin-top:10px;font-size:12px">↑↑↑ = Strong growth signal | ↑↑ = Growing | Numbers = estimated team size. Bengaluru Main Campus & Expansion site are the highest priority for outreach.</p>
+</div>
+</div>
+
+<!-- TAB 11: Program Propensity -->
+<div class="panel" id="panel-11">
+<div class="section-title">📦 Program Package Propensity</div>
+<div class="card">
+<h3><span class="icon">📊</span> Program Packages — Propensity Assessment for 7-Eleven</h3>
+<table>
+<tr><th>Program Package</th><th>Propensity</th><th>What It Means for 7-Eleven</th><th>Where to Sell</th></tr>
+<tr><td><strong>Platform Transformation</strong><br><span style="font-size:11px;color:#888">Upgrades, support, cloud, test automation, AI</span></td>
+<td><div class="propensity"><div class="dot filled"></div><div class="dot filled"></div><div class="dot filled"></div><div class="dot filled"></div><div class="dot filled"></div></div><span class="badge high">VERY HIGH</span></td>
+<td>7-BOSS cloud platform modernization, Azure optimization, CI/CD acceleration. IPO-grade platform stability.</td>
+<td>GSC Engineering (Sunil, Vivekanand), SVP Ops (Atul). India GCC as delivery hub.</td></tr>
+<tr><td><strong>Cloud Transformation</strong></td>
+<td><div class="propensity"><div class="dot filled"></div><div class="dot filled"></div><div class="dot filled"></div><div class="dot filled"></div><div class="dot filled"></div></div><span class="badge high">VERY HIGH</span></td>
+<td>Azure-centric stack needs optimization & FinOps. Only 1 cloud vendor engagement — massive gap.</td>
+<td>SVP Ops (Atul), Dir IT (Sudipto). Azure Databricks, Pipelines, K8s optimization.</td></tr>
+<tr><td><strong>Digital Product Engineering</strong></td>
+<td><div class="propensity"><div class="dot filled"></div><div class="dot filled"></div><div class="dot filled"></div><div class="dot filled"></div><div class="dot empty"></div></div><span class="badge high">HIGH</span></td>
+<td>Mobile app dev (7NOW, Android), API/microservices, product-led transformation culture.</td>
+<td>Dir Engineering (Sunil, Vivekanand), VP GSC (Malahar). Mobile Experience Pod.</td></tr>
+<tr><td><strong>Platform Modernisation</strong></td>
+<td><div class="propensity"><div class="dot filled"></div><div class="dot filled"></div><div class="dot filled"></div><div class="dot filled"></div><div class="dot empty"></div></div><span class="badge high">HIGH</span></td>
+<td>Legacy app modernization, microservices migration, POS systems upgrade.</td>
+<td>SVP Ops (Atul), Dir Engineering, Dir Transformation (Sneha).</td></tr>
+<tr><td><strong>Data Programs</strong><br><span style="font-size:11px;color:#888">Engineering, analytics, visualisation</span></td>
+<td><div class="propensity"><div class="dot filled"></div><div class="dot filled"></div><div class="dot filled"></div><div class="dot filled"></div><div class="dot filled"></div></div><span class="badge high">VERY HIGH</span></td>
+<td>Enterprise data platform (Databricks), BI modernization (Power BI/Tableau), investor-grade analytics for IPO.</td>
+<td>Dir Data (PRAG TYAGI), Sr Dir GBS (Padma). Data lakehouse, governance, ML ops.</td></tr>
+<tr><td><strong>AI for Enterprise</strong></td>
+<td><div class="propensity"><div class="dot filled"></div><div class="dot filled"></div><div class="dot filled"></div><div class="dot filled"></div><div class="dot filled"></div></div><span class="badge high">VERY HIGH</span></td>
+<td>Only 2 AI/ML vendor engagements despite stated top priority. GenAI marketing needs scaling. ML operationalization gap. Computer vision, NLP, agentic workflows.</td>
+<td>VP GSC (Malahar), Dir Eng (Vivekanand), Dir Data (PRAG). AI/ML CoE establishment.</td></tr>
+<tr><td><strong>Growth Marketing</strong></td>
+<td><div class="propensity"><div class="dot filled"></div><div class="dot filled"></div><div class="dot filled"></div><div class="dot filled"></div><div class="dot filled"></div></div><span class="badge high">VERY HIGH</span></td>
+<td>Existing CMO engagement in US. Extend to loyalty (Gold Pass), personalization, Adobe/SFMC integration. GenAI creative assistant expansion.</td>
+<td>CMO (existing US relationship), VP GSC (Malahar). Build on existing engagement.</td></tr>
+<tr><td><strong>Tailored Graduate Cohorts</strong></td>
+<td><div class="propensity"><div class="dot filled"></div><div class="dot filled"></div><div class="dot filled"></div><div class="dot empty"></div><div class="dot empty"></div></div><span class="badge med">MEDIUM</span></td>
+<td>GSC investing in upskilling, leadership development, apprenticeship programs. Zero hiring but talent needs.</td>
+<td>Dir HR (Chetana), Sr Dir GBS (Padma). Niche skills: AI/ML, cloud, mobile.</td></tr>
+<tr><td><strong>Experience Design</strong></td>
+<td><div class="propensity"><div class="dot filled"></div><div class="dot filled"></div><div class="dot filled"></div><div class="dot filled"></div><div class="dot empty"></div></div><span class="badge high">HIGH</span></td>
+<td>AR product trials, in-store digital signage, mobile UX for 7NOW, unified commerce experience for IPO.</td>
+<td>VP GSC (Malahar), VP Products US (Scott Albert). CX modernization.</td></tr>
+</table>
+</div>
+<div class="grid3">
+<div class="metric"><div class="val">7 of 9</div><div class="lbl">Packages Rated HIGH+</div></div>
+<div class="metric" style="background:var(--g2)"><div class="val">TOP 3</div><div class="lbl">AI for Enterprise, Growth Marketing, Data Programs</div></div>
+<div class="metric"><div class="val">$2.6M</div><div class="lbl">12-Month Engagement Potential</div></div>
+</div>
+</div>
+
+<!-- TAB 12: Outreach Playbook -->
+<div class="panel" id="panel-12">
+<div class="section-title">🎯 Outreach Playbook & Engagement Cadence</div>
+<div class="ai-block" style="background:linear-gradient(135deg,#2E1869,#3C25F7)">
+<h3>Engagement Philosophy</h3>
+<div class="sub" style="font-size:14px;line-height:1.7">Position as <strong>"Strategic Partner for GCC Optimization & Digital Acceleration"</strong> — NOT another vendor for staff aug. Lead with insight (white space analysis, AI maturity gaps), not capability decks. Anchor every conversation to a quantified business outcome.</div>
+</div>
+<div class="card">
+<h3><span class="icon">📅</span> Trigger Events & Timing Windows</h3>
+<table>
+<tr><th>Trigger Event</th><th>Date</th><th>Why It Matters</th><th>Outreach Action</th></tr>
+<tr><td style="color:#c62828;font-weight:700">🔴 GCC Expansion 232K sq ft</td><td>Feb 2026</td><td>Massive capacity build, zero active hiring — need for managed talent</td><td>Reference expansion in Week 1 to Malahar. Offer capacity augmentation.</td></tr>
+<tr><td style="color:#c62828;font-weight:700">🔴 AI/ML Leadership Departure</td><td>Oct 2025</td><td>Shahmeer Mirza (Sr Dir AI/ML) left — gap in AI leadership</td><td>Position AI/ML CoE as solution. Target Vivekanand R (new hire).</td></tr>
+<tr><td style="color:#e65100;font-weight:700">🟠 IPO Preparation</td><td>2025-2026</td><td>SEI IPO planned — governance, compliance, investor-grade platforms needed</td><td>Lead with IPO readiness: compliance automation, investor dashboards.</td></tr>
+<tr><td style="color:#e65100;font-weight:700">🟠 Transformation Plan</td><td>Sep 2025</td><td>First-ever global plan with priorities and timelines — budgets activating</td><td>Align proposals to published priorities. Reference "not yet capitalized on AI."</td></tr>
+<tr><td style="color:#2e7d32;font-weight:700">🟢 Q2 Planning Cycle</td><td>Apr-May 2026</td><td>Annual budget allocation for new vendor engagements</td><td>Target pilot completion before Q2 for multi-year budget allocation.</td></tr>
+<tr><td style="color:#2e7d32;font-weight:700">🟢 GPTW Certified 2025</td><td>2025</td><td>Cultural pride — GSC values innovation and talent development</td><td>Congratulate in outreach, position Graduate Cohorts as complement.</td></tr>
+</table>
+</div>
+<div class="card">
+<h3><span class="icon">🗓️</span> 12-Week Engagement Cadence</h3>
+<table>
+<tr><th style="width:8%">Week</th><th style="width:28%">Activity</th><th style="width:28%">Stakeholder & Channel</th><th style="width:36%">Milestone / Deliverable</th></tr>
+<tr style="background:#f0ebff">
+<td><strong>1</strong></td>
+<td><strong>Warm LinkedIn Outreach</strong> — Connection + personalized message referencing Feb 2026 GSC expansion & EY GCC Conclave appearance.</td>
+<td><strong>Malahar Pinnelli</strong> (VP & Country Leader)<br>📱 LinkedIn InMail</td>
+<td>✅ Connection accepted ✅ Initial interest signal</td>
+</tr>
+<tr>
+<td><strong>2</strong></td>
+<td><strong>Insight-Led Email</strong> — Share white space analysis 1-pager + "AI maturity gap brief." No pitch — pure value.</td>
+<td><strong>Malahar + Atul Mahajan</strong> (SVP Ops/IT)<br>📧 Email + 1-Pager attachment</td>
+<td>✅ Email opened ✅ 30-min discovery call booked</td>
+</tr>
+<tr style="background:#f0ebff">
+<td><strong>3</strong></td>
+<td><strong>Parallel Technical Thread</strong> — LinkedIn connect with engineering & data leaders. Share relevant AI case study.</td>
+<td><strong>Vivekanand R</strong> (Dir Eng) + <strong>PRAG TYAGI</strong> (Dir Data)<br>📱 LinkedIn</td>
+<td>✅ Technical champions identified ✅ Multi-threaded</td>
+</tr>
+<tr>
+<td><strong>4</strong></td>
+<td><strong>Discovery Call #1</strong> — Listen-first: GCC roadmap, pain points, vendor satisfaction, budget cycles. Present 3 quick-win scenarios.</td>
+<td><strong>Malahar + Atul</strong><br>📹 Video (45 min) | AE + Solution Architect</td>
+<td>✅ Pain points validated ✅ Budget clarity ✅ Pilot interest</td>
+</tr>
+<tr style="background:#f0ebff">
+<td><strong>5-6</strong></td>
+<td><strong>Tailored Proposal</strong> — Present DevOps Pod OR AI/ML CoE pilot. Include ROI model, timeline, team composition, success metrics.</td>
+<td><strong>Malahar + Atul + Vivekanand/PRAG</strong><br>📹 Video (60 min) or in-person BLR | AE + SA + DM</td>
+<td>✅ Pilot scope agreed ✅ Commercials discussed</td>
+</tr>
+<tr>
+<td><strong>7-8</strong></td>
+<td><strong>Pilot Kick-Off</strong> — Deploy talent pod (5-8 engineers). Embed with GSC team. Daily standups, weekly demos, fortnightly exec readouts.</td>
+<td>Engineering teams + <strong>Malahar</strong> (exec sponsor)<br>🏢 On-site BLR + remote</td>
+<td>✅ Team onboarded ✅ First sprint done ✅ Early value shown</td>
+</tr>
+<tr style="background:#f0ebff">
+<td><strong>9-10</strong></td>
+<td><strong>Quick Win Delivery</strong> — Measurable result (e.g. 40% faster deploys, CI/CD for 5 apps). Present metrics dashboard to leadership.</td>
+<td><strong>Malahar + Atul + Sneha Undale</strong><br>📊 Metrics readout</td>
+<td>✅ Quantified ROI ✅ Trust established ✅ Expansion talk initiated</td>
+</tr>
+<tr>
+<td><strong>11-12</strong></td>
+<td><strong>Expand & Negotiate MSA</strong> — Present Tier 2 & 3 proposals (AI/ML CoE, MarTech, CX). Involve CEO. Negotiate Master Services Agreement.</td>
+<td><strong>Hardeep Singh</strong> (CEO) + <strong>Malahar + Atul</strong><br>AE + Legal</td>
+<td>✅ MSA signed ✅ 2-3 workstreams ✅ Strategic partner status</td>
+</tr>
+</table>
+</div>
+<div class="card">
+<h3><span class="icon">💬</span> Stakeholder Messaging Frameworks</h3>
+<table>
+<tr><th style="width:12%">Stakeholder</th><th style="width:18%">Hook (Open With)</th><th style="width:25%">Core Message</th><th style="width:22%">Proof Point</th><th style="width:23%">Ask (CTA)</th></tr>
+<tr>
+<td><strong>Malahar Pinnelli</strong><br><span style="font-size:10px;color:#B61CA7">VP, Country Leader</span></td>
+<td>"Congrats on the GSC expansion — your EY Conclave talk on scaling from ops to strategic hub resonated with our India team."</td>
+<td>"As you scale from 900+ to the next level, we see 6 high-value areas where your vendor ecosystem has gaps — DevOps, AI/ML, mobile, cloud, cyber, CX. Our Co-Innovation model fills these in 2-3 weeks, not months."</td>
+<td>Scaled a GCC-equivalent engagement for a global payments company — 5 pods, 3 continents, 40% faster delivery in 90 days.</td>
+<td>"Would a 30-min walkthrough of our white space analysis be valuable? Happy to share the data."</td>
+</tr>
+<tr>
+<td><strong>Atul Mahajan</strong><br><span style="font-size:10px;color:#B61CA7">SVP Ops, IT</span></td>
+<td>"Your Azure Pipelines + K8s setup has strong bones — we see a clear opportunity to accelerate it."</td>
+<td>"We deploy a DevOps pod in 2 weeks targeting 40% faster deployments and 50% reduction in change failure rate — aligned to your 7-BOSS roadmap."</td>
+<td>Optimized CI/CD for a 10K+ store retailer — reduced deployment time from hours to minutes, zero-downtime releases.</td>
+<td>"Can we schedule a technical deep-dive with your engineering leads to scope a 3-month pilot?"</td>
+</tr>
+<tr>
+<td><strong>Vivekanand R</strong><br><span style="font-size:10px;color:#B61CA7">Dir Eng (AI/ML)</span></td>
+<td>"Welcome to 7-Eleven — your Walmart Global Tech background aligns with the AI ambitions we're seeing at the GSC."</td>
+<td>"Your GenAI marketing assistant on Databricks/LangGraph is impressive. We can scale it from marketing into product, ops, and service — and close the MLOps gap."</td>
+<td>Built KYC extraction AI saving 2 hrs per analyst per day for a global investment firm. Full production ML pipeline with governance.</td>
+<td>"Would you be open to an AI architecture review? We'll bring our retail AI playbook."</td>
+</tr>
+<tr>
+<td><strong>PRAG TYAGI</strong><br><span style="font-size:10px;color:#B61CA7">Dir Data Platform</span></td>
+<td>"Your Databricks + Spark foundation is solid — we specialize in taking data platforms to investor-grade."</td>
+<td>"With IPO underway, your data platform needs investor-grade analytics, real-time dashboards, audit-ready governance. We've done this for multiple pre-IPO enterprises."</td>
+<td>Designed enterprise data platform for a hedge fund — cloud-agnostic, front-to-back office, 24/7 follow-the-sun support.</td>
+<td>"Can we explore how your data roadmap maps to IPO readiness requirements?"</td>
+</tr>
+</table>
+</div>
+<div class="card">
+<h3><span class="icon">🧑‍🤝‍🧑</span> Bounteous Pursuit Team</h3>
+<div class="grid4">
+<div style="background:var(--g1);color:#fff;border-radius:10px;padding:14px;text-align:center"><div style="font-size:24px">👔</div><div style="font-weight:700;margin-top:4px">Account Executive</div><div style="font-size:11px;opacity:.8;margin-top:4px">Relationship owner. Cadence, commercials, MSA.</div></div>
+<div style="background:var(--g1);color:#fff;border-radius:10px;padding:14px;text-align:center"><div style="font-size:24px">🏗️</div><div style="font-weight:700;margin-top:4px">Solution Architect</div><div style="font-size:11px;opacity:.8;margin-top:4px">Technical credibility. Architecture, POC, scoping.</div></div>
+<div style="background:var(--g1);color:#fff;border-radius:10px;padding:14px;text-align:center"><div style="font-size:24px">🚀</div><div style="font-weight:700;margin-top:4px">Delivery Manager</div><div style="font-size:11px;opacity:.8;margin-top:4px">Execution confidence. Pod assembly, QA.</div></div>
+<div style="background:var(--g1);color:#fff;border-radius:10px;padding:14px;text-align:center"><div style="font-size:24px">🤝</div><div style="font-weight:700;margin-top:4px">India Lead</div><div style="font-size:11px;opacity:.8;margin-top:4px">On-ground Bengaluru presence, cultural alignment.</div></div>
+</div>
+</div>
+</div>
+
+<!-- TAB 13: ROI Builder -->
+<div class="panel" id="panel-13">
+<div class="section-title">💰 ROI & Business Case Builder</div>
+<div class="ai-block" style="background:linear-gradient(135deg,#2E1869,#3C25F7)">
+<h3>Financial Context — 7-Eleven</h3>
+<div style="display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:14px">
+<div class="ai-card"><div style="font-size:22px;font-weight:800">~$729M</div><div style="font-size:11px;opacity:.8">Revenue 2024</div></div>
+<div class="ai-card"><div style="font-size:22px;font-weight:800">~$15M</div><div style="font-size:11px;opacity:.8">IT Spend 2024</div></div>
+<div class="ai-card"><div style="font-size:22px;font-weight:800">+5.1%</div><div style="font-size:11px;opacity:.8">IT Spend Growth</div></div>
+<div class="ai-card"><div style="font-size:22px;font-weight:800">$2-3M</div><div style="font-size:11px;opacity:.8">Target Run Rate</div></div>
+</div>
+</div>
+<div class="card">
+<h3><span class="icon">📊</span> Program-Level ROI Models</h3>
+<table>
+<tr><th>Program</th><th>Pilot $</th><th>Duration</th><th>Quantified Value</th><th>ROI</th><th>Value Anchor</th></tr>
+<tr><td><strong>DevOps Acceleration Pod</strong></td><td>$180K</td><td>3 mo</td><td>40% faster deploys for 5 apps. 50% less change failures. 60% MTTR cut. ~$450K annualized dev productivity gain.</td><td style="color:#2e7d32;font-weight:800;font-size:16px">2.5x</td><td>13K+ stores on 7-BOSS — every downtime hour costs thousands. 60% MTTR cut = $500K+ saved annually.</td></tr>
+<tr><td><strong>AI/ML Center of Excellence</strong></td><td>$350K</td><td>6 mo</td><td>15-20% repeat purchase uplift (Gold Pass). 10-15% shrinkage reduction (CV). ML in production in 8 wks vs 6+ mo.</td><td style="color:#2e7d32;font-weight:800;font-size:16px">3.5x</td><td>Already reclaimed 13M hours via AI ordering. Extending to loyalty + loss prevention = $10-15M annual value.</td></tr>
+<tr><td><strong>Mobile Experience Pod</strong></td><td>$200K</td><td>3 mo</td><td>2x feature velocity for 7NOW. Android-first dev. Pre-ordering + FunStamps enhancements.</td><td style="color:#2e7d32;font-weight:800;font-size:16px">2.0x</td><td>7NOW targets 30-min delivery nationwide. 1% app conversion uplift = millions in incremental revenue.</td></tr>
+<tr><td><strong>Marketing Tech Integration</strong></td><td>$250K</td><td>4 mo</td><td>Unify Adobe + SFMC + HubSpot. 25% campaign ROI increase. GenAI creative expansion to full journey.</td><td style="color:#2e7d32;font-weight:800;font-size:16px">3.0x</td><td>GenAI assistant already made vendors stand down. Adobe/SFMC integration = 30% faster campaign launches.</td></tr>
+<tr><td><strong>Cloud Optimization (Azure)</strong></td><td>$150K</td><td>3 mo</td><td>20-30% cloud cost reduction via FinOps. Databricks optimization. IaC for faster provisioning.</td><td style="color:#2e7d32;font-weight:800;font-size:16px">4.0x</td><td>On ~$15M IT spend, 20% cloud savings = $1.5-2M annually. Pays for full Bounteous engagement.</td></tr>
+<tr><td><strong>Data Programs (IPO-Grade)</strong></td><td>$300K</td><td>6 mo</td><td>Investor-grade analytics. Real-time compliance dashboards. 35% compliance overhead reduction.</td><td style="color:#2e7d32;font-weight:800;font-size:16px">3.0x</td><td>Every compliance failure delays IPO by months — cost of delay = $50-100M valuation impact.</td></tr>
+<tr><td><strong>Experience Design</strong></td><td>$200K</td><td>4 mo</td><td>Unified commerce design (in-store + mobile + online). AR product trials. 25% CSAT improvement.</td><td style="color:#2e7d32;font-weight:800;font-size:16px">2.5x</td><td>1-point CSAT improvement correlates to 3% revenue uplift in convenience retail.</td></tr>
+</table>
+</div>
+<div class="card">
+<h3><span class="icon">⚖️</span> Cost Comparison: Bounteous vs. Alternatives</h3>
+<table>
+<tr><th>Approach</th><th>Time to Value</th><th>12-Month Cost</th><th>Risk</th><th>Outcome</th></tr>
+<tr><td><strong>Direct Hire</strong></td><td>3-6 months (zero postings today)</td><td>$1.2-1.8M</td><td style="color:#c62828">HIGH — competition, retention, ramp</td><td>Team of 8-10, limited skills</td></tr>
+<tr><td><strong>Large SI (Cognizant etc.)</strong></td><td>3-6 months</td><td>$1.5-2.5M</td><td style="color:#e65100">MEDIUM — generalist, high churn</td><td>Bodies, not outcomes</td></tr>
+<tr style="background:#f0ebff"><td><strong style="color:var(--p1)">Bounteous Co-Innovation</strong></td><td style="color:#2e7d32;font-weight:700">2-3 weeks</td><td style="color:#2e7d32;font-weight:700">$1.0-1.5M</td><td style="color:#2e7d32;font-weight:700">LOW — pre-built pods, shared risk</td><td style="color:#2e7d32;font-weight:700">Measurable outcomes, 3.5x ROI</td></tr>
+</table>
+<div style="margin-top:12px;padding:14px;background:linear-gradient(90deg,#e8f5e9,#c8e6c9);border-radius:10px;font-size:13px"><strong>💡 Key Selling Point:</strong> Bounteous delivers at 20-30% lower cost than large SIs, with 4-8x faster time-to-value. Co-Innovation = pay for results, not hours.</div>
+</div>
+<div class="card">
+<h3><span class="icon">🗺️</span> 12-Month Investment Roadmap</h3>
+<div style="display:grid;grid-template-columns:repeat(4,1fr);gap:14px">
+<div style="border:3px solid var(--p2);border-radius:12px;padding:16px"><div style="font-weight:800;color:var(--p1);font-size:16px">Q1: PROVE</div><div style="font-size:24px;font-weight:800;color:var(--p2)">$350K</div><div style="font-size:12px;margin-top:8px"><strong>DevOps + Mobile Pod</strong><br>2 quick wins. Trust established.</div><div style="margin-top:8px;padding:8px;background:#e8f5e9;border-radius:6px;font-size:11px">40% faster deploys, 2x mobile velocity</div></div>
+<div style="border:3px solid var(--p2);border-radius:12px;padding:16px"><div style="font-weight:800;color:var(--p1);font-size:16px">Q2: EXPAND</div><div style="font-size:24px;font-weight:800;color:var(--p2)">$650K</div><div style="font-size:12px;margin-top:8px"><strong>AI/ML CoE + MarTech</strong><br>Loyalty v1. Campaign automation.</div><div style="margin-top:8px;padding:8px;background:#e8f5e9;border-radius:6px;font-size:11px">15-20% repeat purchase uplift</div></div>
+<div style="border:3px solid var(--p2);border-radius:12px;padding:16px"><div style="font-weight:800;color:var(--p1);font-size:16px">Q3: DEEPEN</div><div style="font-size:24px;font-weight:800;color:var(--p2)">$750K</div><div style="font-size:12px;margin-top:8px"><strong>IPO Readiness</strong><br>Compliance. Investor dashboards.</div><div style="margin-top:8px;padding:8px;background:#e8f5e9;border-radius:6px;font-size:11px">35% compliance overhead reduction</div></div>
+<div style="border:3px solid var(--p2);border-radius:12px;padding:16px"><div style="font-weight:800;color:var(--p1);font-size:16px">Q4: TRANSFORM</div><div style="font-size:24px;font-weight:800;color:var(--p2)">$850K</div><div style="font-size:12px;margin-top:8px"><strong>CX + Agentic AI</strong><br>Unified commerce. AR. IoT.</div><div style="margin-top:8px;padding:8px;background:#e8f5e9;border-radius:6px;font-size:11px">25% CSAT, 20% ops efficiency</div></div>
+</div>
+<div style="text-align:center;margin-top:16px;padding:16px;background:var(--g1);border-radius:12px;color:#fff"><div style="font-size:14px;opacity:.8">TOTAL 12-MONTH INVESTMENT</div><div style="font-size:36px;font-weight:800;margin:4px 0">$2.6M</div><div style="font-size:14px">ROI: <strong>3.5x</strong> | Valuation Impact: <strong>$50-75M</strong> | Run Rate: <strong>$2-3M</strong></div></div>
+</div>
+</div>
+
+<!-- TAB 14: Win Themes -->
+<div class="panel" id="panel-14">
+<div class="section-title">🏆 Win Themes & Proof Points</div>
+<div class="card">
+<h3><span class="icon">🔗</span> Pain Point → Proof Point Mapping</h3>
+<table>
+<tr><th style="width:18%">7-Eleven Pain Point</th><th style="width:14%">Signal</th><th style="width:13%">Offering</th><th style="width:30%">Bounteous Proof Point</th><th style="width:25%">Impact</th></tr>
+<tr><td><strong>AI/ML Leadership Gap</strong><br><span style="font-size:10px">Sr Dir AI/ML departed; only MLflow</span></td><td>Shahmeer exit Oct 2025; 2 AI vendors</td><td>AI for Enterprise</td><td><strong>KYC Extraction AI:</strong> GenAI automating extraction/validation of KYC from structured & unstructured docs with traceable analyst review.</td><td>Saved ~2 hrs/analyst/day. Improved accuracy & compliance confidence.</td></tr>
+<tr><td><strong>GenAI Marketing Scaling</strong><br><span style="font-size:10px">Databricks/LangGraph limited to creative</span></td><td>Want HTML emails, KPI integration, image/video</td><td>Growth Marketing + AI</td><td><strong>Unified Customer View:</strong> Built data orchestration engine, integrated fragmented marketing platforms for personalized cross-channel campaigns.</td><td>Campaign prep from hours to minutes. Personalization at scale.</td></tr>
+<tr><td><strong>Mobile Velocity (7NOW)</strong><br><span style="font-size:10px">Android trending, 2 mobile vendors</span></td><td>30-min delivery, FunStamps, pre-ordering</td><td>Digital Product Eng.</td><td><strong>BNPL In-Store Commerce:</strong> Built extensible web & native mobile commerce for pay-later, offers, rewards at merchants.</td><td>New mobile commerce channel. Extensible architecture for rapid iteration.</td></tr>
+<tr><td><strong>Platform Modernization</strong><br><span style="font-size:10px">7-BOSS needs CI/CD acceleration</span></td><td>Azure + Docker/K8s at medium maturity</td><td>Platform + Cloud Transform</td><td><strong>Payment Sandbox on AWS:</strong> Re-engineered on-prem sandbox to microservices with Aurora PostgreSQL, messaging, secure connectivity.</td><td>Cloud-native testing. Microservices for scalable ops.</td></tr>
+<tr><td><strong>IPO Governance</strong><br><span style="font-size:10px">OpenPages + Hyperion need integration</span></td><td>IPO = Priority #1; investor-grade needed</td><td>Data Programs + EDT</td><td><strong>Enterprise Data Platform for Hedge Fund:</strong> Cloud-agnostic, front-to-back office tools, follow-the-sun testing CoE.</td><td>Full front-to-back visibility. Audit-ready governance. 24/7 support.</td></tr>
+<tr><td><strong>MarTech Fragmentation</strong><br><span style="font-size:10px">Adobe+SFMC+HubSpot not unified</span></td><td>Multiple tools across loyalty, marketing</td><td>Growth Marketing + XD</td><td><strong>Global Commerce Brand Launch:</strong> Visual identity, landing pages, marketing assets, merchandising for sales team readiness.</td><td>Accelerated market readiness. Unified brand experience.</td></tr>
+<tr><td><strong>Loss Prevention / CV</strong><br><span style="font-size:10px">Patented digital twin tech</span></td><td>USPTO patent; 110 loss prevention postings</td><td>AI for Enterprise</td><td><strong>AI Doc Reconciliation for Insurer:</strong> AI-powered clause-level comparison across disconnected systems with audit trail.</td><td>Eliminated manual reconciliation. Reduced risk by $1M+ annually.</td></tr>
+<tr><td><strong>GCC Capacity Gap</strong><br><span style="font-size:10px">232K sq ft expansion, zero hiring</span></td><td>Zero India job postings; 900+ need augmentation</td><td>Grad Cohorts + Managed Svcs</td><td><strong>AI Health & Wellness Product:</strong> Partnered with client teams for feature innovation, API eng, mobile test automation — 18 countries.</td><td>Global co-located delivery. Measurable uptake within first year.</td></tr>
+</table>
+</div>
+<div class="card">
+<h3><span class="icon">📖</span> Win Theme Narratives — Sales Pitch Anchors</h3>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:14px">
+<div style="border:2px solid var(--p2);border-radius:12px;padding:18px">
+<div style="font-weight:800;color:var(--p1);font-size:15px;margin-bottom:8px">🎯 Theme 1: "Fill the AI Gap Before Competitors Do"</div>
+<p style="font-size:12px;line-height:1.7">7-Eleven stated they haven't fully capitalized on AI and data analytics. With only 2 AI/ML vendors and a recent Sr Dir AI/ML departure, there's a 6-month window before Cognizant or Tredence expand here. Bounteous' AI for Enterprise — intelligent product eng, AI-enhanced experiences, modern platforms, agentic reinvention — is built for this moment.</p>
+<div style="margin-top:8px;font-size:11px;color:var(--p2);font-weight:700">USE WITH: Malahar, Vivekanand, PRAG</div>
+</div>
+<div style="border:2px solid var(--p2);border-radius:12px;padding:18px">
+<div style="font-weight:800;color:var(--p1);font-size:15px;margin-bottom:8px">🎯 Theme 2: "Speed Wins — 2 Weeks, Not 6 Months"</div>
+<p style="font-size:12px;line-height:1.7">232K sq ft expansion but zero active job postings. Hiring takes 3-6 months. Large SIs ramp in 3-6 months. Bounteous deploys pre-built talent pods in 2-3 weeks at 20-30% lower cost. This isn't staff aug — it's outcome-linked teams that embed with GSC engineers and deliver from Sprint 1.</p>
+<div style="margin-top:8px;font-size:11px;color:var(--p2);font-weight:700">USE WITH: Atul, Malahar, Chetana (HR)</div>
+</div>
+<div style="border:2px solid var(--p2);border-radius:12px;padding:18px">
+<div style="font-weight:800;color:var(--p1);font-size:15px;margin-bottom:8px">🎯 Theme 3: "IPO-Ready Platforms, Not Just IPO Plans"</div>
+<p style="font-size:12px;line-height:1.7">The Transformation Plan sets clear IPO timelines. But investor-grade platforms need compliance automation, real-time governance dashboards, audit-ready data. Bounteous delivered front-to-back transformations for banks and hedge funds under stricter regulatory regimes. We bring that enterprise rigor to retail.</p>
+<div style="margin-top:8px;font-size:11px;color:var(--p2);font-weight:700">USE WITH: Malahar, PRAG, Hardeep (CEO)</div>
+</div>
+<div style="border:2px solid var(--p2);border-radius:12px;padding:18px">
+<div style="font-weight:800;color:var(--p1);font-size:15px;margin-bottom:8px">🎯 Theme 4: "Extend the CMO Win into IT & the GCC"</div>
+<p style="font-size:12px;line-height:1.7">Bounteous already has a CMO relationship in the US. Expand twofold: (1) deepen marketing tech via Adobe/SFMC integration and GenAI scaling, (2) bridge into IT through the India GCC, where Malahar's team owns the platforms powering marketing. The CMO relationship is the trust bridge — use it to open Bengaluru doors.</p>
+<div style="margin-top:8px;font-size:11px;color:var(--p2);font-weight:700">USE WITH: US CMO (existing), Malahar, Atul</div>
+</div>
+</div>
+</div>
+<div class="card">
+<h3><span class="icon">🛡️</span> Competitive Counter-Positioning</h3>
+<table>
+<tr><th style="width:22%">If They Say...</th><th style="width:18%">They're Thinking...</th><th style="width:60%">You Say...</th></tr>
+<tr><td>"We already work with Cognizant for most IT."</td><td>Why another vendor?</td><td>"Cognizant is strong in app dev and data eng — 32% share in saturated areas. We focus on gaps they don't cover: AI operationalization, CX, marketing tech, DevOps acceleration. We complement, not compete."</td></tr>
+<tr><td>"Tredence handles our data and analytics."</td><td>We're covered on data/AI.</td><td>"Tredence excels at data engineering and last-mile analytics. We sit above the data layer — operationalizing AI into workflows, building agentic systems, connecting AI to experiences. Think of us as the application and experience layer on Tredence's data foundation."</td></tr>
+<tr><td>"We're not adding new vendors."</td><td>Vendor consolidation pressure.</td><td>"We understand — especially pre-IPO. Our Co-Innovation model actually reduces sprawl: one engagement replaces 3-5 niche vendors in DevOps, cloud, mobile, and CX. Fewer vendors, more integrated outcomes."</td></tr>
+<tr><td>"We're hiring internally."</td><td>Want in-house capability.</td><td>"Zero active India postings suggests strategic, not volume hiring. We provide specialized expertise on-demand while you build core team. Our Graduate Cohorts upskill your internal talent — we're a bridge, not a replacement."</td></tr>
+<tr><td>"Budget is tight with IPO prep."</td><td>Cost sensitivity.</td><td>"Our outcome-based pricing ties fees to value. DevOps pilot ROI is 2.5x in 6 months — pays for itself. Cloud optimization saves 20-30% on Azure, directly funding further transformation."</td></tr>
+</table>
+</div>
+<div class="card" style="border-left-color:#2e7d32;background:linear-gradient(135deg,rgba(46,125,50,.03),rgba(46,125,50,.08))">
+<h3><span class="icon">✅</span> Deal Qualification Scorecard (MEDDPICC)</h3>
+<table>
+<tr><th>Dimension</th><th>Status</th><th>Evidence</th></tr>
+<tr><td><strong>Metrics</strong></td><td><span class="badge high">STRONG</span></td><td>40% faster deploys, 15-20% loyalty uplift, $1.5M cloud savings, 3.5x ROI</td></tr>
+<tr><td><strong>Economic Buyer</strong></td><td><span class="badge high">IDENTIFIED</span></td><td>Malahar Pinnelli (VP, GSC budget), Atul Mahajan (SVP, IT budget)</td></tr>
+<tr><td><strong>Decision Criteria</strong></td><td><span class="badge med">INFERRED</span></td><td>Speed, specialization, outcome pricing, Co-Innovation, IPO readiness</td></tr>
+<tr><td><strong>Decision Process</strong></td><td><span class="badge med">TO VALIDATE</span></td><td>Likely: Malahar recommends → Atul approves tech → Hardeep strategic. Validate Week 4.</td></tr>
+<tr><td><strong>Identify Pain</strong></td><td><span class="badge high">STRONG</span></td><td>AI/ML gap, zero hiring, 232K expansion, IPO governance, MarTech fragmentation</td></tr>
+<tr><td><strong>Champion</strong></td><td><span class="badge med">TARGET</span></td><td>Primary: Malahar. Secondary: Vivekanand R (new hire, eager to prove AI impact)</td></tr>
+<tr><td><strong>Competition</strong></td><td><span class="badge high">FAVORABLE</span></td><td>Bounteous sweet spots have 1-4 vendors vs 19-23 in saturated areas</td></tr>
+<tr><td><strong>Paper Process</strong></td><td><span class="badge low">UNKNOWN</span></td><td>MSA terms, procurement, legal — clarify in discovery</td></tr>
+</table>
+<div style="margin-top:12px;padding:12px;background:#e8f5e9;border-radius:8px;font-size:14px;text-align:center"><strong>Overall Score: 7/10 — HIGH CONFIDENCE</strong> &nbsp;|&nbsp; Action: <strong style="color:#2e7d32">PURSUE AGGRESSIVELY</strong> &nbsp;|&nbsp; Win Probability: <strong>70-80%</strong></div>
+</div>
+</div>
+
+<!-- TAB 15: Bounteous Edge -->
+<div class="panel" id="panel-15">
+<div class="section-title">⭐ Bounteous Differentiator — Why Bounteous Wins Over Incumbents</div>
+
+<div class="ai-block">
+<h3>Bounteous at a Glance</h3>
+<div style="display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin-top:14px">
+<div class="ai-card" style="text-align:center"><div style="font-size:22px;font-weight:800">5,000+</div><div style="font-size:10px;opacity:.8">AI-Enabled Workforce</div></div>
+<div class="ai-card" style="text-align:center"><div style="font-size:22px;font-weight:800">100+</div><div style="font-size:10px;opacity:.8">Global 2000 Clients</div></div>
+<div class="ai-card" style="text-align:center"><div style="font-size:22px;font-weight:800">6</div><div style="font-size:10px;opacity:.8">Global Regions (US, CA, MX, EU, IN, SG)</div></div>
+<div class="ai-card" style="text-align:center"><div style="font-size:22px;font-weight:800">2003</div><div style="font-size:10px;opacity:.8">Founded (22 Years)</div></div>
+<div class="ai-card" style="text-align:center"><div style="font-size:22px;font-weight:800">3x</div><div style="font-size:10px;opacity:.8">IDC FinTech Top 100</div></div>
+</div>
+<div style="margin-top:14px;font-size:13px;opacity:.9;line-height:1.7">Led by CEO <strong>Sudarshan Mandayam</strong> (ex-Cognizant, Infosys, L&T Infotech, JPMorgan, Citi) — bringing insider understanding of large SI playbooks and how to outmaneuver them. EVP Data & AI <strong>Martin Young</strong> (ex-Slalom, built alliances with OpenAI & Anthropic) accelerating enterprise AI at scale. Backed by <strong>New Mountain Capital</strong>.</div>
+</div>
+
+<!-- Analyst Recognition -->
+<div class="card">
+<h3><span class="icon">🏅</span> Industry Recognition — Analyst Validation</h3>
+<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:14px">
+<div style="background:#f5f0ff;border-radius:10px;padding:16px;border:2px solid var(--p3)">
+<div style="font-weight:800;color:var(--p1);font-size:13px">Gartner® Market Guide</div>
+<div style="font-size:12px;margin-top:6px">Representative Vendor — Global Digital Marketing Agencies <strong>(3 consecutive years, 2023-2025)</strong>. Cited for Co-Innovation methodology and GenAI-powered CX solutions.</div>
+</div>
+<div style="background:#f5f0ff;border-radius:10px;padding:16px;border:2px solid var(--p3)">
+<div style="font-weight:800;color:var(--p1);font-size:13px">IDC FinTech Rankings</div>
+<div style="font-size:12px;margin-top:6px">Top 100 Solution Provider <strong>(3 consecutive years, 2023-2025)</strong>. Recognized among top global technology providers serving financial services and fintech.</div>
+</div>
+<div style="background:#f5f0ff;border-radius:10px;padding:16px;border:2px solid var(--p3)">
+<div style="font-weight:800;color:var(--p1);font-size:13px">Forrester Research</div>
+<div style="font-size:12px;margin-top:6px">Recognized in <strong>Commerce Services Landscape Q3 2025</strong>, CRM Marketing Services Landscape Q3 2025, and Customer Analytics Service Providers Landscape Q1 2025.</div>
+</div>
+</div>
+<p style="margin-top:12px;font-size:12px;color:#666"><strong>No incumbent 7-Eleven vendor (Cognizant, Infosys, LTIMindtree, Tredence, Tech Mahindra)</strong> holds equivalent analyst recognition across all three pillars: marketing, CX, and commerce. This uniquely positions Bounteous at the intersection of technology and customer experience.</p>
+</div>
+
+<!-- Head-to-Head Comparison -->
+<div class="card">
+<h3><span class="icon">⚔️</span> Head-to-Head: Bounteous vs. Incumbent Vendors</h3>
+<table>
+<tr><th style="width:14%">Dimension</th><th style="width:14%">Cognizant (32%)</th><th style="width:14%">Infosys (5%)</th><th style="width:14%">LTIMindtree (5%)</th><th style="width:14%">Tredence (5%)</th><th style="width:14%">Tech Mahindra (4%)</th><th style="width:16%;background:var(--p1);color:#fff">Bounteous</th></tr>
+<tr>
+<td><strong>Model</strong></td>
+<td style="font-size:11px">T&M, staff aug, large programs</td>
+<td style="font-size:11px">T&M, managed services, consulting</td>
+<td style="font-size:11px">T&M, project delivery</td>
+<td style="font-size:11px">Outcome-based analytics</td>
+<td style="font-size:11px">T&M, managed services</td>
+<td style="font-size:11px;background:#f0ebff"><strong style="color:#2e7d32">Co-Innovation — shared risk, aligned incentives, joint IP creation</strong></td>
+</tr>
+<tr>
+<td><strong>Size</strong></td>
+<td style="font-size:11px">352,000 employees</td>
+<td style="font-size:11px">317,000 employees</td>
+<td style="font-size:11px">81,000 employees</td>
+<td style="font-size:11px">3,500 employees</td>
+<td style="font-size:11px">145,000 employees</td>
+<td style="font-size:11px;background:#f0ebff"><strong>5,000+ AI-enabled</strong> — nimble enough to move fast, large enough to scale</td>
+</tr>
+<tr>
+<td><strong>Speed</strong></td>
+<td style="font-size:11px">3-6 months ramp</td>
+<td style="font-size:11px">3-6 months ramp</td>
+<td style="font-size:11px">2-4 months ramp</td>
+<td style="font-size:11px">4-8 weeks for data</td>
+<td style="font-size:11px">3-6 months ramp</td>
+<td style="font-size:11px;background:#f0ebff"><strong style="color:#2e7d32">2-3 weeks with pre-built talent pods</strong></td>
+</tr>
+<tr>
+<td><strong>AI Depth</strong></td>
+<td style="font-size:11px">Neuro® AI Suite. Broad but shallow. Microsoft-centric.</td>
+<td style="font-size:11px">Topaz AI platform. Enterprise-scale. Broad coverage.</td>
+<td style="font-size:11px">Canvas.ai. Limited AI/ML at 7-Eleven (14% DevOps only).</td>
+<td style="font-size:11px">Deep data science. 150+ ML accelerators. Databricks & Retail CPG specialist.</td>
+<td style="font-size:11px">TechM amplifAI. Broad, telecom-heavy.</td>
+<td style="font-size:11px;background:#f0ebff"><strong style="color:#2e7d32">Full-stack: strategy → governance → agentic ops. Platform-agnostic. Anthropic/Claude Code Lab partnership. Agent Marketplace.</strong></td>
+</tr>
+<tr>
+<td><strong>CX & Marketing</strong></td>
+<td style="font-size:11px">Moment™ experience tool. Not core strength.</td>
+<td style="font-size:11px">Limited marketing capability.</td>
+<td style="font-size:11px">Not a core capability.</td>
+<td style="font-size:11px">❌ Not a capability.</td>
+<td style="font-size:11px">Limited CX practice.</td>
+<td style="font-size:11px;background:#f0ebff"><strong style="color:#2e7d32">CORE DNA — Gartner-recognized. Forrester CRM Marketing. Premier Adobe/Salesforce/Google partner. Existing 7-Eleven CMO relationship.</strong></td>
+</tr>
+<tr>
+<td><strong>Commerce</strong></td>
+<td style="font-size:11px">Basic e-commerce services.</td>
+<td style="font-size:11px">E-Commerce ops (14% at 7-Eleven).</td>
+<td style="font-size:11px">Not significant.</td>
+<td style="font-size:11px">❌ Not a capability.</td>
+<td style="font-size:11px">Limited.</td>
+<td style="font-size:11px;background:#f0ebff"><strong style="color:#2e7d32">Forrester Commerce Services recognized. Headless CMS, omnichannel, conversion optimization. Deep retail/restaurant experience.</strong></td>
+</tr>
+<tr>
+<td><strong>Cloud</strong></td>
+<td style="font-size:11px">Strong. Microsoft Partner of Year. Multi-cloud.</td>
+<td style="font-size:11px">Strong. AWS/Azure/GCP certified.</td>
+<td style="font-size:11px">Good. Azure & AWS capabilities.</td>
+<td style="font-size:11px">Microsoft Data & Analytics Partner of Year 2025.</td>
+<td style="font-size:11px">Good cloud practice.</td>
+<td style="font-size:11px;background:#f0ebff"><strong>AWS, Azure, GCP certified. Cloud-native architecture. SaaS design & engineering.</strong></td>
+</tr>
+<tr>
+<td><strong>Retail Expertise</strong></td>
+<td style="font-size:11px">Broad vertical. Retail is one of many.</td>
+<td style="font-size:11px">Retail vertical exists but not dominant.</td>
+<td style="font-size:11px">Cross-industry. No retail focus.</td>
+<td style="font-size:11px">★ Retail & CPG specialist (#1 ISG Leader).</td>
+<td style="font-size:11px">Cross-industry.</td>
+<td style="font-size:11px;background:#f0ebff"><strong style="color:#2e7d32">Deep retail & convenience. Gartner notes restaurant/convenience focus. Existing 7-Eleven relationship.</strong></td>
+</tr>
+<tr>
+<td><strong>CEO Background</strong></td>
+<td style="font-size:11px">Ravi Kumar S (ex-Infosys)</td>
+<td style="font-size:11px">Salil Parekh</td>
+<td style="font-size:11px">Debashis Chatterjee</td>
+<td style="font-size:11px">Shub Bhowmick (data analytics)</td>
+<td style="font-size:11px">Mohit Joshi (ex-Infosys)</td>
+<td style="font-size:11px;background:#f0ebff"><strong>Sudarshan Mandayam — ex-Cognizant, Infosys, LTI, JPMorgan, Citi. Knows the incumbent playbook inside out.</strong></td>
+</tr>
+</table>
+</div>
+
+<!-- Unique Differentiators -->
+<div class="card">
+<h3><span class="icon">💎</span> 8 Unique Bounteous Differentiators for 7-Eleven</h3>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:14px">
+<div style="border-radius:12px;padding:18px;background:linear-gradient(135deg,rgba(46,24,105,.05),rgba(60,37,247,.08));border:2px solid var(--p3)">
+<div style="font-size:15px;font-weight:800;color:var(--p1);margin-bottom:8px">1. Co-Innovation Model ≠ Staff Augmentation</div>
+<p style="font-size:12px;line-height:1.7;color:#444">Incumbents sell bodies at hourly rates. Bounteous aligns incentives: shared risk, outcome-linked pricing, joint IP creation. For 7-Eleven, this means paying for deployment velocity and CSAT improvement — not timesheets.</p>
+<div style="font-size:11px;color:var(--p2);font-weight:700;margin-top:6px">VS INCUMBENTS: Cognizant, Infosys, LTIMindtree, Tech Mahindra all operate T&M models that incentivize headcount, not outcomes.</div>
+</div>
+<div style="border-radius:12px;padding:18px;background:linear-gradient(135deg,rgba(46,24,105,.05),rgba(60,37,247,.08));border:2px solid var(--p3)">
+<div style="font-size:15px;font-weight:800;color:var(--p1);margin-bottom:8px">2. CX + Technology = Single Throat to Choke</div>
+<p style="font-size:12px;line-height:1.7;color:#444">No incumbent offers the combination of marketing technology depth (Adobe, Salesforce, Google), experience design, AND engineering in one firm. 7-Eleven currently needs multiple vendors for CX, marketing, and platform work. Bounteous collapses this into one relationship.</p>
+<div style="font-size:11px;color:var(--p2);font-weight:700;margin-top:6px">VS INCUMBENTS: Cognizant has Moment™ but it's an add-on; Tredence has zero CX/marketing capability; Infosys lacks marketing depth.</div>
+</div>
+<div style="border-radius:12px;padding:18px;background:linear-gradient(135deg,rgba(46,24,105,.05),rgba(60,37,247,.08));border:2px solid var(--p3)">
+<div style="font-size:15px;font-weight:800;color:var(--p1);margin-bottom:8px">3. AI That's Governed, Not Just Generated</div>
+<p style="font-size:12px;line-height:1.7;color:#444">Bounteous' AI practice emphasizes governance, auditability, and responsible AI — critical for 7-Eleven's IPO and potential regulated operations. Platform and model agnostic (not locked to one cloud). Agent Marketplace enables governed multi-agent deployment. Anthropic Claude Code Lab partnership for hands-on AI acceleration.</p>
+<div style="font-size:11px;color:var(--p2);font-weight:700;margin-top:6px">VS INCUMBENTS: Cognizant is Microsoft-centric; Tredence is Databricks-centric. Bounteous is model-agnostic with governance-first design.</div>
+</div>
+<div style="border-radius:12px;padding:18px;background:linear-gradient(135deg,rgba(46,24,105,.05),rgba(60,37,247,.08));border:2px solid var(--p3)">
+<div style="font-size:15px;font-weight:800;color:var(--p1);margin-bottom:8px">4. Existing 7-Eleven Relationship (CMO)</div>
+<p style="font-size:12px;line-height:1.7;color:#444">Bounteous isn't starting from scratch. An existing engagement within the CMO area in the US provides a trust foundation. No other new vendor has this. The expansion from CMO → IT → GCC is a natural land-and-expand play.</p>
+<div style="font-size:11px;color:var(--p2);font-weight:700;margin-top:6px">VS INCUMBENTS: Incumbents are entrenched in IT; Bounteous has the marketing trust bridge + IT capability to cross-sell.</div>
+</div>
+<div style="border-radius:12px;padding:18px;background:linear-gradient(135deg,rgba(46,24,105,.05),rgba(60,37,247,.08));border:2px solid var(--p3)">
+<div style="font-size:15px;font-weight:800;color:var(--p1);margin-bottom:8px">5. CEO Knows the Incumbent Playbook</div>
+<p style="font-size:12px;line-height:1.7;color:#444">Sudarshan Mandayam held senior roles at Cognizant, Infosys, and L&T Infotech — the very firms competing for 7-Eleven's business. He knows their strengths, weaknesses, pricing models, and delivery gaps. This insider knowledge shapes Bounteous' positioning against them.</p>
+<div style="font-size:11px;color:var(--p2);font-weight:700;margin-top:6px">STRATEGIC ADVANTAGE: Can anticipate and counter incumbent objections, pricing tactics, and lock-in strategies.</div>
+</div>
+<div style="border-radius:12px;padding:18px;background:linear-gradient(135deg,rgba(46,24,105,.05),rgba(60,37,247,.08));border:2px solid var(--p3)">
+<div style="font-size:15px;font-weight:800;color:var(--p1);margin-bottom:8px">6. White Space Focus — Not Competing, Complementing</div>
+<p style="font-size:12px;line-height:1.7;color:#444">Bounteous deliberately targets areas with fewer than 4 vendor engagements (DevOps, AI/ML, mobile, cyber, cloud, CX) rather than fighting for share in saturated areas (data engineering 23 vendors, app dev 19 vendors). This reduces competitive friction and accelerates deal closure.</p>
+<div style="font-size:11px;color:var(--p2);font-weight:700;margin-top:6px">VS INCUMBENTS: Incumbents fight each other in crowded lanes. Bounteous opens new lanes.</div>
+</div>
+<div style="border-radius:12px;padding:18px;background:linear-gradient(135deg,rgba(46,24,105,.05),rgba(60,37,247,.08));border:2px solid var(--p3)">
+<div style="font-size:15px;font-weight:800;color:var(--p1);margin-bottom:8px">7. Premier Tech Partnerships Where 7-Eleven Invests</div>
+<p style="font-size:12px;line-height:1.7;color:#444">Bounteous holds premier partnerships with <strong>Adobe, Salesforce, Google, AWS, Acquia</strong> — the exact platforms 7-Eleven uses. No incumbent has this same breadth of premier partnership status across 7-Eleven's marketing and experience stack. Additionally, Bounteous' Anthropic Claude Code Lab and AI studio partnerships position it for the agentic AI wave.</p>
+<div style="font-size:11px;color:var(--p2);font-weight:700;margin-top:6px">VS INCUMBENTS: Cognizant is Microsoft-focused; Tredence is Databricks-focused; neither has premier Adobe + Salesforce + Google.</div>
+</div>
+<div style="border-radius:12px;padding:18px;background:linear-gradient(135deg,rgba(46,24,105,.05),rgba(60,37,247,.08));border:2px solid var(--p3)">
+<div style="font-size:15px;font-weight:800;color:var(--p1);margin-bottom:8px">8. "AI White Space" Research-Led Selling</div>
+<p style="font-size:12px;line-height:1.7;color:#444">Bounteous published "The AI Whitespace" report (Sept 2025, 300+ executives surveyed) identifying marketing-IT misalignment as a key barrier to AI transformation. This directly maps to 7-Eleven's challenge: GenAI marketing assistant built by tech, but marketing needs scaling. Bounteous bridges this gap with a research-backed methodology.</p>
+<div style="font-size:11px;color:var(--p2);font-weight:700;margin-top:6px">USE IN OUTREACH: Share report excerpt with Malahar & marketing leads — demonstrates thought leadership incumbents lack.</div>
+</div>
+</div>
+</div>
+
+<!-- Capability Gap Matrix -->
+<div class="card">
+<h3><span class="icon">🎯</span> Capability Gap Matrix — Where Bounteous Wins Outright</h3>
+<table class="heatmap">
+<tr><th style="text-align:left">Capability</th><th>Cognizant</th><th>Infosys</th><th>LTIMindtree</th><th>Tredence</th><th>Tech Mahindra</th><th style="background:var(--p2)">Bounteous</th></tr>
+<tr><td style="text-align:left;font-weight:600">Experience Design & UX</td><td class="h-med">MED</td><td class="h-low">LOW</td><td class="h-low">LOW</td><td class="h-low">NONE</td><td class="h-low">LOW</td><td class="h-crit">★★★★★</td></tr>
+<tr><td style="text-align:left;font-weight:600">Marketing Technology (Adobe/SFMC)</td><td class="h-med">MED</td><td class="h-low">LOW</td><td class="h-low">LOW</td><td class="h-low">NONE</td><td class="h-low">LOW</td><td class="h-crit">★★★★★</td></tr>
+<tr><td style="text-align:left;font-weight:600">Growth Marketing & Loyalty</td><td class="h-low">LOW</td><td class="h-low">LOW</td><td class="h-low">NONE</td><td class="h-low">NONE</td><td class="h-low">LOW</td><td class="h-crit">★★★★★</td></tr>
+<tr><td style="text-align:left;font-weight:600">Digital Commerce (Headless, Omni)</td><td class="h-med">MED</td><td class="h-med">MED</td><td class="h-low">LOW</td><td class="h-low">NONE</td><td class="h-low">LOW</td><td class="h-crit">★★★★★</td></tr>
+<tr><td style="text-align:left;font-weight:600">AI Strategy & Governance</td><td class="h-med">MED</td><td class="h-med">MED</td><td class="h-low">LOW</td><td class="h-med">MED</td><td class="h-low">LOW</td><td class="h-high">★★★★☆</td></tr>
+<tr><td style="text-align:left;font-weight:600">Agentic AI / Agent Marketplace</td><td class="h-med">MED</td><td class="h-low">LOW</td><td class="h-low">LOW</td><td class="h-med">MED</td><td class="h-low">LOW</td><td class="h-high">★★★★☆</td></tr>
+<tr><td style="text-align:left;font-weight:600">Co-Innovation / Outcome Pricing</td><td class="h-low">NONE</td><td class="h-low">NONE</td><td class="h-low">NONE</td><td class="h-med">PARTIAL</td><td class="h-low">NONE</td><td class="h-crit">★★★★★</td></tr>
+<tr><td style="text-align:left;font-weight:600">DevOps & CI/CD Acceleration</td><td class="h-high">HIGH</td><td class="h-med">MED</td><td class="h-med">MED</td><td class="h-low">LOW</td><td class="h-med">MED</td><td class="h-high">★★★★☆</td></tr>
+<tr><td style="text-align:left;font-weight:600">Data Engineering at Scale</td><td class="h-high">HIGH</td><td class="h-med">MED</td><td class="h-high">HIGH</td><td class="h-crit">★★★★★</td><td class="h-med">MED</td><td class="h-med">★★★☆☆</td></tr>
+<tr><td style="text-align:left;font-weight:600">Large-Scale Staff Aug (1000+)</td><td class="h-crit">★★★★★</td><td class="h-crit">★★★★★</td><td class="h-high">HIGH</td><td class="h-low">LOW</td><td class="h-high">HIGH</td><td class="h-low">NOT MODEL</td></tr>
+</table>
+<div style="margin-top:12px;padding:14px;background:#f5f0ff;border-radius:10px;font-size:13px">
+<strong>🎯 Reading the Matrix:</strong> Bounteous has clear differentiation in <strong style="color:var(--p2)">5 capability areas</strong> (Experience Design, Marketing Tech, Growth Marketing, Digital Commerce, Co-Innovation) where NO incumbent has comparable strength. It has competitive parity in AI/DevOps/Cloud, and deliberately avoids competing in data engineering at scale (Tredence's domain) and large-scale staff aug (Cognizant/Infosys territory).
+</div>
+</div>
+
+<!-- Value-Add Summary -->
+<div class="card" style="border-left-color:#2e7d32;background:linear-gradient(135deg,rgba(46,125,50,.02),rgba(46,125,50,.06))">
+<h3><span class="icon">🚀</span> The Bounteous Value Proposition — Summarized for 7-Eleven</h3>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:14px">
+<div>
+<div style="font-weight:800;color:var(--p1);font-size:15px;margin-bottom:10px">What Bounteous Brings That No One Else Can:</div>
+<div style="margin-bottom:8px;padding:10px;background:var(--w);border-radius:8px;border-left:4px solid #2e7d32;font-size:12px"><strong>1.</strong> The only partner that bridges your existing US CMO relationship into India GCC IT services</div>
+<div style="margin-bottom:8px;padding:10px;background:var(--w);border-radius:8px;border-left:4px solid #2e7d32;font-size:12px"><strong>2.</strong> Premier partnerships across ALL of 7-Eleven's marketing stack (Adobe + Salesforce + Google) — no incumbent matches this</div>
+<div style="margin-bottom:8px;padding:10px;background:var(--w);border-radius:8px;border-left:4px solid #2e7d32;font-size:12px"><strong>3.</strong> Co-Innovation model that reduces vendor sprawl instead of adding to it — replace 3-5 niche vendors with one outcome-aligned partner</div>
+<div style="margin-bottom:8px;padding:10px;background:var(--w);border-radius:8px;border-left:4px solid #2e7d32;font-size:12px"><strong>4.</strong> Governed, model-agnostic AI practice — from Anthropic Claude to Databricks Mosaic to OpenAI — not locked into any single ecosystem</div>
+<div style="margin-bottom:8px;padding:10px;background:var(--w);border-radius:8px;border-left:4px solid #2e7d32;font-size:12px"><strong>5.</strong> CEO who held senior roles at Cognizant, Infosys & LTI — he knows exactly how to outperform these firms on 7-Eleven's account</div>
+</div>
+<div>
+<div style="font-weight:800;color:var(--p1);font-size:15px;margin-bottom:10px">The Ask — Position in Sales Conversations:</div>
+<div style="padding:20px;background:var(--g1);border-radius:12px;color:#fff;font-size:13px;line-height:1.8">
+<em>"You have 134 vendor relationships — 72% concentrated in 15 firms fighting over the same saturated workloads. Meanwhile, your six highest-value transformation areas — AI operationalization, DevOps acceleration, mobile experience, cloud optimization, CX modernization, and marketing tech integration — have fewer than 4 vendors each.</em><br><br>
+<em>Bounteous is purpose-built for exactly these gaps. We bring the marketing technology depth of a digital agency, the engineering rigor of a technology firm, and the strategic thinking of a consultancy — unified under a Co-Innovation model that aligns our incentives to your outcomes.</em><br><br>
+<em>We're not asking to replace Cognizant or Tredence. We're asking for the white space they don't cover — and we'll prove our value in 3 months with a $180K pilot that delivers 2.5x ROI."</em>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+</div><!-- end content -->
+
+<button class="download-btn" onclick="downloadDashboard()">⬇ Download Dashboard</button>
+</div><!-- end dashboardMain -->
+
+<script>
+/* auth handled above */
+function showTab(i){
+document.querySelectorAll('.tab').forEach((t,idx)=>{t.classList.toggle('active',idx===i)});
+document.querySelectorAll('.panel').forEach((p,idx)=>{p.classList.toggle('active',idx===i)});
+window.scrollTo({top:0,behavior:'smooth'});
+}
+
+function showP(id,el){
+document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+el.classList.add('active');
+document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
+document.getElementById(id).classList.add('active');
+window.scrollTo({top:0,behavior:'smooth'});
+}
+
+function filterStk(f,btn){
+document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
+btn.classList.add('active');
+document.querySelectorAll('.stakeholder-card').forEach(c=>{
+if(f==='all'){c.style.display='';return}
+const r=c.dataset.region||'';
+const fn=c.dataset.fn||'';
+const match=(f==='india'&&r==='india')||(f==='us'&&r==='us')||(f==='exec'&&fn.includes('exec'))||(f==='tech'&&fn.includes('tech'))||(f==='data'&&fn.includes('data'))||(f==='ops'&&fn.includes('ops'));
+c.style.display=match?'':'none';
+});
+}
+
+function downloadDashboard(){
+const b=new Blob([document.documentElement.outerHTML],{type:'text/html'});
+const a=document.createElement('a');
+a.href=URL.createObjectURL(b);
+a.download='7-Eleven_Bounteous_ABM_Dashboard.html';
+a.click();
+}
+</script>
+</body>
+</html>
